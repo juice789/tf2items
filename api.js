@@ -9,7 +9,7 @@ const api = {}
 
 api.getSchemaItems = ({ steamApiKey: key }) => (start) => myAxios({
     method: 'get',
-    url: `https://api.steampowered.com/IEconItems_440/GetSchemaItems/v1/`,
+    url: 'https://api.steampowered.com/IEconItems_440/GetSchemaItems/v1/',
     params: {
         key,
         language: 'EN',
@@ -19,7 +19,7 @@ api.getSchemaItems = ({ steamApiKey: key }) => (start) => myAxios({
 
 api.getSchemaOverview = ({ steamApiKey: key }) => () => myAxios({
     method: 'get',
-    url: `https://api.steampowered.com/IEconItems_440/GetSchemaOverview/v1/`,
+    url: 'https://api.steampowered.com/IEconItems_440/GetSchemaOverview/v1/',
     params: {
         key,
         language: 'EN'
@@ -28,7 +28,7 @@ api.getSchemaOverview = ({ steamApiKey: key }) => () => myAxios({
 
 api.getItemsGameUrl = ({ steamApiKey: key }) => () => myAxios({
     method: 'get',
-    url: `https://api.steampowered.com/IEconItems_440/GetSchemaURL/v1/`,
+    url: 'https://api.steampowered.com/IEconItems_440/GetSchemaURL/v1/',
     params: {
         key
     }
@@ -41,12 +41,12 @@ api.getItemsGame = () => (url) => myAxios({
 
 api.fetchTfEnglish = () => () => myAxios({
     method: 'get',
-    url: `https://raw.githubusercontent.com/SteamDatabase/GameTracking-TF2/master/tf/resource/tf_english.txt`
+    url: 'https://raw.githubusercontent.com/SteamDatabase/GameTracking-TF2/master/tf/resource/tf_english.txt'
 })
 
 api.fetchProtoObjDefs = () => () => myAxios({
     method: 'get',
-    url: `https://raw.githubusercontent.com/SteamDatabase/GameTracking-TF2/master/tf/resource/tf_proto_obj_defs_english.txt`
+    url: 'https://raw.githubusercontent.com/SteamDatabase/GameTracking-TF2/master/tf/resource/tf_proto_obj_defs_english.txt'
 })
 
 const createApi = compose(map(__, api), applyTo)

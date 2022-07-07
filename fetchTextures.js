@@ -12,7 +12,7 @@ const transformTextures = compose(
     path(['lang', 'Tokens'])
 )
 
-function* fethTextures() {
+function* fetchTextures() {
     try {
         const { fetchProtoObjDefs } = yield getContext('api')
         const protoObjDefs = yield call(fetchProtoObjDefs)
@@ -22,4 +22,4 @@ function* fethTextures() {
     }
 }
 
-module.exports = { fethTextures }
+module.exports = { fetchTextures }

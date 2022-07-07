@@ -8,7 +8,7 @@ function* fetchTfEnglish() {
         const { fetchTfEnglish } = yield getContext('api')
         const english = yield call(fetchTfEnglish)
         const englishVdf = vdf.parse(english)
-        return renameKeysWith(toLower, englishVdf[Object.keys(englishVdf)[0]].Tokens)
+        return renameKeysWith(toLower, englishVdf.lang.Tokens)
     } catch (err) {
         console.log('error fetching tf english', err)
     }

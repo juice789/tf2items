@@ -13,13 +13,9 @@ const transformTextures = compose(
 )
 
 function* fetchTextures() {
-    try {
-        const { fetchProtoObjDefs } = yield getContext('api')
-        const protoObjDefs = yield call(fetchProtoObjDefs)
-        return transformTextures(vdf.parse(protoObjDefs))
-    } catch (err) {
-        console.log('error fetching textures', err)
-    }
+    const { fetchProtoObjDefs } = yield getContext('api')
+    const protoObjDefs = yield call(fetchProtoObjDefs)
+    return transformTextures(vdf.parse(protoObjDefs))
 }
 
 module.exports = { fetchTextures }

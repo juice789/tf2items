@@ -12,14 +12,9 @@ const transformEffects = compose(
 )
 
 function* fetchParticleEffects() {
-    try {
-        yield delay(2000)
-        const { getSchemaOverview } = yield getContext('api')
-        const schema = yield call(getSchemaOverview)
-        return transformEffects(schema)
-    } catch (err) {
-        console.log('error fetching particle effects', err)
-    }
+    const { getSchemaOverview } = yield getContext('api')
+    const schema = yield call(getSchemaOverview)
+    return transformEffects(schema)
 }
 
 module.exports = { fetchParticleEffects }

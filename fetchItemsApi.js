@@ -11,21 +11,15 @@ const transformItemsApi = compose(
 )
 
 function* fetchItemsApi() {
-    try {
-        const { getSchemaItems } = yield getContext('api')
-        let start = 0, items = []
-        do {
-            yield delay(1000)
-            const response = yield call(getSchemaItems, start)
-            items = items.concat(response.result.items)
-            start = response.result.next
-        } while (start >= 0)
-
-        return transformItemsApi(items)
-
-    } catch (err) {
-        console.log('error fetching API items', err)
-    }
+    const { getSchemaItems } = yield getContext('api')
+    let start = 0, items = []
+    do {
+        yield delay(1000)
+        const response = yield call(getSchemaItems, start)
+        items = items.concat(response.result.items)
+        start = response.result.next
+    } while (start >= 0)
+    return transformItemsApi(items)
 }
 
 

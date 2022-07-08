@@ -28,7 +28,7 @@ function* saveSchema() {
         }))
 
     } catch (err) {
-        console.log('error fetching schema', err)
+        console.log('error saving schema', err)
     }
 }
 

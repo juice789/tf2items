@@ -1,6 +1,5 @@
-const { prop, pick, map, compose, complement, includes, equals, length, allPass, mapObjIndexed, when, has, __, chain, assoc, pathEq, omit, split, keys, propEq, propOr, nth, of, range, path } = require('ramda')
-
-const { qualityIds } = require('./schemaHelper.json')
+const { prop, pick, map, compose, complement, includes, equals, length, allPass, mapObjIndexed, when, has, __, chain, assoc, pathEq, omit, split, keys, propEq, propOr, nth, of, range, path, uncurryN, mergeDeepRight, reduce, concat } = require('ramda')
+const { qualityIds, strangifierTargets, crateSeries, chemsetDefindex } = require('./schemaHelper.json')
 
 const propsToKeep = [
     'name',
@@ -20,7 +19,11 @@ const propsToKeep = [
     'item_quality'
 ]
 
-const transformItems = compose(
+const transformItems = uncurryN(3, (collections, itemsApi) => compose(
+    map((item) => mergeDeepRight(collections[item.name], item)),
+    reduce(mergeDeepRight, {}),
+    concat([itemsApi, crateSeries, strangifierTargets, chemsetDefindex]),
+    of,
     map(
         compose(
             pick(propsToKeep),
@@ -98,6 +101,6 @@ const transformItems = compose(
     ),
     omit(['default']),
     mapObjIndexed((v, k) => assoc('defindex', parseInt(k), v))
-)
+))
 
 module.exports = { transformItems }

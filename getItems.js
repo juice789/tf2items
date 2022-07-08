@@ -1,6 +1,6 @@
 const { prop, map, compose, toLower, when, has, __, chain, assoc, reduce, omit, props, split, propOr, replace, mergeDeepLeft, mergeDeepWith } = require('ramda')
 
-function* getItems(english, { items_game }) {
+function getItems(english, items_game) {
 
     var mergePrefab = (item) => mergeDeepLeft(
         omit(['prefab'], item),

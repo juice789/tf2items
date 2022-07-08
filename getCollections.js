@@ -16,7 +16,7 @@ const simplifyCollections = compose(
         )
     ),
     (collections) => renameKeysWith((key) => replace('#', '', path([key, 'name'], collections)), collections),
-    path(['items_game', 'item_collections'])
+    prop('item_collections')
 )
 
 const localizeCollections = uncurryN(2, (english) => map(

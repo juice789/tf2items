@@ -1,8 +1,8 @@
 {
-  "name": "tf2items",
+  "name": "@juice789/tf2items",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "schema.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

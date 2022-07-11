@@ -49,8 +49,8 @@ const GlobalStyle = createGlobalStyle`
     overflow-x:auto;
     font-family: 'Blinker', cursive !important;    
     font-weight:100;
-    color: #f9f9fa;
-    background-color: #797784;
+    color: #b3b2be;
+    background-color: #2d2b37;
   }
   #root {
     height: 100%;

@@ -1,16 +1,19 @@
-import { ThemeProvider } from "styled-components";
-import GlobalStyle from './globalStyle'
-import { defaultRebootTheme } from 'styled-reboot';
+import styled from 'styled-components'
 
-function App() {
+import Items from './Components/Items'
+
+const App = styled.div`
+display:flex;
+flex-direction: column;
+height: 100%;
+`
+
+function AppActual() {
   return (
-    <ThemeProvider theme={defaultRebootTheme}>
-      <GlobalStyle />
-      <div className="App">
-        hello world
-      </div>
-    </ThemeProvider>
+    <App>
+      <Items />
+    </App>
   )
 }
 
-export default App
+export default AppActual

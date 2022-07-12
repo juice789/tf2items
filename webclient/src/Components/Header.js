@@ -58,16 +58,16 @@ const HeaderActual = () => {
 
     const dispatch = useDispatch()
 
-    const openedWidget = useSelector(prop('openedWidget'))
-    const isWidgetOpen = equals(__, openedWidget)
-    const openWidget = (name) => () => dispatch({ type: 'WIDGET_TOGGLE', name })
+    const openedAside = useSelector(prop('openedAside'))
+    const isAsideOpen = equals(__, openedAside)
+    const openAside = (name) => () => dispatch({ type: 'ASIDE_TOGGLE', name })
 
     return (
         <Header>
             <Inner>
                 {
                     <Group>
-                        <NavButton active={isWidgetOpen('items')} onClick={openWidget('items')}>
+                        <NavButton active={isAsideOpen('items')} onClick={openAside('items')}>
                             <PlusIcon />
                         </NavButton>
                     </Group>

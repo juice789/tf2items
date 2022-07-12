@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import * as widgets from './widgets.js'
+import * as asides from './asides.js'
 
 const rootReducer = combineReducers({
-    ...widgets
+    ...asides
 })
 
 export default rootReducer 

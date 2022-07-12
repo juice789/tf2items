@@ -3,17 +3,18 @@ import {
 } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     elevated,
     uncraftable,
     killstreakTier,
     defindex,
-    used_by_classes
+    getClasses,
+    getSlot
 } from './controls'
 
 const weapon = {
     controls: {
-        quality: quality([0, 1, 11, 13, 14, 3, 6]),//no decorated
+        quality: getQuality([0, 1, 11, 13, 14, 3, 6]),
         elevated,
         uncraftable,
         killstreakTier,
@@ -23,14 +24,17 @@ const weapon = {
         map(
             when(
                 compose(equals(0), indexOf('Promo'), propOr('', 'name')),
-                chain(assoc('item_name'), compose(concat(__, ' (promo)'), prop('item_name')))
+                chain(
+                    assoc('item_name'),
+                    compose(concat(__, ' (promo)'), prop('item_name'))
+                )
             )
         ),
         pickBy(
             allPass([
                 compose(complement(includes)(__, [850]), prop('defindex')),//deflector
                 complement(has)('untradable'),
-                compose(complement(includes)(__, [0, 15]), prop('item_quality')),//no normal / decorated items
+                compose(complement(includes)(__, [0, 15]), prop('item_quality')),//no normal or decorated items
                 compose(includes(__, ['primary', 'melee', 'secondary', 'pda', 'pda2', 'building']), prop('item_slot')),
                 compose(complement(includes)('Festive'), prop('item_name')),
                 compose(complement(includes)('Botkiller'), prop('item_name')),
@@ -38,20 +42,8 @@ const weapon = {
             ])
         )),
     filters: {
-        used_by_classes: used_by_classes(),
-        item_slot: {
-            name: 'item_slot',
-            label: 'Slot',
-            isClearable: true,
-            options: [
-                ['melee', 'Melee'],
-                ['primary', 'Primary'],
-                ['secondary', 'Secondary'],
-                ['pda', 'Pda'],
-                ['pda2', 'Pda 2'],
-                ['building', 'Building'],
-            ]
-        }
+        used_by_classes: getClasses(),
+        item_slot: getSlot(['melee', 'primary', 'secondary', 'pda', 'pda2', 'building'])
     },
     rules: {
         elevated: {

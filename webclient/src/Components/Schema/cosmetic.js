@@ -1,16 +1,16 @@
 import { cosmeticCollections } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, pickBy, includes, range, __, toString, allPass, indexOf, propOr, complement, has, equals
+    compose, prop, pickBy, includes, range, __, allPass, indexOf, propOr, complement, has, equals
 } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     elevated,
     uncraftable,
-    effect,
+    getEffect,
     defindex,
-    used_by_classes,
+    getClasses,
     getCollections,
     getRarities
 } from './controls'
@@ -24,10 +24,10 @@ const cosmeticRarities = [
 
 const cosmetic = {
     controls: {
-        quality: quality(['0', '1', '11', '13', '14', '3', '5', '6']),
+        quality: getQuality(['0', '1', '11', '13', '14', '3', '5', '6']),
         elevated,
         uncraftable,
-        effect: effect(map(toString, range([7, 175]))),
+        effect: getEffect(range(7, 175)),
         defindex
     },
     rules: {
@@ -50,7 +50,7 @@ const cosmetic = {
             ])
         )),
     filters: {
-        used_by_classes: used_by_classes('multi'),
+        used_by_classes: getClasses(undefined, ['multi']),
         collection: getCollections(cosmeticCollections),
         rarity: getRarities(cosmeticRarities),
     },

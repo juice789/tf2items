@@ -3,17 +3,18 @@ import {
 } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     elevated,
     uncraftable,
     killstreakTier,
     defindex,
-    used_by_classes
+    getClasses,
+    getSlot
 } from './controls'
 
 const festivized = {
     controls: {
-        quality: quality([1, 11, 14, 3, 6]),
+        quality: getQuality([1, 11, 14, 3, 6]),
         elevated,
         uncraftable,
         killstreakTier,
@@ -25,21 +26,15 @@ const festivized = {
     itemFn: pickBy(
         allPass([
             has('festivized'),
-            compose(complement(includes)(__, [0, 15]), prop('item_quality')),//no normal / decorated items
+            compose(
+                complement(includes)(__, [0, 15]),
+                prop('item_quality')
+            ),
         ])
     ),
     filters: {
-        used_by_classes: used_by_classes('all'),
-        item_slot: {
-            name: 'item_slot',
-            label: 'Slot',
-            isClearable: true,
-            options: [
-                ['melee', 'Melee'],
-                ['primary', 'Primary'],
-                ['secondary', 'Secondary'],
-            ]
-        }
+        used_by_classes: getClasses(undefined, ['all']),
+        item_slot: getSlot(['melee', 'primary', 'secondary'])
     },
     rules: {
         elevated: {

@@ -1,11 +1,11 @@
 import { australiumDefindex } from '@juice789/tf2items'
-import { compose, prop, pickBy, includes } from 'ramda'
+import { pick } from 'ramda'
 
 import {
     killstreakTier,
     festivized,
     defindex,
-    used_by_classes
+    getClasses
 } from './controls'
 
 const australium = {
@@ -14,15 +14,9 @@ const australium = {
         festivized,
         defindex
     },
-    itemFn: pickBy(
-        compose(
-            includes(__, australiumDefindex),
-            parseInt,
-            prop('defindex')
-        )
-    ),
+    itemFn: pick(australiumDefindex),
     filters: {
-        used_by_classes: used_by_classes(['multi', 'all'])
+        used_by_classes: getClasses(undefined, ['multi', 'all'])
     },
     defaults: {
         quality: '11',

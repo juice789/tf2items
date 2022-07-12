@@ -1,32 +1,38 @@
 import {
-    qualities,
-    effects,
+    qualityNames,
+    particleEffects,
     textures,
     killstreakTiers,
     wears,
     itemSlots,
     itemClasses,
     rarities,
-    classes
+    classes,
+    impossibleEffects
 } from '@juice789/tf2items'
 
 import {
     compose,
     toPairs,
-    keys,
     omit,
     pickBy,
-    nthArg,
     when,
-    includes,
     __,
-    pick
+    pick,
+    complement,
+    isEmpty
 } from 'ramda'
 
-export const quality = (whiteList = keys(qualities)) => ({
+const pickOmitOptions = (whitelist = [], blacklist = [], list) => compose(
+    toPairs,
+    omit(blacklist),
+    when(() => complement(isEmpty)(whitelist), pick(whitelist)),
+)(list)
+
+export const getQuality = (whiteList, blacklist) => ({
     name: "quality",
     label: "Quality",
-    options: toPairs(pick(whiteList, qualities)),
+    options: pickOmitOptions(whiteList, blacklist, qualityNames),
 })
 
 export const elevated = {
@@ -63,23 +69,10 @@ export const wear = {
     options: toPairs(wears)
 }
 
-const impossibleEffects = [1, 2, 3, 5, 20, 28, 3002, 3040, 184, 3062, 3076, 3080, 3082, 3086, 194, 208, 217, 222]
-
-export const effect = (whitelist) => ({
+export const getEffect = (whitelist, blacklist = impossibleEffects) => ({
     name: "effect",
     label: "Effect",
-    options: toPairs(
-        when(
-            () => whitelist,
-            pickBy(
-                compose(
-                    includes(__, whitelist),
-                    nthArg(1)
-                )
-            ),
-            omit(impossibleEffects, effects)
-        )
-    )
+    options: pickOmitOptions(whitelist, blacklist, particleEffects)
 })
 
 export const texture = {
@@ -113,22 +106,19 @@ export const crateSeries = {
     type: 'input'
 }
 
-export const used_by_classes = (blacklist = []) => ({
+export const getClasses = (whiteList, blacklist) => ({
     name: "used_by_classes",
     label: "Class",
     isClearable: true,
-    options: compose(
-        omit(blacklist),
-        toPairs(classes)
-    )
+    options: pickOmitOptions(whiteList, blacklist, classes)
 })
 
-export const item_slot = {
+export const getSlot = (whiteList, blacklist) => ({
     name: 'item_slot',
     label: 'Slot',
     isClearable: true,
-    options: toPairs(itemSlots)
-}
+    options: pickOmitOptions(whiteList, blacklist, itemSlots)
+})
 
 export const item_class = {
     name: 'item_class',
@@ -144,14 +134,11 @@ export const untradable = {
     ]
 }
 
-export const getRarities = (whiteList = ['common', 'uncommon', 'rare', 'mythical', 'legendary', 'ancient']) => ({
+export const getRarities = (whiteList = ['common', 'uncommon', 'rare', 'mythical', 'legendary', 'ancient'], blacklist) => ({
     name: 'rarity',
     label: 'Rarity',
     isClearable: true,
-    options: compose(
-        pick(whiteList),
-        toPairs(rarities)
-    )
+    options: pickOmitOptions(whiteList, blacklist, rarities)
 })
 
 export const getCollections = options => ({

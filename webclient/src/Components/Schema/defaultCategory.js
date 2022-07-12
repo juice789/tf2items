@@ -1,27 +1,27 @@
 import { identity } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     elevated,
     uncraftable,
     killstreakTier,
     festivized,
     wear,
-    effect,
+    getEffect,
     texture,
     defindex,
     target,
     craftNumber,
     crateSeries,
-    used_by_classes,
-    item_slot,
+    getSlot,
     item_class,
-    untradable
+    untradable,
+    getClasses
 } from './controls'
 
 const defaultCategory = {
     controls: {
-        quality: quality(),
+        quality: getQuality(),
         elevated,
         uncraftable,
         killstreakTier,
@@ -32,7 +32,7 @@ const defaultCategory = {
         },
         festivized,
         wear,
-        effect: effect(),
+        effect: getEffect(undefined, []),
         texture,
         defindex,
         target,
@@ -42,8 +42,8 @@ const defaultCategory = {
     itemFn: identity,
     targetFn: identity,
     filters: {
-        used_by_classes: used_by_classes(),
-        item_slot,
+        used_by_classes: getClasses(),
+        item_slot: getSlot(),
         item_class,
         untradable
     },

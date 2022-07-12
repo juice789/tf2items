@@ -1,14 +1,12 @@
-import { effects } from '@juice789/tf2items'
+import { particleEffects, impossibleEffects } from '@juice789/tf2items'
 
 import {
     omit, pickBy, includes, __
 } from 'ramda'
 
-const impossibleEffects = [1, 2, 3, 5, 20, 28, 3002, 3040, 184, 3062, 3076, 3080, 3082, 3086, 194, 208, 217, 222]
-
 const filterEffects = (whitelist) => pickBy(
     (v, k) => includes(k, map(toString, whitelist)),
-    omit(impossibleEffects, effects)
+    omit(impossibleEffects, particleEffects)
 )
 
 export const multiEffectList = {

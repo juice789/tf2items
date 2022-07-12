@@ -3,20 +3,20 @@ import {
 } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     elevated,
     uncraftable,
-    effect,
+    getEffect,
     defindex,
-    used_by_classes
+    getClasses
 } from './controls'
 
 const taunt = {
     controls: {
-        quality: quality([11, 6, 5, 1]),
+        quality: getQuality([11, 6, 5, 1]),
         elevated,
         uncraftable,
-        effect: effect(map(toString, range([7, 175]))),
+        effect: getEffect(range(7, 175)),
         defindex
     },
     itemFn: pickBy(
@@ -26,7 +26,7 @@ const taunt = {
         ])
     ),
     filters: {
-        used_by_classes: used_by_classes('multi')
+        used_by_classes: getClasses(undefined, ['multi'])
     },
     rules: {
         elevated: {

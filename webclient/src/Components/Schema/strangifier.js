@@ -3,8 +3,12 @@ import {
 } from 'ramda'
 
 import {
+    safeItems as items
+} from '@juice789/tf2items'
+
+import {
     defindex,
-    used_by_classes
+    getClasses
 } from './controls'
 
 const strangifier = {
@@ -21,13 +25,15 @@ const strangifier = {
             item_name: items[target].item_name + " Strangifier"
         }), item.target)),
         values,
-        pickBy(allPass([
-            has('target'),
-            compose(includes('Strangifier'), prop('item_name')),
-        ]))
+        pickBy(
+            allPass([
+                compose(includes('Strangifier'), prop('item_name')),
+                has('target')
+            ])
+        )
     ),
     filters: {
-        used_by_classes: used_by_classes()
+        used_by_classes: getClasses()
     },
     defaults: {
         quality: '6',

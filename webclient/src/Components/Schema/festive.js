@@ -3,15 +3,16 @@ import {
 } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     killstreakTier,
     defindex,
-    used_by_classes
+    getClasses,
+    getSlot
 } from './controls'
 
 const festive = {
     controls: {
-        quality: quality([11, 6]),
+        quality: getQuality([11, 6]),
         killstreakTier,
         defindex
     },
@@ -22,18 +23,8 @@ const festive = {
         ])
     ),
     filters: {
-        used_by_classes: used_by_classes('all'),
-        item_slot: {
-            name: 'item_slot',
-            label: 'Slot',
-            isClearable: true,
-            options: [
-                ['melee', 'Melee'],
-                ['primary', 'Primary'],
-                ['secondary', 'Secondary'],
-                ['building', 'Building'],
-            ]
-        }
+        used_by_classes: getClasses(undefined, ['all']),
+        item_slot: getSlot(['melee', 'primary', 'secondary', 'building'])
     },
     validation: {
         single: ['defindex', 'quality'],

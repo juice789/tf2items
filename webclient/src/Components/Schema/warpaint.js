@@ -1,14 +1,14 @@
 import { textures, warPaintCollections } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, pickBy, includes, range, __, toString, allPass, assoc, complement, equals
+    compose, map, prop, pickBy, has, range, __, allPass, assoc, equals
 } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     elevated,
     wear,
-    effect,
+    getEffect,
     defindex,
     getCollections,
     getRarities
@@ -16,18 +16,18 @@ import {
 
 const warpaint = {
     controls: {
-        quality: quality([11, 5, 15]),
+        quality: getQuality([11, 5, 15]),
         elevated,
         wear,
-        effect: effect(map(toString, range([701, 704]))),
+        effect: getEffect(range(701, 704)),
         defindex
     },
     itemFn: compose(
         map((item) => assoc('item_name', textures[item.texture] + ' ' + item.item_name, item)),
         pickBy(
             allPass([
-                compose(complement(includes)(__, [16391, 9536]), prop('defindex')),//smissmas sweater, ??
                 compose(equals('War Paint'), prop('item_name')),
+                has('texture')
             ])
         )),
     filters: {

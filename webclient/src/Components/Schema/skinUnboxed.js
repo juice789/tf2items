@@ -1,39 +1,41 @@
 import { textures, weaponCollections } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, propEq, pickBy, includes, allPass, assoc, complement, toString, range
+    compose, map, prop, propEq, pickBy, includes, allPass, assoc, complement, range
 } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     elevated,
     killstreakTier,
     wear,
-    effect,
+    getEffect,
     defindex,
-    used_by_classes,
     getCollections,
-    getRarities
+    getRarities,
+    getClasses
 } from './controls'
 
 const skinUnboxed = {
     controls: {
-        quality: quality([11, 5, 15]),
+        quality: getQuality([11, 5, 15]),
         elevated,
         killstreakTier,
         wear,
-        effect: effect(map(toString, range([701, 705]))),
+        effect: getEffect(range(701, 705)),
         defindex
     },
     itemFn: compose(
         map((item) => assoc('item_name', textures[item.texture] + ' ' + item.item_name, item)),
-        pickBy(allPass([
-            compose(complement(includes)('War Paint'), prop('item_name')),
-            propEq('item_quality', 15)
-        ]))
+        pickBy(
+            allPass([
+                compose(complement(includes)('War Paint'), prop('item_name')),
+                propEq('item_quality', 15)
+            ])
+        )
     ),
     filters: {
-        used_by_classes: used_by_classes('all'),
+        used_by_classes: getClasses(undefined, ['all']),
         collection: getCollections(weaponCollections),
         rarity: getRarities()
     },

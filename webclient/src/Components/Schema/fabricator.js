@@ -1,13 +1,14 @@
 import { fabricatorDefindex } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, pickBy, includes, __, chain, assoc,
+    compose, map, prop, __, chain, assoc, pick
 } from 'ramda'
 
 import {
     defindex,
     target,
-    used_by_classes
+    getClasses,
+    getSlots
 } from './controls'
 
 const fabricator = {
@@ -35,25 +36,12 @@ const fabricator = {
                 )
             )
         ),
-        pickBy(
-            compose(includes(__, [20002, 20003]), prop('defindex'))
-        )
+        pick([20002, 20003])
     ),
-    targetFn: pickBy(
-        compose(includes(__, fabricatorDefindex), prop('defindex'))
-    ),
+    targetFn: pick(fabricatorDefindex),
     filters: {
-        used_by_classes: used_by_classes('all'),
-        item_slot: {
-            name: 'item_slot',
-            label: 'Slot',
-            isClearable: true,
-            options: [
-                ['melee', 'Melee'],
-                ['primary', 'Primary'],
-                ['secondary', 'Secondary'],
-            ]
-        }
+        used_by_classes: getClasses(undefined, ['all']),
+        item_slot: getSlots(['melee', 'primary', 'secondary'])
     },
     validation: {
         single: ['defindex', 'target'],

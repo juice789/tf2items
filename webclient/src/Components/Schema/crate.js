@@ -2,7 +2,7 @@
 import { serieslessDefindex } from '@juice789/tf2items'
 
 import {
-    compose, values, map, prop, reverse, pickBy, when, includes, __, allPass, indexOf, chain, has, indexBy, anyPass, equals
+    compose, values, map, prop, test, pickBy, when, includes, __, allPass, chain, has, indexBy, anyPass
 } from 'ramda'
 
 import {
@@ -12,7 +12,7 @@ import {
 
 const crate = {
     controls: {
-        uncraftable, //?
+        uncraftable,
         defindex,
     },
     itemFn: compose(
@@ -31,7 +31,7 @@ const crate = {
         values,
         pickBy(
             allPass([
-                compose(equals(-1), indexOf('B '), reverse, prop('name')),
+                compose(complement(test)(/ B$/), prop('name')), // don't include if the name is like "crate B"
                 anyPass([
                     has('series'),
                     compose(includes(__, serieslessDefindex), prop('defindex'))

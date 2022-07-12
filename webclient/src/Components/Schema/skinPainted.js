@@ -1,37 +1,35 @@
 import { paintableDefindex } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, pickBy, includes, range, __, toString
+    range
 } from 'ramda'
 
 import {
-    quality,
+    getQuality,
     elevated,
     killstreakTier,
     wear,
     texture,
-    effect,
+    getEffect,
     defindex,
-    used_by_classes,
-    item_slot
+    getClasses,
+    getSlot,
 } from './controls'
 
 const skinPainted = {
     controls: {
-        quality: quality([11, 5, 15]),
+        quality: getQuality([11, 5, 15]),
         elevated,
         killstreakTier,
         wear,
         texture,
-        effect: effect(map(toString, range([701, 705]))),
+        effect: getEffect(range(701, 705)),
         defindex
     },
-    itemFn: pickBy(
-        compose(includes(__, paintableDefindex), prop('defindex')),
-    ),
+    itemFn: pick(paintableDefindex),
     filters: {
-        used_by_classes: used_by_classes('all'),
-        item_slot
+        used_by_classes: getClasses(undefined, ['all']),
+        item_slot: getSlot()
     },
     rules: {
         effect: {
@@ -49,7 +47,8 @@ const skinPainted = {
         label: 'Multi effects',
         isClearable: true,
         options: [
-            ['wep2', 'All']
+            ['wep', 'All'],
+            ['wep2', 'No Energy Orb']
         ]
     },
     validation: {

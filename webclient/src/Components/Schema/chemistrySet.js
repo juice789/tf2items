@@ -1,12 +1,12 @@
 import { safeItems as items } from '@juice789/tf2items'
 
 import {
-    compose, values, map, prop, pickBy, when, includes, __, chain, has, indexBy
+    compose, values, map, prop, pick, when, __, chain, has, indexBy
 } from 'ramda'
 
 import {
     defindex,
-    used_by_classes
+    getClasses
 } from './controls'
 
 const chemistrySet = {
@@ -25,26 +25,24 @@ const chemistrySet = {
                     item_name: `${items[td].item_name} ${item.item_name}`
                 }), item.td))
         ),
-        chain((item) => map(od => ({//beautiful
+        chain((item) => map(od => ({
             ...items[od],
             ...item,
             defindex: item.defindex + '<' + od,
             od,
-            item_name: `${item.oq === 14 ? "Collector's " : ''} ${items[od].item_name} ${item.item_name}`
+            item_name: `${item.oq === '14' ? "Collector's " : ''}${items[od].item_name} ${item.item_name}`
         }), item.od)),
         values,
-        pickBy(
-            compose(includes(__, [20000, 20001, 20005, 20006, 20007]), parseInt, prop('defindex'))
-        )
+        pick([20000, 20001, 20005, 20006, 20007])
     ),
     filters: {
-        used_by_classes: used_by_classes(),
+        used_by_classes: getClasses(),
         oq: {
             name: 'oq',
             label: "Collector's",
             isClearable: true,
             options: [
-                [15, 'Yes']
+                [14, 'Yes']
             ]
         }
     },

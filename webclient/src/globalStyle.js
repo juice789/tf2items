@@ -66,3 +66,82 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default GlobalStyle
+
+export const selectStyle = ({
+  background = '#3a3747',
+  menuBackground = '#3a3747',
+  primaryColor = '#6e66a6',
+  borderColor = '#6e66a6',
+  controlHeight = '35px',
+  placeHolderColor = '#b3b2be',
+  singleStyles = {},
+  optionStyles = {},
+  containerStyles = {},
+  menuStyles = {},
+  valueContainerStyles = {}
+} = {}) => ({
+  container: (defaults) => ({
+    ...defaults,
+    ...containerStyles
+  }),
+  control: (defaults, { isFocused }) => ({
+    ...defaults,
+    boxShadow: isFocused ? `0 0 0 1px ${borderColor}` : 'none',
+    borderColor: isFocused ? borderColor : 'transparent',
+    background,
+    height: controlHeight,
+    minHeight: controlHeight,
+    ':hover': {
+      ...defaults[':hover'],
+      boxShadow: isFocused ? `0 0 0 1px ${borderColor}` : 'none',
+      borderColor: borderColor
+    }
+  }),
+  placeholder: (defaults) => ({
+    ...defaults,
+    color: placeHolderColor
+  }),
+  indicatorSeparator: () => ({
+    display: 'none'
+  }),
+  singleValue: (defaults) => ({
+    ...defaults,
+    color: '#f9f9fa',
+    ...singleStyles
+  }),
+  dropdownIndicator: (defaults) => ({
+    ...defaults,
+    color: '#6e66a6 !important',
+    padding: '5px'
+  }),
+  menu: (defaults) => ({
+    ...defaults,
+    background: menuBackground,
+    ...menuStyles
+  }),
+  valueContainer: (defaults) => ({
+    ...defaults,
+    ...valueContainerStyles
+  }),
+  option: (defaults, { isSelected }) => ({
+    ...defaults,
+    color: '#f9f9fa',
+    background: isSelected ? primaryColor : menuBackground,
+    ':hover': {
+      ...defaults[':hover'],
+      background: primaryColor
+    },
+    ...optionStyles
+  }),
+  input: (defaults) => ({
+    ...defaults,
+    color: '#f9f9fa'
+  }),
+  indicatorsContainer: (defaults) => ({
+    ...defaults,
+    padding: 0,
+    '> div:nth-of-type(1)': {
+      padding: '0 !important'
+    }
+  })
+})

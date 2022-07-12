@@ -1,7 +1,7 @@
 import { safeItems as items } from '@juice789/tf2items'
 
 import {
-    compose, values, map, prop, pick, when, __, chain, has, indexBy
+    compose, values, map, prop, pick, when, chain, has, indexBy
 } from 'ramda'
 
 import {

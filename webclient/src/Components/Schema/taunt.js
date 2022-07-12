@@ -1,5 +1,5 @@
 import {
-    propEq, pickBy, allPass, complement, has, map, toString, range
+    propEq, pickBy, allPass, complement, has, range
 } from 'ramda'
 
 import {

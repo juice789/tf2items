@@ -1,7 +1,7 @@
 import { textures, warPaintCollections } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, pickBy, has, range, __, allPass, assoc, equals
+    compose, map, prop, pickBy, has, range, allPass, assoc, equals
 } from 'ramda'
 
 import {

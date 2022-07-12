@@ -2,7 +2,7 @@
 import { serieslessDefindex } from '@juice789/tf2items'
 
 import {
-    compose, values, map, prop, test, pickBy, when, includes, __, allPass, chain, has, indexBy, anyPass
+    compose, values, map, prop, test, pickBy, when, includes, __, allPass, chain, has, indexBy, anyPass, complement
 } from 'ramda'
 
 import {

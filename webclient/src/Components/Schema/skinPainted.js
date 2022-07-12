@@ -1,7 +1,7 @@
 import { paintableDefindex } from '@juice789/tf2items'
 
 import {
-    range
+    range, pick
 } from 'ramda'
 
 import {

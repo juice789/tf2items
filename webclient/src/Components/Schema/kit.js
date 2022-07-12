@@ -1,7 +1,7 @@
 import { fabricatorDefindex } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, __, chain, assoc
+    compose, map, prop, __, chain, assoc, pick
 } from 'ramda'
 
 import {

@@ -8,7 +8,7 @@ import {
     defindex,
     target,
     getClasses,
-    getSlots
+    getSlot
 } from './controls'
 
 const fabricator = {
@@ -41,7 +41,7 @@ const fabricator = {
     targetFn: pick(fabricatorDefindex),
     filters: {
         used_by_classes: getClasses(undefined, ['all']),
-        item_slot: getSlots(['melee', 'primary', 'secondary'])
+        item_slot: getSlot(['melee', 'primary', 'secondary'])
     },
     validation: {
         single: ['defindex', 'target'],

@@ -1,5 +1,5 @@
 import {
-    compose, values, map, prop, pickBy, includes, allPass, chain, indexBy
+    compose, values, map, prop, pickBy, includes, allPass, chain, indexBy, has
 } from 'ramda'
 
 import {

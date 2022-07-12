@@ -4,6 +4,7 @@ import {
 
 import {
     defindex,
+    getClasses,
     target
 } from './controls'
 
@@ -15,7 +16,7 @@ const unusualifier = {
     itemFn: pick([9258]),
     targetFn: pickBy(propEq('item_slot', 'taunt')),
     filters: {
-        used_by_classes: used_by_classes(undefined, ['multi'])
+        used_by_classes: getClasses(undefined, ['multi'])
     },
     defaults: {
         quality: '5',

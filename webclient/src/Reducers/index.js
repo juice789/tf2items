@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import * as asides from './asides.js'
+import * as aside from './aside.js'
 
 const rootReducer = combineReducers({
-    ...asides
+    ...aside
 })
 
 export default rootReducer 

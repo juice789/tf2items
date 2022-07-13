@@ -9,7 +9,8 @@ import {
     killstreakTier,
     defindex,
     getClasses,
-    getSlot
+    getSlot,
+    getRules
 } from './controls'
 
 const weapon = {
@@ -45,13 +46,7 @@ const weapon = {
         used_by_classes: getClasses(),
         item_slot: getSlot(['melee', 'primary', 'secondary', 'pda', 'pda2', 'building'])
     },
-    rules: {
-        elevated: {
-            quality: ['11'],
-            reverse: true,
-            ignore: false
-        }
-    },
+    rules: getRules(['elevated']),
     validation: {
         single: ['defindex', 'quality'],
         multi: ['quality']

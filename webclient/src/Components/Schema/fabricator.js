@@ -20,9 +20,6 @@ const fabricator = {
         quality: 6,
         oq: 6
     },
-    rules: {
-        isTarget: true
-    },
     itemFn: compose(
         map(
             chain(

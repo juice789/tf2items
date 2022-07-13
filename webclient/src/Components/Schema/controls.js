@@ -19,7 +19,8 @@ import {
     when,
     pick,
     complement,
-    isEmpty
+    isEmpty,
+    __
 } from 'ramda'
 
 const pickOmitOptions = (whitelist = [], blacklist = [], list) => compose(
@@ -71,6 +72,7 @@ export const wear = {
 export const getEffect = (whitelist, blacklist = impossibleEffects) => ({
     name: "effect",
     label: "Effect",
+    isClearable: true,
     options: pickOmitOptions(whitelist, blacklist, particleEffects)
 })
 
@@ -87,9 +89,23 @@ export const defindex = {
     options: []
 }
 
+export const defindexVirtual = {
+    name: "defindex",
+    label: "Item",
+    type: 'virtual',
+    options: []
+}
+
 export const target = {
     name: "target",
     label: "Target",
+    options: []
+}
+
+export const targetVirtual = {
+    name: "target",
+    label: "Target",
+    type: 'virtual',
     options: []
 }
 
@@ -146,3 +162,17 @@ export const getCollections = options => ({
     isClearable: true,
     options: options.map((n) => [n, n])
 })
+
+const rules = {
+    effect: {
+        quality: ['5'], //if the quality is 5 display the effect control. Otherwise hide it.
+        hidden: true //hidden by default
+    },
+    elevated: {
+        quality: ['11'], //if the quality is 11 do not display the elevated control. Otherwise display it.
+        reverse: true, //helper flag to reverse the rule logic. Only used in the reducer.
+        hidden: false //displayed by default
+    }
+}
+
+export const getRules = pick(__, rules)

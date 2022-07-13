@@ -44,7 +44,7 @@ const transformItems = uncurryN(3, (collections, itemsApi) => compose(
                     compose(Boolean, prop('item_slot')),
                     compose(equals(9), length, prop('used_by_classes'))
                 ]),
-                assoc('used_by_classes', ['all'])//maybe create a new category to filter used_by_classes instead of overriding the default list. example: class2: single / multi / all
+                assoc('used_by_classes', ['all'])
             ),
             when(
                 has('used_by_classes'),

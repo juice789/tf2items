@@ -17,29 +17,27 @@ flex-direction: column;
 position: relative;
 flex: 0 1 auto;
 overflow-y: auto;
-border-right: 1px solid #403d4f;
-border-top: 1px solid #403d4f;
 width: 35rem;
 `
 
-const HeaderBlock = styled.div`
+const Header = styled.div`
 height:49px;
 display: flex;
 border-bottom: 1px solid #403d4f;
-padding-left: 1rem;
-padding-right: 0.5rem;
-cursor: default;
+padding: 0 0.25rem 0 1rem;
 width: 100%;
 flex: 0 0 auto;
 align-items: center;
 background: #33313f;
 justify-content: space-between;
 box-sizing:border-box;
+font-size:0.9rem;
 `
 
 const Close = styled.div`
 width: 3rem;
 height: 2rem;
+margin: 0 0.25rem 0 0.25rem;
 border-radius: 0.5rem;
 background: #2d2b37;
 display: flex;
@@ -53,39 +51,24 @@ cursor: pointer;
 }
 `
 
-export const Header = ({ data, children }) => {
+const HeaderActual = ({ asideName, label }) => {
     const dispatch = useDispatch()
-    return <HeaderBlock>
-        {children}
-        <Close onClick={() => dispatch({ type: 'ASIDE_TOGGLE', name: data.name })}>
+    return <Header>
+        <span>{label}</span>
+        <Close onClick={() => dispatch({ type: 'ASIDE_CLOSE', name: asideName })}>
             <TimesIcon />
         </Close>
-    </HeaderBlock>
+    </Header>
 }
 
-export const Content = styled.div`
+const Content = styled.div`
 display: flex;
 position: relative;
 flex: 1 1 auto;
 overflow-y: auto;
 `
 
-export const FormInput = styled.input`
-border: 1px solid #3a3747;
-outline: none;
-width: 100%;
-background-color: #3a3747;
-color: #f9f9fa;
-height: 35px;
-border-radius: 0.2rem;
-padding-left: 0.6rem;
-font-weight:300 !important;
-:hover{
-    border-color: #6e66a6;
-}
-`
-
-export const Button = styled.div`
+const Button = styled.div`
 display: flex;
 justify-content: center;
 height:2rem;
@@ -106,73 +89,72 @@ const CategoriesOuter = styled.div`
 display:flex;
 background: #33313f;
 width:100%;
+height: 49px;
+padding: 0 0.25rem 0 1rem;
+border-bottom: 1px solid #33313f;
 `
 
 const Title = styled.div`
 height:3rem;
-padding:1rem;
 display:flex;
 align-items:center;
-width:5rem;
 font-size:0.9rem;
+margin-right:1rem;
 `
 
 const SelectOuter = styled.div`
 flex-grow:1;
 display:flex;
 align-items:center;
-padding: 0 0.5rem;
+margin: 0 0.25rem 0 0.25rem;
 > * {
     width:100%;
     font-size:0.9rem;
 }
 `
 
-const CustomContent = styled(Content)`
-@media(max-width:600px){
-    flex-direction:column;
-}
-`
-
-const AsideActual = () => {
+const AddItemsActual = () => {
 
     const dispatch = useDispatch()
     const category = useSelector(path(['addItems', 'category']))
 
-    const onClick = (name) => () => {
+    const onChange = ({ value }) => {
         dispatch({
             type: 'CATEGORY_CHANGE',
-            category: name,
-            controls: keys(categories[name].controls),
-            filters: keys(categories[name].filters),
-            rules: categories[name].rules,
-            defaults: categories[name].defaults,
-            validation: categories[name].validation
+            category: value,
+            controls: keys(categories[value].controls),
+            filters: keys(categories[value].filters),
+            rules: categories[value].rules,
+            defaults: categories[value].defaults,
+            validation: categories[value].validation
         })
     }
 
-    const categoryOptions = map((name) => ({ value: name, label: name }), keys(categories))
+    const categoryOptions = map(
+        (name) => ({ value: name, label: name }),
+        keys(categories)
+    )
 
     return (
         <Aside>
-            <Header data={{ name: 'items' }}>Add items</Header>
+            <HeaderActual asideName={'addItems'} label={'Add items'} />
             <CategoriesOuter>
-                <Title>Category</Title>
+                <Title>Category: </Title>
                 <SelectOuter>
                     <Select
-                        onChange={({ value }) => onClick(value)()}
+                        onChange={onChange}
                         styles={selectStyle()}
                         options={categoryOptions}
                         value={categoryOptions.find(propEq('value', category))}
                     />
                 </SelectOuter>
             </CategoriesOuter>
-            <CustomContent>
+            <Content>
                 <Form key={category} />
                 <Preview />
-            </CustomContent>
+            </Content>
         </Aside>
     )
 }
 
-export default AsideActual
+export default AddItemsActual

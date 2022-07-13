@@ -9,10 +9,11 @@ import {
     elevated,
     uncraftable,
     getEffect,
-    defindex,
+    defindexVirtual,
     getClasses,
     getCollections,
-    getRarities
+    getRarities,
+    getRules
 } from './controls'
 
 const cosmeticRarities = [
@@ -27,20 +28,10 @@ const cosmetic = {
         quality: getQuality(['0', '1', '11', '13', '14', '3', '5', '6']),
         elevated,
         uncraftable,
-        effect: getEffect(range(7, 175)),
-        defindex
+        effect: getEffect(range(7, 700)),
+        defindex: defindexVirtual
     },
-    rules: {
-        elevated: {
-            quality: ['11'],
-            reverse: true,
-            ignore: false
-        },
-        effect: {
-            quality: ['5'],
-            ignore: true
-        }
-    },
+    rules: getRules(['effect', 'elevated']),
     itemFn: compose(
         pickBy(
             allPass([
@@ -59,6 +50,7 @@ const cosmetic = {
         label: 'Multi effects',
         isClearable: true,
         options: [
+            ['all', 'All'],
             ['gen1', 'Gen 1'],
             ['gen1low', 'Gen 1 Low'],
             ['gen1high', 'Gen 1 High'],

@@ -11,7 +11,8 @@ import {
     getEffect,
     defindex,
     getCollections,
-    getRarities
+    getRarities,
+    getRules
 } from './controls'
 
 const warpaint = {
@@ -34,17 +35,7 @@ const warpaint = {
         collection: getCollections(warPaintCollections),
         rarity: getRarities()
     },
-    rules: {
-        effect: {
-            quality: ['5'],
-            ignore: true
-        },
-        elevated: {
-            quality: ['11'],
-            reverse: true,
-            ignore: false
-        }
-    },
+    rules: getRules(['effect', 'elevated']),
     multiEffect: {
         name: 'multiEffect',
         label: 'Multi effects',

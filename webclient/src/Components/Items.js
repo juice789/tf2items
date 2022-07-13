@@ -28,7 +28,9 @@ const asides = {
 const ItemsActual = () => {
 
     const openedAside = useSelector(prop('openedAside'))
-    const aside = openedAside ? React.createElement(asides[openedAside], { key: openedAside }) : null
+    const aside = openedAside
+        ? React.createElement(asides[openedAside], { key: openedAside })
+        : null
 
     return (
         <Items>

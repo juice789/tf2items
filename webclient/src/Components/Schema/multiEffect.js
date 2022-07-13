@@ -1,7 +1,7 @@
 import { particleEffects, impossibleEffects } from '@juice789/tf2items'
 
 import {
-    omit, pickBy, includes, __
+    omit, pickBy, includes, __, map, without, range, concat, toString
 } from 'ramda'
 
 const filterEffects = (whitelist) => pickBy(
@@ -9,7 +9,8 @@ const filterEffects = (whitelist) => pickBy(
     omit(impossibleEffects, particleEffects)
 )
 
-export const multiEffectList = {
+const multiEffectList = {
+    all: filterEffects(without([4], range(1, 700))),
     gen1: filterEffects(without([4], range(1, 20))),
     gen1low: filterEffects([6, 7, 11, 12, 15, 16, 18, 19]),
     gen1high: filterEffects([8, 9, 10, 13, 14, 17]),
@@ -42,3 +43,5 @@ export const multiEffectList = {
     taunt8: filterEffects(range(3059, 3073)),
     taunt9: filterEffects(range(3073, 3088))
 }
+
+export default multiEffectList

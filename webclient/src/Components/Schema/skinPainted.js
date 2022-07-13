@@ -14,6 +14,7 @@ import {
     defindex,
     getClasses,
     getSlot,
+    getRules,
 } from './controls'
 
 const skinPainted = {
@@ -22,7 +23,7 @@ const skinPainted = {
         elevated,
         killstreakTier,
         wear,
-        texture,
+        texture, //todo: filter the textures by collection
         effect: getEffect(range(701, 705)),
         defindex
     },
@@ -31,17 +32,7 @@ const skinPainted = {
         used_by_classes: getClasses(undefined, ['all']),
         item_slot: getSlot()
     },
-    rules: {
-        effect: {
-            quality: ['5'],
-            ignore: true
-        },
-        elevated: {
-            quality: ['11'],
-            reverse: true,
-            ignore: false
-        }
-    },
+    rules: getRules(['effect', 'elevated']),
     multiEffect: {
         name: 'multiEffect',
         label: 'Multi effects',

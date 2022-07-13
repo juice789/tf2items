@@ -42,7 +42,7 @@ const chemistrySet = {
             label: "Collector's",
             isClearable: true,
             options: [
-                [14, 'Yes']
+                ['14', 'Yes']
             ]
         }
     },

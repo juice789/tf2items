@@ -5,25 +5,17 @@ import { prop, equals, __ } from 'ramda'
 
 import { PlusIcon } from 'react-line-awesome'
 
-const Group = styled.div`
-display:flex;
-height:100%;
-padding:0 0.25rem 0 0.25rem;
-align-items:center;
-justify-content:center;
-`
-
 const Header = styled.div`
 display: flex;
 align-items: center;
-height: 3rem;
-min-height: 3rem;
+height: 49px;
+min-height: 49px;
 > a, a:hover {
     text-decoration: none;    
 }
 background: #33313f;
 justify-content:space-between;
-padding: 0 0.25rem 0 0.25rem;
+border-bottom: 1px solid #403d4f;
 `
 
 const Inner = styled.div`
@@ -33,7 +25,16 @@ align-items:center;
 flex-grow:1;
 justify-content:flex-end;
 `
-const NavButton = styled.div`
+
+const Group = styled.div`
+display:flex;
+height:100%;
+padding: 0 0.25rem 0 0.25rem;
+align-items:center;
+justify-content:center;
+`
+
+const Button = styled.div`
 display: flex;
 align-items: center;
 font-size: 1.1rem;
@@ -46,7 +47,7 @@ justify-content:center;
 cursor:pointer;
 display:flex;
 position:relative;
-margin:0 0.25rem 0 0.25rem;
+margin: 0 0.25rem 0 0.25rem;
 background: ${({ active }) => active ? '#3a3747' : '#2d2b37'};
 color: ${({ active }) => active ? '#e1e0e5' : '#8a879a'};
 :hover{
@@ -67,9 +68,12 @@ const HeaderActual = () => {
             <Inner>
                 {
                     <Group>
-                        <NavButton active={isAsideOpen('items')} onClick={openAside('items')}>
+                        <Button
+                            active={isAsideOpen('addItems')}
+                            onClick={openAside('addItems')}
+                        >
                             <PlusIcon />
-                        </NavButton>
+                        </Button>
                     </Group>
                 }
             </Inner>

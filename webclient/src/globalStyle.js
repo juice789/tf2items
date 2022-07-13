@@ -145,3 +145,23 @@ export const selectStyle = ({
     }
   })
 })
+
+export const toggleStyle = {
+  trackContent: (defaults) => ({
+    ...defaults,
+    [':nth-child(2)']: {
+      color: "#1b9e2c"
+    },
+    [':nth-child(3)']: {
+      color: "#c77265"
+    }
+  }),
+  track: (defaults) => ({
+    ...defaults,
+    border: '0px',
+    boxShadow: "0 0 0 1px #3a3747",
+    [':hover']: {
+      boxShadow: "0 0 0 1px #3a3747, 0 0 0 2px #6e66a6"
+    }
+  })
+};

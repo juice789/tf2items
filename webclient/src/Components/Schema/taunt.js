@@ -8,7 +8,8 @@ import {
     uncraftable,
     getEffect,
     defindex,
-    getClasses
+    getClasses,
+    getRules
 } from './controls'
 
 const taunt = {
@@ -16,7 +17,7 @@ const taunt = {
         quality: getQuality([11, 6, 5, 1]),
         elevated,
         uncraftable,
-        effect: getEffect(range(7, 175)),
+        effect: getEffect(range(3000, 4000)),
         defindex
     },
     itemFn: pickBy(
@@ -28,17 +29,7 @@ const taunt = {
     filters: {
         used_by_classes: getClasses(undefined, ['multi'])
     },
-    rules: {
-        elevated: {
-            quality: ['11'],
-            reverse: true,
-            ignore: false
-        },
-        effect: {
-            quality: ['5'],
-            ignore: true
-        }
-    },
+    rules: getRules(['effect', 'elevated']),
     multiEffect: {
         name: 'multiEffect',
         label: 'Multi effects',

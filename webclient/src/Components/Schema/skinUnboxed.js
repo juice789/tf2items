@@ -13,7 +13,8 @@ import {
     defindex,
     getCollections,
     getRarities,
-    getClasses
+    getClasses,
+    getRules
 } from './controls'
 
 const skinUnboxed = {
@@ -29,7 +30,10 @@ const skinUnboxed = {
         map((item) => assoc('item_name', textures[item.texture] + ' ' + item.item_name, item)),
         pickBy(
             allPass([
-                compose(complement(includes)('War Paint'), prop('item_name')),
+                compose(
+                    complement(includes)('War Paint'),
+                    prop('item_name')
+                ),
                 propEq('item_quality', 15)
             ])
         )
@@ -39,17 +43,7 @@ const skinUnboxed = {
         collection: getCollections(weaponCollections),
         rarity: getRarities()
     },
-    rules: {
-        effect: {
-            quality: ['5'],
-            ignore: true
-        },
-        elevated: {
-            quality: ['11'],
-            reverse: true,
-            ignore: false
-        }
-    },
+    rules: getRules(['effect', 'elevated']),
     multiEffect: {
         name: 'multiEffect',
         label: 'Multi effects',

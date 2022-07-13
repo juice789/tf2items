@@ -20,9 +20,6 @@ const kit = {
         quality: '6',
         uncraftable: '1'
     },
-    rules: {
-        isTarget: true
-    },
     itemFn: compose(
         map(
             chain(

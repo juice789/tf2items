@@ -9,7 +9,8 @@ import {
     killstreakTier,
     defindex,
     getClasses,
-    getSlot
+    getSlot,
+    getRules
 } from './controls'
 
 const festivized = {
@@ -36,13 +37,7 @@ const festivized = {
         used_by_classes: getClasses(undefined, ['all']),
         item_slot: getSlot(['melee', 'primary', 'secondary'])
     },
-    rules: {
-        elevated: {
-            quality: ['11'],
-            reverse: true,
-            ignore: false
-        }
-    },
+    rules: getRules(['elevated']),
     validation: {
         single: ['defindex', 'quality'],
         multi: ['quality']

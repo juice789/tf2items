@@ -22,9 +22,6 @@ const unusualifier = {
         quality: '5',
         uncraftable: '1'
     },
-    rules: {
-        isTarget: true
-    },
     validation: {
         single: ['defindex', 'target'],
         multi: ['defindex']

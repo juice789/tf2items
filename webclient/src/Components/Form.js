@@ -99,6 +99,7 @@ const FormActual = () => {
                                     options={map(([value, label]) => ({ value, label }), options)}
                                     styles={selectStyle()}
                                     isClearable={isClearable}
+                                    optionHeight={40}
                                 />
                             </FormSelect> :
                             <FormSelect>

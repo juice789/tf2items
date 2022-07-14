@@ -63,6 +63,17 @@ const GlobalStyle = createGlobalStyle`
     color: #a198da,
     decoration: underline,
   }
+  .fast-option{
+    color: #f9f9fa;
+    background: #3a3747;
+    cursor: default;
+  }
+  .fast-option:hover{
+      background: #6e66a6;
+  }
+  .fast-option-selected{
+    background: #6e66a6;
+  } 
 `
 
 export default GlobalStyle
@@ -140,8 +151,14 @@ export const selectStyle = ({
   indicatorsContainer: (defaults) => ({
     ...defaults,
     padding: 0,
-    '> div:nth-of-type(1)': {
-      padding: '0 !important'
+    '> div': {
+      padding: '0 !important',
+      paddingRight: '5px !important',
+      color: '#8a879a',
+      ':hover': {
+        color: '#f9f9fa',
+        cursor: 'default'
+      },
     }
   })
 })

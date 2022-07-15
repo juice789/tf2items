@@ -13,8 +13,8 @@ import {
 
 const fabricator = {
     controls: {
-        defindex,
-        target
+        defindex: defindex({ isSearchable: false }),
+        target: target()
     },
     defaults: {
         quality: 6,

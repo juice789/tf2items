@@ -10,7 +10,7 @@ import {
 const key = {
     controls: {
         uncraftable,
-        defindex,
+        defindex: defindex(),
     },
     itemFn: compose(
         map(

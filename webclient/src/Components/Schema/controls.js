@@ -53,6 +53,7 @@ export const killstreakTier = {
     name: "killstreakTier",
     label: "Killstreak Tier",
     isClearable: true,
+    isSearchable: false,
     options: toPairs(killstreakTiers)
 }
 
@@ -66,6 +67,7 @@ export const wear = {
     name: "wear",
     label: "Wear",
     isClearable: true,
+    isSearchable: false,
     options: toPairs(wears)
 }
 
@@ -83,31 +85,23 @@ export const texture = {
     options: toPairs(pickBy((v, k) => k >= 102, textures))
 }
 
-export const defindex = {
+export const defindex = (settings = {}) => ({
     name: "defindex",
     label: "Item",
-    options: []
-}
+    options: [],
+    isClearable: true,
+    isSearchable: true,
+    ...settings
+})
 
-export const defindexVirtual = {
-    name: "defindex",
-    label: "Item",
-    type: 'virtual',
-    options: []
-}
-
-export const target = {
+export const target = (settings = {}) => ({
     name: "target",
     label: "Target",
-    options: []
-}
-
-export const targetVirtual = {
-    name: "target",
-    label: "Target",
-    type: 'virtual',
-    options: []
-}
+    options: [],
+    isClearable: true,
+    isSearchable: true,
+    ...settings
+})
 
 export const craftNumber = {
     name: "craftNumber",
@@ -138,12 +132,15 @@ export const getSlot = (whiteList, blacklist) => ({
 export const item_class = {
     name: 'item_class',
     label: 'Type',
+    isClearable: true,
     options: toPairs(itemClasses)
 }
 
 export const untradable = {
     name: 'untradable',
     label: 'Not tradable',
+    isClearable: true,
+    isSearchable: false,
     options: [
         ['1', 'Not tradable']
     ]

@@ -5,12 +5,8 @@ display: flex;
 flex-direction: column;
 flex: 1 1 auto;
 overflow-y: auto;
-width:50%;
+width: 50%;
 color: #8a879a;
-@media(max-width:600px){
-    width:100%;
-    overflow-y:unset;
-}
 `
 
 export const FormInner = styled.div`
@@ -48,6 +44,7 @@ export const FilterIcon = styled.div`
 display:flex;
 color:#6e66a6;
 transition: transform 0.2s ease;
+font-size:1rem;
 `
 
 export const FilterHeader = styled.div`
@@ -104,11 +101,13 @@ line-height:1rem;
 border: 0;
 font-weight:300;
 font-size:0.9rem;
-:enabled:hover{
+:enabled: hover{
     background:#897fd0;
 }
 :disabled{
     cursor: not-allowed;
+    background: rgba(138, 135, 154, 0.2);
+    color:rgba(138, 135, 154, 0.5);
 }
 :active, :focus{
     outline:0;

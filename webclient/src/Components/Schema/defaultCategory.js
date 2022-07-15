@@ -34,8 +34,8 @@ const defaultCategory = {
         wear,
         effect: getEffect(undefined, []),
         texture,
-        defindex,
-        target,
+        defindex: defindex({ type: 'virtual' }), //todo consider merging all modifications to the other categories, also consider doing all item_name modifications
+        target: target({ type: 'virtual' }), //todo how to filter items that can't be targets?
         craftNumber,
         crateSeries
     },

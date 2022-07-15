@@ -73,7 +73,7 @@ const GlobalStyle = createGlobalStyle`
   }
   .fast-option-selected{
     background: #6e66a6;
-  } 
+  }
 `
 
 export default GlobalStyle
@@ -166,19 +166,23 @@ export const selectStyle = ({
 export const toggleStyle = {
   trackContent: (defaults) => ({
     ...defaults,
-    [':nth-child(2)']: {
+    ':nth-child(2)': {
       color: "#1b9e2c"
     },
-    [':nth-child(3)']: {
+    ':nth-child(3)': {
       color: "#c77265"
+    },
+    '>i': {
+      fontWeight: '600'
     }
   }),
   track: (defaults) => ({
     ...defaults,
     border: '0px',
     boxShadow: "0 0 0 1px #3a3747",
-    [':hover']: {
+    ':hover': {
       boxShadow: "0 0 0 1px #3a3747, 0 0 0 2px #6e66a6"
     }
-  })
+  }),
+
 };

@@ -1,15 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import {
-    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat, either
+    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat
 } from 'ramda'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faCheck,
-    faTimes,
-    faChevronCircleDown
-} from '@fortawesome/free-solid-svg-icons'
+import { CheckIcon, TimesIcon, ChevronCircleDownIcon } from 'react-line-awesome'
 
 import Select from 'react-select'
 import SelectVirtual from 'react-select-virtualized'
@@ -17,7 +12,7 @@ import SelectVirtual from 'react-select-virtualized'
 import Toggle from '@juice789/react-toggle'
 import { selectStyle, toggleStyle } from '../globalStyle'
 
-import { safeItems as items } from '@juice789/tf2items'
+import { safeItems as items, skuFromForm } from '@juice789/tf2items'
 import categories from './Schema'
 
 import multiEffectList from './Schema/multiEffect'
@@ -40,8 +35,6 @@ const getFilters = compose(
     toPairs,
     pickBy(Boolean)
 )
-
-const skuFromForm = () => { }
 
 const FormActual = () => {
 
@@ -80,37 +73,50 @@ const FormActual = () => {
         val: e?.value || ''
     })
 
-    const getRow = ({ name, label, options, type, isOn, isClearable = false, remap }) => (
+    const getControl = (name, type, { options, isOn, isClearable, isSearchable, remap }) => {
+        switch (type) {
+            case 'input':
+                return <FormInput onChange={propChange(name)} />
+            case 'toggle':
+                return (
+                    <Toggle styles={toggleStyle} isOn={isOn} onChange={propChange(name)} remap={remap}>
+                        <Toggle.Left><CheckIcon /></Toggle.Left>
+                        <Toggle.Right><TimesIcon /></Toggle.Right>
+                    </Toggle>
+                )
+            case 'virtual':
+                return (
+                    <FormSelect>
+                        <SelectVirtual
+                            onChange={propChange(name)}
+                            options={map(([value, label]) => ({ value, label }), options)}
+                            styles={selectStyle()}
+                            isClearable={isClearable}
+                            isSearchable={isSearchable}
+                            optionHeight={40}
+                        />
+                    </FormSelect>
+                )
+            default:
+                return (
+                    <FormSelect>
+                        <Select
+                            onChange={propChange(name)}
+                            options={map(([value, label]) => ({ value, label }), options)}
+                            styles={selectStyle()}
+                            isClearable={isClearable}
+                            isSearchable={isSearchable}
+                        />
+                    </FormSelect>
+                )
+        }
+    }
+
+    const getRow = ({ name, label, type, ...rest }) => (
         <FormRow key={name}>
             <FormLabel>{label}:</FormLabel>
             <InputOuter>
-                {type === 'input' ?
-                    <FormInput name={name} key={name} onChange={propChange(name)} />
-                    :
-                    type === 'toggle' ?
-                        <Toggle styles={toggleStyle} isOn={isOn} onChange={propChange(name)} remap={remap}>
-                            <Toggle.Left><FontAwesomeIcon icon={faCheck} /></Toggle.Left>
-                            <Toggle.Right><FontAwesomeIcon icon={faTimes} /></Toggle.Right>
-                        </Toggle> :
-                        type === 'virtual' ?
-                            <FormSelect>
-                                <SelectVirtual
-                                    onChange={propChange(name)}
-                                    options={map(([value, label]) => ({ value, label }), options)}
-                                    styles={selectStyle()}
-                                    isClearable={isClearable}
-                                    optionHeight={40}
-                                />
-                            </FormSelect> :
-                            <FormSelect>
-                                <Select
-                                    onChange={propChange(name)}
-                                    options={map(([value, label]) => ({ value, label }), options)}
-                                    styles={selectStyle()}
-                                    isClearable={isClearable}
-                                />
-                            </FormSelect>
-                }
+                {getControl(name, type, rest)}
             </InputOuter>
         </FormRow >
     )
@@ -153,7 +159,9 @@ const FormActual = () => {
         )
     })
 
-    const saveDisabled = (validationType) => hasPath(['validation', validationType], formState) && any(complement(Boolean), props(formState.validation[validationType], formState.controls))
+    const isSaveDisabled = (validationType) =>
+        hasPath(['validation', validationType], formState)
+        && any(complement(Boolean), props(formState.validation[validationType], formState.controls))
 
     return (
         <Form>
@@ -172,7 +180,7 @@ const FormActual = () => {
                     isOpen={formState.filterOpen}>
                     <FilterHeader onClick={() => dispatch({ type: 'FILTER_TOGGLE' })}>
                         Filters:
-                        <FilterIcon><FontAwesomeIcon icon={faChevronCircleDown} /></FilterIcon>
+                        <FilterIcon><ChevronCircleDownIcon /></FilterIcon>
                     </FilterHeader>
                     <FilterContent>
                         {map(getRow, values(category.filters))}
@@ -181,19 +189,21 @@ const FormActual = () => {
                 {map(getRow, values(pick(['defindex', 'target', 'craftNumber', 'crateSeries'], controls)))}
             </FormInner>
             <SaveOptions>
-                <SaveMain
-                    disabled={saveDisabled('single')}
-                    onClick={save}>
-                    Save
-                </SaveMain>
+                <FormRow>
+                    <SaveMain
+                        disabled={isSaveDisabled('single')}
+                        onClick={save}>
+                        Save
+                    </SaveMain>
+                </FormRow>
             </SaveOptions>
             <SaveOptions>
                 <FormRow>
                     <FormLabel>Save all filtered items:</FormLabel>
                     <Save
-                        disabled={saveDisabled('multi')}
+                        disabled={isSaveDisabled('multi')}
                         onClick={category.targetFn ? saveAllTargets : saveAll}>
-                        Save all ({Object.keys(category.targetFn ? filteredTargets : filteredItems).length})
+                        Save all ({keys(category.targetFn ? filteredTargets : filteredItems).length})
                     </Save>
                 </FormRow>
             </SaveOptions>
@@ -205,7 +215,7 @@ const FormActual = () => {
                         {getRow(categories[formState.category].multiEffect)}
                         <FormRow>
                             <Save
-                                disabled={saveDisabled('effect')}
+                                disabled={isSaveDisabled('effect')}
                                 onClick={saveMultiEffect}>
                                 Save effects{formState.props.multiEffect ? ' (' + keys(multiEffectList[formState.props.multiEffect]).length + ')' : ''}
                             </Save>

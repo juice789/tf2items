@@ -19,7 +19,7 @@ const weapon = {
         elevated,
         uncraftable,
         killstreakTier,
-        defindex,
+        defindex: defindex(),
     },
     itemFn: compose(
         map(

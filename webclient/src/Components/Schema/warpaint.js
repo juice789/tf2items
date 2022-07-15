@@ -21,7 +21,7 @@ const warpaint = {
         elevated,
         wear,
         effect: getEffect(range(701, 704)),
-        defindex
+        defindex: defindex()
     },
     itemFn: compose(
         map((item) => assoc('item_name', textures[item.texture] + ' ' + item.item_name, item)),

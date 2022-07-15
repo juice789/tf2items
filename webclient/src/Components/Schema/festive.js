@@ -14,7 +14,7 @@ const festive = {
     controls: {
         quality: getQuality([11, 6]),
         killstreakTier,
-        defindex
+        defindex: defindex()
     },
     itemFn: pickBy(
         allPass([

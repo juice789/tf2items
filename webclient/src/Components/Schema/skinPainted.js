@@ -25,7 +25,7 @@ const skinPainted = {
         wear,
         texture, //todo: filter the textures by collection
         effect: getEffect(range(701, 705)),
-        defindex
+        defindex: defindex()
     },
     itemFn: pick(paintableDefindex),
     filters: {

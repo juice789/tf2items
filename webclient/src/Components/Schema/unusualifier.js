@@ -10,8 +10,8 @@ import {
 
 const unusualifier = {
     controls: {
-        defindex,
-        target,
+        defindex: defindex({ isSearchable: false }),
+        target: target(),
     },
     itemFn: pick([9258]),
     targetFn: pickBy(propEq('item_slot', 'taunt')),

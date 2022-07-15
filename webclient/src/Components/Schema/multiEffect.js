@@ -1,7 +1,7 @@
 import { particleEffects, impossibleEffects } from '@juice789/tf2items'
 
 import {
-    omit, pickBy, includes, __, map, without, range, concat, toString
+    omit, pickBy, includes, map, without, range, concat, toString
 } from 'ramda'
 
 const filterEffects = (whitelist) => pickBy(

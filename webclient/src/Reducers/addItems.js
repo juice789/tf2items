@@ -1,4 +1,4 @@
-import { has, always, assoc, assocPath, evolve, fromPairs, map, compose, concat, __, of, when, ifElse, prop, includes } from 'ramda'
+import { has, always, assoc, assocPath, evolve, fromPairs, map, compose, concat, __, of, when, ifElse, prop, includes, omit, mergeRight, indexBy } from 'ramda'
 
 const defaultState = {
     category: 'All items',
@@ -23,7 +23,7 @@ export function addItems(state = defaultState, action) {
                 rules: always(action.rules || {}),
                 props: {},
                 defaults: always(action.defaults || {}),
-                filterOpen: false,
+                filterOpen: always(false),
                 validation: always(action.validation || {}),
             }, state)
         case 'NEWITEM_FILTER_CHANGE':
@@ -51,6 +51,24 @@ export function addItems(state = defaultState, action) {
                 ...state,
                 filterOpen: !state.filterOpen
             }
+        default:
+            return state
+    }
+}
+
+export const tmpItems = (state = {}, action) => {
+    switch (action.type) {
+        case 'ADD_ITEMS':
+            return mergeRight(
+                indexBy(
+                    prop('sku'),
+                    map((sku) => ({ sku }), action.items)
+                ), state)
+        case 'REMOVE_ITEM':
+            return omit([action.sku], state)
+        case 'CLEAR_ITEMS':
+        case 'NEW_ITEMS':
+            return {}
         default:
             return state
     }

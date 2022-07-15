@@ -13,7 +13,7 @@ import {
 
 const strangifier = {
     controls: {
-        defindex,
+        defindex: defindex(),
     },
     itemFn: compose(
         indexBy(prop('defindex')),

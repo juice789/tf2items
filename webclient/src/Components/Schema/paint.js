@@ -10,7 +10,7 @@ import {
 const paint = {
     controls: {
         uncraftable,
-        defindex,
+        defindex: defindex(),
     },
     itemFn: pickBy(
         allPass([

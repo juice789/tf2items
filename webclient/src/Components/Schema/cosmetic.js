@@ -9,7 +9,7 @@ import {
     elevated,
     uncraftable,
     getEffect,
-    defindexVirtual,
+    defindex,
     getClasses,
     getCollections,
     getRarities,
@@ -29,7 +29,7 @@ const cosmetic = {
         elevated,
         uncraftable,
         effect: getEffect(range(7, 700)),
-        defindex: defindexVirtual
+        defindex: defindex({ type: 'virtual' })
     },
     rules: getRules(['effect', 'elevated']),
     itemFn: compose(

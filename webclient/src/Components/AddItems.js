@@ -25,13 +25,12 @@ height:49px;
 display: flex;
 border-bottom: 1px solid #403d4f;
 padding: 0 0.25rem 0 1rem;
-width: 100%;
 flex: 0 0 auto;
 align-items: center;
 background: #33313f;
 justify-content: space-between;
 box-sizing:border-box;
-font-size:0.9rem;
+font-size: 0.9rem;
 `
 
 const Close = styled.div`
@@ -61,56 +60,34 @@ const HeaderActual = ({ asideName, label }) => {
     </Header>
 }
 
+const CategoriesOuter = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+background: #33313f;
+width: 100%;
+min-height: 49px;
+padding: 0 0.25rem 0 1rem;
+border-bottom: 1px solid #33313f;
+font-size: 0.9rem;
+`
+
+const SelectOuter = styled.div`
+flex-grow: 1;
+display: flex;
+align-items: center;
+margin: 0 0.25rem 0 1rem;
+> * {
+    width: 100%;
+    font-size: 0.9rem;
+}
+`
+
 const Content = styled.div`
 display: flex;
 position: relative;
 flex: 1 1 auto;
 overflow-y: auto;
-`
-
-const Button = styled.div`
-display: flex;
-justify-content: center;
-height:2rem;
-align-items:center;
-padding: 0.2rem 1rem;
-cursor: pointer;
-background: ${({ danger }) => danger ? '#b74838' : '#6e66a6'};
-color: #f9f9fa;
-border-radius: 0.3rem;
-transition: background 0.2s ease;
-line-height:1rem;
-:hover{
-    background: ${({ danger }) => danger ? '#762114' : '#897fd0'};
-}
-`
-
-const CategoriesOuter = styled.div`
-display:flex;
-background: #33313f;
-width:100%;
-height: 49px;
-padding: 0 0.25rem 0 1rem;
-border-bottom: 1px solid #33313f;
-`
-
-const Title = styled.div`
-height:3rem;
-display:flex;
-align-items:center;
-font-size:0.9rem;
-margin-right:1rem;
-`
-
-const SelectOuter = styled.div`
-flex-grow:1;
-display:flex;
-align-items:center;
-margin: 0 0.25rem 0 0.25rem;
-> * {
-    width:100%;
-    font-size:0.9rem;
-}
 `
 
 const AddItemsActual = () => {
@@ -139,13 +116,14 @@ const AddItemsActual = () => {
         <Aside>
             <HeaderActual asideName={'addItems'} label={'Add items'} />
             <CategoriesOuter>
-                <Title>Category: </Title>
+                Category:
                 <SelectOuter>
                     <Select
                         onChange={onChange}
                         styles={selectStyle()}
                         options={categoryOptions}
                         value={categoryOptions.find(propEq('value', category))}
+                        isSearchable={false}
                     />
                 </SelectOuter>
             </CategoriesOuter>

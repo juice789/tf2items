@@ -11,7 +11,7 @@ import {
 
 const chemistrySet = {
     controls: {
-        defindex
+        defindex: defindex()
     },
     itemFn: compose(
         indexBy(prop('defindex')),
@@ -41,6 +41,7 @@ const chemistrySet = {
             name: 'oq',
             label: "Collector's",
             isClearable: true,
+            isSearchable: false,
             options: [
                 ['14', 'Yes']
             ]

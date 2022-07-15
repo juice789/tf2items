@@ -19,7 +19,7 @@ const festivized = {
         elevated,
         uncraftable,
         killstreakTier,
-        defindex
+        defindex: defindex()
     },
     defaults: {
         festivized: '1'

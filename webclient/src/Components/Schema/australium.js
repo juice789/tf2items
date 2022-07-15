@@ -12,7 +12,7 @@ const australium = {
     controls: {
         killstreakTier,
         festivized,
-        defindex
+        defindex: defindex()
     },
     itemFn: pick(australiumDefindex),
     filters: {

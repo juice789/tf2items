@@ -18,7 +18,7 @@ const taunt = {
         elevated,
         uncraftable,
         effect: getEffect(range(3000, 4000)),
-        defindex
+        defindex: defindex()
     },
     itemFn: pickBy(
         allPass([

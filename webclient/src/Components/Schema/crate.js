@@ -13,7 +13,7 @@ import {
 const crate = {
     controls: {
         uncraftable,
-        defindex,
+        defindex: defindex(),
     },
     itemFn: compose(
         indexBy(prop('defindex')),

@@ -1,7 +1,7 @@
 import { has, always, assoc, assocPath, evolve, fromPairs, map, compose, concat, __, of, when, ifElse, prop, includes, omit, mergeRight, indexBy } from 'ramda'
 
 const defaultState = {
-    category: 'All items',
+    category: '',
     controls: {},
     filters: {},
     rules: {},

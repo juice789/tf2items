@@ -93,14 +93,14 @@ const transformItems = uncurryN(3, (collections, itemsApi) => compose(
             when(
                 allPass([
                     compose(includes('paintkitweapon'), propOr('', 'item_quality')),
-                    complement(propEq)('defindex', 9536)
+                    complement(propEq)('defindex', '9536')
                 ]),
                 chain(assoc('texture'), path(['static_attrs', 'paintkit_proto_def_index']))
             )
         )
     ),
     omit(['default']),
-    mapObjIndexed((v, k) => assoc('defindex', parseInt(k), v))
+    mapObjIndexed((v, k) => assoc('defindex', k, v))
 ))
 
 module.exports = { transformItems }

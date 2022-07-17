@@ -9,10 +9,13 @@ const {
 const {
     qualityNames,
     killstreakTiers,
-    wears,
-    particleEffects,
-    textures
+    wears
 } = require('./schemaHelper.json')
+
+const {
+    textures,
+    particleEffects
+} = require('./schema.json')
 
 const ktRemap = {
     '6527': '1',

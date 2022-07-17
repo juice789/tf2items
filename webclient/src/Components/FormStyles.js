@@ -59,12 +59,13 @@ export const FilterContent = styled.div`
 display:flex;
 flex-direction:column;
 padding-top:0.5rem;
+visibility:${({ hidden }) => hidden ? 'hidden' : 'visible'};
 > ${FormRow} > ${FormLabel}{
     padding-left: 0.5rem;
 }`
 
 export const Filters = styled.div`
-display: ${({isDisabled}) => isDisabled ? 'none' : 'flex'};
+display: ${({ isDisabled }) => isDisabled ? 'none' : 'flex'};
 flex-direction: column;
 font-size: 0.9rem;
 max-height: ${({ isOpen }) => isOpen ? '50rem' : '2.5rem'};
@@ -101,6 +102,7 @@ line-height:1rem;
 border: 0;
 font-weight:300;
 font-size:0.9rem;
+user-select:none;
 :enabled: hover{
     background:#897fd0;
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { map, keys, path, propEq } from 'ramda'
 import styled from 'styled-components'
@@ -17,7 +17,7 @@ flex-direction: column;
 position: relative;
 flex: 0 1 auto;
 overflow-y: auto;
-width: 35rem;
+width: 50%;
 `
 
 const Header = styled.div`
@@ -94,8 +94,9 @@ const AddItemsActual = () => {
 
     const dispatch = useDispatch()
     const category = useSelector(path(['addItems', 'category']))
-
+    const [counter, setCounter] = useState(0)
     const onChange = ({ value }) => {
+        setCounter(counter + 1)
         dispatch({
             type: 'CATEGORY_CHANGE',
             category: value,
@@ -106,6 +107,10 @@ const AddItemsActual = () => {
             validation: categories[value].validation
         })
     }
+
+    useEffect(() => {
+        onChange({ value: 'All items' })
+    }, [])
 
     const categoryOptions = map(
         (name) => ({ value: name, label: name }),
@@ -128,7 +133,7 @@ const AddItemsActual = () => {
                 </SelectOuter>
             </CategoriesOuter>
             <Content>
-                <Form key={category} />
+                {category !== '' && <Form key={category + counter} />}
                 <Preview />
             </Content>
         </Aside>

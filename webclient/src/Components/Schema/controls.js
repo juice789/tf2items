@@ -166,7 +166,7 @@ const rules = {
         hidden: true //hidden by default
     },
     elevated: {
-        quality: ['11'], //if the quality is 11 do not display the elevated control. Otherwise display it.
+        quality: ['11', '6', '15'], //if the quality is strange, unique or decorated do not display the elevated control. Otherwise display it.
         reverse: true, //helper flag to reverse the rule logic. Only used in the reducer.
         hidden: false //displayed by default
     }

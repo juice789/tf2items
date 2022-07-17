@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import {
-    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat
+    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat, mapObjIndexed
 } from 'ramda'
 
 import { CheckIcon, TimesIcon, ChevronCircleDownIcon } from 'react-line-awesome'
@@ -57,10 +57,14 @@ const FormActual = () => {
         category.itemFn(items)
     )
 
-    const filteredTargets = category.targetFn && pickBy(
-        allPass(getFilters(formState.filters)),
-        category.targetFn(items)
-    )
+    const filteredTargets = category.controls.target
+        ? category.targetFn
+            ? pickBy(
+                allPass(getFilters(formState.filters)),
+                category.targetFn(items)
+            )
+            : items
+        : false
 
     const controls = evolve({
         defindex: assoc('options', getItems(filteredItems)),
@@ -79,7 +83,7 @@ const FormActual = () => {
                 return <FormInput onChange={propChange(name)} />
             case 'toggle':
                 return (
-                    <Toggle styles={toggleStyle} isOn={isOn} onChange={propChange(name)} remap={remap}>
+                    <Toggle disabled={hiddenControlNames[name]} key={name} styles={toggleStyle} isOn={isOn} onChange={propChange(name)} remap={remap}>
                         <Toggle.Left><CheckIcon /></Toggle.Left>
                         <Toggle.Right><TimesIcon /></Toggle.Right>
                     </Toggle>
@@ -113,7 +117,7 @@ const FormActual = () => {
     }
 
     const getRow = ({ name, label, type, ...rest }) => (
-        <FormRow key={name}>
+        <FormRow key={name} hidden={includes(name, hiddenControlNames)}>
             <FormLabel>{label}:</FormLabel>
             <InputOuter>
                 {getControl(name, type, rest)}
@@ -169,10 +173,7 @@ const FormActual = () => {
                 {map(
                     getRow,
                     values(
-                        omit(
-                            ['defindex', 'target', 'craftNumber', 'crateSeries'],
-                            pickBy((v, k) => complement(includes)(k, hiddenControlNames), controls),
-                        )
+                        omit(['defindex', 'target', 'craftNumber', 'crateSeries'], controls)
                     )
                 )}
                 <Filters

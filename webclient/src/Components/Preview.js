@@ -35,7 +35,7 @@ flex: 1 1 auto;
 overflow-y:auto;
 position:relative;
 width: 100%;
-padding: 0 1rem;
+padding: 0.25rem;
 `
 
 const Controls = styled.div`
@@ -102,6 +102,7 @@ color: #f9f9fa;
 border-radius: 0.3rem;
 transition: background 0.2s ease;
 line-height:1rem;
+user-select:none;
 :hover{
     background: ${({ danger }) => danger ? '#762114' : '#897fd0'};
 }

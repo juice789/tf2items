@@ -35,12 +35,11 @@ const defaultCategory = {
         effect: getEffect(undefined, []),
         texture,
         defindex: defindex({ type: 'virtual' }), //todo consider merging all modifications to the other categories, also consider doing all item_name modifications
-        target: target({ type: 'virtual' }), //todo how to filter items that can't be targets?
+        target: target({ type: 'virtual' }), //todo how to filter items that can't be targets? should be it filtered at all?
         craftNumber,
         crateSeries
     },
     itemFn: identity,
-    targetFn: identity,
     filters: {
         used_by_classes: getClasses(),
         item_slot: getSlot(),

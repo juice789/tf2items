@@ -1,7 +1,7 @@
 import { textures, weaponCollections } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, propEq, pickBy, includes, allPass, assoc, complement, range
+    compose, map, prop, propEq, pickBy, includes, allPass, assoc, complement, range, props, evolve, join, chain, __, identity
 } from 'ramda'
 
 import {
@@ -27,7 +27,16 @@ const skinUnboxed = {
         defindex: defindex()
     },
     itemFn: compose(
-        map((item) => assoc('item_name', textures[item.texture] + ' ' + item.item_name, item)),
+        map(
+            chain(
+                assoc('item_name'),
+                compose(
+                    join(' '),
+                    evolve([prop(__, textures), identity]),
+                    props(['texture', 'item_name'])
+                )
+            )
+        ),
         pickBy(
             allPass([
                 compose(

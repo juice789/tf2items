@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import {
-    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat, mapObjIndexed
+    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat
 } from 'ramda'
 
 import { CheckIcon, TimesIcon, ChevronCircleDownIcon } from 'react-line-awesome'

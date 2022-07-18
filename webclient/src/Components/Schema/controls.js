@@ -138,11 +138,12 @@ export const item_class = {
 
 export const untradable = {
     name: 'untradable',
-    label: 'Not tradable',
+    label: 'Tradable',
     isClearable: true,
     isSearchable: false,
     options: [
-        ['1', 'Not tradable']
+        ['2', 'Tradable only'],
+        ['1', 'Untradable only']
     ]
 }
 

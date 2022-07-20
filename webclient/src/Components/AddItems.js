@@ -50,16 +50,6 @@ cursor: pointer;
 }
 `
 
-const HeaderActual = ({ asideName, label }) => {
-    const dispatch = useDispatch()
-    return <Header>
-        <span>{label}</span>
-        <Close onClick={() => dispatch({ type: 'ASIDE_CLOSE', name: asideName })}>
-            <TimesIcon />
-        </Close>
-    </Header>
-}
-
 const CategoriesOuter = styled.div`
 display: flex;
 align-items: center;
@@ -119,7 +109,12 @@ const AddItemsActual = () => {
 
     return (
         <Aside>
-            <HeaderActual asideName={'addItems'} label={'Add items'} />
+            <Header>
+                <span>Add items</span>
+                <Close onClick={() => dispatch({ type: 'ASIDE_CLOSE', name: 'addItems' })}>
+                    <TimesIcon />
+                </Close>
+            </Header>
             <CategoriesOuter>
                 Category:
                 <SelectOuter>

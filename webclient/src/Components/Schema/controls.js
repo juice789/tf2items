@@ -103,14 +103,14 @@ export const target = (settings = {}) => ({
     ...settings
 })
 
-export const craftNumber = {
-    name: "craftNumber",
+export const craft = {
+    name: "craft",
     label: "Craft number",
     type: 'input'
 }
 
-export const crateSeries = {
-    name: "crateSeries",
+export const series = {
+    name: "series",
     label: "Crate series",
     type: 'input'
 }

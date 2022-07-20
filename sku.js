@@ -44,7 +44,8 @@ const skuFromItem = ({
     texture,
     wear,
     australium,
-    series
+    series,
+    craft
 }) => [
     defindex,
     quality,
@@ -59,7 +60,8 @@ const skuFromItem = ({
     texture && 'pk-' + texture,
     wear && 'w-' + wear,
     ['1', true].includes(australium) && 'australium',
-    series && 'c-' + series,
+    series && isNaN(series) === false && 'c-' + parseInt(series),
+    craft && isNaN(craft) === false && 'no-' + parseInt(craft),
 ].filter(Boolean).join(';')
 
 const skuFromForm = curry((obj, overrides) => compose(
@@ -107,6 +109,7 @@ const skuFromForm = curry((obj, overrides) => compose(
 
 const rules = {
     c: "series",
+    no: "craft",
     kt: "killstreakTier",
     od: "output",
     oq: "oq",
@@ -145,8 +148,10 @@ const getName = ({
     texture,
     wear,
     australium,
-    series
+    series,
+    craft
 }) => [
+    craft && '#'+ craft,
     uncraftable && 'Non-Craftable',
     elevated && 'Strange',
     quality && !['6', '15'].includes(quality.toString()) && qualityNames[quality],

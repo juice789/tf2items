@@ -13,8 +13,8 @@ import {
     texture,
     defindex,
     target,
-    craftNumber,
-    crateSeries,
+    craft,
+    series,
     getSlot,
     item_class,
     untradable,
@@ -38,8 +38,8 @@ const defaultCategory = {
         texture,
         defindex: defindex({ type: 'virtual' }),
         target: target({ type: 'virtual' }),
-        craftNumber,
-        crateSeries
+        craft,
+        series
     },
     itemFn: map(compose(
         when(//Strangifier

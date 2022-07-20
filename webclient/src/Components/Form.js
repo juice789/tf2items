@@ -74,13 +74,13 @@ const FormActual = () => {
     const propChange = (name) => (e) => dispatch({
         type: has(name, map(prop('name'), controls)) ? 'NEWITEM_PROP_CHANGE' : 'NEWITEM_FILTER_CHANGE',
         key: name,
-        val: e?.value || ''
+        val: e?.value || e?.target?.value || ''
     })
 
     const getControl = (name, type, { options, isOn, isClearable, isSearchable, remap }) => {
         switch (type) {
             case 'input':
-                return <FormInput onChange={propChange(name)} />
+                return <FormInput type={'number'} onChange={propChange(name)} />
             case 'toggle':
                 return (
                     <Toggle disabled={hiddenControlNames[name]} key={name} styles={toggleStyle} isOn={isOn} onChange={propChange(name)} remap={remap}>

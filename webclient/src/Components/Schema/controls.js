@@ -115,6 +115,12 @@ export const series = {
     type: 'input'
 }
 
+export const targetInput = {
+    name: "target",
+    label: "Target",
+    type: 'input'
+}
+
 export const getClasses = (whiteList, blacklist) => ({
     name: "used_by_classes",
     label: "Class",

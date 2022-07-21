@@ -18,7 +18,8 @@ import {
     getSlot,
     item_class,
     untradable,
-    getClasses
+    getClasses,
+    targetInput
 } from './controls'
 
 const defaultCategory = {
@@ -37,7 +38,7 @@ const defaultCategory = {
         effect: getEffect(undefined, []),
         texture,
         defindex: defindex({ type: 'virtual' }),
-        target: target({ type: 's' }),
+        target: targetInput,
         craft,
         series
     },

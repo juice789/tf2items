@@ -1,14 +1,13 @@
 import React from 'react'
-import memoize from 'memoize-one'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import {
-    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat, min
+    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat
 } from 'ramda'
 
 import { CheckIcon, TimesIcon, ChevronCircleDownIcon } from 'react-line-awesome'
 
 import Select, { createFilter } from 'react-select'
-import { areEqual, VariableSizeList as List } from 'react-window'
+import { areEqual, FixedSizeList as List } from 'react-window'
 
 import Toggle from '@juice789/react-toggle'
 import { selectStyle, toggleStyle } from '../globalStyle'
@@ -78,27 +77,18 @@ const FormActual = () => {
         val: e?.value || e?.target?.value || ''
     })
 
-    const OptionActual = React.memo(({ index, style, data }) => <div style={style}>{data.items[index]}</div>, areEqual)
+    const MenuListOption = React.memo(({ index, style, data }) => <div style={style}>{data[index]}</div>, areEqual)
 
-    const createItemData = memoize((items) => ({
-        items
-    }))
-
-    const MenuListActual = (props) => {
-
-        const itemData = createItemData(props.children)
-
-        return (
-            <List
-                itemCount={props.children.length}
-                itemSize={() => 35}
-                height={200}
-                itemData={itemData}
-            >
-                {OptionActual}
-            </List>
-        )
-    }
+    const MenuList = ({ children }) => (
+        <List
+            itemCount={children.length}
+            itemSize={35}
+            height={200}
+            itemData={children}
+        >
+            {MenuListOption}
+        </List>
+    )
 
     const getControl = (name, type, { options, isOn, isClearable, isSearchable, remap }) => {
         switch (type) {
@@ -111,21 +101,6 @@ const FormActual = () => {
                         <Toggle.Right><TimesIcon /></Toggle.Right>
                     </Toggle>
                 )
-            case 'virtual':
-                return (
-                    <FormSelect>
-                        <Select
-                            onChange={propChange(name)}
-                            options={map(([value, label]) => ({ value, label }), options)}
-                            styles={selectStyle()}
-                            isClearable={isClearable}
-                            isSearchable={isSearchable}
-                            components={{ MenuList: MenuListActual }}
-                            filterOption={createFilter({ ignoreAccents: false })}
-                            menuIsOpen={true}
-                        />
-                    </FormSelect>
-                )
             default:
                 return (
                     <FormSelect>
@@ -135,6 +110,8 @@ const FormActual = () => {
                             styles={selectStyle()}
                             isClearable={isClearable}
                             isSearchable={isSearchable}
+                            components={type === 'virtual' ? { MenuList } : {}}
+                            filterOption={createFilter({ ignoreAccents: false })}
                         />
                     </FormSelect>
                 )

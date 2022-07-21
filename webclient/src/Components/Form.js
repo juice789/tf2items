@@ -1,13 +1,14 @@
 import React from 'react'
+import memoize from 'memoize-one'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import {
-    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat
+    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat, min
 } from 'ramda'
 
 import { CheckIcon, TimesIcon, ChevronCircleDownIcon } from 'react-line-awesome'
 
-import Select from 'react-select'
-import SelectVirtual from 'react-select-virtualized'
+import Select, { createFilter } from 'react-select'
+import { areEqual, VariableSizeList as List } from 'react-window'
 
 import Toggle from '@juice789/react-toggle'
 import { selectStyle, toggleStyle } from '../globalStyle'
@@ -77,6 +78,28 @@ const FormActual = () => {
         val: e?.value || e?.target?.value || ''
     })
 
+    const OptionActual = React.memo(({ index, style, data }) => <div style={style}>{data.items[index]}</div>, areEqual)
+
+    const createItemData = memoize((items) => ({
+        items
+    }))
+
+    const MenuListActual = (props) => {
+
+        const itemData = createItemData(props.children)
+
+        return (
+            <List
+                itemCount={props.children.length}
+                itemSize={() => 35}
+                height={200}
+                itemData={itemData}
+            >
+                {OptionActual}
+            </List>
+        )
+    }
+
     const getControl = (name, type, { options, isOn, isClearable, isSearchable, remap }) => {
         switch (type) {
             case 'input':
@@ -91,13 +114,15 @@ const FormActual = () => {
             case 'virtual':
                 return (
                     <FormSelect>
-                        <SelectVirtual
+                        <Select
                             onChange={propChange(name)}
                             options={map(([value, label]) => ({ value, label }), options)}
                             styles={selectStyle()}
                             isClearable={isClearable}
                             isSearchable={isSearchable}
-                            optionHeight={40}
+                            components={{ MenuList: MenuListActual }}
+                            filterOption={createFilter({ ignoreAccents: false })}
+                            menuIsOpen={true}
                         />
                     </FormSelect>
                 )

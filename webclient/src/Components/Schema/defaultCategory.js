@@ -37,7 +37,7 @@ const defaultCategory = {
         effect: getEffect(undefined, []),
         texture,
         defindex: defindex({ type: 'virtual' }),
-        target: target({ type: 'virtual' }),
+        target: target({ type: 's' }),
         craft,
         series
     },

@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
-import * as aside from './aside.js'
-import * as addItems from './addItems'
+import * as ui from './ui'
+import * as items from './items'
+import * as pages from './pages'
 
 const rootReducer = combineReducers({
-    ...aside,
-    ...addItems
+    ...ui,
+    ...items,
+    ...pages
 })
 
 export default rootReducer 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import {
     prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat
@@ -39,6 +39,7 @@ const getFilters = compose(
 const FormActual = () => {
 
     const dispatch = useDispatch()
+    const [isFilterOpen, toggleFilter] = useState(false)
     const formState = useSelector(prop('addItems'), shallowEqual)
 
     const hiddenControlNames = useSelector(compose(
@@ -135,12 +136,12 @@ const FormActual = () => {
     )
 
     const save = () => dispatch({
-        type: 'ADD_ITEMS',
+        type: 'PREVIEW_ITEMS',
         items: [createItem({ defindex: formState.controls.defindex })]
     })
 
     const saveAll = () => dispatch({
-        type: 'ADD_ITEMS',
+        type: 'PREVIEW_ITEMS',
         items: map(
             compose(createItem, objOf('defindex')),
             keys(filteredItems)
@@ -149,7 +150,7 @@ const FormActual = () => {
 
     const saveMultiEffect = () => {
         return dispatch({
-            type: 'ADD_ITEMS',
+            type: 'PREVIEW_ITEMS',
             items: map(
                 compose(createItem, mergeRight({ defindex: formState.controls.defindex }), objOf('effect')),
                 keys(multiEffectList[formState.props.multiEffect])
@@ -158,7 +159,7 @@ const FormActual = () => {
     }
 
     const saveAllTargets = () => dispatch({
-        type: 'ADD_ITEMS',
+        type: 'PREVIEW_ITEMS',
         items: map(
             compose(createItem, mergeRight({ defindex: formState.controls.defindex }), objOf('target')),
             keys(filteredTargets)
@@ -180,8 +181,8 @@ const FormActual = () => {
                 )}
                 <Filters
                     isDisabled={values(category.filters).length === 0}
-                    isOpen={formState.filterOpen}>
-                    <FilterHeader onClick={() => dispatch({ type: 'FILTER_TOGGLE' })}>
+                    isOpen={isFilterOpen}>
+                    <FilterHeader onClick={() => toggleFilter(!isFilterOpen)}>
                         Filters:
                         <FilterIcon><ChevronCircleDownIcon /></FilterIcon>
                     </FilterHeader>

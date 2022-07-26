@@ -31,6 +31,7 @@ background: #33313f;
 justify-content: space-between;
 box-sizing:border-box;
 font-size: 0.9rem;
+color: #f9f9fa;
 `
 
 const Close = styled.div`
@@ -60,6 +61,7 @@ min-height: 49px;
 padding: 0 0.25rem 0 1rem;
 border-bottom: 1px solid #33313f;
 font-size: 0.9rem;
+color: #f9f9fa;
 `
 
 const SelectOuter = styled.div`
@@ -92,9 +94,9 @@ const AddItemsActual = () => {
             category: value,
             controls: keys(categories[value].controls),
             filters: keys(categories[value].filters),
-            rules: categories[value].rules,
-            defaults: categories[value].defaults,
-            validation: categories[value].validation
+            rules: categories[value].rules || {},
+            defaults: categories[value].defaults || {},
+            validation: categories[value].validation || {}
         })
     }
 

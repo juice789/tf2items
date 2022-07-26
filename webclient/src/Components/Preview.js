@@ -110,14 +110,14 @@ user-select:none;
 const PreviewActual = () => {
 
     const dispatch = useDispatch()
-    const tmpItems = useSelector(compose(values, prop('tmpItems')), shallowEqual)
+    const previewItems = useSelector(compose(values, prop('preview')), shallowEqual)
 
-    const removeTmpItem = (sku) => () => dispatch({ type: 'REMOVE_ITEM', sku })
-    const clearItems = () => dispatch({ type: 'CLEAR_ITEMS' })
+    const removeItem = (sku) => () => dispatch({ type: 'REMOVE_PREVIEW_ITEM', sku })
+    const clearItems = () => dispatch({ type: 'CLEAR_PREVIEW' })
 
     const saveItems = () => dispatch({
-        type: 'NEW_ITEMS',
-        items: indexBy(prop('sku'), tmpItems)
+        type: 'SAVE_ITEMS',
+        items: indexBy(prop('sku'), previewItems)
     })
 
     const items = map(({ sku }) => (
@@ -126,19 +126,19 @@ const PreviewActual = () => {
                 <Item>{itemFromSku(sku).name}</Item>
                 <SKU>{sku}</SKU>
             </ItemOuter>
-            <Icon onClick={removeTmpItem(sku)}>
+            <Icon onClick={removeItem(sku)}>
                 <TimesCircleIcon />
             </Icon>
         </Row>
-    ), tmpItems)
+    ), previewItems)
 
     return (
-        <Preview itemCount={tmpItems.length}>
-            <Header>Items to add: ({tmpItems.length})</Header>
+        <Preview itemCount={previewItems.length}>
+            <Header>Items to add: ({previewItems.length})</Header>
             <List>
                 {items}
             </List>
-            <Controls isVisible={tmpItems.length > 0}>
+            <Controls isVisible={previewItems.length > 0}>
                 <Button onClick={saveItems}>Save</Button>
                 <Button onClick={clearItems}>Reset</Button>
             </Controls>

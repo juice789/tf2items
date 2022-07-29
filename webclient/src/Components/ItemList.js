@@ -50,16 +50,20 @@ position: relative;
 const Row = styled.div`
 display: flex;
 flex-direction: column;
+min-width: 20rem;
 :hover {
     background: #403d4f;
 }
+`
+const RowInner = styled.div`
+display: flex;
 `
 
 const StickyRow = memo(() => {
     return <Th>
         <Label grow={true} w={16.5}>Item name</Label>
-        <Label w={3}>SKU</Label>
-        <Label w={3}>Links</Label>
+        <Label w={4}>SKU</Label>
+        <Label w={4}>Links</Label>
     </Th>
 })
 
@@ -67,10 +71,12 @@ const RowActual = memo(({ data: items, index, style }) => {
     const sku = items[index]
     return (
         <Row key={sku} style={style}>
-            <Checkbox sku={sku} />
-            <Name sku={sku} />
-            <SKU sku={sku} />
-            <Links sku={sku} />
+            <RowInner>
+                <Checkbox sku={sku} />
+                <Name sku={sku} />
+                <SKU sku={sku} />
+                <Links sku={sku} />
+            </RowInner>
         </Row>
     )
 }, areEqual)

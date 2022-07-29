@@ -101,7 +101,7 @@ const AddItemsActual = () => {
     }
 
     useEffect(() => {
-        onChange({ value: 'All items' })
+        onChange({ value: 'Weapon' })
     }, [])
 
     const categoryOptions = map(

@@ -12,8 +12,9 @@ import { areEqual, FixedSizeList as List } from 'react-window'
 import Toggle from '@juice789/react-toggle'
 import { selectStyle, toggleStyle } from '../globalStyle'
 
-import { safeItems as items, skuFromForm } from '@juice789/tf2items'
-import categories from './Schema'
+import { safeItems as items } from '@juice789/tf2items'
+
+import categories, { skuFromForm } from './Schema'
 
 import multiEffectList from './Schema/multiEffect'
 

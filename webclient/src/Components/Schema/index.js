@@ -17,6 +17,7 @@ import taunt from './taunt'
 import unusualifier from './unusualifier'
 import warpaint from './warpaint'
 import weapon from './weapon'
+import skuFromForm from './skuFromForm'
 
 const schema = {
     "All items": defaultCategory,
@@ -41,3 +42,5 @@ const schema = {
 }
 
 export default schema
+
+export { skuFromForm }

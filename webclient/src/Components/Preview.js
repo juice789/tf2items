@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { prop, map, compose, values, indexBy } from 'ramda'
 import { TimesCircleIcon } from 'react-line-awesome'
-import { itemFromSku } from '@juice789/tf2items'
+import { itemNameFromSku } from '@juice789/tf2items'
 
 const Preview = styled.div`
 display: flex;
@@ -123,7 +123,7 @@ const PreviewActual = () => {
     const items = map(({ sku }) => (
         <Row key={sku}>
             <ItemOuter>
-                <Item>{itemFromSku(sku).name}</Item>
+                <Item>{itemNameFromSku(sku)}</Item>
                 <SKU>{sku}</SKU>
             </ItemOuter>
             <Icon onClick={removeItem(sku)}>

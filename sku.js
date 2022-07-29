@@ -1,5 +1,5 @@
 const {
-    curry, includes, when, compose, __, prop, chain, assoc, has, nth, split, map, reduce, pickBy, mergeRight
+    compose, split, map, reduce, pickBy, mergeRight
 } = require('ramda')
 
 const {
@@ -16,19 +16,6 @@ const {
     textures,
     particleEffects
 } = require('./schema.json')
-
-const ktRemap = {
-    '6527': '1',
-    '6523': '2',
-    '6526': '3',
-    '20002': '2',
-    '20003': '3'
-}
-
-const odRemap = {
-    '20002': '6523',
-    '20003': '6526'
-}
 
 const skuFromItem = ({
     defindex,
@@ -64,49 +51,6 @@ const skuFromItem = ({
     craft && isNaN(craft) === false && 'no-' + parseInt(craft),
 ].filter(Boolean).join(';')
 
-const skuFromForm = curry((obj, overrides) => compose(
-    skuFromItem,
-    when(
-        compose(includes('>'), prop('defindex')),//strangifier
-        compose(
-            chain(assoc('defindex'), compose(nth(0), split('>'), prop('defindex'))),
-            chain(assoc('target'), compose(nth(1), split('>'), prop('defindex')))
-        )
-    ),
-    when(
-        compose(includes('<'), prop('defindex')),//chemistry set
-        compose(
-            chain(assoc('oq'), compose(prop('oq'), prop(__, safeItems), prop('defindex'))),
-            chain(assoc('defindex'), compose(nth(0), split('<'), prop('defindex'))),
-            chain(assoc('target'), compose(nth(2), split('<'), prop('defindex'))),
-            chain(assoc('output'), compose(nth(1), split('<'), prop('defindex')))
-        )
-    ),
-    when(
-        compose(includes('/'), prop('defindex')),//crates
-        compose(
-            chain(assoc('defindex'), compose(nth(0), split('/'), prop('defindex'))),
-            chain(assoc('series'), compose(nth(1), split('/'), prop('defindex')))
-        )
-    ),
-    when(
-        compose(has('target'), prop(__, safeItems), prop('defindex')),
-        chain(assoc('target'), compose(prop('target'), prop(__, safeItems), prop('defindex')))
-    ),
-    when(
-        compose(has('texture'), prop(__, safeItems), prop('defindex')),
-        chain(assoc('texture'), compose(prop('texture'), prop(__, safeItems), prop('defindex')))
-    ),
-    when(
-        compose(prop(__, odRemap), prop('defindex')),
-        chain(assoc('output'), compose(prop(__, odRemap), prop('defindex'))),
-    ),
-    when(
-        compose(prop(__, ktRemap), prop('defindex')),
-        chain(assoc('killstreakTier'), compose(prop(__, ktRemap), prop('defindex'))),
-    )
-)(mergeRight(obj, overrides)))
-
 const rules = {
     c: "series",
     no: "craft",
@@ -134,6 +78,16 @@ const decodeRules = compose(
     )
 )
 
+const itemFromSku = (sku) => {
+    const [defindex, quality, ...more] = sku.split(';')
+    const item = {
+        defindex,
+        quality,
+        ...decodeRules(more)
+    }
+    return item
+}
+
 const getName = ({
     defindex,
     quality,
@@ -151,37 +105,32 @@ const getName = ({
     series,
     craft
 }) => [
-    craft && '#'+ craft,
+    craft && '#' + craft,
     uncraftable && 'Non-Craftable',
     elevated && 'Strange',
     quality && !['6', '15'].includes(quality.toString()) && qualityNames[quality],
     oq && oq.toString() !== '6' && qualityNames[oq],
     target && killstreakTier && killstreakTiers[killstreakTier],
-    target ? safeItems[target].item_name : null,
-    output ? safeItems[output].item_name : null,
+    target && safeItems[target].item_name,
+    output && safeItems[output].item_name,
     effect && particleEffects[effect],
     festivized && 'Festivized',
     !target && killstreakTier && killstreakTiers[killstreakTier],
     texture && textures[texture],
     australium && 'Australium',
-    quality.toString() === '6' ? safeItems[defindex].item_name : safeItems[defindex].item_name,
+    safeItems[defindex].item_name,
     wear && '(' + wears[wear] + ')',
     series && '#' + series
 ].filter(Boolean).join(' ')
 
-const itemFromSku = (sku) => {
-    const [defindex, quality, ...more] = sku.split(';')
-    const item = {
-        defindex,
-        quality,
-        ...decodeRules(more)
-    }
-    item.name = getName(item)
-    return item
+const itemNameFromSku = (sku) => {
+    const item = itemFromSku(sku)
+    return getName(item)
 }
 
 module.exports = {
     skuFromItem,
-    skuFromForm,
-    itemFromSku
+    itemFromSku,
+    getName,
+    itemNameFromSku
 }

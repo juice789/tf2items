@@ -21,7 +21,7 @@ width: 50%;
 `
 
 const Header = styled.div`
-height:49px;
+height:3rem;
 display: flex;
 border-bottom: 1px solid #403d4f;
 padding: 0 0.25rem 0 1rem;
@@ -57,7 +57,7 @@ align-items: center;
 justify-content: center;
 background: #33313f;
 width: 100%;
-min-height: 49px;
+min-height: 3rem;
 padding: 0 0.25rem 0 1rem;
 border-bottom: 1px solid #33313f;
 font-size: 0.9rem;

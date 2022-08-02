@@ -1,83 +1,116 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { prop, equals, __ } from 'ramda'
+import { prop, equals, __, path, } from 'ramda'
+import { SearchIcon, PlusIcon, TimesIcon } from 'react-line-awesome'
 
-import { PlusIcon } from 'react-line-awesome'
+import Pages from './Pages'
 
 const Header = styled.div`
 display: flex;
 align-items: center;
-height: 49px;
-min-height: 49px;
-> a, a:hover {
-    text-decoration: none;    
-}
+height: 3rem;
+min-height: 3rem;
 background: #33313f;
-justify-content:space-between;
 border-bottom: 1px solid #403d4f;
-`
-
-const Inner = styled.div`
-display:flex;
-height:100%;
-align-items:center;
-flex-grow:1;
-justify-content:flex-end;
-`
-
-const Group = styled.div`
-display:flex;
-height:100%;
-padding: 0 0.25rem 0 0.25rem;
-align-items:center;
-justify-content:center;
+justify-content: flex-end;
+padding-right:0.5rem;
 `
 
 const Button = styled.div`
 display: flex;
 align-items: center;
+justify-content: center;
 font-size: 1.1rem;
 border-radius: 0.5rem;
-width: 3rem;
-min-width:3rem;
-height:2rem;
-min-height:2rem;
-justify-content:center;
-cursor:pointer;
-display:flex;
-position:relative;
-margin: 0 0.25rem 0 0.25rem;
+width: ${({ isOpen }) => isOpen ? '15rem' : 'auto'};
+cursor: pointer;
+margin-left: 0.5rem;
 background: ${({ active }) => active ? '#3a3747' : '#2d2b37'};
-color: ${({ active }) => active ? '#e1e0e5' : '#8a879a'};
+color: ${({ active, isOpen }) => isOpen ? '#e1e0e5' : active ? '#e1e0e5' : '#8a879a'};
+overflow: hidden;
 :hover{
     color: #e1e0e5;
 }
+> i {
+    min-width: 3rem;
+    height: 2rem;
+    min-height: 2rem;    
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+`
+
+const Input = styled.input`
+background: #2d2b37;
+flex-grow:1;
+border: 0;
+outline: 0;
+font-size:0.9rem;
+width:0;
+color: inherit;
+margin-right:1rem;
 `
 
 const HeaderActual = () => {
 
     const dispatch = useDispatch()
-
+    const searchRef = useRef()
+    const [searchOpen, toggleSearch] = useState(false)
+    const flag = useSelector(path(['search', 'flag']))
     const openedAside = useSelector(prop('openedAside'))
     const isAsideOpen = equals(__, openedAside)
     const openAside = (name) => () => dispatch({ type: 'ASIDE_TOGGLE', name })
 
+    const searchChange = () => {
+        dispatch({
+            type: 'SEARCH_INPUT',
+            value: searchRef.current.value
+        })
+    }
+
+    useEffect(() => {
+        if (!searchOpen) {
+            dispatch({
+                type: 'SEARCH_CLEAR',
+                value: ''
+            })
+        }
+    }, [searchOpen])
+
+    useEffect(() => {
+        if (flag) {
+            toggleSearch(false)
+            dispatch({
+                type: 'SEARCH_CLEAR',
+                value: ''
+            })
+        }
+    }, [flag])
+
+
     return (
         <Header>
-            <Inner>
+            <Pages />
+            <Button isOpen={searchOpen}>
+                <SearchIcon onClick={() => toggleSearch(true)} />
                 {
-                    <Group>
-                        <Button
-                            active={isAsideOpen('addItems')}
-                            onClick={openAside('addItems')}
-                        >
-                            <PlusIcon />
-                        </Button>
-                    </Group>
+                    searchOpen
+                        ? <>
+                            <Input ref={searchRef} autoFocus onChange={searchChange} />
+                            <TimesIcon onClick={() => toggleSearch(false)} />
+                        </>
+                        : null
                 }
-            </Inner>
-        </Header>
+            </Button>
+            <Button
+                active={isAsideOpen('addItems')}
+                onClick={openAside('addItems')}
+            >
+                <PlusIcon />
+            </Button>
+        </Header >
     )
 }
 

@@ -1,9 +1,19 @@
+import { assoc, dissoc } from 'ramda'
+
 const defaultPages = {
     '0': 'Example items'
 }
 
 export const pages = (state = defaultPages, action) => {
     switch (action.type) {
+        case 'PAGE_ADDED':
+            return assoc(
+                action.selectedPage,
+                action.value,
+                state
+            )
+        case 'PAGE_DELETED':
+            return dissoc(action.selectedPage, state)
         default:
             return state
     }

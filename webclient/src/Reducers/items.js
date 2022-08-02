@@ -56,7 +56,7 @@ export const preview = (state = {}, action) => {
             return mergeRight(
                 indexBy(
                     prop('sku'),
-                    map((sku) => ({ sku }), action.items)
+                    map((sku) => ({ sku, page: '0' }), action.items)
                 ), state)
         case 'REMOVE_PREVIEW_ITEM':
             return omit([action.sku], state)

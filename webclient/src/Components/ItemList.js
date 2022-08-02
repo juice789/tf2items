@@ -3,8 +3,10 @@ import styled from 'styled-components'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList as List, areEqual } from 'react-window'
 
-import { prop, compose, propEq, map, values, filter } from 'ramda'
+import { prop, compose, propEq, path, gte, when, __, indexOf, map, assoc, chain, toLower, values, filter } from 'ramda'
+
 import { shallowEqual, useSelector } from 'react-redux'
+import { itemNameFromSku } from '@juice789/tf2items'
 
 import { Checkbox, Name, SKU, Links } from './Cells'
 
@@ -22,7 +24,7 @@ top: 0;
 left: 0;
 width: 100%;
 display: flex;
-height: 49px;
+height: 3rem;
 background: #33313f;
 position: sticky !important;
 border-bottom: 1px solid #403d4f;
@@ -31,7 +33,7 @@ z-index: 2;
 
 const Label = styled.div`
 font-size: 0.9rem;
-height: 49px;
+height: 3rem;
 border-right: 1px solid #3a3747;
 display: flex;
 align-items:center;
@@ -61,9 +63,9 @@ display: flex;
 
 const StickyRow = memo(() => {
     return <Th>
-        <Label grow={true} w={16.5}>Item name</Label>
-        <Label w={4}>SKU</Label>
-        <Label w={4}>Links</Label>
+        <Label grow={true} w={16}>Item name</Label>
+        <Label w={10}>SKU</Label>
+        <Label w={6}>Links</Label>
     </Th>
 })
 
@@ -110,9 +112,15 @@ const AutoSizerActual = ({ itemCount, itemSize, items }) => (
 const ItemListActual = memo(() => {
 
     const selectedPage = useSelector(prop('selectedPage'))
+    const searchTerm = useSelector(path(['search', 'value']))
 
     const items = useSelector(compose(
         map(prop('sku')),
+        when(
+            () => Boolean(searchTerm),
+            filter(compose(gte(__, 0), indexOf(toLower(searchTerm)), prop('name')))
+        ),
+        map(chain(assoc('name'), compose(toLower, itemNameFromSku, prop('sku')))),
         filter(propEq('page', selectedPage)),
         values,
         prop('items')

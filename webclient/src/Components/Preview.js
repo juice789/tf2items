@@ -24,7 +24,7 @@ width: 100%;
 display: flex;
 align-items: center;
 justify-content: center;
-height: 49px;
+height: 3rem;
 border-bottom: 1px solid #403d4f;
 `
 

@@ -100,11 +100,12 @@ export const selectStyle = ({
   optionStyles = {},
   containerStyles = {},
   menuStyles = {},
-  valueContainerStyles = {}
+  valueContainerStyles = {},
+  controlStyles = {}
 } = {}) => ({
   container: (defaults) => ({
     ...defaults,
-    ...containerStyles
+    ...containerStyles,
   }),
   control: (defaults, { isFocused }) => ({
     ...defaults,
@@ -113,6 +114,7 @@ export const selectStyle = ({
     background,
     height: controlHeight,
     minHeight: controlHeight,
+    ...controlStyles,
     ':hover': {
       ...defaults[':hover'],
       boxShadow: isFocused ? `0 0 0 1px ${borderColor}` : 'none',
@@ -173,6 +175,23 @@ export const selectStyle = ({
     }
   })
 })
+
+export const selectStyleAlt = {
+  background: '#2d2b37',
+  controlHeight: '2rem',
+  singleStyles: {
+    maxWidth: 'unset',
+    transform: 'unset',
+    top: 'unset',
+    position: 'relative'
+  },
+  controlStyles: {
+    borderRadius: '0.5rem'
+  },
+  containerStyles: {
+    fontSize: '0.8rem'
+  }
+}
 
 export const toggleStyle = {
   trackContent: (defaults) => ({

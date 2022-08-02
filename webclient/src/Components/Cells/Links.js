@@ -21,9 +21,9 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 padding: 0 0.5rem;
-width:5rem;
-min-width:5rem;
-max-width:5rem;
+width: 6rem;
+min-width: 6rem;
+max-width: 6rem;
 > a {
     color:#8a879a;
     text-decoration: none;

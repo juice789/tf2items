@@ -49,6 +49,11 @@ api.fetchProtoObjDefs = () => () => myAxios({
     url: 'https://raw.githubusercontent.com/SteamDatabase/GameTracking-TF2/master/tf/resource/tf_proto_obj_defs_english.txt'
 })
 
+api.getAssetClassInfo = ({ steamApiKey }) => (ids, appId = 440) => myAxios({
+    method: 'get',
+    url: `https://api.steampowered.com/ISteamEconomy/GetAssetClassInfo/v1/?key=${steamApiKey}&appid=${appId}&language=EN&class_count=${ids.length}${ids.join('')}`
+})
+
 const createApi = compose(map(__, api), applyTo)
 
 module.exports = createApi

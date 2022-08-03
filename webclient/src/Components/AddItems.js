@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { map, keys, path, propEq } from 'ramda'
+import { map, path, propEq, propOr, keys, length, compose } from 'ramda'
 import styled from 'styled-components'
-import { TimesIcon } from 'react-line-awesome'
+import { TimesIcon, ListIcon } from 'react-line-awesome'
 import Select from 'react-select'
 
 import { selectStyle } from '../globalStyle'
@@ -17,7 +17,7 @@ flex-direction: column;
 position: relative;
 flex: 0 1 auto;
 overflow-y: auto;
-width: 50%;
+width: 25%;
 `
 
 const Header = styled.div`
@@ -34,18 +34,19 @@ font-size: 0.9rem;
 color: #f9f9fa;
 `
 
-const Close = styled.div`
+const Button = styled.div`
 width: 3rem;
 height: 2rem;
 margin: 0 0.25rem 0 0.25rem;
 border-radius: 0.5rem;
-background: #2d2b37;
+background: ${({ active }) => active ? '#3a3747' : '#2d2b37'};
 display: flex;
 align-items: center;
 justify-content: center;
 color: #8a879a;
 transition: color 0.2s ease;
 cursor: pointer;
+position:relative;
 :hover {
     color: #e1e0e5;
 }
@@ -82,11 +83,31 @@ flex: 1 1 auto;
 overflow-y: auto;
 `
 
+const Controls = styled.div`
+display:flex;
+`
+
+const ChangeCounter = styled.div`
+position: absolute;
+background: #b74838;
+height: 1rem;
+width: 1rem; 
+display: flex;
+align-items: center;
+justify-content: center;
+top: calc(70% - 0.5rem);
+left: calc(70% - 0.5rem);
+border-radius: 1rem;
+color: #e1e0e5;
+font-size: 0.8rem;
+`
+
 const AddItemsActual = () => {
 
     const dispatch = useDispatch()
     const category = useSelector(path(['addItems', 'category']))
     const [counter, setCounter] = useState(0)
+    const [previewOpen, togglePreview] = useState(0)
     const onChange = ({ value }) => {
         setCounter(counter + 1)
         dispatch({
@@ -109,29 +130,49 @@ const AddItemsActual = () => {
         keys(categories)
     )
 
+    const changeCounter = useSelector(compose(
+        length,
+        keys,
+        propOr({}, 'preview')
+    ))
+
     return (
         <Aside>
             <Header>
                 <span>Add items</span>
-                <Close onClick={() => dispatch({ type: 'ASIDE_CLOSE', name: 'addItems' })}>
-                    <TimesIcon />
-                </Close>
+                <Controls>
+                    <Button active={previewOpen} onClick={() => togglePreview(!previewOpen)}>
+                        <ListIcon />
+                        {changeCounter > 0 ? <ChangeCounter>{changeCounter}</ChangeCounter> : null}
+                    </Button>
+                    <Button onClick={() => dispatch({ type: 'ASIDE_CLOSE', name: 'addItems' })}>
+                        <TimesIcon />
+                    </Button>
+                </Controls>
             </Header>
-            <CategoriesOuter>
-                Category:
-                <SelectOuter>
-                    <Select
-                        onChange={onChange}
-                        styles={selectStyle()}
-                        options={categoryOptions}
-                        value={categoryOptions.find(propEq('value', category))}
-                        isSearchable={false}
-                    />
-                </SelectOuter>
-            </CategoriesOuter>
+            {
+                previewOpen === false
+                && <CategoriesOuter>
+                    Category:
+                    <SelectOuter>
+                        <Select
+                            onChange={onChange}
+                            styles={selectStyle()}
+                            options={categoryOptions}
+                            value={categoryOptions.find(propEq('value', category))}
+                            isSearchable={false}
+                        />
+                    </SelectOuter>
+                </CategoriesOuter>
+            }
+
             <Content>
-                {category !== '' && <Form key={category + counter} />}
-                <Preview />
+                {
+                    previewOpen
+                        ? <Preview />
+                        : category !== '' && <Form key={category + counter} />
+                }
+
             </Content>
         </Aside>
     )

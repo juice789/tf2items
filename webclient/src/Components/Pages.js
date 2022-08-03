@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { prop, path, compose, map, toPairs, groupBy, length, values, propOr, concat, __ } from 'ramda'
+import { prop, path, compose, map, toPairs, groupBy, length, values, propOr, mergeRight, zipObj } from 'ramda'
 import { PlusIcon, TimesIcon, AngleDownIcon, SaveIcon, EditIcon, TrashIcon } from 'react-line-awesome'
 import { useEventListener } from './utils'
 
@@ -33,7 +33,7 @@ flex-direction:column;
 background: #2d2b37;
 position:absolute;
 top:2.25rem;
-left: 0rem;
+right: 0rem;
 min-width:100%;
 border-radius: 0.5rem;
 overflow:hidden;
@@ -43,7 +43,7 @@ border: 1px solid #2d2b37;
 font-size:0.8rem;
 `
 
-const SmallButton = styled.div`
+const Button = styled.div`
 display:flex;
 width:1.5rem;
 height:1.5rem;
@@ -59,9 +59,8 @@ margin-left:0.25rem;
 }
 `
 
-const PagesAdd = styled.div`
+const NewPage = styled.div`
 height: 3rem;
-padding: 0.5rem;
 width:100%;
 display:flex;
 align-items:center;
@@ -69,9 +68,8 @@ justify-content:flex-end;
 background: #33313f;
 `
 
-const PageOption = styled.div`
+const Option = styled.div`
 height: 2.5rem;
-padding: 0.5rem;
 min-width:100%;
 width:max-content;
 max-width:15rem;
@@ -85,7 +83,7 @@ background: ${({ isActive }) => isActive ? '#6e66a6' : 'inherit'};
 }
 `
 
-const PageInput = styled.input`
+const Input = styled.input`
 border: 1px solid #2d2b37;
 outline: none;
 background-color: #2d2b37;
@@ -93,6 +91,7 @@ color: #f9f9fa;
 height: 1.5rem;
 border-radius: 0.25rem;
 padding-left: 0.6rem;
+margin-left:0.5rem;
 font-weight:100;
 max-width: 7rem;
 :hover{
@@ -100,32 +99,91 @@ max-width: 7rem;
 }
 `
 
-const OptionControls = styled.div`
+const Controls = styled.div`
 display:flex;
 margin-left:1rem;
-min-width: 3.5rem;
+margin-right:0.5rem;
 justify-content:flex-end;
 `
 
-const PageOptionActual = ([value, label, pages, selectedPage, togglePages]) => {
+const Label = styled.div`
+display: flex;
+height: 100%;
+min-width:5rem;
+align-items: center;
+padding-left: 0.5rem;
+flex-grow: 1;
+`
+
+const OptionActual = ({ value, label, pages, selectedPage, toggleDropdown, pageItemCount }) => {
 
     const dispatch = useDispatch()
 
-    const editPageRef = useRef()
-    const [pageEditing, toggleEditPage] = useState(false)
+    const ref = useRef()
+    const [editOpen, toggleEdit] = useState(false)
 
-    const onPageSave = () => {
+    const onSave = () => {
         dispatch({
             type: 'PAGE_EDIT',
-            value: editPageRef.current.value,
+            label: ref.current.value,
+            value
+        })
+        toggleEdit(false)
+    }
+
+    const selectPage = () => {
+        dispatch({
+            type: 'PAGE_CHANGE',
+            value
+        })
+        toggleDropdown(false)
+    }
+
+    const onDelete = () => {
+        dispatch({
+            type: 'PAGE_DELETE',
+            value
         })
     }
 
-    const pageEditClick = (val) => (e) => {
-        e.stopPropagation()
-        toggleEditPage(val)
-        return false
-    }
+    return <Option isActive={selectedPage === value}>
+        {
+            editOpen
+                ? <Input
+                    onKeyPress={({ key }) => key === 'Enter' && onSave()}
+                    ref={ref}
+                    autoFocus
+                    defaultValue={label}
+                    placeholder={'Page name'}
+                />
+                : <Label onClick={selectPage}>{label}</Label>
+        }
+        <Controls>
+            {
+                editOpen
+                    ? <>
+                        <Button onClick={onSave} ><SaveIcon /></Button>
+                        <Button onClick={() => toggleEdit(false)}><TimesIcon /></Button>
+                    </>
+                    : <>
+                        <Button onClick={() => toggleEdit(true)} ><EditIcon /></Button>
+                        {
+                            Object.keys(pages).length > 1 && (pageItemCount[value] > 0) === false
+                            && <Button onClick={onDelete} ><TrashIcon /></Button>
+                        }
+                    </>
+            }
+        </Controls>
+    </Option>
+}
+
+const DropdownActual = ({ toggleDropdown }) => {
+
+    const dispatch = useDispatch()
+    const ref = useRef()
+    const [newPageOpen, toggleNewPage] = useState(false)
+    const selectedPage = useSelector(prop('selectedPage'))
+    const pages = useSelector(prop('pages'))
 
     const pageItemCount = useSelector(compose(
         map(length),
@@ -134,90 +192,47 @@ const PageOptionActual = ([value, label, pages, selectedPage, togglePages]) => {
         propOr({}, 'items')
     ))
 
-    const selectPage = (page) => (e) => {
-        e.stopPropagation()
-        dispatch({
-            type: 'PAGE_CHANGE',
-            page
-        })
-        togglePages(false)
-    }
-
-    return <PageOption key={value} isActive={selectedPage === value}>
-        {
-            pageEditing === value
-                ? <PageInput
-                    onKeyPress={({ key }) => key === 'Enter' && onPageSave()}
-                    ref={editPageRef}
-                    autoFocus
-                    defaultValue={pageEditing ? label : ''}
-                    placeholder={'Page name'}
-                />
-                : <span onClick={selectPage(value)}>{label}</span>
-        }
-        <OptionControls>
-            {
-                pageEditing === value
-                    ? <>
-                        <SmallButton><SaveIcon /></SmallButton>
-                        <SmallButton onClick={() => toggleEditPage(false)}><TimesIcon /></SmallButton>
-                    </>
-                    : <>
-                        <SmallButton><EditIcon onClick={pageEditClick(value)} /></SmallButton>
-                        {
-                            Object.keys(pages).length > 1 && (pageItemCount[value] > 0) === false
-                                ? <SmallButton ><TrashIcon onClick={() => { }} /></SmallButton>
-                                : null
-                        }
-                    </>
-            }
-        </OptionControls>
-    </PageOption>
-}
-
-const DropdownActual = ({ togglePages }) => {
-
-    const dispatch = useDispatch()
-    const pagesRef = useRef()
-    const newPageRef = useRef()
-    const [newPageOpen, toggleNewPage] = useState(false)
-    const selectedPage = useSelector(prop('selectedPage'))
-    const pages = useSelector(prop('pages'))
-
-    const pageOptions = useSelector(compose(
-        map(PageOptionActual),
-        map(concat(__, [pages, selectedPage, togglePages])),
+    const options = useSelector(compose(
+        map(
+            compose(
+                props => <OptionActual {...props} key={props.value} />,
+                mergeRight({ pages, selectedPage, toggleDropdown, pageItemCount }),
+                zipObj(['value', 'label'])
+            )),
         toPairs,
         prop('pages')
     ))
 
-    const onPageSave = () => {
+    const onSave = () => {
         dispatch({
-            type: 'PAGE_NEW',
-            value: newPageRef.current.value,
+            type: 'PAGE_ADD',
+            label: ref.current.value,
         })
+        toggleNewPage(false)
     }
 
-    return <Dropdown ref={pagesRef}>
-        {pageOptions}
-        <PagesAdd>
+    return <Dropdown>
+        {options}
+        <NewPage>
             {
                 newPageOpen
                     ? <>
-                        <PageInput
-                            onKeyPress={({ key }) => key === 'Enter' && onPageSave()}
-                            ref={newPageRef}
+                        <Input
+                            onKeyPress={({ key }) => key === 'Enter' && onSave()}
+                            ref={ref}
                             autoFocus
                             placeholder={'Page name'}
                         />
-                        <OptionControls>
-                            <SmallButton><SaveIcon /></SmallButton>
-                            <SmallButton onClick={() => toggleNewPage(false)}><TimesIcon /></SmallButton>
-                        </OptionControls>
+                        <Controls>
+                            <Button onClick={onSave}><SaveIcon /></Button>
+                            <Button onClick={() => toggleNewPage(false)}><TimesIcon /></Button>
+                        </Controls>
                     </>
-                    : <SmallButton onClick={() => toggleNewPage(true)}><PlusIcon /></SmallButton>
+                    : <Controls>
+                        <Button onClick={() => toggleNewPage(true)}><PlusIcon /></Button>
+                    </Controls>
             }
-        </PagesAdd>
+        </NewPage>
     </Dropdown>
 }
 
@@ -226,39 +241,35 @@ const PagesActual = () => {
     const selectedPage = useSelector(prop('selectedPage'))
     const selectedPageName = useSelector(path(['pages', selectedPage]))
 
-    const pagesRef = useRef()
-    const [pagesOpen, togglePages] = useState(false)
+    const ref = useRef()
+    const [dropdownOpen, toggleDropdown] = useState(false)
 
     const handler = useCallback(
         (e) => {
-            if (pagesOpen && !pagesRef.current.contains(e.target)) {
-                togglePages(!pagesOpen)
+            if (dropdownOpen && !ref.current.contains(e.target)) {
+                toggleDropdown(!dropdownOpen)
             }
         },
-        [pagesOpen]
+        [dropdownOpen]
     )
 
     useEventListener('mousedown', handler)
 
     const dropDownClick = (e) => {
-        e.stopPropagation()
-        if (pagesOpen && (pagesRef.current === e.target || Array.from(pagesRef.current.childNodes).includes(e.target))) {
-            togglePages(false)
-        } else {
-            togglePages(true)
+        if (ref.current === e.target || Array.from(ref.current.childNodes).includes(e.target)) {
+            toggleDropdown(!dropdownOpen)
         }
     }
 
-    return <Pages ref={pagesRef} onClick={dropDownClick}>
-        <span>{selectedPageName}</span>
-        <AngleDownIcon />
-        {
-            pagesOpen
-                ? <DropdownActual togglePages={togglePages} />
-                : null
-        }
-
-    </Pages>
+    return (
+        <Pages ref={ref} onClick={dropDownClick}>
+            <span>{selectedPageName}</span>
+            <AngleDownIcon />
+            {
+                dropdownOpen && <DropdownActual toggleDropdown={toggleDropdown} />
+            }
+        </Pages>
+    )
 }
 
 export default PagesActual

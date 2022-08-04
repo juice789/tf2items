@@ -1,10 +1,8 @@
 const { call, getContext, delay } = require('redux-saga/effects')
 
 const {
-    prop, groupBy, map, compose, toPairs, uniq, pick, values, merge, indexBy, props, mapObjIndexed, when, complement, has, assoc, unnest
+    groupBy, map, compose, toPairs, uniq, pick, values, mergeRight, indexBy, props, mapObjIndexed, when, complement, has, assoc, unnest, uncurryN
 } = require('ramda')
-
-const fromEconItem = require('./fromEconItem.js')
 
 const getAssetClassQuery = compose(
     map(([key, { classid, instanceid }]) => `&classid${key}=${classid}&instanceid${key}=${instanceid}`),
@@ -27,14 +25,12 @@ const transformAssetClasses = compose(
     values
 )
 
-const mergeAssetClasses = (assetClasses, inventory) => compose(
-    indexBy(prop('id')),
-    map(fromEconItem),
+const mergeAssetClasses = uncurryN(2, (assetClasses) => compose(
     unnest,
     values,
-    mapObjIndexed((v, k) => map(merge(assetClasses[k]), v)),
+    mapObjIndexed((v, k) => map(mergeRight(assetClasses[k]), v)),
     groupBy(props(['classid', 'instanceid']))
-)(inventory)
+))
 
 function* fetchAppDataInventory(inventory, d = 1000) {
 
@@ -50,7 +46,7 @@ function* fetchAppDataInventory(inventory, d = 1000) {
         yield delay(d)
         const chunk = getAssetClassQuery(ids.slice(pos, pos + 100))
         const { result } = yield call(getAssetClassInfo, chunk)
-        assetClasses = merge(assetClasses, transformAssetClasses(result))
+        assetClasses = mergeRight(assetClasses, transformAssetClasses(result))
         pos += 100
     }
 

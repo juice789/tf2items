@@ -25,12 +25,12 @@ const {
     path,
     pathOr,
     invertObj,
-    merge,
+    mergeRight,
     values,
-    indexOf
+    indexOf,
+    replace,
+    trim
 } = require('ramda')
-
-//const { removeStrs, removeStr } = require('./RD.js')
 
 const { safeItems: items } = require('.schemaItems.js')
 const { particleEffects: effects, textures } = require('./schema.json')
@@ -54,13 +54,19 @@ const recipe = ({ market_hash_name }) => find(
     ['Fabricator', 'Strangifier Chemistry Set', 'Chemistry Set']
 )
 
-const series = ({ market_hash_name }) => market_hash_name.indexOf('Chemistry') >= 0 ? undefined : market_hash_name.split('#')[1]
+const series = ({ market_hash_name }) => indexOf('Chemistry', market_hash_name) >= 0
+    ? undefined
+    : market_hash_name.split('#')[1]
+
+const craft = ({ name, market_hash_name }) => indexOf('#', name) !== -1 && indexOf('#', name) === -1 ? market_hash_name.split('#')[1] : undefined
 
 const australium = (item) => item.app_data.quality === '11' && marketHashIncludes('Australium', item)
 
 const wear = compose(
     propOr(null, __, invertObj(wears)),
-    removeStrs(['(', ')']),
+    trim,
+    replace(/\s\s+/g, ' '),
+    reduce((all, curr) => replace(curr, '', all), __, ['(', ')']),
     defaultTo(''),
     findTag('exterior')
 )
@@ -69,7 +75,9 @@ const texture = ifElse(
     findTag('exterior'),
     compose(
         propOr('NaN', __, invertObj(textures)),
-        ({ app_data, market_hash_name }) => removeStrs([
+        trim,
+        replace(/\s\s+/g, ' '),
+        ({ app_data, market_hash_name }) => reduce((all, curr) => replace(curr, '', all), market_hash_name, [
             "Specialized Killstreak",
             "Professional Killstreak",
             "Killstreak",
@@ -82,7 +90,7 @@ const texture = ifElse(
             "Strange",
             qualities[app_data.quality],
             items[app_data.def_index].item_name
-        ], market_hash_name)
+        ])
     ),
     always(null)
 )
@@ -105,7 +113,7 @@ const effect = ifElse(
     ]),
     compose(
         propOr('NaN', __, invertObj(effects)),
-        removeStr('★ Unusual Effect: '),
+        replace('★ Unusual Effect: ', ''),
         prop('value'),
         find(compose(equals('ffd700'), prop('color'))),
         prop('descriptions')
@@ -113,10 +121,16 @@ const effect = ifElse(
     always(null)
 )
 
-const elevated = ({ app_data, market_hash_name }) => app_data.quality === '11' ? false : includes('Strange', removeStrs(
-    [items[app_data.def_index].item_name],
-    market_hash_name
-))
+const elevated = ({ app_data, market_hash_name }) => app_data.quality === '11'
+    ? false
+    : includes(
+        'Strange',
+        replace(
+            items[app_data.def_index].item_name,
+            '',
+            market_hash_name
+        )
+    )
 
 const uncraftable = compose(
     Boolean,
@@ -128,10 +142,10 @@ const market_hash_name = prop('market_hash_name')
 
 const quality = pathOr('99', ['app_data', 'quality'])
 
-const defIndex = pathOr('0', ['app_data', 'def_index'])
+const defindex = pathOr('0', ['app_data', 'def_index'])
 
-const fns1 = {
-    defIndex,
+const propsTf2_1 = {
+    defindex,
     quality,
     market_hash_name,
     uncraftable,
@@ -143,6 +157,7 @@ const fns1 = {
     wear,
     australium,
     series,
+    craft,
     recipe,
     id,
     old_id
@@ -152,26 +167,31 @@ const isTarget = (market_hash_name) =>
     find(includes(__, market_hash_name), ['Strangifier', 'Fabricator', 'Strangifier Chemistry Set', 'Unusualifier']) ||
     (indexOf('Killstreak', market_hash_name) >= 0 && indexOf('Kit', market_hash_name) >= 0)
 
-const target = ({ defIndex, market_hash_name }) => {
+const target = ({ defindex, market_hash_name }) => {
 
     if (isTarget(market_hash_name)) {
-        const itemName = removeStrs([
-            'Strangifier',
-            'Unusual',
-            'Unusualifier',
-            items[defIndex].item_name,
-            "Specialized Killstreak",
-            "Professional Killstreak",
-            "Killstreak",
-            "Collector's",
-            "Series",
-            'Kit',
-            'Fabricator',
-            'Chemistry Set',
-            "#1",
-            "#2",
-            "#3"
-        ], market_hash_name)
+
+        const itemName = compose(
+            trim,
+            replace(/\s\s+/g, ' '),
+            reduce((all, curr) => replace(curr, '', all), __, [
+                'Strangifier',
+                'Unusual',
+                'Unusualifier',
+                items[defindex].item_name,
+                "Specialized Killstreak",
+                "Professional Killstreak",
+                "Killstreak",
+                "Collector's",
+                "Series",
+                'Kit',
+                'Fabricator',
+                'Chemistry Set',
+                "#1",
+                "#2",
+                "#3"
+            ]),
+        )(market_hash_name)
 
         return find(
             ({ item_quality, item_name }) => ![0, 15].includes(item_quality) && item_name === itemName,
@@ -191,10 +211,14 @@ const output = ({ recipe, market_hash_name, killstreakTier }) => {
         case 'Strangifier Chemistry Set':
             return 6522
         case 'Chemistry Set':
-            const itemName = removeStrs([
-                'Chemistry Set',
-                "Collector's",
-            ], market_hash_name)
+            const itemName = compose(
+                trim,
+                replace(/\s\s+/g, ' '),
+                reduce((all, curr) => replace(curr, '', all), __, [
+                    'Chemistry Set',
+                    "Collector's",
+                ]),
+            )(market_hash_name)
             return find(
                 ({ item_quality, item_name }) => ![0, 15].includes(item_quality) && item_name === itemName,
                 values(items)).defindex
@@ -202,24 +226,24 @@ const output = ({ recipe, market_hash_name, killstreakTier }) => {
     }
 }
 
-const oq = ({ market_hash_name, recipe }) => Boolean(recipe) ? includes("Collector's", market_hash_name) ? '14' : '6' : undefined
+const oq = ({ market_hash_name, recipe }) => recipe ? includes("Collector's", market_hash_name) ? '14' : '6' : undefined
 
-const fns2 = {
+const propsTf2_2 = {
     target,
     output,
     oq,
 }
 
-const fns3 = {
+const propsOtherGame = {
     sku: market_hash_name,
     id,
     old_id
 }
 
 const keyRemap = when(
-    compose(includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']), prop('defIndex')),
+    compose(includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']), prop('defindex')),
     compose(
-        assoc('defIndex', '5021'),
+        assoc('defindex', '5021'),
         assoc('uncraftable', false)
     )
 )
@@ -229,9 +253,9 @@ const kitRemap = when(
         includes('Killstreakifier Basic'),
         propOr('', 'name'),
         prop(__, items),
-        prop('defIndex')
+        prop('defindex')
     ),
-    assoc('defIndex', '6527')
+    assoc('defindex', '6527')
 )
 
 const promoIndex = {
@@ -249,8 +273,8 @@ const promoIndex = {
 }
 
 const promoRemap = when(
-    compose(has(__, promoIndex), prop('defIndex')),
-    chain(assoc('defIndex'), compose(prop(__, promoIndex), prop('defIndex')))
+    compose(has(__, promoIndex), prop('defindex')),
+    chain(assoc('defindex'), compose(prop(__, promoIndex), prop('defindex')))
 )
 
 const otherIndex = {
@@ -262,8 +286,8 @@ const otherIndex = {
 }
 
 const otherRemap = when(
-    compose(has(__, otherIndex), prop('defIndex')),
-    chain(assoc('defIndex'), compose(prop(__, otherIndex), prop('defIndex')))
+    compose(has(__, otherIndex), prop('defindex')),
+    chain(assoc('defindex'), compose(prop(__, otherIndex), prop('defindex')))
 )
 
 const remaps = compose(
@@ -276,13 +300,13 @@ const remaps = compose(
 const fromEconItem440 = compose(
     chain(assoc('sku'), skuFromItem),
     remaps,
-    chain(merge, compose(map(__, fns2), applyTo)),
-    map(__, fns1),
+    chain(mergeRight, compose(map(__, propsTf2_2), applyTo)),
+    map(__, propsTf2_1),
     unary(applyTo)
 )
 
 const fromEconItemOther = compose(
-    map(__, fns3),
+    map(__, propsOtherGame),
     unary(applyTo)
 )
 
@@ -292,8 +316,4 @@ const fromEconItem = ifElse(
     fromEconItemOther
 )
 
-module.exports = {
-    fromEconItem,
-    kitRemap,
-    promoRemap
-}
+module.exports = { fromEconItem }

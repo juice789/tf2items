@@ -6,6 +6,7 @@ import Header from './Components/Header'
 
 import AddItems from './Components/AddItems'
 import ItemList from './Components/ItemList'
+import Settings from './Components/Settings'
 
 const App = styled.div`
 display: flex;
@@ -24,7 +25,8 @@ overflow-x:hidden;
 `
 
 const asides = {
-  'addItems': AddItems
+  'addItems': AddItems,
+  'settings': Settings
 }
 
 const ItemsActual = () => {
@@ -39,7 +41,7 @@ const ItemsActual = () => {
       <Header />
       <Inner>
         {aside}
-        <ItemList/>
+        <ItemList />
       </Inner>
     </App>
   )

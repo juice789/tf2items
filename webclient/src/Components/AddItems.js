@@ -107,7 +107,7 @@ const AddItemsActual = () => {
     const dispatch = useDispatch()
     const category = useSelector(path(['addItems', 'category']))
     const [counter, setCounter] = useState(0)
-    const [previewOpen, togglePreview] = useState(0)
+    const [previewOpen, togglePreview] = useState(false)
     const onChange = ({ value }) => {
         setCounter(counter + 1)
         dispatch({

@@ -17,6 +17,7 @@ justify-content:space-between;
 border: 1px solid #2d2b37;
 user-select:none;
 position:relative;
+margin-left:0.5rem;
 :hover {
     border-color: #6e66a6;
 }

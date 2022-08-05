@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { prop, equals, __, path, } from 'ramda'
-import { SearchIcon, PlusIcon, TimesIcon } from 'react-line-awesome'
+import { SearchIcon, PlusIcon, TimesIcon, CogIcon } from 'react-line-awesome'
 
 import Pages from './Pages'
+import Sort from './Sort'
 
 const Header = styled.div`
 display: flex;
@@ -92,6 +93,7 @@ const HeaderActual = () => {
 
     return (
         <Header>
+            <Sort />
             <Pages />
             <Button isOpen={searchOpen}>
                 <SearchIcon onClick={() => toggleSearch(true)} />
@@ -103,6 +105,12 @@ const HeaderActual = () => {
                         </>
                         : null
                 }
+            </Button>
+            <Button
+                active={isAsideOpen('settings')}
+                onClick={openAside('settings')}
+            >
+                <CogIcon />
             </Button>
             <Button
                 active={isAsideOpen('addItems')}

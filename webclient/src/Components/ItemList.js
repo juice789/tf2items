@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList as List, areEqual } from 'react-window'
 
-import { prop, compose, propEq, path, gte, when, __, indexOf, map, assoc, chain, toLower, values, filter } from 'ramda'
+import { prop, compose, propEq, path, gte, when, __, indexOf, map, assoc, chain, toLower, values, filter, cond, reverse, sortBy, identity, T } from 'ramda'
 
 import { shallowEqual, useSelector } from 'react-redux'
 import { itemNameFromSku } from '@juice789/tf2items'
@@ -113,9 +113,18 @@ const ItemListActual = memo(() => {
 
     const selectedPage = useSelector(prop('selectedPage'))
     const searchTerm = useSelector(path(['search', 'value']))
+    const { sortType, sortMode } = useSelector(prop('sort'))
 
     const items = useSelector(compose(
+        when(
+            () => sortMode === 'DESC',
+            reverse
+        ),
         map(prop('sku')),
+        cond([
+            [() => sortType === 'SORT_NAME', sortBy(prop('name'))],
+            [T, identity]
+        ]),
         when(
             () => Boolean(searchTerm),
             filter(compose(gte(__, 0), indexOf(toLower(searchTerm)), prop('name')))

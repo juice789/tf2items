@@ -129,7 +129,10 @@ const ItemListActual = memo(() => {
             () => Boolean(searchTerm),
             filter(compose(gte(__, 0), indexOf(toLower(searchTerm)), prop('name')))
         ),
-        map(chain(assoc('name'), compose(toLower, itemNameFromSku, prop('sku')))),
+        map(chain(
+            assoc('name'),
+            compose(toLower, itemNameFromSku, prop('sku'))
+        )),
         filter(propEq('page', selectedPage)),
         values,
         prop('items')

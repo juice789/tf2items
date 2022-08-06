@@ -9,7 +9,6 @@ const Preview = styled.div`
 display: flex;
 flex-direction: column;
 height: 100%;
-width: 50%;
 flex: 1 1 auto;
 overflow-y: auto;
 align-items: center;

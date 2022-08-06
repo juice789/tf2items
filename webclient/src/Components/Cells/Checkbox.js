@@ -31,7 +31,7 @@ export const Checkbox = React.memo(({ sku }) => {
 
     const dispatch = useDispatch()
 
-    const isOpen = useSelector(compose(equals('batch'), propOr([], 'openedAside')))
+    const isOpen = useSelector(compose(equals('settings'), propOr([], 'openedAside')))
 
     const checked = useSelector(compose(
         has(sku),

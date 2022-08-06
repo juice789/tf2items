@@ -1,93 +1,42 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { TimesIcon } from 'react-line-awesome'
+import { SaveIcon, TimesIcon } from 'react-line-awesome'
 import { selectStyle } from '../globalStyle'
-import { propEq, prop, compose, map, pickBy, T, path, toPairs, omit, assoc, when, gte, __, indexOf, chain, toLower } from 'ramda'
+import { propEq, prop, compose, map, pickBy, T, path, toPairs, assoc, when, gte, __, indexOf, chain, toLower, filter } from 'ramda'
 import Select from 'react-select'
-
-const Settings = styled.div`
-display: flex;
-flex-direction: column;
-position: relative;
-flex: 0 1 auto;
-overflow-y: auto;
-width: 25%;
-`
-
-const Header = styled.div`
-height:3rem;
-display: flex;
-border-bottom: 1px solid #403d4f;
-padding-left: 1rem;
-padding-right: 0.5rem;
-cursor: default;
-width: 100%;
-flex: 0 0 auto;
-align-items: center;
-background: #33313f;
-justify-content: space-between;
-box-sizing:border-box;
-`
-
-const Close = styled.div`
-width: 3rem;
-height: 2rem;
-border-radius: 0.5rem;
-background: #2d2b37;
-display: flex;
-align-items: center;
-justify-content: center;
-color: #8a879a;
-transition: color 0.2s ease;
-cursor: pointer;
-:hover {
-    color: #e1e0e5;
-}
-`
-
-const Content = styled.div`
-display: flex;
-position: relative;
-flex: 1 1 auto;
-overflow-y: auto;
-`
-
-const PageInner = styled.div`
-display:flex;
-flex-direction:column;
-font-size:0.9rem;
-color:#8a879a;
-width:100%;
-`
+import { itemNameFromSku } from '@juice789/tf2items'
+import { Aside, Header, HeaderButton, SaveButton } from './Blocks'
 
 const Group = styled.div`
-display:flex;
-flex-direction:column;
+display: flex;
+flex-direction: column;
 border-bottom: ${({ inner }) => inner ? 0 : '1px solid #403d4f'};
 padding: ${({ inner }) => inner ? 0 : '1rem'};
+font-size: 0.9rem;
 width:100%;
+color: #8a879a;
 `
 
 const GroupHeader = styled.div`
-display:flex;
-align-items:center;
-justify-content:center;
-padding-bottom:1rem;
+display: flex;
+align-items: center;
+justify-content: center;
+padding-bottom: 1rem;
 `
 
 const Label = styled.div`
-width:50%;
-min-width:50%;
-display:flex;
-align-items:center;
+width: 50%;
+min-width: 50%;
+display: flex;
+align-items: center;
 padding: 0.5rem 1rem 0 1rem;
 `
 
 const Control = styled.div`
-min-width:50%;
-display:flex;
-justify-content:space-around;
+min-width: 50%;
+display: flex;
+justify-content: space-around;
 padding: 0.5rem 1rem 0rem 0;
 `
 
@@ -100,50 +49,45 @@ border-radius: ${({ inner }) => inner ? 0 : '0.5rem'};
 `
 
 const ControlOuter = styled.div`
-display:flex;
-width:100%;
+display: flex;
+width: 100%;
 > * {
-    flex-grow:1;
+    flex-grow: 1;
 }
 `
 
-const Button = styled.div`
-display: flex;
-justify-content: center;
-height:2rem;
-align-items:center;
-padding: 0.2rem 1rem;
-cursor: pointer;
-background: ${({ danger }) => danger ? '#b74838' : '#6e66a6'};
-color: #f9f9fa;
-border-radius: 0.3rem;
-transition: background 0.2s ease;
-line-height:1rem;
-:hover{
-    background: ${({ danger }) => danger ? '#762114' : '#897fd0'};
-}`
-
 const getPageOptions = compose(
     map(([value, label]) => ({ value, label })),
-    toPairs,
-    omit(['0'])
+    toPairs
 )
+
+const usePagesOptions = [
+    { value: true, label: 'Yes' },
+    { value: false, label: 'No' }
+]
 
 const SettingsActual = () => {
 
     const dispatch = useDispatch()
-
+    const pageRef = useRef()
     const searchTerm = useSelector(path(['search', 'value']))
     const selectedPage = useSelector(prop('selectedPage'))
+    const usePages = useSelector(prop('usePages'))
     const selectedItems = useSelector(prop('selectedItems'))
     const pages = useSelector(prop('pages'))
 
     const pageItems = useSelector(
         compose(
-            map(T),/*
-            when(() => Boolean(searchTerm), pickBy(compose(gte(__, 0), indexOf(toLower(searchTerm)), prop('name')))),
-            map(chain(assoc('name'), compose(toLower, prop('name'), itemFromSku, prop('sku')))),
-            pickBy(propEq('page', selectedPage)),*/
+            map(T),
+            when(
+                () => Boolean(searchTerm),
+                filter(compose(gte(__, 0), indexOf(toLower(searchTerm)), prop('name')))
+            ),
+            map(chain(
+                assoc('name'),
+                compose(toLower, itemNameFromSku, prop('sku'))
+            )),
+            pickBy(propEq('page', selectedPage)),
             prop('items')
         )
     )
@@ -162,51 +106,105 @@ const SettingsActual = () => {
         items: map(assoc('__' + propName, value), selectedItems)
     })
 
+
+    const setUsePages = ({ value }) => {
+
+        const payload = {
+            type: 'USE_PAGES',
+            value
+        }
+
+        value
+            ? dispatch(payload)
+            : dispatch({
+                type: 'NOTIFICATION_PUSH',
+                notification: {
+                    id: Date.now().toString(),
+                    type: 'info',
+                    label: 'Are you sure? This will reset all pages.',
+                    blocking: true,
+                    payload,
+                    buttons: 'yesNo'
+                }
+            })
+    }
+
+
+    const savePage = () => {
+        const selected = pageRef.current.state.selectValue[0]?.value
+        selected !== undefined &&
+            setVal('page', selected)()
+    }
+
     return (
-        <Settings>
+        <Aside>
             <Header>
                 Settings
-                <Close onClick={() => dispatch({ type: 'ASIDE_TOGGLE', name: 'settings' })}>
+                <HeaderButton onClick={() => dispatch({ type: 'ASIDE_TOGGLE', name: 'settings' })}>
                     <TimesIcon />
-                </Close>
+                </HeaderButton>
             </Header>
-            <Content>
-                <PageInner>
-                    <Group>
-                        <GroupHeader>Select all items on this page:</GroupHeader>
-                        <Control>
-                            <Button onClick={selectAll}>Select</Button>
-                            <Button onClick={deselectAll}>Deselect</Button>
-                        </Control>
-                    </Group>
-                    <Group>
-                        <GroupHeader>Perform action on every selected item:</GroupHeader>
+            <Group padBottom={true}>
+                <GroupHeader>Use Pages:</GroupHeader>
+                <ControlOuter>
+                    <Select
+                        isSearchable={false}
+                        styles={selectStyle()}
+                        options={usePagesOptions}
+                        value={usePagesOptions.find(propEq('value', usePages))}
+                        onChange={setUsePages}
+                    />
+                </ControlOuter>
+            </Group>
+            <Group padBottom={true}>
+                <GroupHeader>Select all items on this page:</GroupHeader>
+                <Control>
+                    <SaveButton onClick={selectAll}>Select</SaveButton>
+                    <SaveButton onClick={deselectAll}>Deselect</SaveButton>
+                </Control>
+            </Group>
+            <Group>
+                <GroupHeader>Perform action on every selected item:</GroupHeader>
+                {
+                    usePages && <Row>
                         <Group inner={true}>
-                            <Row>
+                            <Row inner={true}>
                                 <Label>Page:</Label>
                                 <Control>
                                     <ControlOuter>
                                         <Select
                                             isSearchable={false}
+                                            isClearable={true}
                                             styles={selectStyle()}
                                             options={pageOptions}
-                                            value={pageOptions.find(propEq('value', selectedPage))}
-                                            onChange={({ value }) => setVal('page', value)()}
+                                            ref={pageRef}
                                         />
                                     </ControlOuter>
                                 </Control>
                             </Row>
+                            <Row inner={true}>
+                                <Label></Label>
+                                <Control>
+                                    <ControlOuter>
+                                        <SaveButton onClick={savePage}>
+                                            <SaveIcon />
+                                        </SaveButton>
+                                    </ControlOuter>
+                                </Control>
+                            </Row>
                         </Group>
-                    </Group>
-                    <Group>
-                        <GroupHeader>Remove every selected item:</GroupHeader>
+                    </Row>
+                }
+                <Group inner={true}>
+                    <Row>
+                        <Label>Remove selected:</Label>
                         <Control>
-                            <Button danger={true} onClick={setVal('toRemove', '1')}>Remove</Button>
+                            <SaveButton full={true} danger={true} onClick={setVal('toRemove', '1')}>Remove</SaveButton>
                         </Control>
-                    </Group>
-                </PageInner>
-            </Content>
-        </Settings>
+                    </Row>
+                </Group>
+            </Group>
+        </Aside>
     )
 }
 

@@ -1,4 +1,8 @@
-import { has, assoc, assocPath, evolve, fromPairs, map, compose, concat, __, of, when, ifElse, prop, includes, omit, mergeRight, indexBy } from 'ramda'
+import {
+    has, dissoc, assoc, indexBy, prop, map, omit, chain, pick, compose, filter, complement, startsWith, keys, replace, assocPath, mergeDeepRight, dissocPath, converge, evolve, ifElse, fromPairs, concat, __, of, when, mergeRight, includes,pickBy
+} from 'ramda'
+
+import { renameKeysWith } from 'ramda-adjunct'
 
 const defaultState = {
     category: '',
@@ -45,6 +49,8 @@ export function addItems(state = defaultState, action) {
                     )
                 )
             }, state)
+        case 'USE_PAGES':
+            return action.value === false ? map(assoc('page', '0'), state) : state
         default:
             return state
     }
@@ -56,7 +62,7 @@ export const preview = (state = {}, action) => {
             return mergeRight(
                 indexBy(
                     prop('sku'),
-                    map((sku) => ({ sku, page: '0' }), action.items)
+                    map((sku) => ({ sku, page: action.page }), action.items)
                 ), state)
         case 'REMOVE_PREVIEW_ITEM':
             return omit([action.sku], state)
@@ -99,10 +105,50 @@ const defaultItems = {
     }
 }
 
+const resetChanges = map(chain(
+    pick,
+    compose(
+        filter(complement(startsWith('__'))),
+        keys
+    )
+))
+
+const applyChanges = compose(
+    map(renameKeysWith(replace('__', ''))),
+    map(chain(pick, compose(filter(startsWith('__')), keys))),
+    map(omit(['__toRemove']))
+)
+
 export const items = (state = defaultItems, action) => {
     switch (action.type) {
         case 'SAVE_ITEMS':
-            return mergeRight(state, action.items)
+        case 'MASS_PROP_CHANGE':
+            return mergeDeepRight(state, action.items)
+        case 'RESET_CHANGE':
+            return dissocPath([action.sku, '__' + action.p], state)
+        case 'RESET_CHANGES':
+            return resetChanges(state)
+        case 'SAVE_CHANGES':
+            const removeList = keys(pickBy(has('__toRemove'), state))
+            return compose(
+                converge(mergeDeepRight, [resetChanges, applyChanges]),
+                omit(removeList)
+            )(state)
+        default:
+            return state
+    }
+}
+
+export function selectedItems(state = [], action) {
+    switch (action.type) {
+        case 'ITEM_SELECTED':
+            return has(action.sku, state) ? dissoc(action.sku, state) : assoc(action.sku, true, state)
+        case 'DESELECT_ALL':
+        case 'RESET_CHANGES':
+        case 'SAVE_CHANGES':
+            return {}
+        case 'SET_SELECTION':
+            return action.items
         default:
             return state
     }

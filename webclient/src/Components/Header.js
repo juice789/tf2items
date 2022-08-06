@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { prop, equals, __, path, } from 'ramda'
-import { SearchIcon, PlusIcon, TimesIcon, CogIcon } from 'react-line-awesome'
+import { prop, equals, __, path, compose, length, keys, pickBy, startsWith, find, propOr } from 'ramda'
+import { SearchIcon, PlusIcon, TimesIcon, CogIcon, SyncAltIcon } from 'react-line-awesome'
 
 import Pages from './Pages'
 import Sort from './Sort'
+import { ChangeCounter } from './Blocks'
 
 const Header = styled.div`
 display: flex;
@@ -30,6 +31,7 @@ margin-left: 0.5rem;
 background: ${({ active }) => active ? '#3a3747' : '#2d2b37'};
 color: ${({ active, isOpen }) => isOpen ? '#e1e0e5' : active ? '#e1e0e5' : '#8a879a'};
 overflow: hidden;
+position:relative;
 :hover{
     color: #e1e0e5;
 }
@@ -54,6 +56,13 @@ color: inherit;
 margin-right:1rem;
 `
 
+const getChangeCount = compose(
+    length,
+    keys,
+    pickBy(compose(find(startsWith('__')), keys)),
+    propOr({}, 'items')
+)
+
 const HeaderActual = () => {
 
     const dispatch = useDispatch()
@@ -61,6 +70,8 @@ const HeaderActual = () => {
     const [searchOpen, toggleSearch] = useState(false)
     const flag = useSelector(path(['search', 'flag']))
     const openedAside = useSelector(prop('openedAside'))
+    const usePages = useSelector(prop('usePages'))
+    const changeCounter = useSelector(getChangeCount)
     const isAsideOpen = equals(__, openedAside)
     const openAside = (name) => () => dispatch({ type: 'ASIDE_TOGGLE', name })
 
@@ -94,7 +105,7 @@ const HeaderActual = () => {
     return (
         <Header>
             <Sort />
-            <Pages />
+            {usePages && <Pages />}
             <Button isOpen={searchOpen}>
                 <SearchIcon onClick={() => toggleSearch(true)} />
                 {
@@ -105,6 +116,10 @@ const HeaderActual = () => {
                         </>
                         : null
                 }
+            </Button>
+            <Button active={isAsideOpen('changes')} onClick={openAside('changes')}>
+                <SyncAltIcon />
+                {changeCounter > 0 ? <ChangeCounter>{changeCounter}</ChangeCounter> : null}
             </Button>
             <Button
                 active={isAsideOpen('settings')}

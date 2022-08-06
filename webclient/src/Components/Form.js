@@ -1,24 +1,107 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import {
     prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat
 } from 'ramda'
-
 import { CheckIcon, TimesIcon, ChevronCircleDownIcon } from 'react-line-awesome'
-
 import Select, { createFilter } from 'react-select'
 import { areEqual, FixedSizeList as List } from 'react-window'
-
 import Toggle from '@juice789/react-toggle'
 import { selectStyle, toggleStyle } from '../globalStyle'
-
 import { safeItems as items } from '@juice789/tf2items'
-
 import categories, { skuFromForm } from './Schema'
-
 import multiEffectList from './Schema/multiEffect'
+import { SaveButton } from './Blocks'
 
-import { Form, FormInner, FormRow, FormLabel, FormSelect, Filters, FilterHeader, Save, InputOuter, FilterContent, FilterIcon, SaveOptions, SaveMain, FormInput } from './FormStyles'
+const Group = styled.div`
+display:flex;
+flex-direction:column;
+border-bottom: 1px solid #403d4f;
+padding: 1rem 1rem 0.5rem 1rem;
+font-size: 0.9rem;
+color: #8a879a;
+`
+
+const Row = styled.div`
+display: flex;
+justify-content: space-between;
+margin-bottom: 0.5rem;
+height: 2rem;
+`
+
+const Label = styled.label`
+align-self: center;
+width:50%;
+margin: 0;
+`
+
+const SelectOuter = styled.div`
+width:100%;
+`
+
+const InputOuter = styled.div`
+display:flex;
+align-items:center;
+justify-content:center;
+width:50%;
+`
+
+const FilterIcon = styled.div`
+display:flex;
+color:#6e66a6;
+transition: transform 0.2s ease;
+font-size:1rem;
+`
+
+const FilterHeader = styled.div`
+min-height:2.5rem;
+display:flex;
+align-items:center;
+justify-content:space-between;
+cursor:pointer;
+`
+
+const FilterContent = styled.div`
+display:flex;
+flex-direction:column;
+padding-top:0.5rem;
+visibility:${({ hidden }) => hidden ? 'hidden' : 'visible'};
+> ${Row} > ${Label}{
+    padding-left: 0.5rem;
+}`
+
+const Filters = styled.div`
+display: ${({ isDisabled }) => isDisabled ? 'none' : 'flex'};
+flex-direction: column;
+max-height: ${({ isOpen }) => isOpen ? '50rem' : '2.5rem'};
+transition: max-height 0.2s ease;
+border: 1px solid #403d4f;
+padding: 0 0.5rem;
+border-radius: 0.5rem;
+flex: 0 0 auto;
+overflow: ${({ isOpen }) => isOpen ? 'visible' : 'hidden'};
+margin-bottom:0.5rem;
+box-sizing: content-box;
+> ${FilterHeader} > ${FilterIcon}{
+    transform: ${({ isOpen }) => isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+}
+`
+
+const Input = styled.input`
+border: 1px solid #3a3747;
+outline: none;
+width: 100%;
+background-color: #3a3747;
+color: #f9f9fa;
+height: 35px;
+border-radius: 0.2rem;
+padding-left: 0.6rem;
+font-weight:300 !important;
+:hover{
+    border-color: #6e66a6;
+}
+`
 
 const getItems = compose(
     values,
@@ -42,6 +125,8 @@ const FormActual = () => {
     const dispatch = useDispatch()
     const [isFilterOpen, toggleFilter] = useState(false)
     const formState = useSelector(prop('addItems'), shallowEqual)
+    const usePages = useSelector(prop('usePages'))
+    const pages = useSelector(prop('pages'))
 
     const hiddenControlNames = useSelector(compose(
         keys,
@@ -95,7 +180,7 @@ const FormActual = () => {
     const getControl = (name, type, { options, isOn, isClearable, isSearchable, remap }) => {
         switch (type) {
             case 'input':
-                return <FormInput type={'number'} onChange={propChange(name)} />
+                return <Input type={'number'} onChange={propChange(name)} />
             case 'toggle':
                 return (
                     <Toggle disabled={hiddenControlNames[name]} key={name} styles={toggleStyle} isOn={isOn} onChange={propChange(name)} remap={remap}>
@@ -105,7 +190,7 @@ const FormActual = () => {
                 )
             default:
                 return (
-                    <FormSelect>
+                    <SelectOuter>
                         <Select
                             onChange={propChange(name)}
                             options={map(([value, label]) => ({ value, label }), options)}
@@ -115,18 +200,18 @@ const FormActual = () => {
                             components={type === 'virtual' ? { MenuList } : {}}
                             filterOption={createFilter({ ignoreAccents: false })}
                         />
-                    </FormSelect>
+                    </SelectOuter>
                 )
         }
     }
 
     const getRow = ({ name, label, type, ...rest }) => (
-        <FormRow key={name} hidden={includes(name, hiddenControlNames)}>
-            <FormLabel>{label}:</FormLabel>
+        <Row key={name} hidden={includes(name, hiddenControlNames)}>
+            <Label>{label}:</Label>
             <InputOuter>
                 {getControl(name, type, rest)}
             </InputOuter>
-        </FormRow >
+        </Row>
     )
 
     const createItem = skuFromForm(
@@ -138,11 +223,13 @@ const FormActual = () => {
 
     const save = () => dispatch({
         type: 'PREVIEW_ITEMS',
+        page: usePages ? formState.props.page : '0',
         items: [createItem({ defindex: formState.controls.defindex })]
     })
 
     const saveAll = () => dispatch({
         type: 'PREVIEW_ITEMS',
+        page: usePages ? formState.props.page : '0',
         items: map(
             compose(createItem, objOf('defindex')),
             keys(filteredItems)
@@ -152,6 +239,7 @@ const FormActual = () => {
     const saveMultiEffect = () => {
         return dispatch({
             type: 'PREVIEW_ITEMS',
+            page: usePages ? formState.props.page : '0',
             items: map(
                 compose(createItem, mergeRight({ defindex: formState.controls.defindex }), objOf('effect')),
                 keys(multiEffectList[formState.props.multiEffect])
@@ -161,19 +249,19 @@ const FormActual = () => {
 
     const saveAllTargets = () => dispatch({
         type: 'PREVIEW_ITEMS',
+        page: usePages ? formState.props.page : '0',
         items: map(
             compose(createItem, mergeRight({ defindex: formState.controls.defindex }), objOf('target')),
             keys(filteredTargets)
         )
     })
 
-    const isSaveDisabled = (validationType) =>
-        hasPath(['validation', validationType], formState)
-        && any(complement(Boolean), props(formState.validation[validationType], formState.controls))
+    const isSaveDisabled = (validationType) => (hasPath(['validation', validationType], formState) && any(complement(Boolean), props(formState.validation[validationType], formState.controls))) || (usePages && !formState.props.page)
 
     return (
-        <Form>
-            <FormInner>
+        <>
+            <Group>
+                {usePages && getRow({ name: 'page', label: 'Page', options: toPairs(pages) })}
                 {map(
                     getRow,
                     values(
@@ -192,44 +280,42 @@ const FormActual = () => {
                     </FilterContent>
                 </Filters>
                 {map(getRow, values(pick(['defindex', 'target', 'craftNumber', 'crateSeries'], controls)))}
-            </FormInner>
-            <SaveOptions>
-                <FormRow>
-                    <SaveMain
+            </Group>
+            <Group>
+                <Row>
+                    <SaveButton
                         disabled={isSaveDisabled('single')}
-                        onClick={save}>
+                        onClick={save}
+                        full={true}>
                         Save
-                    </SaveMain>
-                </FormRow>
-            </SaveOptions>
-            <SaveOptions>
-                <FormRow>
-                    <FormLabel>Save all filtered items:</FormLabel>
-                    <Save
+                    </SaveButton>
+                </Row>
+            </Group>
+            <Group>
+                <Row>
+                    <Label>Save all filtered items:</Label>
+                    <SaveButton
                         disabled={isSaveDisabled('multi')}
                         onClick={category.targetFn ? saveAllTargets : saveAll}>
                         Save all ({keys(category.targetFn ? filteredTargets : filteredItems).length})
-                    </Save>
-                </FormRow>
-            </SaveOptions>
-            <SaveOptions>
-                {
-                    categories[formState.category].multiEffect && formState.controls.quality === '5' &&
-                    <>
-                        <FormRow>Save multiple effects for the selected item:</FormRow>
-                        {getRow(categories[formState.category].multiEffect)}
-                        <FormRow>
-                            <Save
-                                disabled={isSaveDisabled('effect')}
-                                onClick={saveMultiEffect}>
-                                Save effects{formState.props.multiEffect ? ' (' + keys(multiEffectList[formState.props.multiEffect]).length + ')' : ''}
-                            </Save>
-                        </FormRow>
-                    </>
-                }
-
-            </SaveOptions>
-        </Form>
+                    </SaveButton>
+                </Row>
+            </Group>
+            {
+                categories[formState.category].multiEffect && formState.controls.quality === '5' &&
+                <Group>
+                    <Row>Save multiple effects for the selected item:</Row>
+                    {getRow(categories[formState.category].multiEffect)}
+                    <Row>
+                        <SaveButton
+                            disabled={isSaveDisabled('effect')}
+                            onClick={saveMultiEffect}>
+                            Save effects{formState.props.multiEffect ? ' (' + keys(multiEffectList[formState.props.multiEffect]).length + ')' : ''}
+                        </SaveButton>
+                    </Row>
+                </Group>
+            }
+        </>
     )
 }
 

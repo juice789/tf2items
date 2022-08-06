@@ -4,9 +4,12 @@ import styled from 'styled-components'
 import { prop } from 'ramda'
 import Header from './Components/Header'
 
+import Notifications from '@juice789/redux-saga-notifications'
+
 import AddItems from './Components/AddItems'
 import ItemList from './Components/ItemList'
 import Settings from './Components/Settings'
+import Changes from './Components/Changes'
 
 const App = styled.div`
 display: flex;
@@ -26,7 +29,8 @@ overflow-x:hidden;
 
 const asides = {
   'addItems': AddItems,
-  'settings': Settings
+  'settings': Settings,
+  'changes': Changes
 }
 
 const ItemsActual = () => {
@@ -37,13 +41,16 @@ const ItemsActual = () => {
     : null
 
   return (
-    <App>
-      <Header />
-      <Inner>
-        {aside}
-        <ItemList />
-      </Inner>
-    </App>
+    <>
+      <App>
+        <Header />
+        <Inner>
+          {aside}
+          <ItemList />
+        </Inner>
+      </App>
+      <Notifications />
+    </>
   )
 }
 

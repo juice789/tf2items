@@ -1,4 +1,4 @@
-import { assoc, dissoc } from 'ramda'
+import { assoc, dissoc, keys } from 'ramda'
 
 const defaultPages = {
     '0': 'Page 0'
@@ -6,6 +6,10 @@ const defaultPages = {
 
 export const pages = (state = defaultPages, action) => {
     switch (action.type) {
+        case 'RESET_STATE':
+            return defaultPages
+        case 'NEW_STATE':
+            return action.pages
         case 'PAGE_ADDED':
             return assoc(
                 action.value,
@@ -23,6 +27,10 @@ export const pages = (state = defaultPages, action) => {
 
 export function selectedPage(state = '0', action) {
     switch (action.type) {
+        case 'RESET_STATE':
+            return '0'
+        case 'NEW_STATE':
+            return keys(action.pages)[0]
         case 'PAGE_CHANGE':
         case 'PAGE_ADDED':
             return action.value
@@ -37,6 +45,8 @@ export function selectedPage(state = '0', action) {
 
 export const usePages = (state = false, action) => {
     switch (action.type) {
+        case 'RESET_STATE':
+            return false
         case 'USE_PAGES':
             return action.value
         default:

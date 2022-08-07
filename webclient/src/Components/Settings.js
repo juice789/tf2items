@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { SaveIcon, TimesIcon } from 'react-line-awesome'
 import { selectStyle } from '../globalStyle'
-import { propEq, prop, compose, map, pickBy, T, path, toPairs, assoc, when, gte, __, indexOf, chain, toLower, filter } from 'ramda'
+import { propEq, prop, compose, map, pickBy, T, path, toPairs, assoc, when, gte, __, indexOf, chain, toLower, filter, keys } from 'ramda'
 import Select from 'react-select'
 import { itemNameFromSku } from '@juice789/tf2items'
 import { Aside, Header, HeaderButton, SaveButton } from './Blocks'
@@ -37,7 +37,8 @@ const Control = styled.div`
 min-width: 50%;
 display: flex;
 justify-content: space-around;
-padding: 0.5rem 1rem 0rem 0;
+padding-top: 0.5rem;
+padding-right: ${({ inner }) => inner ? '1rem' : '0'};
 `
 
 const Row = styled.div`
@@ -55,6 +56,18 @@ width: 100%;
     flex-grow: 1;
 }
 `
+const FileInput = styled.input`
+display:none;
+`
+
+const FileLabel = styled.label`
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin:0;
+`
 
 const getPageOptions = compose(
     map(([value, label]) => ({ value, label })),
@@ -69,12 +82,12 @@ const usePagesOptions = [
 const SettingsActual = () => {
 
     const dispatch = useDispatch()
-    const pageRef = useRef()
     const searchTerm = useSelector(path(['search', 'value']))
     const selectedPage = useSelector(prop('selectedPage'))
     const usePages = useSelector(prop('usePages'))
     const selectedItems = useSelector(prop('selectedItems'))
     const pages = useSelector(prop('pages'))
+    const [newPage, setNewPage] = useState(null)
 
     const pageItems = useSelector(
         compose(
@@ -129,11 +142,42 @@ const SettingsActual = () => {
             })
     }
 
+    const noSelection = keys(selectedItems).length === 0
 
-    const savePage = () => {
-        const selected = pageRef.current.state.selectValue[0]?.value
-        selected !== undefined &&
-            setVal('page', selected)()
+    const resetState = () => {
+        dispatch({
+            type: 'NOTIFICATION_PUSH',
+            notification: {
+                id: Date.now().toString(),
+                type: 'info',
+                label: 'Are you sure? This will reset all items.',
+                blocking: true,
+                payload: {
+                    type: 'RESET_STATE'
+                },
+                buttons: 'yesNo'
+            }
+        })
+    }
+
+    const exportState = () => {
+        dispatch({
+            type: 'EXPORT_STATE'
+        })
+    }
+
+    const onUpload = (e) => {
+        var reader = new FileReader()
+        reader.onload = onReaderLoad
+        reader.readAsText(e.target.files[0])
+    }
+
+    function onReaderLoad(e) {
+        var importedState = JSON.parse(e.target.result)
+        dispatch({
+            type: 'IMPORT_STATE',
+            importedState
+        })
     }
 
     return (
@@ -170,23 +214,26 @@ const SettingsActual = () => {
                         <Group inner={true}>
                             <Row inner={true}>
                                 <Label>Page:</Label>
-                                <Control>
+                                <Control inner={true}>
                                     <ControlOuter>
                                         <Select
                                             isSearchable={false}
                                             isClearable={true}
                                             styles={selectStyle()}
                                             options={pageOptions}
-                                            ref={pageRef}
+                                            value={pageOptions.find(propEq('value', newPage))}
+                                            onChange={(props) => setNewPage(props?.value)}
                                         />
                                     </ControlOuter>
                                 </Control>
                             </Row>
                             <Row inner={true}>
                                 <Label></Label>
-                                <Control>
+                                <Control inner={true}>
                                     <ControlOuter>
-                                        <SaveButton onClick={savePage}>
+                                        <SaveButton
+                                            disabled={!Boolean(newPage) || noSelection}
+                                            onClick={setVal('page', newPage)}>
                                             <SaveIcon />
                                         </SaveButton>
                                     </ControlOuter>
@@ -198,11 +245,44 @@ const SettingsActual = () => {
                 <Group inner={true}>
                     <Row>
                         <Label>Remove selected:</Label>
-                        <Control>
-                            <SaveButton full={true} danger={true} onClick={setVal('toRemove', '1')}>Remove</SaveButton>
+                        <Control inner={true}>
+                            <SaveButton
+                                disabled={noSelection}
+                                full={true}
+                                danger={true}
+                                onClick={setVal('toRemove', '1')}>
+                                Remove
+                            </SaveButton>
                         </Control>
                     </Row>
                 </Group>
+            </Group>
+            <Group padBottom={true}>
+                <ControlOuter>
+                    <SaveButton
+                        full={true}
+                        danger={true}
+                        onClick={resetState}>
+                        Reset state
+                    </SaveButton>
+                </ControlOuter>
+            </Group>
+            <Group padBottom={true}>
+                <ControlOuter>
+                    <SaveButton
+                        full={true}
+                        onClick={exportState}>
+                        Export state
+                    </SaveButton>
+                </ControlOuter>
+            </Group>
+            <Group padBottom={true}>
+                <ControlOuter>
+                    <SaveButton full={true}>
+                        <FileLabel htmlFor="importstate">Import state</FileLabel>
+                    </SaveButton>
+                    <FileInput type="file" id="importstate" name="importstate" accept="application/JSON" multiple={false} onChange={onUpload} />
+                </ControlOuter>
             </Group>
         </Aside>
     )

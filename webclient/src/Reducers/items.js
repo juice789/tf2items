@@ -1,5 +1,5 @@
 import {
-    has, dissoc, assoc, indexBy, prop, map, omit, chain, pick, compose, filter, complement, startsWith, keys, replace, assocPath, mergeDeepRight, dissocPath, converge, evolve, ifElse, fromPairs, concat, __, of, when, mergeRight, includes,pickBy
+    has, dissoc, assoc, indexBy, prop, map, omit, chain, pick, compose, filter, complement, startsWith, keys, replace, assocPath, mergeDeepRight, dissocPath, converge, evolve, ifElse, fromPairs, concat, __, of, when, mergeRight, includes, pickBy
 } from 'ramda'
 
 import { renameKeysWith } from 'ramda-adjunct'
@@ -17,6 +17,8 @@ const defaultState = {
 export function addItems(state = defaultState, action) {
     switch (action.type) {
         case 'ASIDE_TOGGLE':
+        case 'RESET_STATE':
+        case 'NEW_STATE':
             return defaultState
         case 'CATEGORY_CHANGE':
             return {
@@ -58,6 +60,9 @@ export function addItems(state = defaultState, action) {
 
 export const preview = (state = {}, action) => {
     switch (action.type) {
+        case 'RESET_STATE':
+        case 'NEW_STATE':
+            return {}
         case 'PREVIEW_ITEMS':
             return mergeRight(
                 indexBy(
@@ -121,6 +126,10 @@ const applyChanges = compose(
 
 export const items = (state = defaultItems, action) => {
     switch (action.type) {
+        case 'RESET_STATE':
+            return defaultItems
+        case 'NEW_STATE':
+            return action.items
         case 'SAVE_ITEMS':
         case 'MASS_PROP_CHANGE':
             return mergeDeepRight(state, action.items)
@@ -141,6 +150,9 @@ export const items = (state = defaultItems, action) => {
 
 export function selectedItems(state = [], action) {
     switch (action.type) {
+        case 'RESET_STATE':
+        case 'NEW_STATE':
+            return []
         case 'ITEM_SELECTED':
             return has(action.sku, state) ? dissoc(action.sku, state) : assoc(action.sku, true, state)
         case 'DESELECT_ALL':

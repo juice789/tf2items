@@ -1,5 +1,8 @@
 export const openedAside = (state = 'addItems', action) => {
     switch (action.type) {
+        case 'RESET_STATE':
+        case 'NEW_STATE':
+            return null
         case 'ASIDE_TOGGLE':
             return state === action.name ? null : action.name
         case 'ASIDE_CLOSE':
@@ -9,8 +12,13 @@ export const openedAside = (state = 'addItems', action) => {
     }
 }
 
-export function search(state = { value: '', flag: false }, action) {
+const defaultSearch = { value: '', flag: false }
+
+export function search(state = defaultSearch, action) {
     switch (action.type) {
+        case 'RESET_STATE':
+        case 'NEW_STATE':
+            return defaultSearch
         case 'SEARCH_INPUT_ACTUAL':
             return {
                 ...state,
@@ -31,8 +39,13 @@ export function search(state = { value: '', flag: false }, action) {
     }
 }
 
+const defaultSort = { sortType: 'SORT_DEFAULT', sortMode: null }
+
 export function sort(state = { sortType: 'SORT_DEFAULT', sortMode: null }, action) {
     switch (action.type) {
+        case 'RESET_STATE':
+        case 'NEW_STATE':
+            return defaultSort
         case 'SORT_DEFAULT':
             return {
                 sortType: 'SORT_DEFAULT',

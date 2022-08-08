@@ -3,7 +3,6 @@ import {
 } from 'ramda'
 
 import {
-    getQuality,
     killstreakTier,
     defindex,
     getClasses
@@ -11,7 +10,6 @@ import {
 
 const botkiller = {
     controls: {
-        quality: getQuality([11, 6]),
         killstreakTier,
         defindex: defindex()
     },
@@ -24,9 +22,11 @@ const botkiller = {
     filters: {
         used_by_classes: getClasses(undefined, ['multi', 'all'])
     },
+    defaults: {
+        quality: '11'
+    },
     validation: {
-        single: ['defindex', 'quality'],
-        multi: ['quality']
+        single: ['defindex']
     }
 }
 

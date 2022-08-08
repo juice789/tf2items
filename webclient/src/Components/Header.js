@@ -32,6 +32,7 @@ background: ${({ active }) => active ? '#3a3747' : '#2d2b37'};
 color: ${({ active, isOpen }) => isOpen ? '#e1e0e5' : active ? '#e1e0e5' : '#8a879a'};
 overflow: hidden;
 position:relative;
+min-width: max-content;
 :hover{
     color: #e1e0e5;
 }
@@ -54,6 +55,7 @@ font-size:0.9rem;
 width:0;
 color: inherit;
 margin-right:1rem;
+min-width:8rem;
 `
 
 const getChangeCount = compose(

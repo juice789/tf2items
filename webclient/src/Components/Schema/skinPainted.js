@@ -9,6 +9,7 @@ import {
     elevated,
     killstreakTier,
     wear,
+    festivized,
     texture,
     getEffect,
     defindex,
@@ -21,6 +22,7 @@ const skinPainted = {
     controls: {
         quality: getQuality([11, 5, 15]),
         elevated,
+        festivized,
         killstreakTier,
         wear,
         texture, //todo: filter the textures by collection

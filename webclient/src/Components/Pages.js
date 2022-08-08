@@ -26,6 +26,9 @@ margin-left:0.5rem;
     font-weight:bold;
     padding-left:0.5rem;
 }
+> span {
+    min-width:max-content;
+}
 `
 
 const Dropdown = styled.div`
@@ -35,6 +38,7 @@ background: #2d2b37;
 position:absolute;
 top:2.25rem;
 right: 0rem;
+flex:1 1 auto;
 min-width:100%;
 border-radius: 0.5rem;
 overflow:hidden;
@@ -42,6 +46,15 @@ z-index:11;
 padding:2px 0;
 border: 1px solid #2d2b37;
 font-size:0.8rem;
+box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 10%) 0px 4px 8px, rgb(0 0 0 / 10%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
+`
+
+const DropdownInner = styled.div`
+display:flex;
+flex: 0 0 auto;
+overflow-y: auto;
+max-height: 15rem;
+flex-direction:column;
 `
 
 const Button = styled.div`
@@ -62,6 +75,7 @@ margin-left:0.25rem;
 
 const NewPage = styled.div`
 height: 3rem;
+min-height:3rem;
 width:100%;
 display:flex;
 align-items:center;
@@ -71,6 +85,7 @@ background: #33313f;
 
 const Option = styled.div`
 height: 2.5rem;
+min-height:2.5rem;
 min-width:100%;
 width:max-content;
 max-width:15rem;
@@ -94,7 +109,7 @@ border-radius: 0.25rem;
 padding-left: 0.6rem;
 margin-left:0.5rem;
 font-weight:100;
-max-width: 7rem;
+flex-grow:1;
 :hover{
     border-color: #6e66a6;
 }
@@ -213,7 +228,9 @@ const DropdownActual = ({ toggleDropdown }) => {
     }
 
     return <Dropdown>
-        {options}
+        <DropdownInner>
+            {options}
+        </DropdownInner>
         <NewPage>
             {
                 newPageOpen

@@ -47,6 +47,8 @@ export const usePages = (state = false, action) => {
     switch (action.type) {
         case 'RESET_STATE':
             return false
+        case 'NEW_STATE':
+            return action.usePages
         case 'USE_PAGES':
             return action.value
         default:

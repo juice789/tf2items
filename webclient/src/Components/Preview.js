@@ -110,6 +110,8 @@ const PreviewActual = () => {
 
     const dispatch = useDispatch()
     const previewItems = useSelector(compose(values, prop('preview')), shallowEqual)
+    const usePages = useSelector(prop('usePages'))
+    const pages = useSelector(prop('pages'))
 
     const removeItem = (sku) => () => dispatch({ type: 'REMOVE_PREVIEW_ITEM', sku })
     const clearItems = () => dispatch({ type: 'CLEAR_PREVIEW' })
@@ -119,11 +121,11 @@ const PreviewActual = () => {
         items: indexBy(prop('sku'), previewItems)
     })
 
-    const items = map(({ sku }) => (
+    const items = map(({ sku, page }) => (
         <Row key={sku}>
             <ItemOuter>
                 <Item>{itemNameFromSku(sku)}</Item>
-                <SKU>{sku}</SKU>
+                <SKU>{sku}{usePages ? ' | ' + pages[page] : null}</SKU>
             </ItemOuter>
             <Icon onClick={removeItem(sku)}>
                 <TimesCircleIcon />

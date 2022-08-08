@@ -1,7 +1,8 @@
 {
-  "name": "tf2items",
+  "name": "tf2items-web",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://juice789.github.io/tf2items/",
   "dependencies": {
     "@juice789/react-toggle": "^3.0.1",
     "@juice789/redux-saga-notifications": "^1.0.1",
@@ -27,7 +28,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +53,7 @@
   "devDependencies": {
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
+    "gh-pages": "^4.0.0",
     "process": "^0.11.10",
     "react-app-rewired": "^2.2.1",
     "stream-browserify": "^3.0.0"

@@ -7,6 +7,16 @@ position: relative;
 flex: 0 1 auto;
 overflow-y: auto;
 width: 25%;
+min-width:25rem;
+`
+
+export const AsideInner = styled.div`
+display:flex;
+position: relative;
+flex: 0 1 auto;
+overflow-y: auto;
+flex-direction:column;
+height:100%;
 `
 
 export const Header = styled.div`

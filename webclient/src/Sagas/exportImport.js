@@ -1,23 +1,26 @@
 import { takeEvery, select, put } from 'redux-saga/effects'
-import { prop, groupBy, map, compose, values, evolve, indexBy, unnest, mapObjIndexed, assoc, objOf } from 'ramda'
+import { prop, groupBy, map, compose, values, evolve, indexBy, unnest, mapObjIndexed, assoc, objOf, pick } from 'ramda'
 
 function* exportState() {
 
-    const items = yield select(compose(
-        map(map(prop('sku'))),
-        groupBy(prop('page')),
-        values,
-        prop('items')
+    const state = yield select(compose(
+        evolve({
+            items: compose(
+                map(map(prop('sku'))),
+                groupBy(prop('page')),
+                values,
+            )
+        }),
+        pick(['items', 'pages', 'usePages'])
     ))
-    const pages = yield select(prop('pages'))
 
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ items, pages }));
-    var downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "tf2items.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    var dataStr = "data:text/jsoncharset=utf-8," + encodeURIComponent(JSON.stringify(state))
+    var downloadAnchorNode = document.createElement('a')
+    downloadAnchorNode.setAttribute("href", dataStr)
+    downloadAnchorNode.setAttribute("download", "tf2items.json")
+    document.body.appendChild(downloadAnchorNode)
+    downloadAnchorNode.click()
+    downloadAnchorNode.remove()
 }
 
 function* importState({ importedState }) {

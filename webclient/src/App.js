@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { prop } from 'ramda'
+
 import Header from './Components/Header'
 
 import Notifications from '@juice789/redux-saga-notifications'
@@ -17,6 +18,7 @@ flex: 1 1 auto;
 overflow-y:auto;
 flex-direction:column;
 height: 100%;
+min-width:1000px;
 `
 
 const Inner = styled.div`
@@ -40,13 +42,14 @@ const ItemsActual = () => {
     ? React.createElement(asides[openedAside], { key: openedAside })
     : null
 
+  const itemList = <ItemList />
   return (
     <>
       <App>
         <Header />
         <Inner>
           {aside}
-          <ItemList />
+          {itemList}
         </Inner>
       </App>
       <Notifications />

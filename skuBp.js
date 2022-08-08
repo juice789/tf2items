@@ -20,7 +20,7 @@ const toBpQuality = (sku) => {
     const isPainted = items[defindex].item_name === 'War Paint' || Boolean(texture) || isWeaponEffect
 
     return [
-        elevated || quality === '11' && isPainted && 'Strange',
+        (elevated || quality === '11' && isPainted) && 'Strange',
         isPainted
             ? !elevated && qualityNames[isWeaponEffect ? '5' : '15']
             : qualityNames[quality]

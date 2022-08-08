@@ -11,7 +11,7 @@ import categories from './Schema'
 import Form from './Form.js'
 import Preview from './Preview.js'
 
-import { Aside, Header, HeaderButton, ChangeCounter } from './Blocks'
+import { Aside, AsideInner, Header, HeaderButton, ChangeCounter } from './Blocks'
 
 const CategoriesOuter = styled.div`
 display: flex;
@@ -104,11 +104,13 @@ const AddItemsActual = () => {
                     </SelectOuter>
                 </CategoriesOuter>
             }
-            {
-                previewOpen
-                    ? <Preview />
-                    : category !== '' && <Form key={category + counter} />
-            }
+            <AsideInner>
+                {
+                    previewOpen
+                        ? <Preview />
+                        : category !== '' && <Form key={category + counter} />
+                }
+            </AsideInner>
         </Aside>
     )
 }

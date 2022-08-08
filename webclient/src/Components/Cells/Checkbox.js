@@ -24,7 +24,6 @@ color: ${({ checked }) => checked ? '#6e66a6' : '#8a879a'};
 justify-content: center;
 align-items: center;
 transition: color 0.2s ease;
-}
 `
 
 export const Checkbox = React.memo(({ sku }) => {

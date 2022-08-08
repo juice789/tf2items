@@ -11,6 +11,7 @@ import {
     wear,
     getEffect,
     defindex,
+    festivized,
     getCollections,
     getRarities,
     getClasses,
@@ -21,6 +22,7 @@ const skinUnboxed = {
     controls: {
         quality: getQuality([11, 5, 15]),
         elevated,
+        festivized,
         killstreakTier,
         wear,
         effect: getEffect(range(701, 705)),

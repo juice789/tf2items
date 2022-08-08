@@ -6,7 +6,7 @@ import { selectStyle } from '../globalStyle'
 import { propEq, prop, compose, map, pickBy, T, path, toPairs, assoc, when, gte, __, indexOf, chain, toLower, filter, keys } from 'ramda'
 import Select from 'react-select'
 import { itemNameFromSku } from '@juice789/tf2items'
-import { Aside, Header, HeaderButton, SaveButton } from './Blocks'
+import { Aside, AsideInner, Header, HeaderButton, SaveButton } from './Blocks'
 
 const Group = styled.div`
 display: flex;
@@ -39,6 +39,7 @@ display: flex;
 justify-content: space-around;
 padding-top: 0.5rem;
 padding-right: ${({ inner }) => inner ? '1rem' : '0'};
+align-items:center;
 `
 
 const Row = styled.div`
@@ -188,102 +189,104 @@ const SettingsActual = () => {
                     <TimesIcon />
                 </HeaderButton>
             </Header>
-            <Group padBottom={true}>
-                <GroupHeader>Use Pages:</GroupHeader>
-                <ControlOuter>
-                    <Select
-                        isSearchable={false}
-                        styles={selectStyle()}
-                        options={usePagesOptions}
-                        value={usePagesOptions.find(propEq('value', usePages))}
-                        onChange={setUsePages}
-                    />
-                </ControlOuter>
-            </Group>
-            <Group padBottom={true}>
-                <GroupHeader>Select all items on this page:</GroupHeader>
-                <Control>
-                    <SaveButton onClick={selectAll}>Select</SaveButton>
-                    <SaveButton onClick={deselectAll}>Deselect</SaveButton>
-                </Control>
-            </Group>
-            <Group>
-                <GroupHeader>Perform action on every selected item:</GroupHeader>
-                {
-                    usePages && <Row>
-                        <Group inner={true}>
-                            <Row inner={true}>
-                                <Label>Page:</Label>
-                                <Control inner={true}>
-                                    <ControlOuter>
-                                        <Select
-                                            isSearchable={false}
-                                            isClearable={true}
-                                            styles={selectStyle()}
-                                            options={pageOptions}
-                                            value={pageOptions.find(propEq('value', newPage))}
-                                            onChange={(props) => setNewPage(props?.value)}
-                                        />
-                                    </ControlOuter>
-                                </Control>
-                            </Row>
-                            <Row inner={true}>
-                                <Label></Label>
-                                <Control inner={true}>
-                                    <ControlOuter>
-                                        <SaveButton
-                                            disabled={!Boolean(newPage) || noSelection}
-                                            onClick={setVal('page', newPage)}>
-                                            <SaveIcon />
-                                        </SaveButton>
-                                    </ControlOuter>
-                                </Control>
-                            </Row>
-                        </Group>
-                    </Row>
-                }
-                <Group inner={true}>
-                    <Row>
-                        <Label>Remove selected:</Label>
-                        <Control inner={true}>
-                            <SaveButton
-                                disabled={noSelection}
-                                full={true}
-                                danger={true}
-                                onClick={setVal('toRemove', '1')}>
-                                Remove
-                            </SaveButton>
-                        </Control>
-                    </Row>
+            <AsideInner>
+                <Group padBottom={true}>
+                    <GroupHeader>Use Pages:</GroupHeader>
+                    <ControlOuter>
+                        <Select
+                            isSearchable={false}
+                            styles={selectStyle()}
+                            options={usePagesOptions}
+                            value={usePagesOptions.find(propEq('value', usePages))}
+                            onChange={setUsePages}
+                        />
+                    </ControlOuter>
                 </Group>
-            </Group>
-            <Group padBottom={true}>
-                <ControlOuter>
-                    <SaveButton
-                        full={true}
-                        danger={true}
-                        onClick={resetState}>
-                        Reset state
-                    </SaveButton>
-                </ControlOuter>
-            </Group>
-            <Group padBottom={true}>
-                <ControlOuter>
-                    <SaveButton
-                        full={true}
-                        onClick={exportState}>
-                        Export state
-                    </SaveButton>
-                </ControlOuter>
-            </Group>
-            <Group padBottom={true}>
-                <ControlOuter>
-                    <SaveButton full={true}>
-                        <FileLabel htmlFor="importstate">Import state</FileLabel>
-                    </SaveButton>
-                    <FileInput type="file" id="importstate" name="importstate" accept="application/JSON" multiple={false} onChange={onUpload} />
-                </ControlOuter>
-            </Group>
+                <Group padBottom={true}>
+                    <GroupHeader>Select all items on this page:</GroupHeader>
+                    <Control>
+                        <SaveButton onClick={selectAll}>Select</SaveButton>
+                        <SaveButton onClick={deselectAll}>Deselect</SaveButton>
+                    </Control>
+                </Group>
+                <Group>
+                    <GroupHeader>Perform action on every selected item:</GroupHeader>
+                    {
+                        usePages && <Row>
+                            <Group inner={true}>
+                                <Row inner={true}>
+                                    <Label>Page:</Label>
+                                    <Control inner={true}>
+                                        <ControlOuter>
+                                            <Select
+                                                isSearchable={false}
+                                                isClearable={true}
+                                                styles={selectStyle()}
+                                                options={pageOptions}
+                                                value={pageOptions.find(propEq('value', newPage))}
+                                                onChange={(props) => setNewPage(props?.value)}
+                                            />
+                                        </ControlOuter>
+                                    </Control>
+                                </Row>
+                                <Row inner={true}>
+                                    <Label></Label>
+                                    <Control inner={true}>
+                                        <ControlOuter>
+                                            <SaveButton
+                                                disabled={!Boolean(newPage) || noSelection}
+                                                onClick={setVal('page', newPage)}>
+                                                <SaveIcon />
+                                            </SaveButton>
+                                        </ControlOuter>
+                                    </Control>
+                                </Row>
+                            </Group>
+                        </Row>
+                    }
+                    <Group inner={true}>
+                        <Row>
+                            <Label>Remove selected:</Label>
+                            <Control inner={true}>
+                                <SaveButton
+                                    disabled={noSelection}
+                                    full={true}
+                                    danger={true}
+                                    onClick={setVal('toRemove', '1')}>
+                                    Remove
+                                </SaveButton>
+                            </Control>
+                        </Row>
+                    </Group>
+                </Group>
+                <Group padBottom={true}>
+                    <ControlOuter>
+                        <SaveButton
+                            full={true}
+                            danger={true}
+                            onClick={resetState}>
+                            Reset state
+                        </SaveButton>
+                    </ControlOuter>
+                </Group>
+                <Group padBottom={true}>
+                    <ControlOuter>
+                        <SaveButton
+                            full={true}
+                            onClick={exportState}>
+                            Export state
+                        </SaveButton>
+                    </ControlOuter>
+                </Group>
+                <Group padBottom={true}>
+                    <ControlOuter>
+                        <SaveButton full={true}>
+                            <FileLabel htmlFor="importstate">Import state</FileLabel>
+                        </SaveButton>
+                        <FileInput type="file" id="importstate" name="importstate" accept="application/JSON" multiple={false} onChange={onUpload} />
+                    </ControlOuter>
+                </Group>
+            </AsideInner>
         </Aside>
     )
 }

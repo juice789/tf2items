@@ -41,6 +41,7 @@ z-index:11;
 padding:2px 0;
 border: 1px solid #2d2b37;
 font-size:0.8rem;
+box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 10%) 0px 4px 8px, rgb(0 0 0 / 10%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
 `
 
 const Option = styled.div`

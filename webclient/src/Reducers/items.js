@@ -51,8 +51,6 @@ export function addItems(state = defaultState, action) {
                     )
                 )
             }, state)
-        case 'USE_PAGES':
-            return action.value === false ? map(assoc('page', '0'), state) : state
         default:
             return state
     }
@@ -137,6 +135,8 @@ export const items = (state = defaultItems, action) => {
             return dissocPath([action.sku, '__' + action.p], state)
         case 'RESET_CHANGES':
             return resetChanges(state)
+        case 'USE_PAGES':
+            return action.value === false ? map(assoc('page', '0'), state) : state
         case 'SAVE_CHANGES':
             const removeList = keys(pickBy(has('__toRemove'), state))
             return compose(

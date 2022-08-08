@@ -1,4 +1,4 @@
-export const openedAside = (state = 'addItems', action) => {
+export const openedAside = (state = null, action) => {
     switch (action.type) {
         case 'RESET_STATE':
         case 'NEW_STATE':

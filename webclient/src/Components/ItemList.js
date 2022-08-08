@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList as List, areEqual } from 'react-window'
 
-import { prop, compose, propEq, path, gte, when, __, indexOf, map, assoc, chain, toLower, values, filter, cond, reverse, sortBy, identity, T } from 'ramda'
+import { prop, compose, propEq, path, gte, when, __, indexOf, map, assoc, chain, toLower, values, filter, cond, reverse, sortBy, identity, T, propOr, equals } from 'ramda'
 
 import { shallowEqual, useSelector } from 'react-redux'
 import { itemNameFromSku } from '@juice789/tf2items'
 
-import { Checkbox, Name, SKU, Links } from './Cells'
+import { Checkbox, Name, Links } from './Cells'
 
 const ItemList = styled.div`
 display: flex;
@@ -43,6 +43,12 @@ width: ${prop('w')}rem;
 min-width: ${prop('w')}rem;
 max-width: ${({ grow, w }) => grow ? 'unset' : w + 'rem'};
 flex-grow: ${({ grow }) => grow ? 1 : 0};
+@media (max-width:1400px){
+    width: ${prop('w2')}rem;
+    min-width: ${prop('w2')}rem;
+    max-width: ${({ grow, w2 }) => grow ? 'unset' : w2 + 'rem'};
+    flex-grow: ${({ grow }) => grow ? 1 : 0};
+}
 `
 
 const Rows = styled.div`
@@ -62,10 +68,16 @@ display: flex;
 `
 
 const StickyRow = memo(() => {
+
+    const isOpen = useSelector(compose(
+        equals('settings'),
+        propOr([], 'openedAside')
+    ))
+
     return <Th>
-        <Label grow={true} w={16}>Item name</Label>
-        <Label w={10}>SKU</Label>
-        <Label w={6}>Links</Label>
+        {isOpen ? <Label w={2} /> : null}
+        <Label w={10} w2={8}>Links</Label>
+        <Label grow={true}>Item</Label>
     </Th>
 })
 
@@ -75,9 +87,8 @@ const RowActual = memo(({ data: items, index, style }) => {
         <Row key={sku} style={style}>
             <RowInner>
                 <Checkbox sku={sku} />
-                <Name sku={sku} />
-                <SKU sku={sku} />
                 <Links sku={sku} />
+                <Name sku={sku} />
             </RowInner>
         </Row>
     )

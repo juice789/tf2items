@@ -53,7 +53,7 @@ const skuFromItem = ({
 
 const rules = {
     c: "series",
-    no: "craft",
+    n: "craft",
     kt: "killstreakTier",
     od: "output",
     oq: "oq",

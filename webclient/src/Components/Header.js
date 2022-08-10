@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { prop, equals, __, path, compose, length, keys, pickBy, startsWith, find, propOr } from 'ramda'
-import { SearchIcon, PlusIcon, TimesIcon, CogIcon, SyncAltIcon } from 'react-line-awesome'
+import { SearchIcon, PlusIcon, TimesIcon, CogIcon, SyncAltIcon, EllipsisHIcon } from 'react-line-awesome'
+import { useMediaQuery } from '@react-hook/media-query'
+import { useEventListener } from './utils'
 
 import Pages from './Pages'
 import Sort from './Sort'
@@ -25,14 +27,11 @@ align-items: center;
 justify-content: center;
 font-size: 1.1rem;
 border-radius: 0.5rem;
-width: ${({ isOpen }) => isOpen ? '15rem' : 'auto'};
 cursor: pointer;
 margin-left: 0.5rem;
 background: ${({ active }) => active ? '#3a3747' : '#2d2b37'};
 color: ${({ active, isOpen }) => isOpen ? '#e1e0e5' : active ? '#e1e0e5' : '#8a879a'};
-overflow: hidden;
 position:relative;
-min-width: max-content;
 :hover{
     color: #e1e0e5;
 }
@@ -58,6 +57,24 @@ margin-right:1rem;
 min-width:8rem;
 `
 
+const Menu = styled.div`
+display:flex;
+flex-direction:column;
+position:absolute;
+top:2.5rem;
+right:0.25rem;
+z-index:1000;
+background:#33313f;
+width:20rem;
+padding:0.5rem 0.5rem 0.25rem 0.5rem;
+border-radius:0.5rem;
+box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 10%) 0px 4px 8px, rgb(0 0 0 / 10%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
+> * {
+    margin:0 0 0.5rem 0;
+    flex-grow:1;
+}
+`
+
 const getChangeCount = compose(
     length,
     keys,
@@ -70,12 +87,31 @@ const HeaderActual = () => {
     const dispatch = useDispatch()
     const searchRef = useRef()
     const [searchOpen, toggleSearch] = useState(false)
+
+    const menuRef = useRef()
+    const [dropdownOpen, toggleDropdown] = useState(false)
+
+    const handler = useCallback(
+        (e) => {
+            if (dropdownOpen && !menuRef.current.contains(e.target)) {
+                toggleDropdown(!dropdownOpen)
+            }
+        },
+        [dropdownOpen]
+    )
+
     const flag = useSelector(path(['search', 'flag']))
     const openedAside = useSelector(prop('openedAside'))
     const usePages = useSelector(prop('usePages'))
     const changeCounter = useSelector(getChangeCount)
     const isAsideOpen = equals(__, openedAside)
-    const openAside = (name) => () => dispatch({ type: 'ASIDE_TOGGLE', name })
+    const openAside = (name) => () => {
+        dispatch({ type: 'ASIDE_TOGGLE', name })
+        toggleDropdown(false)
+    }
+    const isResponsive = useMediaQuery('(max-width: 850px)')
+    const searchTerm = useSelector(path(['search', 'value']))
+    useEventListener('mousedown', handler)
 
     const searchChange = () => {
         dispatch({
@@ -103,38 +139,57 @@ const HeaderActual = () => {
         }
     }, [flag])
 
+    const dropDownClick = (e) => {
+        if (menuRef.current === e.target || Array.from(menuRef.current.childNodes).includes(e.target)) {
+            toggleDropdown(!dropdownOpen)
+        }
+    }
+
+    const headerContents = <>
+        <Sort />
+        {usePages && <Pages />}
+        <Button onClick={() => toggleSearch(!searchOpen)} isOpen={searchOpen}>
+            <SearchIcon onClick={e => isResponsive && e.stopPropagation()} />
+            {
+                searchOpen
+                    ? <>
+                        <Input onClick={e => e.stopPropagation()} ref={searchRef} autoFocus defaultValue={searchTerm} onChange={searchChange} />
+                        <TimesIcon onClick={() => toggleSearch(false)} />
+                    </>
+                    : null
+            }
+        </Button>
+        <Button active={isAsideOpen('changes')} onClick={openAside('changes')}>
+            <SyncAltIcon />
+            {changeCounter > 0 ? <ChangeCounter>{changeCounter}</ChangeCounter> : null}
+        </Button>
+        <Button
+            active={isAsideOpen('settings')}
+            onClick={openAside('settings')}
+        >
+            <CogIcon />
+        </Button>
+        <Button
+            active={isAsideOpen('addItems')}
+            onClick={openAside('addItems')}
+        >
+            <PlusIcon />
+        </Button>
+    </>
 
     return (
         <Header>
-            <Sort />
-            {usePages && <Pages />}
-            <Button isOpen={searchOpen}>
-                <SearchIcon onClick={() => toggleSearch(true)} />
-                {
-                    searchOpen
-                        ? <>
-                            <Input ref={searchRef} autoFocus onChange={searchChange} />
-                            <TimesIcon onClick={() => toggleSearch(false)} />
-                        </>
-                        : null
-                }
-            </Button>
-            <Button active={isAsideOpen('changes')} onClick={openAside('changes')}>
-                <SyncAltIcon />
-                {changeCounter > 0 ? <ChangeCounter>{changeCounter}</ChangeCounter> : null}
-            </Button>
-            <Button
-                active={isAsideOpen('settings')}
-                onClick={openAside('settings')}
-            >
-                <CogIcon />
-            </Button>
-            <Button
-                active={isAsideOpen('addItems')}
-                onClick={openAside('addItems')}
-            >
-                <PlusIcon />
-            </Button>
+            {
+                isResponsive
+                    ?
+                    <Button ref={menuRef} onClick={dropDownClick}>
+                        <EllipsisHIcon />
+                        {
+                            dropdownOpen && <Menu>{headerContents}</Menu>
+                        }
+                    </Button>
+                    : headerContents
+            }
         </Header >
     )
 }

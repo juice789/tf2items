@@ -131,6 +131,7 @@ export const Links = ({ sku }) => {
         ['6', '15'].includes(quality) === false && qualityNames[quality],
         festivized && 'festivized',
         killstreakTier && killstreakTiers[killstreakTier],
+        australium && 'australium',
         texture && textures[texture],
         target && items[target].item_name,
         output && items[output].item_name,

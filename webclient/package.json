@@ -7,6 +7,7 @@
     "@juice789/react-toggle": "^3.0.1",
     "@juice789/redux-saga-notifications": "^1.0.1",
     "@juice789/tf2items": "file:..",
+    "@react-hook/media-query": "^1.1.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",

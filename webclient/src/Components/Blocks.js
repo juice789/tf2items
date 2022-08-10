@@ -8,6 +8,10 @@ flex: 0 1 auto;
 overflow-y: auto;
 width: 25%;
 min-width:25rem;
+@media (max-width:850px){
+    width:100%;
+    min-width:20rem;
+}
 `
 
 export const AsideInner = styled.div`

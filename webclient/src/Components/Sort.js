@@ -69,6 +69,11 @@ padding-left: 0.5rem;
 flex-grow: 1;
 `
 
+const Inner = styled.div`
+display:flex;
+align-items:center;
+`
+
 const OptionActual = ({ type, label, toggleDropdown, selected }) => {
 
     const dispatch = useDispatch()
@@ -136,7 +141,7 @@ const SortActual = () => {
 
     return (
         <Sort ref={ref} onClick={dropDownClick}>
-            {icon}&nbsp;<span>{sorts[sortType]}</span>
+            <Inner>{icon}&nbsp;<span>{sorts[sortType]}</span></Inner>
             <AngleDownIcon />
             {
                 dropdownOpen && <DropdownActual toggleDropdown={toggleDropdown} />

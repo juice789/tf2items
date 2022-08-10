@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { prop } from 'ramda'
+import { useMediaQuery } from '@react-hook/media-query'
 
 import Header from './Components/Header'
 
@@ -18,7 +19,6 @@ flex: 1 1 auto;
 overflow-y:auto;
 flex-direction:column;
 height: 100%;
-min-width:1000px;
 `
 
 const Inner = styled.div`
@@ -38,6 +38,9 @@ const asides = {
 const ItemsActual = () => {
 
   const openedAside = useSelector(prop('openedAside'))
+
+  const isResponsive = useMediaQuery('(max-width: 850px)')
+
   const aside = openedAside
     ? React.createElement(asides[openedAside], { key: openedAside })
     : null
@@ -48,8 +51,15 @@ const ItemsActual = () => {
       <App>
         <Header />
         <Inner>
-          {aside}
-          {itemList}
+          {isResponsive
+            ? openedAside
+              ? aside
+              : itemList
+            : <>
+              {aside}
+              {itemList}
+            </>
+          }
         </Inner>
       </App>
       <Notifications />

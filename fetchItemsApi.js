@@ -1,12 +1,19 @@
 const { call, delay, getContext } = require('redux-saga/effects')
-const { prop, indexBy, pick, map, compose } = require('ramda')
+const { prop, indexBy, pick, map, compose, evolve, replace, when } = require('ramda')
 
 const propsToKeep = [
     'image_url'
 ]
 
 const transformItemsApi = compose(
-    map(pick(propsToKeep)),
+    map(
+        compose(
+            pick(propsToKeep),
+            when(
+                prop('image_url'),
+                evolve({ image_url: replace('http://media.steampowered.com/apps/440/icons/', '') })
+            )
+        )),
     indexBy(prop('defindex'))
 )
 

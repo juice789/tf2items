@@ -2,16 +2,16 @@
   "name": "@juice789/tf2items",
   "version": "1.0.0",
   "description": "",
-  "main": "schema.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "updateSchema": "node saveSchema.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
-    "osenv": "^0.1.5",
     "ramda": "^0.28.0",
     "ramda-adjunct": "^3.2.0",
     "redux-saga": "^1.1.3",

@@ -1,1 +1,1 @@
-demo https://juice789.github.io/tf2items/
+sku playground: https://juice789.github.io/tf2items/

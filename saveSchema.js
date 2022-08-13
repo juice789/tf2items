@@ -1,3 +1,4 @@
+const { runSaga } = require('redux-saga')
 const { call } = require('redux-saga/effects')
 const { fetchItemsApi } = require('./fetchItemsApi.js')
 const { fetchItemsGame } = require('./fetchItemsGame.js')
@@ -7,8 +8,12 @@ const { fetchTfEnglish } = require('./fetchTfEnglish.js')
 const { getCollections } = require('./getCollections.js')
 const { getItems } = require('./getItems.js')
 const { transformItems } = require('./transformItems.js')
+const fs = require('fs')
 
-function* saveSchema() {
+const options = require('./options.json')
+const api = require('./api.js')(options)
+
+function* saveSchemaSaga() {
     try {
 
         const itemsApi = yield call(fetchItemsApi)
@@ -27,9 +32,15 @@ function* saveSchema() {
             items: transformedItems
         }))
 
+        return true
+
     } catch (err) {
         console.log('error saving schema', err)
     }
 }
 
-module.exports = { saveSchema }
+runSaga({
+    context: { api }
+}, saveSchemaSaga).toPromise().then(() => {
+    console.log('schema saved!')
+})

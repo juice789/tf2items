@@ -1,8 +1,11 @@
-const { runSaga } = require('redux-saga')
-const { saveSchema } = require('./saveSchema.js')
-const options = require('./options.json')
-const api = require('./api.js')(options)
+const helperObjects = require('./schemaHelper.json')
+const items = require('./schemaItems.js')
+const sku = require('./sku.js')
+const skuBp = require('./skuBp.js')
 
-runSaga({
-    context: { api }
-}, saveSchema)
+module.exports = {
+    ...helperObjects,
+    ...items,
+    ...sku,
+    ...skuBp
+}

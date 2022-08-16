@@ -29,38 +29,85 @@ const {
     values,
     indexOf,
     replace,
-    trim
+    trim,
+    reduce,
+    nth,
+    split,
+    propSatisfies,
+    pathEq,
+    complement,
+    either,
+    concat
 } = require('ramda')
 
-const { safeItems: items } = require('.schemaItems.js')
+const { safeItems: items } = require('./schemaItems.js')
 const { particleEffects: effects, textures } = require('./schema.json')
 const { qualityNames: qualities, wears } = require('./schemaHelper.json')
 const { skuFromItem } = require('./sku.js')
+const { renameKeys } = require('ramda-adjunct')
 
-const marketHashIncludes = curry((string, item) => item.market_hash_name.indexOf(string) !== -1)
+const marketHashIncludes = curry((string, { market_hash_name }) => market_hash_name.indexOf(string) !== -1)
+
+const removeStrings = curry((string, strings) => compose(
+    trim,
+    replace(/\s\s+/g, ' '),
+    reduce((all, curr) => replace(curr, '', all), string)(strings)
+))
 
 const findTag = uncurryN(2, (tagName) => compose(
     prop('name'),
-    find(({ category_name }) => toLower(category_name) === toLower(tagName)),
+    find(propEq('category_name', tagName)),
+    map(renameKeys({
+        localized_category_name: 'category_name',
+        localized_tag_name: 'name'
+    })),
     prop('tags')
 ))
 
-const old_id = ifElse(has('new_assetid'), prop('assetid'), always(undefined))
-
-const id = chain(propOr(__, 'new_assetid'), prop('assetid'))
-
-const recipe = ({ market_hash_name }) => find(
-    includes(__, market_hash_name),
-    ['Fabricator', 'Strangifier Chemistry Set', 'Chemistry Set']
+const old_id = ifElse(
+    has('new_assetid'),
+    prop('assetid'),
+    always(null)
 )
 
-const series = ({ market_hash_name }) => indexOf('Chemistry', market_hash_name) >= 0
-    ? undefined
-    : market_hash_name.split('#')[1]
+const id = chain(
+    propOr(__, 'new_assetid'),
+    prop('assetid')
+)
 
-const craft = ({ name, market_hash_name }) => indexOf('#', name) !== -1 && indexOf('#', name) === -1 ? market_hash_name.split('#')[1] : undefined
+const recipe = compose(
+    defaultTo(null),
+    find(__, ['Fabricator', 'Strangifier Chemistry Set', 'Chemistry Set']),
+    flip(marketHashIncludes),
+)
 
-const australium = (item) => item.app_data.quality === '11' && marketHashIncludes('Australium', item)
+const series = ifElse(
+    marketHashIncludes('Chemistry'),
+    compose(
+        nth(1),
+        split('#'),
+        prop('market_hash_name')
+    ),
+    always(null)
+)
+
+const craft = ifElse(
+    allPass([
+        propSatisfies(includes('#'), 'name'),
+        propSatisfies(complement(includes)('#'), 'market_hash_name'),
+    ]),
+    compose(
+        nth(1),
+        split('#'),
+        prop('market_hash_name')
+    ),
+    always(null)
+)
+
+const australium = allPass([
+    pathEq(['app_data', 'quality'], '11'),
+    marketHashIncludes('Australium')
+])
 
 const wear = compose(
     propOr(null, __, invertObj(wears)),
@@ -68,16 +115,14 @@ const wear = compose(
     replace(/\s\s+/g, ' '),
     reduce((all, curr) => replace(curr, '', all), __, ['(', ')']),
     defaultTo(''),
-    findTag('exterior')
+    findTag('Exterior')
 )
 
 const texture = ifElse(
-    findTag('exterior'),
+    findTag('Exterior'),
     compose(
-        propOr('NaN', __, invertObj(textures)),
-        trim,
-        replace(/\s\s+/g, ' '),
-        ({ app_data, market_hash_name }) => reduce((all, curr) => replace(curr, '', all), market_hash_name, [
+        propOr('-1', __, invertObj(textures)),
+        ({ app_data, market_hash_name }) => removeStrings(market_hash_name, [
             "Specialized Killstreak",
             "Professional Killstreak",
             "Killstreak",
@@ -105,32 +150,29 @@ const killstreakTier = compose(
 
 const effect = ifElse(
     allPass([
-        compose(equals('5'), path(['app_data', 'quality'])),
+        pathEq(['app_data', 'quality'], '5'),
         compose(
-            find(compose(equals('ffd700'), prop('color'))),
+            find(propEq('color', 'ffd700')),
             prop('descriptions')
         )
     ]),
     compose(
-        propOr('NaN', __, invertObj(effects)),
+        propOr('-1', __, invertObj(effects)),
         replace('★ Unusual Effect: ', ''),
         prop('value'),
-        find(compose(equals('ffd700'), prop('color'))),
+        find(propEq('color', 'ffd700')),
         prop('descriptions')
     ),
     always(null)
 )
 
-const elevated = ({ app_data, market_hash_name }) => app_data.quality === '11'
-    ? false
-    : includes(
-        'Strange',
-        replace(
-            items[app_data.def_index].item_name,
-            '',
-            market_hash_name
-        )
+const elevated = allPass([
+    complement(pathEq)(['app_data', 'quality'], '11'),
+    compose(
+        includes('Strange'),
+        ({ app_data, market_hash_name }) => replace(items[app_data.def_index].item_name, '', market_hash_name)
     )
+])
 
 const uncraftable = compose(
     Boolean,
@@ -140,9 +182,9 @@ const uncraftable = compose(
 
 const market_hash_name = prop('market_hash_name')
 
-const quality = pathOr('99', ['app_data', 'quality'])
+const quality = pathOr('-1', ['app_data', 'quality'])
 
-const defindex = pathOr('0', ['app_data', 'def_index'])
+const defindex = pathOr('-1', ['app_data', 'def_index'])
 
 const propsTf2_1 = {
     defindex,
@@ -163,42 +205,45 @@ const propsTf2_1 = {
     old_id
 }
 
-const isTarget = (market_hash_name) =>
-    find(includes(__, market_hash_name), ['Strangifier', 'Fabricator', 'Strangifier Chemistry Set', 'Unusualifier']) ||
-    (indexOf('Killstreak', market_hash_name) >= 0 && indexOf('Kit', market_hash_name) >= 0)
+const isTarget = either(
+    compose(
+        find(__, ['Strangifier', 'Fabricator', 'Strangifier Chemistry Set', 'Unusualifier']),
+        flip(marketHashIncludes),
+    ),
+    allPass([
+        marketHashIncludes('Kit'),
+        marketHashIncludes('Killstreak')
+    ])
+)
 
-const target = ({ defindex, market_hash_name }) => {
-
-    if (isTarget(market_hash_name)) {
-
-        const itemName = compose(
-            trim,
-            replace(/\s\s+/g, ' '),
-            reduce((all, curr) => replace(curr, '', all), __, [
-                'Strangifier',
-                'Unusual',
-                'Unusualifier',
-                items[defindex].item_name,
-                "Specialized Killstreak",
-                "Professional Killstreak",
-                "Killstreak",
-                "Collector's",
-                "Series",
-                'Kit',
-                'Fabricator',
-                'Chemistry Set',
-                "#1",
-                "#2",
-                "#3"
-            ]),
-        )(market_hash_name)
-
-        return find(
-            ({ item_quality, item_name }) => ![0, 15].includes(item_quality) && item_name === itemName,
-            values(items)
-        ).defindex
-    }
-}
+const target = ifElse(
+    isTarget,
+    compose(
+        propOr(null, 'defindex'),
+        find(__, values(items)),
+        allPass,
+        concat([propSatisfies(includes(__, [0, 15]), 'item_quality')]),
+        propEq('item_name'),
+        ({ market_hash_name, defindex }) => removeStrings(market_hash_name, [
+            'Strangifier',
+            'Unusual',
+            'Unusualifier',
+            items[defindex].item_name,
+            "Specialized Killstreak",
+            "Professional Killstreak",
+            "Killstreak",
+            "Collector's",
+            "Series",
+            'Kit',
+            'Fabricator',
+            'Chemistry Set',
+            "#1",
+            "#2",
+            "#3"
+        ])
+    ),
+    always(null)
+)
 
 const output = ({ recipe, market_hash_name, killstreakTier }) => {
     switch (recipe) {
@@ -211,22 +256,22 @@ const output = ({ recipe, market_hash_name, killstreakTier }) => {
         case 'Strangifier Chemistry Set':
             return 6522
         case 'Chemistry Set':
-            const itemName = compose(
-                trim,
-                replace(/\s\s+/g, ' '),
-                reduce((all, curr) => replace(curr, '', all), __, [
-                    'Chemistry Set',
-                    "Collector's",
-                ]),
+            return compose(
+                propOr(null, 'defindex'),
+                find(__, values(items)),
+                allPass,
+                concat([propSatisfies(includes(__, [0, 15]), 'item_quality')]),
+                propEq('item_name'),
+                removeStrings(__, ['Chemistry Set', "Collector's"])
             )(market_hash_name)
-            return find(
-                ({ item_quality, item_name }) => ![0, 15].includes(item_quality) && item_name === itemName,
-                values(items)).defindex
-        default: return undefined
+        default:
+            return null
     }
 }
 
-const oq = ({ market_hash_name, recipe }) => recipe ? includes("Collector's", market_hash_name) ? '14' : '6' : undefined
+const oq = ({ market_hash_name, recipe }) => recipe
+    ? includes("Collector's", market_hash_name) ? '14' : '6'
+    : null
 
 const propsTf2_2 = {
     target,
@@ -241,7 +286,10 @@ const propsOtherGame = {
 }
 
 const keyRemap = when(
-    compose(includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']), prop('defindex')),
+    compose(
+        includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']),
+        prop('defindex')
+    ),
     compose(
         assoc('defindex', '5021'),
         assoc('uncraftable', false)

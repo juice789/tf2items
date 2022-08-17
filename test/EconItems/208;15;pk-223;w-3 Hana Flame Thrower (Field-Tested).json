@@ -1,0 +1,192 @@
+{
+    "econItem": {
+        "appid": 440,
+        "assetid": "11519197731",
+        "classid": "2651218168",
+        "instanceid": "4591766456",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEMaQkUTxr2vTx8mMnvA-aHAfQ_ktk664MayTdinxVwPffnYmRYexDHDPIOBMot8Qn-WmlkvMI6BNK19rkDeFi8s4KVMeUlN4tKTsCBU_SHMlr-u0w6gaFZfpGJvmqxihD650u8",
+        "icon_url_large": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEMaQkUTxr2vTx8mMnvA-aHAfQ_ktk664MayTdinxVwPffnYmRYexDHDPIOBMot8Qn-WmlkvMI6BNK19rkDeFi8s4KVMeUlN4tKTsCBU_SHMlr-u0w6gaFZfpGJvmqxihD650u8",
+        "descriptions": [
+            {
+                "value": "Commando Grade Flame Thrower (Field-Tested)",
+                "color": "8847ff"
+            },
+            {
+                "value": "Extinguishing teammates restores 20 health",
+                "color": "7ea9d1"
+            },
+            {
+                "value": "Afterburn reduces Medi Gun healing and resist shield effects.\nAlt-Fire: Release a blast of air that pushes enemies and projectiles and extinguishes teammates that are on fire."
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "Winter 2017 Collection"
+            },
+            {
+                "value": "    Miami Element War Paint",
+                "color": "eb4b4b"
+            },
+            {
+                "value": "    Jazzy War Paint",
+                "color": "d32ce6"
+            },
+            {
+                "value": "    Mosaic War Paint",
+                "color": "d32ce6"
+            },
+            {
+                "value": "    Cosmic Calamity War Paint",
+                "color": "8847ff"
+            },
+            {
+                "value": "✔ Hana War Paint",
+                "color": "8847ff"
+            },
+            {
+                "value": "    Uranium War Paint",
+                "color": "8847ff"
+            },
+            {
+                "value": "    Neo Tokyo War Paint",
+                "color": "8847ff"
+            },
+            {
+                "value": "    Hazard Warning War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Damascus and Mahogany War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Dovetailed War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Alien Tech War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Cabin Fevered War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Polar Surprise War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Bomber Soul War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Geometrical Teams War Paint",
+                "color": "4b69ff"
+            }
+        ],
+        "tradable": 1,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=208&lang=en_US",
+                "name": "Item Wiki Page..."
+            },
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D778069724308267234",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "name": "Hana Flame Thrower",
+        "name_color": "FAFAFA",
+        "type": "",
+        "market_name": "Hana Flame Thrower (Field-Tested)",
+        "market_hash_name": "Hana Flame Thrower (Field-Tested)",
+        "market_actions": [
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D778069724308267234",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "commodity": 0,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 1,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "paintkitweapon",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Decorated Weapon",
+                "color": "FAFAFA"
+            },
+            {
+                "category": "Type",
+                "internal_name": "primary",
+                "localized_category_name": "Type",
+                "localized_tag_name": "Primary weapon"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Pyro",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Pyro"
+            },
+            {
+                "category": "Exterior",
+                "internal_name": "TFUI_InvTooltip_FieldTested",
+                "localized_category_name": "Exterior",
+                "localized_tag_name": "Field-Tested"
+            }
+        ],
+        "app_data": {
+            "def_index": "208",
+            "quality": "15",
+            "slot": "Primary weapon",
+            "filter_data": {
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "7"
+                    }
+                },
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "0"
+                    }
+                }
+            },
+            "player_class_ids": {
+                "0": "7"
+            },
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "208;15;pk-223;w-3",
+        "defindex": "208",
+        "quality": "15",
+        "market_hash_name": "Hana Flame Thrower (Field-Tested)",
+        "uncraftable": false,
+        "elevated": false,
+        "effect": null,
+        "killstreakTier": null,
+        "festivized": false,
+        "texture": "223",
+        "wear": "3",
+        "australium": false,
+        "series": null,
+        "craft": null,
+        "recipe": null,
+        "id": "11519197731",
+        "old_id": null,
+        "target": null,
+        "output": null,
+        "oq": null
+    }
+}

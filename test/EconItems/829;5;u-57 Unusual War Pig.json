@@ -1,0 +1,121 @@
+{
+    "econItem": {
+        "appid": 440,
+        "assetid": "11857456973",
+        "classid": "171217924",
+        "instanceid": "173275477",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdEH9myp0erksICfTae6NMEp5nqWSMU5OD2NoNlycPmihXOjLx2Sk5MbUqMcbBnQz4ruyeU2f4ZDPNKjPmC196DeoJWjSIvGTw--iREDjBFesoFlhXevBXpzAYacyAPURo049armfqzkF7RkItI5NAJQz12noUsIkyxyM",
+        "icon_url_large": "IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdEH9myp0erksICfTae6NMEp5nqWSMU5OD2NoNlycPmihXOjLx2Sk5MbUqMcbBnQz4ruyeU2f4ZDPNKjPmC196DeoJWjSIvGTw--iREDjBFesoFlhXevBXpzAYacyAPURo049armfqzkF7RkItI5NAJQz12noUsIkyxyM",
+        "descriptions": [
+            {
+                "value": "Style: Uninhibited",
+                "color": "756b5e"
+            },
+            {
+                "value": "Paint Color: The Bitter Taste of Defeat and Lime",
+                "color": "756b5e"
+            },
+            {
+                "value": "★ Unusual Effect: Terror-Watt",
+                "color": "ffd700"
+            },
+            {
+                "value": "After complaints that obstructed vision was affecting his performance, Soldier slapped some goggles on a helmet and charged back into the fray. His performance did not improve, but on the upside, everyone has stopped expecting anything from him."
+            }
+        ],
+        "tradable": 1,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=829&lang=en_US",
+                "name": "Item Wiki Page..."
+            },
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D777610456180177707",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "name": "Unusual War Pig",
+        "name_color": "8650AC",
+        "type": "Level 43 Headgear",
+        "market_name": "Unusual War Pig",
+        "market_hash_name": "Unusual War Pig",
+        "market_actions": [
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D777610456180177707",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "commodity": 0,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 1,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "rarity4",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Unusual",
+                "color": "8650AC"
+            },
+            {
+                "category": "Type",
+                "internal_name": "misc",
+                "localized_category_name": "Type",
+                "localized_tag_name": "Cosmetic"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Soldier",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Soldier"
+            }
+        ],
+        "app_data": {
+            "def_index": "829",
+            "quality": "5",
+            "slot": "Cosmetic",
+            "filter_data": {
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "3"
+                    }
+                },
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "8"
+                    }
+                }
+            },
+            "player_class_ids": {
+                "0": "3"
+            },
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "829;5;u-57",
+        "defindex": "829",
+        "quality": "5",
+        "market_hash_name": "Unusual War Pig",
+        "uncraftable": false,
+        "elevated": false,
+        "effect": "57",
+        "killstreakTier": null,
+        "festivized": false,
+        "texture": null,
+        "wear": null,
+        "australium": false,
+        "series": null,
+        "craft": null,
+        "recipe": null,
+        "id": "11857456973",
+        "old_id": null,
+        "target": null,
+        "output": null,
+        "oq": null
+    }
+}

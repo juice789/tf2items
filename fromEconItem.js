@@ -5,11 +5,9 @@ const {
     propOr,
     find,
     flip,
-    equals,
     map,
     when,
     unary,
-    toLower,
     allPass,
     propEq,
     uncurryN,
@@ -22,12 +20,10 @@ const {
     defaultTo,
     applyTo,
     assoc,
-    path,
     pathOr,
     invertObj,
     mergeRight,
     values,
-    indexOf,
     replace,
     trim,
     reduce,
@@ -37,7 +33,8 @@ const {
     pathEq,
     complement,
     either,
-    concat
+    concat,
+    of,
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
@@ -51,8 +48,8 @@ const marketHashIncludes = curry((string, { market_hash_name }) => market_hash_n
 const removeStrings = curry((string, strings) => compose(
     trim,
     replace(/\s\s+/g, ' '),
-    reduce((all, curr) => replace(curr, '', all), string)(strings)
-))
+    reduce((all, curr) => replace(curr, '', all), string)
+)(strings))
 
 const findTag = uncurryN(2, (tagName) => compose(
     prop('name'),
@@ -61,7 +58,7 @@ const findTag = uncurryN(2, (tagName) => compose(
         localized_category_name: 'category_name',
         localized_tag_name: 'name'
     })),
-    prop('tags')
+    propOr([], 'tags')
 ))
 
 const old_id = ifElse(
@@ -123,16 +120,16 @@ const texture = ifElse(
     compose(
         propOr('-1', __, invertObj(textures)),
         ({ app_data, market_hash_name }) => removeStrings(market_hash_name, [
-            "Specialized Killstreak",
-            "Professional Killstreak",
-            "Killstreak",
-            "(Field-Tested)",
-            "(Well-Worn)",
-            "(Battle Scarred)",
-            "(Minimal Wear)",
-            "(Factory New)",
-            "Festivized",
-            "Strange",
+            'Specialized Killstreak',
+            'Professional Killstreak',
+            'Killstreak',
+            '(Field-Tested)',
+            '(Well-Worn)',
+            '(Battle Scarred)',
+            '(Minimal Wear)',
+            '(Factory New)',
+            'Festivized',
+            'Strange',
             qualities[app_data.quality],
             items[app_data.def_index].item_name
         ])
@@ -143,7 +140,7 @@ const texture = ifElse(
 const festivized = marketHashIncludes('Festivized')
 
 const killstreakTier = compose(
-    propOr(null, __, { 'Professional Killstreak': 3, 'Specialized Killstreak': 2, 'Killstreak': 1 }),
+    propOr(null, __, { 'Professional Killstreak': '3', 'Specialized Killstreak': '2', 'Killstreak': '1' }),
     find(__, ['Professional Killstreak', 'Specialized Killstreak', 'Killstreak']),
     flip(marketHashIncludes)
 )
@@ -153,7 +150,7 @@ const effect = ifElse(
         pathEq(['app_data', 'quality'], '5'),
         compose(
             find(propEq('color', 'ffd700')),
-            prop('descriptions')
+            propOr([], 'descriptions')
         )
     ]),
     compose(
@@ -161,7 +158,7 @@ const effect = ifElse(
         replace('★ Unusual Effect: ', ''),
         prop('value'),
         find(propEq('color', 'ffd700')),
-        prop('descriptions')
+        propOr([], 'descriptions')
     ),
     always(null)
 )
@@ -177,7 +174,7 @@ const elevated = allPass([
 const uncraftable = compose(
     Boolean,
     find(propEq('value', '( Not Usable in Crafting )')),
-    prop('descriptions')
+    propOr([], 'descriptions')
 )
 
 const market_hash_name = prop('market_hash_name')
@@ -219,27 +216,28 @@ const isTarget = either(
 const target = ifElse(
     isTarget,
     compose(
-        propOr(null, 'defindex'),
+        propOr('-1', 'defindex'),
         find(__, values(items)),
         allPass,
-        concat([propSatisfies(includes(__, [0, 15]), 'item_quality')]),
+        concat([propSatisfies(complement(includes)(__, [0, 15]), 'item_quality')]),
+        of,
         propEq('item_name'),
         ({ market_hash_name, defindex }) => removeStrings(market_hash_name, [
             'Strangifier',
             'Unusual',
             'Unusualifier',
             items[defindex].item_name,
-            "Specialized Killstreak",
-            "Professional Killstreak",
-            "Killstreak",
+            'Specialized Killstreak',
+            'Professional Killstreak',
+            'Killstreak',
             "Collector's",
-            "Series",
+            'Series',
             'Kit',
             'Fabricator',
             'Chemistry Set',
-            "#1",
-            "#2",
-            "#3"
+            '#1',
+            '#2',
+            '#3'
         ])
     ),
     always(null)
@@ -249,18 +247,19 @@ const output = ({ recipe, market_hash_name, killstreakTier }) => {
     switch (recipe) {
         case 'Fabricator':
             const ktMap = {
-                '2': 6523,
-                '3': 6526
+                '2': '6523',
+                '3': '6526'
             }
             return ktMap[killstreakTier]
         case 'Strangifier Chemistry Set':
-            return 6522
+            return '6522'
         case 'Chemistry Set':
             return compose(
-                propOr(null, 'defindex'),
+                propOr('-1', 'defindex'),
                 find(__, values(items)),
                 allPass,
-                concat([propSatisfies(includes(__, [0, 15]), 'item_quality')]),
+                concat([propSatisfies(complement(includes)(__, [0, 15]), 'item_quality')]),
+                of,
                 propEq('item_name'),
                 removeStrings(__, ['Chemistry Set', "Collector's"])
             )(market_hash_name)
@@ -276,7 +275,7 @@ const oq = ({ market_hash_name, recipe }) => recipe
 const propsTf2_2 = {
     target,
     output,
-    oq,
+    oq
 }
 
 const propsOtherGame = {

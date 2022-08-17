@@ -1,0 +1,109 @@
+{
+    "econItem": {
+        "appid": 440,
+        "assetid": "11923307175",
+        "classid": "83",
+        "instanceid": "0",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEfbQAuURrwvz0N3Z6xX6ffDLhUy9xj5skA3GZolFkqYbCxNW4xcVbDBaEHBfY891zuDWki5sDLBQ4iqw",
+        "icon_url_large": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEfbQAuURrwvz0N3Z6xX6ffDLhUy9xj5skA3GZolFkqYbCxNW4xcVbDBaEHBfY891zuDWki5sDLBQ4iqw",
+        "descriptions": [
+            {
+                "value": "Changes the name of an item in your backpack"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "This is a limited use item. Uses: 1",
+                "color": "00a000"
+            }
+        ],
+        "tradable": 1,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=5020&lang=en_US",
+                "name": "Item Wiki Page..."
+            }
+        ],
+        "name": "Name Tag",
+        "name_color": "7D6D00",
+        "type": "Level 1 Tool",
+        "market_name": "Name Tag",
+        "market_hash_name": "Name Tag",
+        "commodity": 1,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 1,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "Unique",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Unique",
+                "color": "7D6D00"
+            },
+            {
+                "category": "Type",
+                "internal_name": "TF_T",
+                "localized_category_name": "Type",
+                "localized_tag_name": "Tool"
+            }
+        ],
+        "app_data": {
+            "limited": "1",
+            "quantity": "1",
+            "def_index": "5020",
+            "quality": "6",
+            "containing_bundles": {
+                "0": "2146",
+                "1": "2147",
+                "2": "2148",
+                "3": "2149",
+                "4": "2150",
+                "5": "2151",
+                "6": "2152",
+                "7": "2153",
+                "8": "2154"
+            },
+            "filter_data": {
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757"
+                    }
+                },
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "4294967295"
+                    }
+                }
+            },
+            "player_class_ids": "",
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "5020;6",
+        "defindex": "5020",
+        "quality": "6",
+        "market_hash_name": "Name Tag",
+        "uncraftable": false,
+        "elevated": false,
+        "effect": null,
+        "killstreakTier": null,
+        "festivized": false,
+        "texture": null,
+        "wear": null,
+        "australium": false,
+        "series": null,
+        "craft": null,
+        "recipe": null,
+        "id": "11923307175",
+        "old_id": null,
+        "target": null,
+        "output": null,
+        "oq": null
+    }
+}

@@ -1,0 +1,104 @@
+{
+    "econItem": {
+        "appid": 440,
+        "assetid": "9377519477",
+        "classid": "780611776",
+        "instanceid": "11040578",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEMZQEFXAv3tCx8hMn0CvfCULYEzoNi4cEBiDI5yQMoZLqwZWAyIlbEAqIGD_M79QnuWHYx7JRgAJmm-bwEUYDlWQ",
+        "icon_url_large": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEMZQEFXAv3tCx8hMn0CvfCULYEzoNi4cEBiDI5yQMoZLqwZWAyIlbEAqIGD_M79QnuWHYx7JRgAJmm-bwEUYDlWQ",
+        "descriptions": [
+            {
+                "value": "Can be used to wrap one item for gifting. The gift will be distributed to a random Steam user currently playing TF2."
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "This is a limited use item. Uses: 1",
+                "color": "00a000"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "( Not Usable in Crafting )"
+            }
+        ],
+        "tradable": 1,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=5083&lang=en_US",
+                "name": "Item Wiki Page..."
+            }
+        ],
+        "name": "Giftapult",
+        "name_color": "7D6D00",
+        "type": "Level 5 Tool",
+        "market_name": "Giftapult",
+        "market_hash_name": "Giftapult",
+        "commodity": 0,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 1,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "Unique",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Unique",
+                "color": "7D6D00"
+            },
+            {
+                "category": "Type",
+                "internal_name": "TF_T",
+                "localized_category_name": "Type",
+                "localized_tag_name": "Tool"
+            }
+        ],
+        "app_data": {
+            "limited": "1",
+            "quantity": "1",
+            "def_index": "5083",
+            "quality": "6",
+            "filter_data": {
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757"
+                    }
+                },
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "4294967295"
+                    }
+                }
+            },
+            "player_class_ids": "",
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "5083;6;uncraftable",
+        "defindex": "5083",
+        "quality": "6",
+        "market_hash_name": "Giftapult",
+        "uncraftable": true,
+        "elevated": false,
+        "effect": null,
+        "killstreakTier": null,
+        "festivized": false,
+        "texture": null,
+        "wear": null,
+        "australium": false,
+        "series": null,
+        "craft": null,
+        "recipe": null,
+        "id": "9377519477",
+        "old_id": null,
+        "target": null,
+        "output": null,
+        "oq": null
+    }
+}

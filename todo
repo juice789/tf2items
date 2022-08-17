@@ -2,11 +2,6 @@ preview resets the add item form but not the state
 add button labels when responsive
 search button not triggering on icon click
 
-
-strangifier
-unusualifier
-strangifer chem set
-collector chem set
 crates
 key
 pro ks cosmetics
@@ -15,3 +10,4 @@ bacon grease
 generic fabricator
 generic kit
 more test where the item is a normal wep
+dont add series if the market hash includes the # character

@@ -35,6 +35,8 @@ const {
     either,
     concat,
     of,
+    path,
+    equals
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
@@ -78,12 +80,24 @@ const recipe = compose(
     flip(marketHashIncludes),
 )
 
+
 const series = ifElse(
-    marketHashIncludes('Chemistry'),
-    compose(
-        nth(1),
-        split('#'),
-        prop('market_hash_name')
+    compose(equals('Crate'), findTag('Type')),
+    ifElse(
+        marketHashIncludes('#'),
+        compose(
+            defaultTo(null),
+            nth(1),
+            split('#'),
+            prop('market_hash_name')
+        ),
+        compose(
+            defaultTo(null),
+            nth(0),
+            propOr([], 'series'),
+            prop(__, items),
+            path(['app_data', 'def_index'])
+        )
     ),
     always(null)
 )

@@ -1,0 +1,117 @@
+{
+    "econItem": {
+        "appid": 440,
+        "assetid": "11934124004",
+        "classid": "2671387651",
+        "instanceid": "11040671",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdEH9myp0du1AHE66AL6lNU5Fw_2yIWtaMjIpQmjAT3G9DJDbHyXxoWvF-OcjNzQT1st2ZE2H0YDPLOC_mEF96GuZANDrarTulseqTEz2fR-EvFQwBfKRX9WVNOc-PPRM5htYC-jDswxV7Glg4fMIAeQK8m0sLYeB1hnJHdY0LxHPxSdzYiF98b0NqTOG6Ab2tJoGokDEhXRpxRv1NZeTcuSjs5p7xauHXbbhuMPwzq5XB3lsVEsgfUZMthIpIro3nugFKbYE4CWEQEKspMHfQV_3kwyiYWeO6OeNb48QFVVhPHki5kyB8B0p8ua-NYgVHsXsm-_SbsY3umZmfdKnT",
+        "icon_url_large": "IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdEH9myp0du1AHE66AL6lNU5Fw_2yIWtaMjIpQmjAT3G9DJDbHyXxoWvF-OcjNzQT1st2ZE2H0YDPLOC_mEF96GuZANDrarTulseqTEz2fR-EvFQwBfKRX9WVNOc-PPRM5htYC-jDswxV7Glg4fMIAeQK8m0sLYeB1hnJHdY0LxHPxSdzYiF98b0NqTOG6Ab2tJoGokDEhXRpxRv1NZeTcuSjs5p7xauHXbbhuMPwzq5XB3lsVEsgfUZMthIpIro3nugFKbYE4CWEQEKspMHfQV_3kwyiYWeO6OeNb48QFVVhPHki5kyB8B0p8ua-NYgVHsXsm-_SbsY3umZmfdKnT",
+        "descriptions": [
+            {
+                "value": "Used to add Unusual effects to specific items."
+            },
+            {
+                "value": "This Unusualifier can be applied to a Taunt: The Trackman's Touchdown."
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "This is a limited use item. Uses: 1",
+                "color": "00a000"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "( Not Usable in Crafting )"
+            }
+        ],
+        "tradable": 1,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=9258&lang=en_US",
+                "name": "Item Wiki Page..."
+            },
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D2499679677220534014",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "name": "Unusual Taunt: The Trackman's Touchdown Unusualifier",
+        "name_color": "8650AC",
+        "type": "Level 5 Unusualifier",
+        "market_name": "Unusual Taunt: The Trackman's Touchdown Unusualifier",
+        "market_hash_name": "Unusual Taunt: The Trackman's Touchdown Unusualifier",
+        "market_actions": [
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D2499679677220534014",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "commodity": 0,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 1,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "rarity4",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Unusual",
+                "color": "8650AC"
+            },
+            {
+                "category": "Type",
+                "internal_name": "TF_Unusualifier",
+                "localized_category_name": "Type",
+                "localized_tag_name": "Unusualifier"
+            }
+        ],
+        "app_data": {
+            "limited": "1",
+            "quantity": "1",
+            "def_index": "9258",
+            "quality": "5",
+            "filter_data": {
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757"
+                    }
+                },
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "4294967295"
+                    }
+                }
+            },
+            "player_class_ids": "",
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "9258;5;uncraftable;td-30917",
+        "defindex": "9258",
+        "quality": "5",
+        "market_hash_name": "Unusual Taunt: The Trackman's Touchdown Unusualifier",
+        "uncraftable": true,
+        "elevated": false,
+        "effect": null,
+        "killstreakTier": null,
+        "festivized": false,
+        "texture": null,
+        "wear": null,
+        "australium": false,
+        "series": null,
+        "craft": null,
+        "recipe": null,
+        "id": "11934124004",
+        "old_id": null,
+        "target": "30917",
+        "output": null,
+        "oq": null
+    }
+}

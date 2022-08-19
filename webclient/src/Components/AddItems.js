@@ -41,6 +41,11 @@ const Controls = styled.div`
 display:flex;
 `
 
+const FormOuter = styled.div`
+display: ${({ isHidden }) => isHidden ? 'none' : 'flex'};
+flex-direction:column;
+`
+
 const AddItemsActual = () => {
 
     const dispatch = useDispatch()
@@ -105,11 +110,8 @@ const AddItemsActual = () => {
                 </CategoriesOuter>
             }
             <AsideInner>
-                {
-                    previewOpen
-                        ? <Preview />
-                        : category !== '' && <Form key={category + counter} />
-                }
+                {previewOpen && <Preview />}
+                {category !== '' && <FormOuter isHidden={previewOpen}><Form key={category + counter} /></FormOuter>}
             </AsideInner>
         </Aside>
     )

@@ -1,5 +1,5 @@
 const {
-    compose, split, map, reduce, pickBy, mergeRight
+    compose, split, map, reduce, pickBy, mergeRight, converge, concat, of, join, head, tail, filter
 } = require('ramda')
 
 const {
@@ -53,7 +53,7 @@ const skuFromItem = ({
 
 const rules = {
     c: "series",
-    n: "craft",
+    no: "craft",
     kt: "killstreakTier",
     od: "output",
     oq: "oq",
@@ -73,6 +73,8 @@ const decodeRules = compose(
     map(
         compose(
             ([k, value = true]) => ({ [rules[k]]: value }),
+
+            converge(concat, [compose(of, head), compose(filter(Boolean), of, join('-'), tail)]),
             split('-')
         )
     )

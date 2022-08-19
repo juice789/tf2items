@@ -16,9 +16,11 @@ padding: 0 0.5rem;
 justify-content:space-between;
 border: 1px solid #2d2b37;
 user-select:none;
+color: #8a879a;
 position:relative;
 :hover {
     border-color: #6e66a6;
+    color: #e1e0e5;
 }
 > i:last-of-type {
     color: #6e66a6;

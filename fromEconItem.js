@@ -108,9 +108,10 @@ const craft = ifElse(
         propSatisfies(complement(includes)('#'), 'market_hash_name'),
     ]),
     compose(
+        defaultTo(null),
         nth(1),
         split('#'),
-        prop('market_hash_name')
+        prop('name')
     ),
     always(null)
 )
@@ -300,7 +301,7 @@ const propsOtherGame = {
 
 const keyRemap = when(
     compose(
-        includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']),
+        includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']), //old keys that turned into regular keys
         prop('defindex')
     ),
     compose(
@@ -352,10 +353,10 @@ const otherRemap = when(
 )
 
 const remaps = compose(
-    otherRemap,
     promoRemap,
     kitRemap,
-    keyRemap
+    keyRemap,
+    otherRemap
 )
 
 const fromEconItem440 = compose(

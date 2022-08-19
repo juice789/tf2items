@@ -111,15 +111,15 @@ export const Links = ({ sku }) => {
         wear && 'w' + wear,
         texture && 'pk' + texture,
         elevated && 'strange',
+        series && 'c' + series,
+        craft && 'n' + craft,
         uncraftable && 'uncraftable',
         australium && 'australium',
         killstreakTier && 'kt-' + killstreakTier,
         festivized && 'festive',
         target && 'td-' + target,
         output && 'od-' + output,
-        oq && 'oq-' + oq,
-        craft && 'n' + craft,
-        series && 'c' + series
+        oq && 'oq-' + oq
     ].filter(Boolean).join(';')
 
     const manncoUrl = [
@@ -138,7 +138,7 @@ export const Links = ({ sku }) => {
         items[defindex].item_name.replace('\\n', ' '),
         wear && wears[wear],
         chemSeries[defindex] && 'series-' + chemSeries[defindex],
-        series && 'series-' + series
+        series && (!items[defindex].seriesHidden || ['111', '112', '113', '114', '115', '116'].includes(series)) && 'series-' + series
     ].filter(Boolean).join('-').replaceAll(/[^0-9a-zA-Z -]/g, '').replaceAll(' ', '-').toLowerCase()
 
     return (

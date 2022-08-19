@@ -75,6 +75,27 @@ box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 10%) 0px 4px 8px, rgb(0 0 0
 }
 `
 
+const Label = styled.span`
+display:none;
+align-items:center;
+justify-content:flex-start;
+font-size:0.9rem;
+line-height:0;
+flex-grow:1;
+justify-content:center;
+@media (max-width:850px){
+    display:flex
+}
+`
+
+const PlaceHolder = styled.div`
+display:none;
+min-width:3rem;
+@media (max-width:850px){
+    display:flex;
+}
+`
+
 const getChangeCount = compose(
     length,
     keys,
@@ -149,7 +170,7 @@ const HeaderActual = () => {
         <Sort />
         {usePages && <Pages />}
         <Button onClick={() => toggleSearch(!searchOpen)} isOpen={searchOpen}>
-            <SearchIcon onClick={e => isResponsive && e.stopPropagation()} />
+            <SearchIcon onClick={e => {searchOpen && e.stopPropagation()}}/>
             {
                 searchOpen
                     ? <>
@@ -162,18 +183,24 @@ const HeaderActual = () => {
         <Button active={isAsideOpen('changes')} onClick={openAside('changes')}>
             <SyncAltIcon />
             {changeCounter > 0 ? <ChangeCounter>{changeCounter}</ChangeCounter> : null}
+            <Label>Changes</Label>
+            <PlaceHolder />
         </Button>
         <Button
             active={isAsideOpen('settings')}
             onClick={openAside('settings')}
         >
             <CogIcon />
+            <Label>Settings</Label>
+            <PlaceHolder />
         </Button>
         <Button
             active={isAsideOpen('addItems')}
             onClick={openAside('addItems')}
         >
             <PlusIcon />
+            <Label>Add Items</Label>
+            <PlaceHolder />
         </Button>
     </>
 

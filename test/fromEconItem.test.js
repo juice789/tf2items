@@ -46,5 +46,4 @@ it('fromEconItem', () => {
         "oq":null
     }
 }
- 
 */

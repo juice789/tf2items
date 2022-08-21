@@ -1,0 +1,39 @@
+fetchAppDataInventory test
+skuBp.js test
+
+add more functions:
+fromListing
+fromNotification
+toSearchParams
+currency?
+blanket?
+
+
+-- on preview save and reset click, close the preview
+-- add tooltip for use pages
+-- sort defult label click still not working
+-- multi stage select (checkbox)
+
+option 1: 
+
+call the sagas anywhere your redux-saga app + add the api context from the api.js
+
+const { fetchAppDataInventory } = require('@juice789/tf2items')
+
+function* fetchAppDataINvnetorySaga(inventory){
+    const fetched = yield call(fetchAppDataINventry, inventory)
+}
+
+function* fetchInventorySaga(){
+    yielt takeEvery('FETCH_INVENTORY', fetchAppDataInventorySaga)
+}
+
+option 2: 
+
+initialize the library as a module, functions are available as promises
+
+const { getInstance } = require('@juice789/tf2items')
+
+const app = getInstance(options)
+
+app.saveSchema().then(console.log)

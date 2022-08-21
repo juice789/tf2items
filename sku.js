@@ -39,7 +39,7 @@ const skuFromItem = ({
     ['1', true].includes(uncraftable) && 'uncraftable',
     ['1', true].includes(elevated) && 'strange',
     effect && 'u-' + effect,
-    killstreakTier && 'kt-' + killstreakTier,
+    killstreakTier && ['1', '2', '3'].includes(killstreakTier) && 'kt-' + killstreakTier,
     ['1', true].includes(festivized) && 'festive',
     target && 'td-' + target,
     output && 'od-' + output,
@@ -52,19 +52,19 @@ const skuFromItem = ({
 ].filter(Boolean).join(';')
 
 const rules = {
-    c: "series",
-    no: "craft",
+    uncraftable: 'uncraftable',
+    strange: 'elevated',
+    u: "effect",
     kt: "killstreakTier",
+    festive: 'festivized',
+    td: "target",
     od: "output",
     oq: "oq",
     pk: "texture",
-    td: "target",
-    u: "effect",
     w: "wear",
-    festive: 'festivized',
-    strange: 'elevated',
     australium: 'australium',
-    uncraftable: 'uncraftable'
+    c: "series",
+    no: "craft"
 }
 
 const decodeRules = compose(

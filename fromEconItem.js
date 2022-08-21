@@ -40,8 +40,8 @@ const {
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
-const { particleEffects: effects, textures } = require('./schema.json')
-const { qualityNames: qualities, wears } = require('./schemaHelper.json')
+const { particleEffects, textures } = require('./schema.json')
+const { qualityNames, wears } = require('./schemaHelper.json')
 const { skuFromItem } = require('./sku.js')
 const { renameKeys } = require('ramda-adjunct')
 
@@ -145,7 +145,7 @@ const texture = ifElse(
             '(Factory New)',
             'Festivized',
             'Strange',
-            qualities[app_data.quality],
+            qualityNames[app_data.quality],
             items[app_data.def_index].item_name
         ])
     ),
@@ -169,7 +169,7 @@ const effect = ifElse(
         )
     ]),
     compose(
-        propOr('-1', __, invertObj(effects)),
+        propOr('-1', __, invertObj(particleEffects)),
         replace('★ Unusual Effect: ', ''),
         prop('value'),
         find(propEq('color', 'ffd700')),

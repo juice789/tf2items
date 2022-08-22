@@ -1,12 +1,11 @@
-fetchAppDataInventory test
-skuBp.js test
-
 add more functions:
 fromListing
 fromNotification
 toSearchParams
 currency?
 blanket?
+
+--add war paint tests
 
 
 -- on preview save and reset click, close the preview

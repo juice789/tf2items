@@ -106,11 +106,14 @@ const getName = ({
     australium,
     series,
     craft
-}) => [
+},
+    bpTexture = false,
+    qualityBpStyle = false
+) => [
     craft && '#' + craft,
     uncraftable && 'Non-Craftable',
     elevated && 'Strange',
-    quality && !['6', '15'].includes(quality.toString()) && qualityNames[quality],
+    quality && !['6', '15'].includes(quality.toString()) && (qualityBpStyle ? effect : true) && qualityNames[quality],
     oq && oq.toString() !== '6' && qualityNames[oq],
     target && killstreakTier && killstreakTiers[killstreakTier],
     target && safeItems[target].item_name,
@@ -119,6 +122,7 @@ const getName = ({
     festivized && 'Festivized',
     !target && killstreakTier && killstreakTiers[killstreakTier],
     texture && textures[texture],
+    bpTexture && '|',
     australium && 'Australium',
     safeItems[defindex].item_name,
     wear && '(' + wears[wear] + ')',

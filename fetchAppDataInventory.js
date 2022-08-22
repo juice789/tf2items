@@ -34,20 +34,16 @@ const mergeAssetClasses = uncurryN(2, (assetClasses) => compose(
 
 function* fetchAppDataInventory(inventory, d = 1000) {
 
-    let pos = 0
-    let assetClasses = {}
-
+    let p = 0, assetClasses = {}
     const { getAssetClassInfo } = yield getContext('api')
-
     const ids = getAssetClassIds(inventory)
 
-    while (ids.length > 0 && pos < ids.length) {
-        console.log('pulling from', pos, 'ids:', ids.length)
+    while (ids.length > 0 && p < ids.length) {
         yield delay(d)
-        const chunk = getAssetClassQuery(ids.slice(pos, pos + 100))
-        const { result } = yield call(getAssetClassInfo, chunk)
+        const query = getAssetClassQuery(ids.slice(p, p + 100))
+        const { result } = yield call(getAssetClassInfo, query)
         assetClasses = mergeRight(assetClasses, transformAssetClasses(result))
-        pos += 100
+        p += 100
     }
 
     return mergeAssetClasses(assetClasses, inventory)

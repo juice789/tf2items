@@ -1,9 +1,8 @@
 const crypto = require('crypto')
-
 const { safeItems: items } = require('./schemaItems.js')
-const { qualityNames, killstreakTiers, wears } = require('./schemaHelper.json')
-const { particleEffects, textures } = require('./schema.json')
-const { itemFromSku } = require('./sku.js')
+const { qualityNames } = require('./schemaHelper.json')
+const { itemFromSku, getName } = require('./sku.js')
+const { omit } = require('ramda')
 
 const toBpQuality = (sku) => {
 
@@ -29,25 +28,12 @@ const toBpQuality = (sku) => {
 
 const toBpName = (sku) => {
 
-    const {
-        defindex,
-        killstreakTier,
-        festivized,
-        texture,
-        wear,
-        australium
-    } = itemFromSku(sku)
+    const item = omit(
+        ['quality', 'elevated', 'uncraftable', 'craft', 'target', 'output', 'oq'],
+        itemFromSku(sku)
+    )
 
-    return [
-        festivized && 'Festivized',
-        killstreakTier && killstreakTiers[killstreakTier],
-        australium && 'Australium',
-        [
-            texture && textures[texture],
-            items[defindex].item_name.replace('\\n', '%0A')
-        ].filter(Boolean).join(' | '),
-        wear && '(' + wears[wear] + ')'
-    ].filter(Boolean).join(' ')
+    return getName(item, Boolean(item.texture)).replace('\\n', '%0A')
 }
 
 const toBpPriceIndex = (sku) => {
@@ -82,25 +68,14 @@ const listingFromSku = (sku) => {
 }
 
 const toBpSku = (sku) => {
-
-    const {
-        elevated,
-        quality,
-        effect
-    } = itemFromSku(sku)
-
-    return [
-        elevated && 'Strange',
-        !Boolean(['6', '15'].includes(quality) || effect) && qualityNames[quality],
-        effect && particleEffects[effect],
-        toBpName(sku)
-    ].filter(Boolean).join(' ')
+    const item = omit(
+        ['craft'],
+        itemFromSku(sku)
+    )
+    return getName(item, null, Boolean(item.effect))
 }
 
-const toBpId = (sku) => {
-    const bpSku = toBpSku(sku).replace(' | ', ' ')
-    return crypto.createHash('md5').update(bpSku).digest('hex')
-}
+const toBpId = (sku) => crypto.createHash('md5').update(toBpSku(sku)).digest('hex')
 
 module.exports = {
     toBpQuality,

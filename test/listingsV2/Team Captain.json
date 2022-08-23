@@ -1,0 +1,68 @@
+{
+    "listing": {
+        "id": "440_76561198031007256_1a8517883bbf43681bb46e641b9a37cf",
+        "steamid": "76561198031007256",
+        "appid": 440,
+        "currencies": {
+            "metal": 1
+        },
+        "value": {
+            "raw": 1,
+            "short": "1 ref",
+            "long": "1 ref"
+        },
+        "tradeOffersPreferred": true,
+        "buyoutOnly": true,
+        "listedAt": 1661254084,
+        "bumpedAt": 1661254084,
+        "intent": "buy",
+        "count": 1,
+        "status": "active",
+        "source": "user",
+        "item": {
+            "appid": 440,
+            "baseName": "Team Captain",
+            "defindex": 378,
+            "id": "",
+            "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/soldier_officer.f0976b763aa371c65d389d77f5f3429f5a431b5e.png",
+            "marketName": "The Team Captain",
+            "name": "The Team Captain",
+            "origin": null,
+            "originalId": "",
+            "price": {
+                "community": {
+                    "value": 9,
+                    "valueHigh": 9.22,
+                    "currency": "metal",
+                    "raw": 9.11,
+                    "short": "9–9.22 ref",
+                    "long": "$0.25",
+                    "usd": 0.25203749999999997,
+                    "updatedAt": 1661030616,
+                    "difference": -0.27500000000000036
+                },
+                "suggested": {
+                    "raw": 9.11,
+                    "short": "9.11 ref",
+                    "long": "$0.25",
+                    "usd": 0.250525
+                }
+            },
+            "quality": {
+                "id": 6,
+                "name": "Unique",
+                "color": "#FFD700"
+            },
+            "summary": "Level 1-100 Hat",
+            "class": [
+                "Soldier",
+                "Medic",
+                "Heavy"
+            ],
+            "slot": "misc",
+            "tradable": true,
+            "craftable": true
+        }
+    },
+    "expected": "378;6"
+}

@@ -1,0 +1,63 @@
+{
+  "listing": {
+    "id": "440_76561198031007256_3a0f98b134352b5bae3e4ddeda3700da",
+    "steamid": "76561198031007256",
+    "appid": 440,
+    "currencies": {
+      "metal": 1
+    },
+    "value": {
+      "raw": 1,
+      "short": "1 ref",
+      "long": "1 ref"
+    },
+    "tradeOffersPreferred": true,
+    "buyoutOnly": true,
+    "listedAt": 1661254166,
+    "bumpedAt": 1661254167,
+    "intent": "buy",
+    "count": 1,
+    "status": "active",
+    "source": "user",
+    "item": {
+      "appid": 440,
+      "baseName": "Revolver",
+      "defindex": 24,
+      "id": "",
+      "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_revolver.9b4a43c8ce5797a08d0dfb5d9d5bfb1b90928008.png",
+      "marketName": "Strange Professional Killstreak Revolver",
+      "name": "Strange Professional Killstreak Revolver",
+      "origin": null,
+      "originalId": "",
+      "price": {
+        "steam": {
+          "currency": "usd",
+          "short": "$8.88",
+          "long": "322.91 ref, 5.67 keys",
+          "raw": 227.76,
+          "value": 888.0000000000001
+        },
+        "suggested": {
+          "raw": 227.76,
+          "short": "4 keys",
+          "long": "227.76 ref, 4.00 keys, $6.26",
+          "usd": 6.2634
+        }
+      },
+      "quality": {
+        "id": 11,
+        "name": "Strange",
+        "color": "#CF6A32"
+      },
+      "summary": "Level 1 Revolver",
+      "killstreakTier": 3,
+      "class": [
+        "Spy"
+      ],
+      "slot": "secondary",
+      "tradable": true,
+      "craftable": true
+    }
+  },
+  "expected": "210;11;kt-3"
+}

@@ -1,0 +1,87 @@
+{
+  "listing": {
+    "id": "440_76561198031007256_0e00582be25dcdd600ab54d7c65d7d8a",
+    "steamid": "76561198031007256",
+    "appid": 440,
+    "currencies": {
+      "metal": 1
+    },
+    "value": {
+      "raw": 1,
+      "short": "1 ref",
+      "long": "1 ref"
+    },
+    "tradeOffersPreferred": true,
+    "buyoutOnly": true,
+    "listedAt": 1661254233,
+    "bumpedAt": 1661254233,
+    "intent": "buy",
+    "count": 1,
+    "status": "active",
+    "source": "user",
+    "item": {
+      "appid": 440,
+      "baseName": "Anger",
+      "defindex": 518,
+      "id": "",
+      "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/c_bet_brinkhood.16b34cf3a5b777028b11347262fecc6c9fc2ca0e.png",
+      "marketName": "Strange Genuine Anger",
+      "name": "Strange Genuine Anger",
+      "origin": null,
+      "originalId": "",
+      "price": {
+        "steam": {
+          "currency": "usd",
+          "short": "$5.27",
+          "long": "191.64 ref, 3.37 keys",
+          "raw": 135.16837837837835,
+          "value": 527
+        },
+        "community": {
+          "value": 1.7,
+          "valueHigh": 2.5,
+          "currency": "keys",
+          "raw": 119.574,
+          "short": "1.7–2.5 keys",
+          "long": "119.57 ref, $3.29",
+          "usd": 3.6014549999999996,
+          "updatedAt": 1648929175,
+          "difference": 37.24325
+        },
+        "suggested": {
+          "raw": 119.574,
+          "short": "2.1 keys",
+          "long": "119.57 ref, $3.29",
+          "usd": 3.288285
+        }
+      },
+      "quality": {
+        "id": 1,
+        "name": "Genuine",
+        "color": "#4D7455"
+      },
+      "summary": "Level 10 Hood",
+      "elevatedQuality": {
+        "id": 11,
+        "name": "Strange",
+        "color": "#CF6A32"
+      },
+      "class": [
+        "Sniper"
+      ],
+      "slot": "misc",
+      "killEaters": [
+        {
+          "score": 0,
+          "killEater": {
+            "id": 64,
+            "name": "Points Scored"
+          }
+        }
+      ],
+      "tradable": true,
+      "craftable": true
+    }
+  },
+  "expected": "518;1;strange"
+}

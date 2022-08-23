@@ -33,24 +33,23 @@ const {
     toString,
     take,
     uncurryN,
-    is,
-    propSatisfies
+    is
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
 const { textures } = require('./schema.json')
 const { skuFromItem } = require('./sku.js')
 
+const {
+    kitRemap,
+    promoRemap
+} = require('./fromEconItem.js')
+
 const findValue = uncurryN(2, (fns) => compose(
     find(Boolean),
     map(__, fns),
     applyTo
 ))
-
-const {
-    kitRemap,
-    promoRemap
-} = require('./fromEconItem.js')
 
 const defindex = prop('defindex')
 
@@ -307,7 +306,7 @@ const unboxSkinsRemap = chain(
 )
 
 const remapCrateSeries = when(
-    has('series'),
+    compose(Boolean, prop('series')),
     chain(
         compose(
             when(Boolean),
@@ -341,7 +340,7 @@ const remaps = compose(
     remapStrangifier
 )
 
-const fromListing = compose(
+const fromListingV1 = compose(
     skuFromItem,
     remaps,
     map(__, fns),
@@ -355,4 +354,4 @@ const fromListing = compose(
     )
 )
 
-module.exports = { fromListing }
+module.exports = { fromListingV1, remaps }

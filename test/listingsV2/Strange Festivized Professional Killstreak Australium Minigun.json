@@ -1,0 +1,65 @@
+{
+    "listing": {
+        "id": "440_76561198031007256_26145cae200b562931a1d29b1bc1e1bf",
+        "steamid": "76561198031007256",
+        "appid": 440,
+        "currencies": {
+            "metal": 1
+        },
+        "value": {
+            "raw": 1,
+            "short": "1 ref",
+            "long": "1 ref"
+        },
+        "tradeOffersPreferred": true,
+        "buyoutOnly": true,
+        "listedAt": 1661263541,
+        "bumpedAt": 1661263541,
+        "intent": "buy",
+        "count": 1,
+        "status": "active",
+        "source": "user",
+        "item": {
+            "appid": 440,
+            "baseName": "Minigun",
+            "defindex": 202,
+            "id": "",
+            "imageUrl": "/images/440/backpack/weapons/w_models/w_minigun_gold.png",
+            "marketName": "Strange Festivized Professional Killstreak Australium Minigun",
+            "name": "Strange Festivized Professional Killstreak Australium Minigun",
+            "origin": null,
+            "originalId": "",
+            "price": {
+                "steam": {
+                    "currency": "usd",
+                    "short": "$121.16",
+                    "long": "4,405.82 ref, 77.38 keys",
+                    "raw": 3107.5902702702697,
+                    "value": 12116
+                },
+                "suggested": {
+                    "raw": 3107.5902702702697,
+                    "short": "54.58 keys",
+                    "long": "3,107.59 ref, 54.58 keys, $85.46",
+                    "usd": 85.45873243243241
+                }
+            },
+            "quality": {
+                "id": 11,
+                "name": "Strange",
+                "color": "#CF6A32"
+            },
+            "summary": "Level 1 Minigun",
+            "killstreakTier": 3,
+            "class": [
+                "Heavy"
+            ],
+            "slot": "primary",
+            "tradable": true,
+            "festivized": true,
+            "australium": true,
+            "craftable": true
+        }
+    },
+    "expected": "202;11;kt-3;festive;australium"
+}

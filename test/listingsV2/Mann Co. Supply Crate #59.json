@@ -1,0 +1,71 @@
+{
+  "listing": {
+    "id": "440_76561198031007256_bf5842b63588c7f1c8868905b0d60be6",
+    "steamid": "76561198031007256",
+    "appid": 440,
+    "currencies": {
+      "metal": 0.05
+    },
+    "value": {
+      "raw": 0.05,
+      "short": "0.05 ref",
+      "long": "0.05 ref"
+    },
+    "tradeOffersPreferred": true,
+    "buyoutOnly": true,
+    "listedAt": 1661254457,
+    "bumpedAt": 1661254451,
+    "intent": "buy",
+    "count": 1,
+    "status": "active",
+    "source": "user",
+    "item": {
+      "appid": 440,
+      "baseName": "Mann Co. Supply Crate",
+      "defindex": 5022,
+      "id": "",
+      "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/crate.9df00592551b1c9bd94baaf44c99f3abd75fba67.png",
+      "marketName": "Mann Co. Supply Crate Series #59",
+      "name": "Mann Co. Supply Crate #59",
+      "origin": null,
+      "originalId": "",
+      "price": {
+        "steam": {
+          "currency": "usd",
+          "short": "$0.03",
+          "long": "1.09 ref",
+          "raw": 0.7694594594594594,
+          "value": 3
+        },
+        "community": {
+          "value": 0.05,
+          "valueHigh": 0.05,
+          "currency": "metal",
+          "raw": 0.05,
+          "short": "0.05 ref",
+          "long": "$0.0014",
+          "usd": 0.0013750000000000001,
+          "updatedAt": 1529076257,
+          "difference": 0.04
+        },
+        "suggested": {
+          "raw": 0.05,
+          "short": "0.05 ref",
+          "long": "$0.0014",
+          "usd": 0.0013750000000000001
+        }
+      },
+      "quality": {
+        "id": 6,
+        "name": "Unique",
+        "color": "#FFD700"
+      },
+      "summary": "Level 10 Supply Crate",
+      "crateSeries": 59,
+      "tradable": true,
+      "craftable": true,
+      "priceindex": "59"
+    }
+  },
+  "expected": "5045;6;c-59"
+}

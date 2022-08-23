@@ -1,10 +1,10 @@
 const path = require('path')
 const fs = require('fs')
-const ListingsPath = path.join(__dirname, "listings")
+const ListingsPath = path.join(__dirname, "listingsV2")
 
 const tests = []
 
-const override = ["buy Mann Co. Supply Crate #59.json"]
+const override = null
 
 const fileNames = override || fs.readdirSync(ListingsPath)
 
@@ -14,10 +14,10 @@ fileNames.forEach(function (file) {
     tests.push(test)
 })
 
-const { fromListing } = require('../fromListing.js')
+const { fromListingV2 } = require('../fromListingV2.js')
 
-it('fromListing', () => {
-    tests.forEach(({ listing, expected }) => expect(fromListing(listing)).toEqual(expected))
+it('fromListingV2', () => {
+    tests.forEach(({ listing, expected }) => expect(fromListingV2(listing)).toEqual(expected))
 })
 
 /*

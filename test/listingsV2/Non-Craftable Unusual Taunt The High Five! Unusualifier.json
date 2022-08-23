@@ -1,0 +1,140 @@
+{
+  "listing": {
+    "id": "440_76561198031007256_1d74135dbae69d29d0900a8c19d8f915",
+    "steamid": "76561198031007256",
+    "appid": 440,
+    "currencies": {
+      "metal": 1
+    },
+    "value": {
+      "raw": 1,
+      "short": "1 ref",
+      "long": "1 ref"
+    },
+    "tradeOffersPreferred": true,
+    "buyoutOnly": true,
+    "listedAt": 1661254335,
+    "bumpedAt": 1661254335,
+    "intent": "buy",
+    "count": 1,
+    "status": "active",
+    "source": "user",
+    "item": {
+      "appid": 440,
+      "baseName": "Unusualifier",
+      "defindex": 9258,
+      "id": "",
+      "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/unusualifier.f84395e47b1321524ab85c591fa2c213ea5fe031.png",
+      "marketName": "Unusual Taunt: The High Five! Unusualifier",
+      "name": "Non-Craftable Unusual Taunt: The High Five! Unusualifier",
+      "origin": null,
+      "originalId": "",
+      "price": {
+        "steam": {
+          "currency": "usd",
+          "short": "$24.13",
+          "long": "877.45 ref, 15.41 keys",
+          "raw": 618.9018918918918,
+          "value": 2413
+        },
+        "community": {
+          "value": 14,
+          "valueHigh": 22,
+          "currency": "keys",
+          "raw": 1024.92,
+          "short": "14–22 keys",
+          "long": "1,024.92 ref, $28.19",
+          "usd": 31.317,
+          "updatedAt": 1609639991,
+          "difference": 434.19999999999993
+        },
+        "suggested": {
+          "raw": 1024.92,
+          "short": "18 keys",
+          "long": "1,024.92 ref, $28.19",
+          "usd": 28.1853
+        }
+      },
+      "quality": {
+        "id": 5,
+        "name": "Unusual",
+        "color": "#8650AC"
+      },
+      "summary": "Level 5 Unusualifier",
+      "tradable": true,
+      "recipe": {
+        "estimatedCraftingCost": [],
+        "inputItems": [],
+        "outputItem": null,
+        "targetItem": {
+          "itemName": "Taunt: The High Five!",
+          "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/taunt_highfive.972a7efe7534d7854f717077ae69acc31f2f105f.png",
+          "_source": {
+            "_id": "440_167",
+            "name": "High Five Taunt",
+            "defindex": 167,
+            "item_class": "no_entity",
+            "item_type_name": "Special Taunt",
+            "item_name": "Taunt: The High Five!",
+            "item_description": "All Class Taunt\nDon't leave your friends hanging.\n\nThis is a partner taunt. Press the taunt key to toggle.",
+            "proper_name": false,
+            "item_slot": "taunt",
+            "item_quality": 6,
+            "image_inventory": "backpack/player/items/all_class/taunt_highfive",
+            "min_ilevel": 5,
+            "max_ilevel": 5,
+            "image_url": "https://steamcdn-a.akamaihd.net/apps/440/icons/taunt_highfive.972a7efe7534d7854f717077ae69acc31f2f105f.png",
+            "image_url_large": "https://steamcdn-a.akamaihd.net/apps/440/icons/taunt_highfive_large.0ea8630a97774ef5072b276e6bf515eb26fdd90b.png",
+            "capabilities": {
+              "nameable": true,
+              "can_craft_if_purchased": true,
+              "can_gift_wrap": true,
+              "can_craft_count": true,
+              "can_craft_mark": true,
+              "can_be_restored": true,
+              "strange_parts": true,
+              "can_card_upgrade": true,
+              "can_strangify": true,
+              "can_killstreakify": true,
+              "can_consume": true,
+              "can_unusualify": true
+            },
+            "attributes": [
+              {
+                "name": "kill eater score type",
+                "class": "kill_eater_score_type",
+                "value": 100
+              },
+              {
+                "name": "taunt is press and hold",
+                "class": "enable_misc2_holdtaunt",
+                "value": 1
+              },
+              {
+                "name": "taunt attack name",
+                "class": "taunt_attack_name",
+                "value": 0
+              },
+              {
+                "name": "taunt attack time",
+                "class": "taunt_attack_time",
+                "value": 1.899999976158142
+              }
+            ],
+            "first_sale_date": 1318464000,
+            "release_date": 1318528832,
+            "appid": 440,
+            "_keywords": [
+              "Taunt:",
+              "The",
+              "High",
+              "Five"
+            ]
+          }
+        }
+      },
+      "priceindex": "167"
+    }
+  },
+  "expected": "9258;5;uncraftable;td-167"
+}

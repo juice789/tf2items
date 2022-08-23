@@ -1,0 +1,41 @@
+{
+    "listing": {
+        "id": 9417179910,
+        "original_id": 9417083384,
+        "defindex": 5731,
+        "level": 5,
+        "quality": 6,
+        "inventory": 2147484362,
+        "quantity": 1,
+        "origin": 8,
+        "flag_cannot_craft": true,
+        "attributes": [
+            {
+                "defindex": 806,
+                "value": "0.285 0.43 0.35"
+            },
+            {
+                "defindex": 449,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 743,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 2025,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 2012,
+                "value": 1131347968,
+                "float_value": 239
+            }
+        ],
+        "name": "Non-Craftable Killstreak Gloves of Running Urgently Kit"
+    },
+    "expected": "6527;6;uncraftable;kt-1;td-239"
+}

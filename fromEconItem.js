@@ -36,7 +36,8 @@ const {
     concat,
     of,
     path,
-    equals
+    equals,
+    is
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
@@ -302,6 +303,7 @@ const propsOtherGame = {
 const keyRemap = when(
     compose(
         includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']), //old keys that turned into regular keys
+        when(is(Number), toString),
         prop('defindex')
     ),
     compose(
@@ -378,4 +380,8 @@ const fromEconItem = ifElse(
     fromEconItemOther
 )
 
-module.exports = { fromEconItem }
+module.exports = {
+    fromEconItem,
+    kitRemap,
+    promoRemap
+}

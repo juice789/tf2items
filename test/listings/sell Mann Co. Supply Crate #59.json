@@ -1,0 +1,31 @@
+{
+    "listing": {
+        "id": 9398144941,
+        "original_id": 1863763946,
+        "defindex": 5045,
+        "level": 10,
+        "quality": 6,
+        "inventory": 2147483814,
+        "quantity": 1,
+        "origin": 0,
+        "attributes": [
+            {
+                "defindex": 187,
+                "value": 1114374144,
+                "float_value": 59
+            },
+            {
+                "defindex": 2046,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 528,
+                "value": 1167910912,
+                "float_value": 5021
+            }
+        ],
+        "name": "Mann Co. Supply Crate #59"
+    },
+    "expected": "5045;6;c-59"
+}

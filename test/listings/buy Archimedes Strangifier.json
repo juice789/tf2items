@@ -1,0 +1,20 @@
+{
+    "listing": {
+        "defindex": 6522,
+        "quality": 6,
+        "attributes": [
+            {
+                "float_value": "828",
+                "defindex": "2012"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "itrox4rejadai2oek7u9",
+        "quantity": "1",
+        "name": "Archimedes Strangifier"
+    },
+    "expected": "6522;6;td-828"
+}

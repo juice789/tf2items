@@ -1,0 +1,85 @@
+{
+    "listing": {
+        "id": 9099585645,
+        "original_id": 4579492804,
+        "defindex": 15107,
+        "level": 1,
+        "quality": 15,
+        "inventory": 2147483665,
+        "quantity": 1,
+        "origin": 8,
+        "custom_name": "Crack Boulder",
+        "equipped": [
+            {
+                "class": 1,
+                "slot": 0
+            }
+        ],
+        "attributes": [
+            {
+                "defindex": 134,
+                "value": 1143963648,
+                "float_value": 702
+            },
+            {
+                "defindex": 725,
+                "value": 1045220557,
+                "float_value": 0.20000000298023224
+            },
+            {
+                "defindex": 2013,
+                "value": 1157275648,
+                "float_value": 2005
+            },
+            {
+                "defindex": 2014,
+                "value": 1082130432,
+                "float_value": 4
+            },
+            {
+                "defindex": 2025,
+                "value": 1077936128,
+                "float_value": 3
+            },
+            {
+                "defindex": 500,
+                "value": "Crack Boulder"
+            },
+            {
+                "defindex": 724,
+                "value": 1058776547,
+                "float_value": 0.6079999804496765
+            },
+            {
+                "defindex": 796,
+                "value": "10 0 -11"
+            },
+            {
+                "defindex": 719,
+                "value": "models\/weapons\/c_models\/stattrack.mdl"
+            },
+            {
+                "defindex": 731,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 2028,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 749,
+                "value": 1058642330,
+                "float_value": 0.6000000238418579
+            },
+            {
+                "defindex": 834,
+                "value": 72,
+                "float_value": 1.0089348943138683e-43
+            }
+        ],
+        "name": "Isotope Professional Killstreak Flower Power Scattergun (Factory New)"
+    },
+    "expected": "15107;5;u-702;kt-3;pk-72;w-1"
+}

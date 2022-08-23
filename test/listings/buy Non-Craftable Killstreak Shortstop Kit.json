@@ -1,0 +1,25 @@
+{
+    "listing": {
+        "defindex": 6527,
+        "quality": 6,
+        "flag_cannot_craft": true,
+        "attributes": [
+            {
+                "float_value": "1",
+                "defindex": "2025"
+            },
+            {
+                "float_value": "220",
+                "defindex": "2012"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "ye1yxt1aa9p94vn80o3j",
+        "quantity": "1",
+        "name": "Non-Craftable Killstreak Shortstop Kit"
+    },
+    "expected": "6527;6;uncraftable;kt-1;td-220"
+}

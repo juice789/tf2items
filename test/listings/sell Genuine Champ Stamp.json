@@ -1,0 +1,31 @@
+{
+    "listing": {
+        "id": 9337022492,
+        "original_id": 1035211070,
+        "defindex": 836,
+        "level": 1,
+        "quality": 1,
+        "inventory": 2147484201,
+        "quantity": 1,
+        "origin": 13,
+        "attributes": [
+            {
+                "defindex": 746,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 292,
+                "value": 1115684864,
+                "float_value": 64
+            },
+            {
+                "defindex": 388,
+                "value": 1115684864,
+                "float_value": 64
+            }
+        ],
+        "name": "Genuine Champ Stamp"
+    },
+    "expected": "815;1"
+}

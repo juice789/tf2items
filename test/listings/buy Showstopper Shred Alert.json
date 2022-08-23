@@ -1,0 +1,14 @@
+{
+    "listing": {
+        "defindex": 1015,
+        "quality": 5,
+        "attributes": [
+            {
+                "float_value": 3001,
+                "defindex": 134
+            }
+        ],
+        "name": "Showstopper Shred Alert"
+    },
+    "expected": "1015;5;u-3001"
+}

@@ -1,0 +1,121 @@
+{
+    "listing": {
+        "id": 8968302328,
+        "original_id": 7617943322,
+        "defindex": 205,
+        "level": 8,
+        "quality": 11,
+        "inventory": 2147483810,
+        "quantity": 1,
+        "origin": 20,
+        "custom_name": "Gold mine",
+        "custom_desc": "An explosion of gold",
+        "equipped": [
+            {
+                "class": 3,
+                "slot": 0
+            }
+        ],
+        "style": 1,
+        "attributes": [
+            {
+                "defindex": 211,
+                "value": 1594537200,
+                "float_value": 9.99487735583264e+18
+            },
+            {
+                "defindex": 214,
+                "value": 5059,
+                "float_value": 7.08916893101925e-42
+            },
+            {
+                "defindex": 379,
+                "value": 341,
+                "float_value": 4.778427763347626e-43
+            },
+            {
+                "defindex": 380,
+                "value": 1097859072,
+                "float_value": 15
+            },
+            {
+                "defindex": 381,
+                "value": 899,
+                "float_value": 1.2597673194280105e-42
+            },
+            {
+                "defindex": 382,
+                "value": 1118830592,
+                "float_value": 88
+            },
+            {
+                "defindex": 383,
+                "value": 27811,
+                "float_value": 3.897151159133749e-41
+            },
+            {
+                "defindex": 384,
+                "value": 1119617024,
+                "float_value": 94
+            },
+            {
+                "defindex": 542,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 2014,
+                "value": 1086324736,
+                "float_value": 6
+            },
+            {
+                "defindex": 2022,
+                "value": 1073741824,
+                "float_value": 2
+            },
+            {
+                "defindex": 2025,
+                "value": 1073741824,
+                "float_value": 2
+            },
+            {
+                "defindex": 2027,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 2053,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 500,
+                "value": "Gold mine"
+            },
+            {
+                "defindex": 501,
+                "value": "An explosion of gold"
+            },
+            {
+                "defindex": 719,
+                "value": "models\/weapons\/c_models\/stattrack.mdl"
+            },
+            {
+                "defindex": 731,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 724,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 796,
+                "value": "10 -3 -10"
+            }
+        ],
+        "name": "Strange Festivized Specialized Killstreak Australium Rocket Launcher"
+    },
+    "expected": "205;11;kt-2;festive;australium"
+}

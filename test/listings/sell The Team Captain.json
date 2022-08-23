@@ -1,0 +1,31 @@
+{
+    "listing": {
+        "id": 9382306181,
+        "original_id": 9074956497,
+        "defindex": 378,
+        "level": 80,
+        "quality": 6,
+        "inventory": 2147484431,
+        "quantity": 1,
+        "origin": 0,
+        "attributes": [
+            {
+                "defindex": 746,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 292,
+                "value": 1115684864,
+                "float_value": 64
+            },
+            {
+                "defindex": 388,
+                "value": 1115684864,
+                "float_value": 64
+            }
+        ],
+        "name": "The Team Captain"
+    },
+    "expected": "378;6"
+}

@@ -1,0 +1,25 @@
+{
+    "listing": {
+        "defindex": 6523,
+        "quality": 6,
+        "flag_cannot_craft": true,
+        "attributes": [
+            {
+                "float_value": "2",
+                "defindex": "2025"
+            },
+            {
+                "float_value": "239",
+                "defindex": "2012"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "ye1yxt1aa9p94vn80o3j",
+        "quantity": "1",
+        "name": "Non-Craftable Specialized Killstreak Gloves of Running Urgently Kit"
+    },
+    "expected": "6523;6;uncraftable;kt-2;td-239"
+}

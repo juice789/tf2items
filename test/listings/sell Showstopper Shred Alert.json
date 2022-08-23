@@ -1,0 +1,40 @@
+{
+    "listing": {
+        "id": 9193040613,
+        "original_id": 2203112229,
+        "defindex": 1015,
+        "level": 5,
+        "quality": 5,
+        "inventory": 2147483656,
+        "quantity": 1,
+        "origin": 2,
+        "attributes": [
+            {
+                "defindex": 2041,
+                "value": 3001,
+                "float_value": 4.205296691438776e-42
+            },
+            {
+                "defindex": 746,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 292,
+                "value": 1120403456,
+                "float_value": 100
+            },
+            {
+                "defindex": 556,
+                "value": "TAUNTATK_ALLCLASS_GUITAR_RIFF"
+            },
+            {
+                "defindex": 557,
+                "value": 0,
+                "float_value": 0
+            }
+        ],
+        "name": "Showstopper Shred Alert"
+    },
+    "expected": "1015;5;u-3001"
+}

@@ -1,0 +1,126 @@
+{
+    "listing": {
+        "id": 9166089294,
+        "original_id": 1344057239,
+        "defindex": 594,
+        "level": 10,
+        "quality": 11,
+        "inventory": 2147484255,
+        "quantity": 1,
+        "origin": 2,
+        "custom_desc": "pinkie pie is right behind you",
+        "flag_cannot_craft": true,
+        "attributes": [
+            {
+                "defindex": 214,
+                "value": 250,
+                "float_value": 3.5032461608120427e-43
+            },
+            {
+                "defindex": 1008,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 1009,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 2013,
+                "value": 1157251072,
+                "float_value": 2002
+            },
+            {
+                "defindex": 2014,
+                "value": 1077936128,
+                "float_value": 3
+            },
+            {
+                "defindex": 2025,
+                "value": 1077936128,
+                "float_value": 3
+            },
+            {
+                "defindex": 501,
+                "value": "pinkie pie is right behind you"
+            },
+            {
+                "defindex": 841,
+                "value": 0,
+                "float_value": 0
+            },
+            {
+                "defindex": 843,
+                "value": 1091043328,
+                "float_value": 8.5
+            },
+            {
+                "defindex": 865,
+                "value": 1112014848,
+                "float_value": 50
+            },
+            {
+                "defindex": 844,
+                "value": 1159274496,
+                "float_value": 2450
+            },
+            {
+                "defindex": 839,
+                "value": 1077097267,
+                "float_value": 2.799999952316284
+            },
+            {
+                "defindex": 862,
+                "value": 1058642330,
+                "float_value": 0.6000000238418579
+            },
+            {
+                "defindex": 863,
+                "value": 1036831949,
+                "float_value": 0.10000000149011612
+            },
+            {
+                "defindex": 796,
+                "value": "10 0 -12"
+            },
+            {
+                "defindex": 368,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 116,
+                "value": 1084227584,
+                "float_value": 5
+            },
+            {
+                "defindex": 356,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 350,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 144,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 15,
+                "value": 0,
+                "float_value": 0
+            },
+            {
+                "defindex": 551,
+                "value": 1065353216,
+                "float_value": 1
+            }
+        ],
+        "name": "Non-Craftable Strange Professional Killstreak Phlogistinator"
+    },
+    "expected": "594;11;uncraftable;kt-3"
+}

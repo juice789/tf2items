@@ -1,0 +1,24 @@
+{
+    "listing": {
+        "defindex": 200,
+        "quality": 15,
+        "attributes": [
+            {
+                "value": "303",
+                "defindex": "834"
+            },
+            {
+                "float_value": "0.2",
+                "defindex": "725"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "ke7jm6yclifx7fseao3o",
+        "quantity": "1",
+        "name": "Macaw Masked Scattergun (Factory New)"
+    },
+    "expected": "200;15;pk-303;w-1"
+}

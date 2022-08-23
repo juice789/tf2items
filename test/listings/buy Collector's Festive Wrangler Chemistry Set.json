@@ -1,0 +1,22 @@
+{
+    "listing": {
+        "defindex": 20001,
+        "quality": 6,
+        "attributes": [
+            {
+                "itemdef": "1086",
+                "quality": "14",
+                "is_output": "true",
+                "defindex": "2000"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "hdnspc4v1gutra6npdn8",
+        "quantity": "1",
+        "name": "Collector's Festive Wrangler Chemistry Set"
+    },
+    "expected": "20007;6;od-1086;oq-14"
+}

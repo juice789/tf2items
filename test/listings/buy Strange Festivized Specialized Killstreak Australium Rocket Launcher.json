@@ -1,0 +1,26 @@
+{
+    "listing": {
+        "defindex": 18,
+        "quality": 11,
+        "attributes": [
+            {
+                "float_value": "2",
+                "defindex": "2025"
+            },
+            {
+                "defindex": "2027"
+            },
+            {
+                "defindex": "2053"
+            },
+            {
+                "value": "",
+                "defindex": 229
+            }
+        ],
+        "user-id": "bgbh06jaa69tpzcifz2p",
+        "quantity": "1",
+        "name": "Strange Festivized Specialized Killstreak Australium Rocket Launcher"
+    },
+    "expected": "205;11;kt-2;festive;australium"
+}

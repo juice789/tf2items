@@ -1,0 +1,32 @@
+{
+    "listing": {
+        "defindex": 20003,
+        "quality": 6,
+        "attributes": [
+            {
+                "itemdef": "6526",
+                "quality": "6",
+                "is_output": "true",
+                "attributes": [
+                    {
+                        "defindex": "2012",
+                        "float_value": "211"
+                    }
+                ],
+                "defindex": "2000"
+            },
+            {
+                "float_value": "3",
+                "defindex": "2025"
+            },
+            {
+                "value": "",
+                "defindex": 229
+            }
+        ],
+        "user-id": "34bgkou5xpxdarydkjor",
+        "quantity": "1",
+        "name": "Professional Killstreak Medi Gun Kit Fabricator"
+    },
+    "expected": "20003;6;kt-3;td-211;od-6526;oq-6"
+}

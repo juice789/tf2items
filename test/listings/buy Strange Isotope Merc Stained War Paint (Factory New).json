@@ -1,0 +1,32 @@
+{
+    "listing": {
+        "defindex": 9536,
+        "quality": 15,
+        "attributes": [
+            {
+                "float_value": "702",
+                "defindex": "134"
+            },
+            {
+                "float_value": "0",
+                "defindex": "214"
+            },
+            {
+                "value": "203",
+                "defindex": "834"
+            },
+            {
+                "float_value": "0.2",
+                "defindex": "725"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "0mkpd85iuz2pxoxl4nhh",
+        "quantity": "1",
+        "name": "Strange Isotope Merc Stained War Paint (Factory New)"
+    },
+    "expected": "17203;5;strange;u-702;pk-203;w-1"
+}

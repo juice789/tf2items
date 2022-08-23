@@ -1,0 +1,26 @@
+{
+    "listing": {
+        "defindex": 20001,
+        "quality": 6,
+        "attributes": [
+            {
+                "itemdef": "6522",
+                "quality": "6",
+                "is_output": "true",
+                "defindex": "2000"
+            },
+            {
+                "float_value": "343",
+                "defindex": "2012"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "hdnspc4v1gutra6npdn8",
+        "quantity": "1",
+        "name": "Strangifier Chemistry Set"
+    },
+    "expected": "20005;6;td-343;od-6522;oq-6"
+}

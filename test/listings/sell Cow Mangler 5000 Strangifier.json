@@ -1,0 +1,30 @@
+{
+    "listing": {
+        "id": 9431380590,
+        "original_id": 9431380590,
+        "defindex": 5783,
+        "level": 5,
+        "quality": 6,
+        "inventory": 2147483673,
+        "quantity": 1,
+        "origin": 8,
+        "attributes": [
+            {
+                "defindex": 2046,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 806,
+                "value": "0.285 0.43 0.35"
+            },
+            {
+                "defindex": 2012,
+                "value": 1138524160,
+                "float_value": 441
+            }
+        ],
+        "name": "Cow Mangler 5000 Strangifier"
+    },
+    "expected": "5783;6;td-441"
+}

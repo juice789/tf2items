@@ -39,7 +39,7 @@ const skuFromItem = ({
     ['1', true].includes(uncraftable) && 'uncraftable',
     ['1', true].includes(elevated) && 'strange',
     effect && 'u-' + effect,
-    killstreakTier && ['1', '2', '3'].includes(killstreakTier) && 'kt-' + killstreakTier,
+    killstreakTier && ['1', '2', '3', 1, 2, 3].includes(killstreakTier) && 'kt-' + killstreakTier,
     ['1', true].includes(festivized) && 'festive',
     target && 'td-' + target,
     output && 'od-' + output,

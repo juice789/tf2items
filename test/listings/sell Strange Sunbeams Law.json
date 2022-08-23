@@ -1,0 +1,101 @@
+{
+    "listing": {
+        "id": 9390838254,
+        "original_id": 2474998711,
+        "defindex": 30362,
+        "level": 18,
+        "quality": 5,
+        "inventory": 3221225475,
+        "quantity": 1,
+        "origin": 8,
+        "custom_name": "\"it's to sexy for the Law\"",
+        "custom_desc": "\"punch a police officer in the face for it\"",
+        "attributes": [
+            {
+                "defindex": 134,
+                "value": 1099431936,
+                "float_value": 17
+            },
+            {
+                "defindex": 142,
+                "value": 1244968080,
+                "float_value": 2960676
+            },
+            {
+                "defindex": 214,
+                "value": 0,
+                "float_value": 0
+            },
+            {
+                "defindex": 261,
+                "value": 1244968080,
+                "float_value": 2960676
+            },
+            {
+                "defindex": 379,
+                "value": 0,
+                "float_value": 0
+            },
+            {
+                "defindex": 380,
+                "value": 1119748096,
+                "float_value": 95
+            },
+            {
+                "defindex": 381,
+                "value": 0,
+                "float_value": 0
+            },
+            {
+                "defindex": 382,
+                "value": 1118699520,
+                "float_value": 87
+            },
+            {
+                "defindex": 383,
+                "value": 0,
+                "float_value": 0
+            },
+            {
+                "defindex": 384,
+                "value": 1118175232,
+                "float_value": 83
+            },
+            {
+                "defindex": 519,
+                "value": 1090519040,
+                "float_value": 8
+            },
+            {
+                "defindex": 520,
+                "value": 0,
+                "float_value": 0
+            },
+            {
+                "defindex": 500,
+                "value": "\"it's to sexy for the Law\""
+            },
+            {
+                "defindex": 501,
+                "value": "\"punch a police officer in the face for it\""
+            },
+            {
+                "defindex": 746,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 292,
+                "value": 1115684864,
+                "float_value": 64
+            },
+            {
+                "defindex": 388,
+                "value": 1115684864,
+                "float_value": 64
+            }
+        ],
+        "name": "Strange Sunbeams Law"
+    },
+    "expected": "30362;5;strange;u-17"
+}

@@ -1,0 +1,66 @@
+{
+    "listing": {
+        "id": 8746488185,
+        "original_id": 7618204236,
+        "defindex": 200,
+        "level": 99,
+        "quality": 15,
+        "inventory": 2147484624,
+        "quantity": 1,
+        "origin": 28,
+        "equipped": [
+            {
+                "class": 1,
+                "slot": 0
+            }
+        ],
+        "style": 0,
+        "attributes": [
+            {
+                "defindex": 211,
+                "value": 1588921200,
+                "float_value": 6.5216960455487e+18
+            },
+            {
+                "defindex": 725,
+                "value": 1045220557,
+                "float_value": 0.20000000298023224
+            },
+            {
+                "defindex": 834,
+                "value": 303,
+                "float_value": 4.245934346904196e-43
+            },
+            {
+                "defindex": 866,
+                "value": 3323235835,
+                "float_value": -9507.4951171875
+            },
+            {
+                "defindex": 867,
+                "value": 1,
+                "float_value": 1.401298464324817e-45
+            },
+            {
+                "defindex": 719,
+                "value": "models\/weapons\/c_models\/stattrack.mdl"
+            },
+            {
+                "defindex": 731,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 724,
+                "value": 1058776547,
+                "float_value": 0.6079999804496765
+            },
+            {
+                "defindex": 796,
+                "value": "10 0 -11"
+            }
+        ],
+        "name": "Macaw Masked Scattergun (Factory New)"
+    },
+    "expected": "200;15;pk-303;w-1"
+}

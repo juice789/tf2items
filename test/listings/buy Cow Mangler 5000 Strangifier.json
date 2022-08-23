@@ -1,0 +1,20 @@
+{
+    "listing": {
+        "defindex": 6522,
+        "quality": 6,
+        "attributes": [
+            {
+                "float_value": "441",
+                "defindex": "2012"
+            },
+            {
+                "value": "",
+                "defindex": 229
+            }
+        ],
+        "user-id": "1vivhbttpctvnerhbp3i",
+        "quantity": "1",
+        "name": "Cow Mangler 5000 Strangifier"
+    },
+    "expected": "5783;6;td-441"
+}

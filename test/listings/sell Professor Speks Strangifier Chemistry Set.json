@@ -1,0 +1,77 @@
+{
+    "listing": {
+        "id": 9389440304,
+        "original_id": 2098243650,
+        "defindex": 20005,
+        "level": 5,
+        "quality": 6,
+        "inventory": 2147483654,
+        "quantity": 1,
+        "origin": 0,
+        "attributes": [
+            {
+                "defindex": 2000,
+                "is_output": false,
+                "quantity": 0,
+                "itemdef": 589,
+                "quality": 6
+            },
+            {
+                "defindex": 2001,
+                "is_output": false,
+                "quantity": 0,
+                "itemdef": 939,
+                "quality": 6
+            },
+            {
+                "defindex": 2002,
+                "is_output": false,
+                "quantity": 0,
+                "itemdef": 140,
+                "quality": 6
+            },
+            {
+                "defindex": 2003,
+                "is_output": false,
+                "quantity": 0,
+                "itemdef": 230,
+                "quality": 6
+            },
+            {
+                "defindex": 2004,
+                "is_output": false,
+                "quantity": 0,
+                "itemdef": 40,
+                "quality": 6
+            },
+            {
+                "defindex": 2005,
+                "is_output": false,
+                "quantity": 1,
+                "itemdef": 199,
+                "quality": 11
+            },
+            {
+                "defindex": 2006,
+                "is_output": true,
+                "quantity": 1,
+                "itemdef": 6522,
+                "quality": 6,
+                "attributes": [
+                    {
+                        "defindex": 2012,
+                        "value": 1135312896,
+                        "float_value": 343
+                    }
+                ]
+            },
+            {
+                "defindex": 2031,
+                "value": 1073741824,
+                "float_value": 2
+            }
+        ],
+        "name": "Professor Speks Strangifier Chemistry Set"
+    },
+    "expected": "20005;6;td-343;od-6522;oq-6"
+}

@@ -1,0 +1,36 @@
+{
+    "listing": {
+        "defindex": 18,
+        "quality": 15,
+        "attributes": [
+            {
+                "float_value": "701",
+                "defindex": "134"
+            },
+            {
+                "float_value": "3",
+                "defindex": "2025"
+            },
+            {
+                "float_value": "0",
+                "defindex": "214"
+            },
+            {
+                "value": "305",
+                "defindex": "834"
+            },
+            {
+                "float_value": "0.2",
+                "defindex": "725"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "4ckt637cp946q3p449o9",
+        "quantity": "1",
+        "name": "Strange Hot Professional Killstreak Anodized Aloha Rocket Launcher (Factory New)"
+    },
+    "expected": "205;5;strange;u-701;kt-3;pk-305;w-1"
+}

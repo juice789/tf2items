@@ -1,0 +1,20 @@
+{
+    "listing": {
+        "defindex": 5022,
+        "quality": 6,
+        "attributes": [
+            {
+                "float_value": 59,
+                "defindex": 187
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "4hueqwgxu9kolclfe8kv",
+        "quantity": "1",
+        "name": "Mann Co. Supply Crate #59"
+    },
+    "expected": "5045;6;c-59"
+}

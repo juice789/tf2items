@@ -1,0 +1,28 @@
+{
+    "listing": {
+        "defindex": 594,
+        "quality": 11,
+        "flag_cannot_craft": true,
+        "attributes": [
+            {
+                "float_value": "3",
+                "defindex": "2025"
+            },
+            {
+                "float_value": "2002",
+                "defindex": "2013"
+            },
+            {
+                "float_value": "1",
+                "defindex": "2014"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "quantity": "1",
+        "name": "Non-Craftable Strange Professional Killstreak Phlogistinator"
+    },
+    "expected": "594;11;uncraftable;kt-3"
+}

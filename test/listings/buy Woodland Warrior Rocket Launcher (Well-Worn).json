@@ -1,0 +1,65 @@
+{
+    "listing": {
+        "id": 8647524516,
+        "original_id": 3931009651,
+        "defindex": 15006,
+        "level": 1,
+        "quality": 15,
+        "inventory": 2147483769,
+        "quantity": 1,
+        "origin": 8,
+        "equipped": [
+            {
+                "class": 3,
+                "slot": 0
+            }
+        ],
+        "attributes": [
+            {
+                "defindex": 211,
+                "value": 1586588400,
+                "float_value": 5.239225682910773e+18
+            },
+            {
+                "defindex": 725,
+                "value": 1061997773,
+                "float_value": 0.800000011920929
+            },
+            {
+                "defindex": 724,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 796,
+                "value": "10 -3 -10"
+            },
+            {
+                "defindex": 719,
+                "value": "models\/weapons\/c_models\/stattrack.mdl"
+            },
+            {
+                "defindex": 731,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 2028,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 749,
+                "value": 1058642330,
+                "float_value": 0.6000000238418579
+            },
+            {
+                "defindex": 834,
+                "value": 6,
+                "float_value": 8.407790785948902e-45
+            }
+        ],
+        "name": "Woodland Warrior Rocket Launcher (Well-Worn)"
+    },
+    "expected": "15006;15;pk-6;w-4"
+}

@@ -1,0 +1,18 @@
+{
+    "listing": {
+        "defindex": 30362,
+        "quality": 5,
+        "attributes": [
+            {
+                "float_value": 17,
+                "defindex": 134
+            },
+            {
+                "float_value": 0,
+                "defindex": 214
+            }
+        ],
+        "name": "Strange Sunbeams Law"
+    },
+    "expected": "30362;5;strange;u-17"
+}

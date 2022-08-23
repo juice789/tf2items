@@ -1,0 +1,101 @@
+{
+    "listing": {
+        "id": 9025730766,
+        "original_id": 8933059312,
+        "defindex": 20003,
+        "level": 1,
+        "quality": 6,
+        "inventory": 3221225475,
+        "quantity": 1,
+        "origin": 20,
+        "attributes": [
+            {
+                "defindex": 2022,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 2000,
+                "is_output": false,
+                "quantity": 2,
+                "quality": 6,
+                "match_all_attribs": true,
+                "attributes": [
+                    {
+                        "defindex": 2025,
+                        "value": 1073741824,
+                        "float_value": 2
+                    }
+                ]
+            },
+            {
+                "defindex": 2001,
+                "is_output": false,
+                "quantity": 7,
+                "itemdef": 5705,
+                "quality": 6
+            },
+            {
+                "defindex": 2002,
+                "is_output": false,
+                "quantity": 6,
+                "itemdef": 5707,
+                "quality": 6
+            },
+            {
+                "defindex": 2003,
+                "is_output": false,
+                "quantity": 3,
+                "itemdef": 5706,
+                "quality": 6
+            },
+            {
+                "defindex": 2004,
+                "is_output": false,
+                "quantity": 3,
+                "itemdef": 5703,
+                "quality": 6
+            },
+            {
+                "defindex": 2005,
+                "is_output": false,
+                "quantity": 3,
+                "itemdef": 5704,
+                "quality": 6
+            },
+            {
+                "defindex": 2006,
+                "is_output": false,
+                "quantity": 3,
+                "itemdef": 5700,
+                "quality": 6
+            },
+            {
+                "defindex": 2007,
+                "is_output": true,
+                "quantity": 1,
+                "itemdef": 6526,
+                "quality": 6,
+                "attributes": [
+                    {
+                        "defindex": 2014,
+                        "value": 1065353216,
+                        "float_value": 1
+                    },
+                    {
+                        "defindex": 2013,
+                        "value": 1157251072,
+                        "float_value": 2002
+                    },
+                    {
+                        "defindex": 2012,
+                        "value": 1129512960,
+                        "float_value": 211
+                    }
+                ]
+            }
+        ],
+        "name": "Professional Killstreak Medi Gun Kit Fabricator"
+    },
+    "expected": "20003;6;kt-3;td-211;od-6526;oq-6"
+}

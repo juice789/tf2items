@@ -1,0 +1,60 @@
+{
+    "listing": {
+        "id": 9114255308,
+        "original_id": 8140707417,
+        "defindex": 17203,
+        "level": 99,
+        "quality": 15,
+        "inventory": 2147483790,
+        "quantity": 1,
+        "origin": 8,
+        "attributes": [
+            {
+                "defindex": 134,
+                "value": 1143947264,
+                "float_value": 701
+            },
+            {
+                "defindex": 725,
+                "value": 1045220557,
+                "float_value": 0.20000000298023224
+            },
+            {
+                "defindex": 719,
+                "value": "models\/weapons\/c_models\/stattrack.mdl"
+            },
+            {
+                "defindex": 731,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 743,
+                "value": 1,
+                "float_value": 1.401298464324817e-45
+            },
+            {
+                "defindex": 2028,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 749,
+                "value": 0,
+                "float_value": 0
+            },
+            {
+                "defindex": 724,
+                "value": 1073741824,
+                "float_value": 2
+            },
+            {
+                "defindex": 834,
+                "value": 203,
+                "float_value": 2.8446358825793787e-43
+            }
+        ],
+        "name": "Hot Merc Stained War Paint (Factory New)"
+    },
+    "expected": "17203;5;u-701;pk-203;w-1"
+}

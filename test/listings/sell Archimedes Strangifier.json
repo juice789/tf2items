@@ -1,0 +1,35 @@
+{
+    "listing": {
+        "id": 9177795982,
+        "original_id": 8961747023,
+        "defindex": 6522,
+        "level": 5,
+        "quality": 6,
+        "inventory": 2147483767,
+        "quantity": 1,
+        "origin": 22,
+        "attributes": [
+            {
+                "defindex": 211,
+                "value": 1594278000,
+                "float_value": 9.7098839419131e+18
+            },
+            {
+                "defindex": 2012,
+                "value": 1146028032,
+                "float_value": 828
+            },
+            {
+                "defindex": 2046,
+                "value": 1065353216,
+                "float_value": 1
+            },
+            {
+                "defindex": 806,
+                "value": "0.285 0.43 0.35"
+            }
+        ],
+        "name": "Archimedes Strangifier"
+    },
+    "expected": "6522;6;td-828"
+}

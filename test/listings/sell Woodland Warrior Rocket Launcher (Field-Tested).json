@@ -1,0 +1,24 @@
+{
+    "listing": {
+        "defindex": 18,
+        "quality": 15,
+        "attributes": [
+            {
+                "value": "6",
+                "defindex": "834"
+            },
+            {
+                "float_value": "0.6",
+                "defindex": "725"
+            },
+            {
+                "value": null,
+                "defindex": 229
+            }
+        ],
+        "user-id": "4wauizttbk9wbaeuuevu",
+        "quantity": "1",
+        "name": "Woodland Warrior Rocket Launcher (Field-Tested)"
+    },
+    "expected": "15006;15;pk-6;w-3"
+}

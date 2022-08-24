@@ -25,25 +25,8 @@ it('fromEconItem', () => {
     "econItem":{},
     "expected": {
         "sku":null,
-        "defindex":null,
-        "quality":null,
-        "market_hash_name":null,
-        "uncraftable":null,
-        "elevated":null,
-        "effect":null,
-        "killstreakTier":null,
-        "festivized":null,
-        "texture":null,
-        "wear":null,
-        "australium":null,
-        "series":null,
-        "craft":null,
-        "recipe":null,
         "id":null,
-        "old_id":null,
-        "target":null,
-        "output":null,
-        "oq":null
+        "old_id":null
     }
 }
 */

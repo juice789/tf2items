@@ -73,7 +73,6 @@ const decodeRules = compose(
     map(
         compose(
             ([k, value = true]) => ({ [rules[k]]: value }),
-
             converge(concat, [compose(of, head), compose(filter(Boolean), of, join('-'), tail)]),
             split('-')
         )

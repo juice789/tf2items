@@ -29,11 +29,8 @@ const {
     allPass,
     converge,
     or,
-    defaultTo,
-    toString,
     take,
-    uncurryN,
-    is
+    uncurryN
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
@@ -41,8 +38,7 @@ const { textures } = require('./schema.json')
 const { skuFromItem } = require('./sku.js')
 
 const {
-    kitRemap,
-    promoRemap
+    kitRemap
 } = require('./fromEconItem.js')
 
 const findValue = uncurryN(2, (fns) => compose(
@@ -50,6 +46,8 @@ const findValue = uncurryN(2, (fns) => compose(
     map(__, fns),
     applyTo
 ))
+
+const isWeaponEffect = compose(includes(__, ['701', '702', '703', '704']), String)
 
 const defindex = prop('defindex')
 
@@ -67,7 +65,7 @@ const effect = findValue(effectOptions)
 const elevated = cond(
     [
         [complement(propEq)('quality', 11), hasPath(['attributes', '214'])],
-        [propEq('quality', 11), compose(includes(__, ['701', '702', '703', '704']), toString, defaultTo(0), effect)],
+        [propEq('quality', 11), compose(isWeaponEffect, effect)],
         [T, F]
     ]
 )
@@ -103,7 +101,7 @@ const wears = {
 const wear = compose(
     prop(__, wears),
     take(3),
-    when(is(Number), toString),
+    String,
     pathOr('0', ['attributes', '725', 'float_value'])
 )
 
@@ -158,56 +156,64 @@ const fns = {
     oq
 }
 
-const remapStrangifier =
-    when(
-        compose(
-            propEq('item_name', 'Strangifier'),
-            prop(__, items),
-            prop('defindex')
-        ),
-        chain(
-            assoc('defindex'),
-            compose(
-                prop('defindex'),
-                nth(0),
-                values,
-                (listingTarget) => pickBy(
-                    compose(
-                        includes(listingTarget.toString()),
-                        propOr([], 'target')
-                    ),
-                    items
-                ),
-                prop('target'))
+const remap = (fn1, fn2) => when(
+    fn1,
+    chain(
+        assoc('defindex'),
+        converge(
+            or,
+            [
+                fn2,
+                prop('defindex')
+            ]
         )
     )
+)
+
+const remapStrangifier = remap(
+    compose(
+        propEq('item_name', 'Strangifier'),
+        prop(__, items),
+        prop('defindex')
+    ),
+    compose(
+        prop('defindex'),
+        nth(0),
+        values,
+        (listingTarget) => pickBy(
+            compose(
+                includes(listingTarget.toString()),
+                propOr([], 'target')
+            ),
+            items
+        ),
+        prop('target')
+    )
+)
 
 const strangifierSets = pickBy(allPass([
     has('td'),
     propEq('item_name', 'Chemistry Set')
 ]), items)
 
-const remapStrangifierSet = when(
+const remapStrangifierSet = remap(
     allPass([
         propEq('defindex', 20001),
         prop('output'),
         prop('target')
     ]),
-    chain(
-        assoc('defindex'),
-        compose(
-            prop('defindex'),
-            nth(0),
-            values,
-            (listingTarget) => pickBy(
-                compose(
-                    includes(listingTarget.toString()),
-                    prop('td')
-                ),
-                strangifierSets
+    compose(
+        prop('defindex'),
+        nth(0),
+        values,
+        (listingTarget) => pickBy(
+            compose(
+                includes(listingTarget.toString()),
+                prop('td')
             ),
-            prop('target'),
-        )
+            strangifierSets
+        ),
+        prop('target'),
     )
 )
 
@@ -217,28 +223,26 @@ const collectorSets = pickBy(allPass([
     propEq('item_name', 'Chemistry Set'),
 ]), items)
 
-const remapCollectorSet = when(
+const remapCollectorSet = remap(
     allPass([
         propEq('defindex', 20001),
         complement(prop)('target')
     ]),
-    chain(
-        assoc('defindex'),
-        compose(
-            prop('defindex'),
-            nth(0),
-            values,
-            (listingOutput) => pickBy(
-                compose(
-                    includes(listingOutput.toString()),
-                    prop('od')
-                ),
-                collectorSets
+    compose(
+        prop('defindex'),
+        nth(0),
+        values,
+        (listingOutput) => pickBy(
+            compose(
+                includes(listingOutput.toString()),
+                prop('od')
             ),
-            prop('output')
-        )
+            collectorSets
+        ),
+        prop('output')
     )
 )
+
 
 const weaponIndex = {
     "0": 190,
@@ -278,9 +282,9 @@ const remapWeapon = when(
 )
 
 const decodeSkinQuality = cond([
-    [allPass([propEq('quality', 15), prop('effect')]), assoc('quality', 5)],
-    [allPass([propEq('quality', 11), prop('effect')]), assoc('quality', 5)],
-    [allPass([propEq('quality', 15), complement(prop)('effect'), prop('elevated')]), assoc('quality', 11)],
+    [allPass([propEq('quality', 15), compose(isWeaponEffect, prop('effect'))]), assoc('quality', 5)], //decorated + effect = unusual
+    [allPass([propEq('quality', 11), compose(isWeaponEffect, prop('effect'))]), assoc('quality', 5)], //strange + effect = unusual
+    [allPass([propEq('quality', 15), complement(prop)('effect'), prop('elevated')]), assoc('quality', 11)], //decorated + elevated = strange
     [T, identity]
 ])
 
@@ -289,50 +293,63 @@ const unboxedSkins = map(
     pickBy(propEq('item_quality', 15), items)
 )
 
-const unboxSkinsRemap = chain(
-    assoc('defindex'),
-    converge(
-        or,
-        [
-            compose(
-                nth(0),
-                flatten,
-                toPairs,
-                ({ defindex, texture }) => pickBy(propEq('item_name', textures[texture] + ' ' + items[defindex].item_name), unboxedSkins)
-            ),
-            prop('defindex')
-        ]
+const unboxSkinsRemap = remap(
+    prop('texture'),
+    compose(
+        nth(0),
+        flatten,
+        toPairs,
+        ({ defindex, texture }) => pickBy(
+            propEq('item_name', textures[texture] + ' ' + items[defindex].item_name),
+            unboxedSkins
+        )
     )
 )
 
-const remapCrateSeries = when(
-    compose(Boolean, prop('series')),
-    chain(
-        compose(
-            when(Boolean),
-            assoc('defindex')
+const remapCrateSeries = remap(
+    prop('series'),
+    compose(
+        prop('defindex'),
+        find(
+            __,
+            values(items)
         ),
-        compose(
-            prop('defindex'),
-            find(
-                __,
-                values(items)
-            ),
-            (s) => compose(
-                includes(s),
-                propOr([], 'series')
-            ),
-            when(is(Number), toString),
-            prop('series')
-        )
+        (s) => compose(
+            includes(s),
+            propOr([], 'series')
+        ),
+        String,
+        prop('series')
     )
+)
+
+const promoIndex = {
+    "30720": "30740",
+    "30721": "30741",
+    "30724": "30739",
+    "810": "831",
+    "811": "832",
+    "812": "833",
+    "813": "834",
+    "814": "835",
+    "815": "836",
+    "816": "837",
+    "817": "838"
+}
+
+const promoRemap = when(
+    allPass([
+        compose(has(__, promoIndex), prop('defindex')),
+        propEq('quality', 1)
+    ]),
+    chain(assoc('defindex'), compose(prop(__, promoIndex), prop('defindex')))
 )
 
 const remaps = compose(
     remapCrateSeries,
     unboxSkinsRemap,
-    promoRemap,
     kitRemap,
+    promoRemap,
     decodeSkinQuality,
     remapWeapon,
     remapCollectorSet,

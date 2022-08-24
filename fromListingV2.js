@@ -1,103 +1,69 @@
 const {
     compose,
-    ifElse,
-    complement,
     propEq,
-    hasPath,
-    F,
     prop,
-    chain,
-    assoc,
     map,
     __,
     applyTo,
-    cond,
-    identity,
-    T,
-    unless,
-    flatten,
-    toPairs,
     pathOr,
-    pickBy,
-    indexBy,
-    propOr,
-    path,
-    find,
-    toString,
-    equals,
     includes,
-    values,
-    unary,
-    nth,
-    has,
-    when,
+    pathEq,
+    propOr,
+    ifElse,
+    equals,
+    length,
+    split,
     allPass,
-    converge,
-    or,
-    pick,
-    defaultTo,
-    pathEq
+    nth,
+    cond,
+    T,
+    F,
+    complement
 } = require('ramda')
 
-
-const { safeItems: items } = require('./schemaItems.js')
-const { textures } = require('./schema.json')
 const { skuFromItem } = require('./sku.js')
-
-const {
-    remaps
-} = require('./fromListingV1.js')
+const { remaps } = require('./fromListingV1.js')
 
 const defindex = prop('defindex')
 
-const quality = path(['quality', 'id'])
+const quality = pathOr(null, ['quality', 'id'])
 
 const uncraftable = compose(includes('Non-Craftable'), prop('name'))
 
-const effect = path(['particle', 'id'])
+const effect = pathOr(null, ['particle', 'id'])
 
-const elevated = pathEq(['elevatedQuality', 'id'], 11)
+const elevated = cond(
+    [
+        [compose(complement(equals)(11), quality), compose(equals(11), pathOr(null, ['elevatedQuality', 'id']))],
+        [compose(equals(11), quality), compose(includes(__, ['701', '702', '703', '704']), String, effect)],
+        [T, F]
+    ]
+)
 
-const killstreakTier = prop('killstreakTier')
+const killstreakTier = propOr(null, 'killstreakTier')
 
 const festivized = propEq('festivized', true)
 
-//const texture = path(['attributes', '834', 'value'])
+const texture = pathOr(null, ['texture', 'id'])
 
-/*const wears = {
-    '0': undefined,
-    '0.2': '1',
-    '0.4': '2',
-    '0.6': '3',
-    '0.8': '4',
-    '1': '5'
-}
-
-const wear = compose(
-    prop(__, wears),
-    (value) => new bignumber(value).dp(2).toString(),
-    pathOr(0, ['attributes', '725', 'float_value'])
-)*/
+const wear = pathOr(null, ['wearTier', 'id'])
 
 const australium = propEq('australium', true)
 
-const series = prop('crateSeries')
+const series = propOr(null, 'crateSeries')
 
-const target = pathOr(null, ['recipe', 'targetItem', '_source', 'defindex'])
-/*
-const output = compose(
-    prop('itemdef'),
-    find(compose(includes(__, [true, 'true']), prop('is_output'))),
-    values,
-    propOr({}, 'attributes')
+const target = ifElse(
+    allPass([
+        pathEq(['recipe', 'targetItem'], null),
+        compose(equals(3), length, split('-'), prop('priceindex'))
+    ]),
+    compose(nth(2), split('-'), prop('priceindex')),
+    pathOr(null, ['recipe', 'targetItem', '_source', 'defindex'])
 )
 
-const oq = compose(
-    prop('quality'),
-    find(compose(includes(__, [true, 'true']), prop('is_output'))),
-    values,
-    propOr({}, 'attributes')
-) */
+const output = pathOr(null, ['recipe', 'outputItem', 'defindex'])
+
+const oq = pathOr(null, ['recipe', 'outputItem', 'quality', 'id'])
 
 const fns = {
     defindex,
@@ -107,21 +73,20 @@ const fns = {
     effect,
     killstreakTier,
     festivized,
-    //texture,
-    //wear,
+    texture,
+    wear,
     australium,
     series,
     target,
-    //output,
-    //oq
+    output,
+    oq
 }
 
 const fromListingV2 = compose(
     skuFromItem,
     remaps,
     map(__, fns),
-    applyTo,
-    prop('item')
+    applyTo
 )
 
 module.exports = { fromListingV2 }

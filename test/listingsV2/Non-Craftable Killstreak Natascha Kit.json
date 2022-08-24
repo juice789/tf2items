@@ -1,0 +1,112 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "Kit",
+        "defindex": 6527,
+        "id": "",
+        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/professional_grease_basic.ee3b1254f3a6bdc43ba695dae8058798ed57cf6b.png",
+        "marketName": "Killstreak Natascha Kit",
+        "name": "Non-Craftable Killstreak Natascha Kit",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$0.48",
+                "long": "17.45 ref",
+                "raw": 11.542702702702702,
+                "value": 48
+            },
+            "suggested": {
+                "raw": 11.542702702702702,
+                "short": "11.54 ref",
+                "long": "11.54 ref, $0.3174",
+                "usd": 0.31742432432432427
+            }
+        },
+        "quality": {
+            "id": 6,
+            "name": "Unique",
+            "color": "#FFD700"
+        },
+        "summary": "Level 5 Killstreak Kit",
+        "killstreakTier": 1,
+        "tradable": true,
+        "recipe": {
+            "estimatedCraftingCost": [],
+            "inputItems": [],
+            "outputItem": null,
+            "targetItem": {
+                "itemName": "Natascha",
+                "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/c_w_ludmila.1cc9040376abc2982600726a81d4d3a448be2cf2.png",
+                "_source": {
+                    "_id": "440_41",
+                    "name": "Natascha",
+                    "defindex": 41,
+                    "item_class": "tf_weapon_minigun",
+                    "item_type_name": "Minigun",
+                    "item_name": "Natascha",
+                    "proper_name": false,
+                    "item_slot": "primary",
+                    "item_quality": 6,
+                    "image_inventory": "backpack/weapons/c_models/c_w_ludmila/c_w_ludmila",
+                    "min_ilevel": 5,
+                    "max_ilevel": 5,
+                    "image_url": "https://steamcdn-a.akamaihd.net/apps/440/icons/c_w_ludmila.1cc9040376abc2982600726a81d4d3a448be2cf2.png",
+                    "image_url_large": "https://steamcdn-a.akamaihd.net/apps/440/icons/c_w_ludmila_large.24f7a5d2937c9bcc9302ebab8b45c6cb6f73a9e2.png",
+                    "craft_class": "weapon",
+                    "craft_material_type": "weapon",
+                    "capabilities": {
+                        "nameable": true,
+                        "can_gift_wrap": true,
+                        "can_craft_mark": true,
+                        "can_be_restored": true,
+                        "strange_parts": true,
+                        "can_card_upgrade": true,
+                        "can_strangify": true,
+                        "can_killstreakify": true,
+                        "can_consume": true
+                    },
+                    "used_by_classes": [
+                        "Heavy"
+                    ],
+                    "attributes": [
+                        {
+                            "name": "slow enemy on hit",
+                            "class": "mult_onhit_enemyspeed",
+                            "value": 1
+                        },
+                        {
+                            "name": "damage penalty",
+                            "class": "mult_dmg",
+                            "value": 0.75
+                        },
+                        {
+                            "name": "minigun spinup time increased",
+                            "class": "mult_minigun_spinup_time",
+                            "value": 1.2999999523162842
+                        },
+                        {
+                            "name": "lunchbox adds minicrits",
+                            "class": "set_weapon_mode",
+                            "value": 1
+                        },
+                        {
+                            "name": "spunup_damage_resistance",
+                            "class": "spunup_damage_resistance",
+                            "value": 0.800000011920929
+                        }
+                    ],
+                    "first_sale_date": 1285718400,
+                    "release_date": 1309463324,
+                    "appid": 440,
+                    "_keywords": [
+                        "Natascha"
+                    ]
+                }
+            }
+        },
+        "priceindex": "1-41"
+    },
+    "expected": "6527;6;uncraftable;kt-1;td-41"
+}

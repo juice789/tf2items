@@ -1,5 +1,5 @@
 import {
-    compose, map, prop, pickBy, when, includes, __, allPass, indexOf, propOr, chain, assoc, complement, has, concat, equals
+    compose, map, prop, pickBy, when, includes, __, allPass, propOr, chain, assoc, complement, has, concat, startsWith
 } from 'ramda'
 
 import {
@@ -24,10 +24,13 @@ const weapon = {
     itemFn: compose(
         map(
             when(
-                compose(equals(0), indexOf('Promo'), propOr('', 'name')),
+                compose(
+                    startsWith('Promo '),
+                    propOr('', 'name')
+                ),
                 chain(
                     assoc('item_name'),
-                    compose(concat(__, ' (promo)'), prop('item_name'))
+                    compose(concat(__, ' (Genuine)'), prop('item_name'))
                 )
             )
         ),

@@ -1,0 +1,54 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "War Paint",
+        "defindex": 9536,
+        "id": "",
+        "imageUrl": "https://scrap.tf/img/items/warpaint/War%20Paint_263_1_0.png",
+        "marketName": "Unusual Death Deluxe War Paint (Factory New)",
+        "name": "Isotope Death Deluxe War Paint (Factory New)",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$146.51",
+                "long": "5,327.64 ref, 99.80 keys",
+                "raw": 3523.1695270270266,
+                "value": 14651
+            }
+        },
+        "quality": {
+            "id": 5,
+            "name": "Unusual",
+            "color": "#8650AC"
+        },
+        "summary": "Level 99 War Paint (Factory New)",
+        "texture": {
+            "id": 263,
+            "itemDefindex": 17263,
+            "rarity": {
+                "id": 3,
+                "name": "Mercenary",
+                "color": "#4B69FF"
+            },
+            "name": "Death Deluxe"
+        },
+        "wearTier": {
+            "id": 1,
+            "name": "Factory New",
+            "short": "FN"
+        },
+        "particle": {
+            "id": 702,
+            "name": "Isotope",
+            "shortName": "isotope",
+            "imageUrl": "/images/440/particles/702_94x94.png",
+            "type": "weapon"
+        },
+        "tradable": true,
+        "craftable": true,
+        "priceindex": "702"
+    },
+    "expected": "17263;5;u-702;pk-263;w-1"
+}

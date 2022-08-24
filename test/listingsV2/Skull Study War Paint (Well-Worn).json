@@ -1,0 +1,52 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "War Paint",
+        "defindex": 9536,
+        "id": "",
+        "imageUrl": "https://scrap.tf/img/items/warpaint/War%20Paint_235_4_0.png",
+        "marketName": "Skull Study War Paint (Well-Worn)",
+        "name": "Skull Study War Paint (Well-Worn)",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$0.15",
+                "long": "5.45 ref",
+                "raw": 3.607094594594594,
+                "value": 15
+            },
+            "suggested": {
+                "raw": 3.607094594594594,
+                "short": "3.61 ref",
+                "long": "3.61 ref, $0.0992",
+                "usd": 0.09919510135135133
+            }
+        },
+        "quality": {
+            "id": 15,
+            "name": "Decorated Weapon",
+            "color": "#fafafa"
+        },
+        "summary": "Level 99 War Paint (Well-Worn)",
+        "texture": {
+            "id": 235,
+            "itemDefindex": 17235,
+            "rarity": {
+                "id": 4,
+                "name": "Commando",
+                "color": "#8847FF"
+            },
+            "name": "Skull Study"
+        },
+        "wearTier": {
+            "id": 4,
+            "name": "Well-Worn",
+            "short": "WW"
+        },
+        "tradable": true,
+        "craftable": true
+    },
+    "expected": "17235;15;pk-235;w-4"
+}

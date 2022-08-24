@@ -1,0 +1,53 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "Chemistry Set",
+        "defindex": 20001,
+        "id": "",
+        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/construction_kit.fdc5df204409bca571d7315ed7208c132a918570.png",
+        "marketName": "Strangifier Chemistry Set",
+        "name": "Strangifier Chemistry Set",
+        "origin": null,
+        "originalId": "",
+        "price": [],
+        "quality": {
+            "id": 6,
+            "name": "Unique",
+            "color": "#FFD700"
+        },
+        "summary": "Level 5 Recipe",
+        "tradable": true,
+        "craftable": true,
+        "recipe": {
+            "estimatedCraftingCost": {
+                "short": "n/a",
+                "long": "0.00 ref, $0.00",
+                "raw": 0
+            },
+            "inputItems": [],
+            "outputItem": {
+                "appid": 440,
+                "baseName": "Strangifier",
+                "defindex": 6522,
+                "id": "",
+                "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/strange_generic.c49007ba98593c7ac9fded38d2d61b1d2b4091b9.png",
+                "marketName": "Strangifier",
+                "name": "Strangifier",
+                "origin": null,
+                "originalId": "",
+                "price": [],
+                "quality": {
+                    "id": 6,
+                    "name": "Unique",
+                    "color": "#FFD700"
+                },
+                "summary": "Level 5 Strangifier",
+                "tradable": true,
+                "craftable": true
+            },
+            "targetItem": null
+        },
+        "priceindex": "6522-6-343"
+    },
+    "expected": "20005;6;td-343;od-6522;oq-6"
+}

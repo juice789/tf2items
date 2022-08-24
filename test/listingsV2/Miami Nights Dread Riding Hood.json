@@ -1,81 +1,60 @@
 {
   "listing": {
-    "id": "440_76561198031007256_1117e3432c42fe1ac2186b69af387ce1",
-    "steamid": "76561198031007256",
     "appid": 440,
-    "currencies": {
-      "metal": 1
+    "baseName": "Dread Hiding Hood",
+    "defindex": 1095,
+    "id": "",
+    "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/thief_sniper_hood.a33b4b66f189645a8181b18e2eb25881014fc2d4.png",
+    "marketName": "Unusual Dread Hiding Hood",
+    "name": "Miami Nights Dread Hiding Hood",
+    "origin": null,
+    "originalId": "",
+    "price": {
+      "steam": {
+        "currency": "usd",
+        "short": "$61.35",
+        "long": "2,230.91 ref, 39.18 keys",
+        "raw": 1573.5445945945944,
+        "value": 6135
+      },
+      "community": {
+        "value": 27,
+        "valueHigh": 33,
+        "currency": "keys",
+        "raw": 1708.1999999999998,
+        "short": "27–33 keys",
+        "long": "1,708.20 ref, $46.98",
+        "usd": 49.324275,
+        "updatedAt": 1636885897,
+        "difference": 443.73749999999995
+      },
+      "suggested": {
+        "raw": 1708.1999999999998,
+        "short": "30 keys",
+        "long": "1,708.20 ref, $46.98",
+        "usd": 46.9755
+      }
     },
-    "value": {
-      "raw": 1,
-      "short": "1 ref",
-      "long": "1 ref"
+    "quality": {
+      "id": 5,
+      "name": "Unusual",
+      "color": "#8650AC"
     },
-    "tradeOffersPreferred": true,
-    "buyoutOnly": true,
-    "listedAt": 1661254288,
-    "bumpedAt": 1661254288,
-    "intent": "buy",
-    "count": 1,
-    "status": "active",
-    "source": "user",
-    "item": {
-      "appid": 440,
-      "baseName": "Dread Hiding Hood",
-      "defindex": 1095,
-      "id": "",
-      "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/thief_sniper_hood.a33b4b66f189645a8181b18e2eb25881014fc2d4.png",
-      "marketName": "Unusual Dread Hiding Hood",
-      "name": "Miami Nights Dread Hiding Hood",
-      "origin": null,
-      "originalId": "",
-      "price": {
-        "steam": {
-          "currency": "usd",
-          "short": "$61.35",
-          "long": "2,230.91 ref, 39.18 keys",
-          "raw": 1573.5445945945944,
-          "value": 6135
-        },
-        "community": {
-          "value": 27,
-          "valueHigh": 33,
-          "currency": "keys",
-          "raw": 1708.1999999999998,
-          "short": "27–33 keys",
-          "long": "1,708.20 ref, $46.98",
-          "usd": 49.324275,
-          "updatedAt": 1636885897,
-          "difference": 443.73749999999995
-        },
-        "suggested": {
-          "raw": 1708.1999999999998,
-          "short": "30 keys",
-          "long": "1,708.20 ref, $46.98",
-          "usd": 46.9755
-        }
-      },
-      "quality": {
-        "id": 5,
-        "name": "Unusual",
-        "color": "#8650AC"
-      },
-      "summary": "Level 1-100 Hood",
-      "class": [
-        "Sniper"
-      ],
-      "slot": "misc",
-      "particle": {
-        "id": 61,
-        "name": "Miami Nights",
-        "shortName": "miami",
-        "imageUrl": "/images/440/particles/61_94x94.png",
-        "type": "standard"
-      },
-      "tradable": true,
-      "craftable": true,
-      "priceindex": "61"
-    }
+    "summary": "Level 1-100 Hood",
+    "class": [
+      "Sniper"
+    ],
+    "slot": "misc",
+    "particle": {
+      "id": 61,
+      "name": "Miami Nights",
+      "shortName": "miami",
+      "imageUrl": "/images/440/particles/61_94x94.png",
+      "type": "standard"
+    },
+    "tradable": true,
+    "craftable": true,
+    "priceindex": "61"
   },
   "expected": "1095;5;u-61"
 }

@@ -1,0 +1,52 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "War Paint",
+        "defindex": 9536,
+        "id": "",
+        "imageUrl": "https://scrap.tf/img/items/warpaint/War%20Paint_284_1_0.png",
+        "marketName": "Strange Sarsaparilla Sprayed War Paint (Factory New)",
+        "name": "Strange Sarsaparilla Sprayed War Paint (Factory New)",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$6.07",
+                "long": "220.73 ref, 4.13 keys",
+                "raw": 145.96709459459458,
+                "value": 607
+            },
+            "suggested": {
+                "raw": 145.96709459459458,
+                "short": "2.73 keys",
+                "long": "145.97 ref, 2.73 keys, $4.01",
+                "usd": 4.0140951013513515
+            }
+        },
+        "quality": {
+            "id": 11,
+            "name": "Strange",
+            "color": "#CF6A32"
+        },
+        "summary": "Level 99 War Paint (Factory New)",
+        "texture": {
+            "id": 284,
+            "itemDefindex": 17284,
+            "rarity": {
+                "id": 3,
+                "name": "Mercenary",
+                "color": "#4B69FF"
+            },
+            "name": "Sarsaparilla Sprayed"
+        },
+        "wearTier": {
+            "id": 1,
+            "name": "Factory New",
+            "short": "FN"
+        },
+        "tradable": true,
+        "craftable": true
+    },
+    "expected": "17284;11;pk-284;w-1"
+}

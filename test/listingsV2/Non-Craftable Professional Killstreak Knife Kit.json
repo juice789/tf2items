@@ -1,0 +1,101 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "Kit",
+        "defindex": 6526,
+        "id": "",
+        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/professional_grease_rare.2b28753ad51f725d6438ab08b43074bcaba264b2.png",
+        "marketName": "Professional Killstreak Knife Kit",
+        "name": "Non-Craftable Professional Killstreak Knife Kit",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$28.16",
+                "long": "1,024.00 ref, 19.18 keys",
+                "raw": 677.1718918918918,
+                "value": 2816
+            },
+            "suggested": {
+                "raw": 677.1718918918918,
+                "short": "12.68 keys",
+                "long": "677.17 ref, 12.68 keys, $18.62",
+                "usd": 18.622227027027026
+            }
+        },
+        "quality": {
+            "id": 6,
+            "name": "Unique",
+            "color": "#FFD700"
+        },
+        "summary": "Level 5 Professional Killstreak Kit",
+        "killstreakTier": 3,
+        "tradable": true,
+        "recipe": {
+            "estimatedCraftingCost": [],
+            "inputItems": [],
+            "outputItem": null,
+            "targetItem": {
+                "itemName": "Knife",
+                "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_knife.035a611b3f12c162ebc8857beb120fd07382c1d4.png",
+                "_source": {
+                    "_id": "440_194",
+                    "name": "Upgradeable TF_WEAPON_KNIFE",
+                    "defindex": 194,
+                    "item_class": "tf_weapon_knife",
+                    "item_type_name": "Knife",
+                    "item_name": "Knife",
+                    "item_description": "Attack an enemy from behind to Backstab them for a one hit kill.",
+                    "proper_name": false,
+                    "item_slot": "melee",
+                    "item_quality": 6,
+                    "image_inventory": "backpack/weapons/w_models/w_knife",
+                    "min_ilevel": 1,
+                    "max_ilevel": 1,
+                    "image_url": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_knife.035a611b3f12c162ebc8857beb120fd07382c1d4.png",
+                    "image_url_large": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_knife_large.22ba9afe5d2266d3d9af0f7dcf99d67d588cb895.png",
+                    "craft_class": "",
+                    "craft_material_type": "weapon",
+                    "capabilities": {
+                        "nameable": true,
+                        "can_gift_wrap": true,
+                        "can_craft_mark": true,
+                        "can_be_restored": true,
+                        "strange_parts": true,
+                        "can_card_upgrade": true,
+                        "can_strangify": true,
+                        "can_killstreakify": true,
+                        "can_consume": true
+                    },
+                    "styles": [
+                        {
+                            "name": "TF_UnknownStyle"
+                        },
+                        {
+                            "name": "TF_UnknownStyle"
+                        }
+                    ],
+                    "used_by_classes": [
+                        "Spy"
+                    ],
+                    "attributes": [
+                        {
+                            "name": "special taunt",
+                            "class": "special_taunt",
+                            "value": 1
+                        }
+                    ],
+                    "first_sale_date": 1285718400,
+                    "release_date": 1309463324,
+                    "appid": 440,
+                    "_keywords": [
+                        "Knife"
+                    ]
+                }
+            }
+        },
+        "priceindex": "3-194"
+    },
+    "expected": "6526;6;uncraftable;kt-3;td-194"
+}

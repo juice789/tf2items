@@ -61,16 +61,16 @@
             "quality": "1",
             "slot": "Building",
             "filter_data": {
-                "1662615936": {
-                    "element_ids": {
-                        "0": "991457757",
-                        "1": "8"
-                    }
-                },
                 "931505789": {
                     "element_ids": {
                         "0": "991457757",
                         "1": "4"
+                    }
+                },
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "8"
                     }
                 }
             },
@@ -81,25 +81,8 @@
         }
     },
     "expected": {
-        "sku": "810;1",
-        "defindex": "810",
-        "quality": "1",
-        "market_hash_name": "Genuine Red-Tape Recorder",
-        "uncraftable": false,
-        "elevated": false,
-        "effect": null,
-        "killstreakTier": null,
-        "festivized": false,
-        "texture": null,
-        "wear": null,
-        "australium": false,
-        "series": null,
-        "craft": null,
-        "recipe": null,
+        "sku": "831;1",
         "id": "10530370903",
-        "old_id": "10530370902",
-        "target": null,
-        "output": null,
-        "oq": null
+        "old_id": "10530370902"
     }
 }

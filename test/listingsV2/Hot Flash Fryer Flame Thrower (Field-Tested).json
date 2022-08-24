@@ -1,0 +1,75 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "Flame Thrower",
+        "defindex": 208,
+        "id": "",
+        "imageUrl": "https://scrap.tf/img/items/warpaint/Flame%20Thrower_49_3_0.png",
+        "marketName": "Unusual Flash Fryer Flame Thrower (Field-Tested)",
+        "name": "Hot Flash Fryer Flame Thrower (Field-Tested)",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$95.39",
+                "long": "3,468.73 ref, 64.98 keys",
+                "raw": 2293.871689189189,
+                "value": 9539
+            },
+            "community": {
+                "value": 46,
+                "valueHigh": 46,
+                "currency": "keys",
+                "raw": 2455.71,
+                "short": "46 keys",
+                "long": "2,455.71 ref, $67.53",
+                "usd": 67.532025,
+                "updatedAt": 1579152851,
+                "difference": 2601.2999999999997
+            },
+            "suggested": {
+                "raw": 2455.71,
+                "short": "46 keys",
+                "long": "2,455.71 ref, $67.53",
+                "usd": 67.532025
+            }
+        },
+        "quality": {
+            "id": 5,
+            "name": "Unusual",
+            "color": "#8650AC"
+        },
+        "summary": "Level 1 Flame Thrower (Field-Tested)",
+        "texture": {
+            "id": 49,
+            "itemDefindex": 15049,
+            "rarity": {
+                "id": 4,
+                "name": "Commando",
+                "color": "#8847FF"
+            },
+            "name": "Flash Fryer"
+        },
+        "class": [
+            "Pyro"
+        ],
+        "wearTier": {
+            "id": 3,
+            "name": "Field-Tested",
+            "short": "FT"
+        },
+        "slot": "primary",
+        "particle": {
+            "id": 701,
+            "name": "Hot",
+            "shortName": "hot",
+            "imageUrl": "/images/440/particles/701_94x94.png",
+            "type": "weapon"
+        },
+        "tradable": true,
+        "craftable": true,
+        "priceindex": "701"
+    },
+    "expected": "15049;5;u-701;pk-49;w-3"
+}

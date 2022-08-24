@@ -1,0 +1,189 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "Fabricator",
+        "defindex": 20003,
+        "id": "",
+        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/professional_kit_rare.97f580303b4d77bfe95dda36615979508a5b0533.png",
+        "marketName": "Professional Killstreak Rocket Launcher Kit Fabricator",
+        "name": "Professional Killstreak Rocket Launcher Kit Fabricator",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$57.96",
+                "long": "2,107.64 ref, 39.48 keys",
+                "raw": 1393.7813513513513,
+                "value": 5796
+            },
+            "suggested": {
+                "raw": 1393.7813513513513,
+                "short": "26.11 keys",
+                "long": "1,393.78 ref, 26.11 keys, $38.33",
+                "usd": 38.328987162162164
+            }
+        },
+        "quality": {
+            "id": 6,
+            "name": "Unique",
+            "color": "#FFD700"
+        },
+        "summary": "Level 5 Recipe",
+        "killstreakTier": 3,
+        "tradable": true,
+        "craftable": true,
+        "recipe": {
+            "estimatedCraftingCost": {
+                "short": "n/a",
+                "long": "0.00 ref, $0.00",
+                "raw": 0
+            },
+            "inputItems": [],
+            "outputItem": {
+                "appid": 440,
+                "baseName": "Kit",
+                "defindex": 6526,
+                "id": "",
+                "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/professional_grease_rare.2b28753ad51f725d6438ab08b43074bcaba264b2.png",
+                "marketName": "Professional Killstreak Rocket Launcher Kit",
+                "name": "Professional Killstreak Rocket Launcher Kit",
+                "origin": null,
+                "originalId": "",
+                "price": {
+                    "steam": {
+                        "currency": "usd",
+                        "short": "$92.97",
+                        "long": "3,380.73 ref, 63.33 keys",
+                        "raw": 2235.6772297297293,
+                        "value": 9297
+                    },
+                    "suggested": {
+                        "raw": 2235.6772297297293,
+                        "short": "41.88 keys",
+                        "long": "2,235.68 ref, 41.88 keys, $61.48",
+                        "usd": 61.48112381756756
+                    }
+                },
+                "quality": {
+                    "id": 6,
+                    "name": "Unique",
+                    "color": "#FFD700"
+                },
+                "summary": "Level 5 Professional Killstreak Kit",
+                "tradable": true,
+                "craftable": true,
+                "recipe": {
+                    "estimatedCraftingCost": [],
+                    "inputItems": [],
+                    "outputItem": null,
+                    "targetItem": {
+                        "itemName": "Rocket Launcher",
+                        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_rocketlauncher.0d0d3821f600a5065d5fd95dadd5ce56a8b0f802.png",
+                        "_source": {
+                            "_id": "440_205",
+                            "name": "Upgradeable TF_WEAPON_ROCKETLAUNCHER",
+                            "defindex": 205,
+                            "item_class": "tf_weapon_rocketlauncher",
+                            "item_type_name": "Rocket Launcher",
+                            "item_name": "Rocket Launcher",
+                            "proper_name": false,
+                            "item_slot": "primary",
+                            "item_quality": 6,
+                            "image_inventory": "backpack/weapons/w_models/w_rocketlauncher",
+                            "min_ilevel": 1,
+                            "max_ilevel": 1,
+                            "image_url": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_rocketlauncher.0d0d3821f600a5065d5fd95dadd5ce56a8b0f802.png",
+                            "image_url_large": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_rocketlauncher_large.376e56473114d28a687759b568bbfb03cac12823.png",
+                            "craft_class": "",
+                            "craft_material_type": "weapon",
+                            "capabilities": {
+                                "nameable": true,
+                                "can_gift_wrap": true,
+                                "can_craft_mark": true,
+                                "can_be_restored": true,
+                                "strange_parts": true,
+                                "can_card_upgrade": true,
+                                "can_strangify": true,
+                                "can_killstreakify": true,
+                                "can_consume": true
+                            },
+                            "styles": [
+                                {
+                                    "name": "TF_UnknownStyle"
+                                },
+                                {
+                                    "name": "TF_UnknownStyle"
+                                }
+                            ],
+                            "used_by_classes": [
+                                "Soldier"
+                            ],
+                            "first_sale_date": 1285718400,
+                            "release_date": 1309463324,
+                            "appid": 440,
+                            "_keywords": [
+                                "Rocket",
+                                "Launcher"
+                            ]
+                        }
+                    }
+                },
+                "priceindex": "3-205"
+            },
+            "targetItem": {
+                "itemName": "Rocket Launcher",
+                "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_rocketlauncher.0d0d3821f600a5065d5fd95dadd5ce56a8b0f802.png",
+                "_source": {
+                    "_id": "440_205",
+                    "name": "Upgradeable TF_WEAPON_ROCKETLAUNCHER",
+                    "defindex": 205,
+                    "item_class": "tf_weapon_rocketlauncher",
+                    "item_type_name": "Rocket Launcher",
+                    "item_name": "Rocket Launcher",
+                    "proper_name": false,
+                    "item_slot": "primary",
+                    "item_quality": 6,
+                    "image_inventory": "backpack/weapons/w_models/w_rocketlauncher",
+                    "min_ilevel": 1,
+                    "max_ilevel": 1,
+                    "image_url": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_rocketlauncher.0d0d3821f600a5065d5fd95dadd5ce56a8b0f802.png",
+                    "image_url_large": "https://steamcdn-a.akamaihd.net/apps/440/icons/w_rocketlauncher_large.376e56473114d28a687759b568bbfb03cac12823.png",
+                    "craft_class": "",
+                    "craft_material_type": "weapon",
+                    "capabilities": {
+                        "nameable": true,
+                        "can_gift_wrap": true,
+                        "can_craft_mark": true,
+                        "can_be_restored": true,
+                        "strange_parts": true,
+                        "can_card_upgrade": true,
+                        "can_strangify": true,
+                        "can_killstreakify": true,
+                        "can_consume": true
+                    },
+                    "styles": [
+                        {
+                            "name": "TF_UnknownStyle"
+                        },
+                        {
+                            "name": "TF_UnknownStyle"
+                        }
+                    ],
+                    "used_by_classes": [
+                        "Soldier"
+                    ],
+                    "first_sale_date": 1285718400,
+                    "release_date": 1309463324,
+                    "appid": 440,
+                    "_keywords": [
+                        "Rocket",
+                        "Launcher"
+                    ]
+                }
+            }
+        },
+        "priceindex": "6526-6-205"
+    },
+    "expected": "20003;6;kt-3;td-205;od-6526;oq-6"
+}

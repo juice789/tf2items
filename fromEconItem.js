@@ -17,7 +17,6 @@ const {
     has,
     always,
     curry,
-    defaultTo,
     applyTo,
     assoc,
     pathOr,
@@ -37,7 +36,7 @@ const {
     of,
     path,
     equals,
-    is
+    pick
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
@@ -51,7 +50,7 @@ const marketHashIncludes = curry((string, { market_hash_name }) => market_hash_n
 const removeStrings = curry((string, strings) => compose(
     trim,
     replace(/\s\s+/g, ' '),
-    reduce((all, curr) => replace(curr, '', all), string)
+    reduce((all, curr) => replace(curr, '', all), string || '')
 )(strings))
 
 const findTag = uncurryN(2, (tagName) => compose(
@@ -76,7 +75,6 @@ const id = chain(
 )
 
 const recipe = compose(
-    defaultTo(null),
     find(__, ['Fabricator', 'Strangifier Chemistry Set', 'Chemistry Set']),
     flip(marketHashIncludes),
 )
@@ -87,13 +85,11 @@ const series = ifElse(
     ifElse(
         marketHashIncludes('#'),
         compose(
-            defaultTo(null),
             nth(1),
             split('#'),
             prop('market_hash_name')
         ),
         compose(
-            defaultTo(null),
             nth(0),
             propOr([], 'series'),
             prop(__, items),
@@ -109,7 +105,6 @@ const craft = ifElse(
         propSatisfies(complement(includes)('#'), 'market_hash_name'),
     ]),
     compose(
-        defaultTo(null),
         nth(1),
         split('#'),
         prop('name')
@@ -123,11 +118,8 @@ const australium = allPass([
 ])
 
 const wear = compose(
-    propOr(null, __, invertObj(wears)),
-    trim,
-    replace(/\s\s+/g, ' '),
-    reduce((all, curr) => replace(curr, '', all), __, ['(', ')']),
-    defaultTo(''),
+    prop(__, invertObj(wears)),
+    removeStrings(__, ['(', ')']),
     findTag('Exterior')
 )
 
@@ -156,7 +148,7 @@ const texture = ifElse(
 const festivized = marketHashIncludes('Festivized')
 
 const killstreakTier = compose(
-    propOr(null, __, { 'Professional Killstreak': '3', 'Specialized Killstreak': '2', 'Killstreak': '1' }),
+    prop(__, { 'Professional Killstreak': '3', 'Specialized Killstreak': '2', 'Killstreak': '1' }),
     find(__, ['Professional Killstreak', 'Specialized Killstreak', 'Killstreak']),
     flip(marketHashIncludes)
 )
@@ -303,7 +295,7 @@ const propsOtherGame = {
 const keyRemap = when(
     compose(
         includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']), //old keys that turned into regular keys
-        when(is(Number), toString),
+        String,
         prop('defindex')
     ),
     compose(
@@ -322,25 +314,6 @@ const kitRemap = when(
     assoc('defindex', '6527')
 )
 
-const promoIndex = {
-    831: '810',
-    832: '811',
-    833: '812',
-    834: '813',
-    835: '814',
-    836: '815',
-    837: '816',
-    838: '817',
-    30739: '30724',
-    30740: '30720',
-    30741: '30721',
-}
-
-const promoRemap = when(
-    compose(has(__, promoIndex), prop('defindex')),
-    chain(assoc('defindex'), compose(prop(__, promoIndex), prop('defindex')))
-)
-
 const otherIndex = {
     5844: '5710', //fall acorns key
     5845: '5720', //strongbox key
@@ -355,13 +328,13 @@ const otherRemap = when(
 )
 
 const remaps = compose(
-    promoRemap,
     kitRemap,
     keyRemap,
     otherRemap
 )
 
 const fromEconItem440 = compose(
+    pick(['sku', 'id', 'old_id']),
     chain(assoc('sku'), skuFromItem),
     remaps,
     chain(mergeRight, compose(map(__, propsTf2_2), applyTo)),
@@ -382,6 +355,5 @@ const fromEconItem = ifElse(
 
 module.exports = {
     fromEconItem,
-    kitRemap,
-    promoRemap
+    kitRemap
 }

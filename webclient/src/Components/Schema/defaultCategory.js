@@ -1,4 +1,4 @@
-import { chain, compose, when, propEq, assoc, concat, prop, __, map, props, join, includes, propOr, gt, length, evolve, identity, nth, equals, allPass, complement, test, has } from 'ramda'
+import { chain, compose, when, propEq, assoc, concat, prop, __, map, props, join, includes, propOr, gt, length, evolve, identity, nth, equals, allPass, complement, test, has, startsWith } from 'ramda'
 
 import { textures } from '@juice789/tf2items'
 
@@ -18,7 +18,7 @@ import {
     item_class,
     untradable,
     getClasses,
-    targetInput
+    targetInput,
 } from './controls'
 
 const defaultCategory = {
@@ -42,6 +42,16 @@ const defaultCategory = {
         series
     },
     itemFn: map(compose(
+        when(//genuine rename
+            compose(
+                startsWith('Promo '),
+                propOr('', 'name')
+            ),
+            chain(
+                assoc('item_name'),
+                compose(concat(__, ' (Genuine)'), prop('item_name'))
+            )
+        ),
         when(//Strangifier
             propEq('item_name', 'Strangifier'),
             chain(assoc('item_name'), compose(join(' '), props(['item_name', 'defindex'])))

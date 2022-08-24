@@ -17,7 +17,9 @@ fileNames.forEach(function (file) {
 const { fromListingV2 } = require('../fromListingV2.js')
 
 it('fromListingV2', () => {
-    tests.forEach(({ listing, expected }) => expect(fromListingV2(listing)).toEqual(expected))
+    tests.forEach(({ listing, expected }) => {
+        
+        expect(fromListingV2(listing)).toEqual(expected)})
 })
 
 /*

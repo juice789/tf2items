@@ -1,67 +1,46 @@
 {
     "listing": {
-        "id": "440_76561198031007256_898371da92dcfca5e6ba3fa854768aa1",
-        "steamid": "76561198031007256",
         "appid": 440,
-        "currencies": {
-            "metal": 1
-        },
-        "value": {
-            "raw": 1,
-            "short": "1 ref",
-            "long": "1 ref"
-        },
-        "tradeOffersPreferred": true,
-        "buyoutOnly": true,
-        "listedAt": 1661260793,
-        "bumpedAt": 1661260793,
-        "intent": "buy",
-        "count": 1,
-        "status": "active",
-        "source": "user",
-        "item": {
-            "appid": 440,
-            "baseName": "Team Captain",
-            "defindex": 378,
-            "id": "",
-            "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/soldier_officer.f0976b763aa371c65d389d77f5f3429f5a431b5e.png",
-            "marketName": "The Team Captain",
-            "name": "Non-Craftable Team Captain",
-            "origin": null,
-            "originalId": "",
-            "price": {
-                "community": {
-                    "value": 12.55,
-                    "valueHigh": 12.55,
-                    "currency": "metal",
-                    "raw": 12.55,
-                    "short": "12.55 ref",
-                    "long": "$0.3451",
-                    "usd": 0.345125,
-                    "updatedAt": 1635944677,
-                    "difference": 2.2750000000000004
-                },
-                "suggested": {
-                    "raw": 12.55,
-                    "short": "12.55 ref",
-                    "long": "$0.3451",
-                    "usd": 0.345125
-                }
+        "baseName": "Team Captain",
+        "defindex": 378,
+        "id": "",
+        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/soldier_officer.f0976b763aa371c65d389d77f5f3429f5a431b5e.png",
+        "marketName": "The Team Captain",
+        "name": "Non-Craftable Team Captain",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "community": {
+                "value": 12.55,
+                "valueHigh": 12.55,
+                "currency": "metal",
+                "raw": 12.55,
+                "short": "12.55 ref",
+                "long": "$0.3451",
+                "usd": 0.345125,
+                "updatedAt": 1635944677,
+                "difference": 2.2750000000000004
             },
-            "quality": {
-                "id": 6,
-                "name": "Unique",
-                "color": "#FFD700"
-            },
-            "summary": "Level 1-100 Hat",
-            "class": [
-                "Soldier",
-                "Medic",
-                "Heavy"
-            ],
-            "slot": "misc",
-            "tradable": true
-        }
+            "suggested": {
+                "raw": 12.55,
+                "short": "12.55 ref",
+                "long": "$0.3451",
+                "usd": 0.345125
+            }
+        },
+        "quality": {
+            "id": 6,
+            "name": "Unique",
+            "color": "#FFD700"
+        },
+        "summary": "Level 1-100 Hat",
+        "class": [
+            "Soldier",
+            "Medic",
+            "Heavy"
+        ],
+        "slot": "misc",
+        "tradable": true
     },
     "expected": "378;6;uncraftable"
 }

@@ -1,0 +1,52 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "War Paint",
+        "defindex": 9536,
+        "id": "",
+        "imageUrl": "https://scrap.tf/img/items/warpaint/War%20Paint_206_4_0.png",
+        "marketName": "Strange Pizza Polished War Paint (Well-Worn)",
+        "name": "Strange Pizza Polished War Paint (Well-Worn)",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$4.91",
+                "long": "178.55 ref, 3.34 keys",
+                "raw": 118.07222972972973,
+                "value": 491
+            },
+            "suggested": {
+                "raw": 118.07222972972973,
+                "short": "2.21 keys",
+                "long": "118.07 ref, 2.21 keys, $3.25",
+                "usd": 3.2469863175675675
+            }
+        },
+        "quality": {
+            "id": 11,
+            "name": "Strange",
+            "color": "#CF6A32"
+        },
+        "summary": "Level 99 War Paint (Well-Worn)",
+        "texture": {
+            "id": 206,
+            "itemDefindex": 17206,
+            "rarity": {
+                "id": 4,
+                "name": "Commando",
+                "color": "#8847FF"
+            },
+            "name": "Pizza Polished"
+        },
+        "wearTier": {
+            "id": 4,
+            "name": "Well-Worn",
+            "short": "WW"
+        },
+        "tradable": true,
+        "craftable": true
+    },
+    "expected": "17206;11;pk-206;w-4"
+}

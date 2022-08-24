@@ -1,10 +1,7 @@
-add more functions:
-fromNotification
-toSearchParams
-currency?
-blanket?
 
---add war paint tests?
+test:
+toSearchParams
+blanket
 
 -- on preview save and reset click, close the preview
 -- add tooltip for use pages

@@ -1,7 +1,7 @@
 import { cosmeticCollections } from '@juice789/tf2items'
 
 import {
-    compose, prop, pickBy, includes, range, __, allPass, indexOf, propOr, complement, has, equals
+    compose, prop, pickBy, includes, range, __, allPass, propOr, complement, has, startsWith, map, when, chain, assoc, concat
 } from 'ramda'
 
 import {
@@ -33,9 +33,20 @@ const cosmetic = {
     },
     rules: getRules(['effect', 'elevated']),
     itemFn: compose(
+        map(
+            when(
+                compose(
+                    startsWith('Promo '),
+                    propOr('', 'name')
+                ),
+                chain(
+                    assoc('item_name'),
+                    compose(concat(__, ' (Genuine)'), prop('item_name'))
+                )
+            )
+        ),
         pickBy(
             allPass([
-                compose(equals(-1), indexOf('Promo '), propOr('', 'name')),
                 compose(includes(__, ['misc', 'head']), prop('item_slot')),
                 complement(has)('untradable')
             ])

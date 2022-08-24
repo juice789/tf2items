@@ -1,0 +1,102 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "Chemistry Set",
+        "defindex": 20001,
+        "id": "",
+        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/construction_kit.fdc5df204409bca571d7315ed7208c132a918570.png",
+        "marketName": "Collector's Bat Outta Hell Chemistry Set",
+        "name": "Collector's Bat Outta Hell Chemistry Set",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$29.87",
+                "long": "1,086.18 ref, 20.35 keys",
+                "raw": 718.2927702702702,
+                "value": 2987
+            },
+            "suggested": {
+                "raw": 718.2927702702702,
+                "short": "13.45 keys",
+                "long": "718.29 ref, 13.45 keys, $19.75",
+                "usd": 19.753051182432433
+            }
+        },
+        "quality": {
+            "id": 6,
+            "name": "Unique",
+            "color": "#FFD700"
+        },
+        "summary": "Level 5 Recipe",
+        "tradable": true,
+        "craftable": true,
+        "recipe": {
+            "estimatedCraftingCost": {
+                "short": "n/a",
+                "long": "0.00 ref, $0.00",
+                "raw": 0
+            },
+            "inputItems": [],
+            "outputItem": {
+                "appid": 440,
+                "baseName": "Bat Outta Hell",
+                "defindex": 939,
+                "id": "",
+                "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/c_skullbat.b286e6e4d48f0f242c6e14036097cb2cabfef65e.png",
+                "marketName": "Collector's Bat Outta Hell",
+                "name": "Collector's Bat Outta Hell",
+                "origin": null,
+                "originalId": "",
+                "price": {
+                    "steam": {
+                        "currency": "usd",
+                        "short": "$177.75",
+                        "long": "6,463.64 ref, 121.08 keys",
+                        "raw": 4274.407094594594,
+                        "value": 17775
+                    },
+                    "community": {
+                        "value": 276,
+                        "valueHigh": 276,
+                        "currency": "keys",
+                        "raw": 14734.26,
+                        "short": "276 keys",
+                        "long": "14,734.26 ref, $405.19",
+                        "usd": 405.19215,
+                        "updatedAt": 1627598201,
+                        "difference": 123.43000000000029
+                    },
+                    "suggested": {
+                        "raw": 14734.26,
+                        "short": "276 keys",
+                        "long": "14,734.26 ref, $405.19",
+                        "usd": 405.19215
+                    }
+                },
+                "quality": {
+                    "id": 14,
+                    "name": "Collector's",
+                    "color": "#830000"
+                },
+                "summary": "Level 5 Skull Bat",
+                "class": [
+                    "Scout",
+                    "Sniper",
+                    "Soldier",
+                    "Demoman",
+                    "Medic",
+                    "Heavy",
+                    "Pyro"
+                ],
+                "slot": "melee",
+                "tradable": true,
+                "craftable": true
+            },
+            "targetItem": null
+        },
+        "priceindex": "939-14"
+    },
+    "expected": "20006;6;od-939;oq-14"
+}

@@ -1,0 +1,54 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "War Paint",
+        "defindex": 9536,
+        "id": "",
+        "imageUrl": "https://scrap.tf/img/items/warpaint/War%20Paint_275_4_0.png",
+        "marketName": "Strange Snow Globalization War Paint (Well-Worn)",
+        "name": "Strange Isotope Snow Globalization War Paint (Well-Worn)",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$0.74",
+                "long": "26.91 ref",
+                "raw": 17.794999999999998,
+                "value": 74
+            }
+        },
+        "quality": {
+            "id": 11,
+            "name": "Strange",
+            "color": "#CF6A32"
+        },
+        "summary": "Level 99 War Paint (Well-Worn)",
+        "texture": {
+            "id": 275,
+            "itemDefindex": 17275,
+            "rarity": {
+                "id": 3,
+                "name": "Mercenary",
+                "color": "#4B69FF"
+            },
+            "name": "Snow Globalization"
+        },
+        "wearTier": {
+            "id": 4,
+            "name": "Well-Worn",
+            "short": "WW"
+        },
+        "particle": {
+            "id": 702,
+            "name": "Isotope",
+            "shortName": "isotope",
+            "imageUrl": "/images/440/particles/702_94x94.png",
+            "type": "weapon"
+        },
+        "tradable": true,
+        "craftable": true,
+        "priceindex": "702"
+    },
+    "expected": "17275;5;strange;u-702;pk-275;w-4"
+}

@@ -1,0 +1,119 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "Strangifier",
+        "defindex": 6522,
+        "id": "",
+        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/strange_generic.c49007ba98593c7ac9fded38d2d61b1d2b4091b9.png",
+        "marketName": "Outback Intellectual Strangifier",
+        "name": "Outback Intellectual Strangifier",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$1.66",
+                "long": "60.36 ref, 1.13 keys",
+                "raw": 39.91851351351351,
+                "value": 166
+            },
+            "community": {
+                "value": 40.11,
+                "valueHigh": 42.55,
+                "currency": "metal",
+                "raw": 41.33,
+                "short": "40.11–42.55 ref",
+                "long": "0.77 keys, $1.14",
+                "usd": 1.1533499999999999,
+                "updatedAt": 1630055233,
+                "difference": 41.33
+            },
+            "suggested": {
+                "raw": 41.33,
+                "short": "41.33 ref",
+                "long": "0.77 keys, $1.14",
+                "usd": 1.136575
+            }
+        },
+        "quality": {
+            "id": 6,
+            "name": "Unique",
+            "color": "#FFD700"
+        },
+        "summary": "Level 5 Strangifier",
+        "tradable": true,
+        "craftable": true,
+        "recipe": {
+            "estimatedCraftingCost": [],
+            "inputItems": [],
+            "outputItem": null,
+            "targetItem": {
+                "itemName": "Outback Intellectual",
+                "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/xms_sniper_sweater_vest.c8021e0098fae1cc1c1c669f262a58235126d0c3.png",
+                "_source": {
+                    "_id": "440_645",
+                    "name": "The Outback Intellectual",
+                    "defindex": 645,
+                    "item_class": "tf_wearable",
+                    "item_type_name": "Apparel",
+                    "item_name": "Outback Intellectual",
+                    "item_description": "Argyle. Pipe-smoking. Individually, they make you look like an idiot. Together, they make you look smart AND stylish! Just like Umberto Eco!",
+                    "proper_name": true,
+                    "item_slot": "misc",
+                    "item_quality": 6,
+                    "image_inventory": "backpack/player/items/sniper/xms_sniper_sweater_vest",
+                    "min_ilevel": 15,
+                    "max_ilevel": 15,
+                    "image_url": "https://steamcdn-a.akamaihd.net/apps/440/icons/xms_sniper_sweater_vest.c8021e0098fae1cc1c1c669f262a58235126d0c3.png",
+                    "image_url_large": "https://steamcdn-a.akamaihd.net/apps/440/icons/xms_sniper_sweater_vest_large.7eee1eb9e5e3b6893d58371c192ed34297c4ea31.png",
+                    "drop_type": "none",
+                    "craft_class": "hat",
+                    "craft_material_type": "hat",
+                    "capabilities": {
+                        "paintable": true,
+                        "nameable": true,
+                        "can_craft_if_purchased": true,
+                        "can_gift_wrap": true,
+                        "can_craft_count": true,
+                        "can_craft_mark": true,
+                        "can_be_restored": true,
+                        "strange_parts": true,
+                        "can_card_upgrade": true,
+                        "can_strangify": true,
+                        "can_killstreakify": true,
+                        "can_consume": true
+                    },
+                    "used_by_classes": [
+                        "Sniper"
+                    ],
+                    "attributes": [
+                        {
+                            "name": "kill eater score type",
+                            "class": "kill_eater_score_type",
+                            "value": 64
+                        },
+                        {
+                            "name": "kill eater kill type",
+                            "class": "kill_eater_kill_type",
+                            "value": 64
+                        },
+                        {
+                            "name": "attach particle effect static",
+                            "class": "set_attached_particle_static",
+                            "value": 28
+                        }
+                    ],
+                    "first_sale_date": 1324252800,
+                    "release_date": 1323995394,
+                    "appid": 440,
+                    "_keywords": [
+                        "Outback",
+                        "Intellectual"
+                    ]
+                }
+            }
+        },
+        "priceindex": "645"
+    },
+    "expected": "6522;6;td-645"
+}

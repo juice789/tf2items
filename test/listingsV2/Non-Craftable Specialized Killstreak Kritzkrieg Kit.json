@@ -1,0 +1,112 @@
+{
+    "listing": {
+        "appid": 440,
+        "baseName": "Kit",
+        "defindex": 6523,
+        "id": "",
+        "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/professional_grease.5448b2535917f85e44100c8adac3c9bdbd8c80b1.png",
+        "marketName": "Specialized Killstreak Kritzkrieg Kit",
+        "name": "Non-Craftable Specialized Killstreak Kritzkrieg Kit",
+        "origin": null,
+        "originalId": "",
+        "price": {
+            "steam": {
+                "currency": "usd",
+                "short": "$1.87",
+                "long": "68.00 ref, 1.27 keys",
+                "raw": 44.968445945945945,
+                "value": 187
+            },
+            "suggested": {
+                "raw": 44.968445945945945,
+                "short": "44.97 ref",
+                "long": "44.97 ref, 0.84 keys, $1.24",
+                "usd": 1.2366322635135134
+            }
+        },
+        "quality": {
+            "id": 6,
+            "name": "Unique",
+            "color": "#FFD700"
+        },
+        "summary": "Level 5 Specialized Killstreak Kit",
+        "killstreakTier": 2,
+        "tradable": true,
+        "recipe": {
+            "estimatedCraftingCost": [],
+            "inputItems": [],
+            "outputItem": null,
+            "targetItem": {
+                "itemName": "Kritzkrieg",
+                "imageUrl": "https://steamcdn-a.akamaihd.net/apps/440/icons/c_overhealer.0a4788b6ea1de4492af02eee8874582477ee7dd4.png",
+                "_source": {
+                    "_id": "440_35",
+                    "name": "The Kritzkrieg",
+                    "defindex": 35,
+                    "item_class": "tf_weapon_medigun",
+                    "item_type_name": "Medi Gun",
+                    "item_name": "Kritzkrieg",
+                    "proper_name": true,
+                    "item_slot": "secondary",
+                    "item_quality": 6,
+                    "image_inventory": "backpack/weapons/c_models/c_overhealer/c_overhealer",
+                    "min_ilevel": 8,
+                    "max_ilevel": 8,
+                    "image_url": "https://steamcdn-a.akamaihd.net/apps/440/icons/c_overhealer.0a4788b6ea1de4492af02eee8874582477ee7dd4.png",
+                    "image_url_large": "https://steamcdn-a.akamaihd.net/apps/440/icons/c_overhealer_large.ae4b95d05aa93b1c4230078081ba335745130058.png",
+                    "craft_class": "weapon",
+                    "craft_material_type": "weapon",
+                    "capabilities": {
+                        "nameable": true,
+                        "can_gift_wrap": true,
+                        "can_craft_mark": true,
+                        "can_be_restored": true,
+                        "strange_parts": true,
+                        "can_card_upgrade": true,
+                        "can_strangify": true,
+                        "can_killstreakify": true,
+                        "can_consume": true
+                    },
+                    "used_by_classes": [
+                        "Medic"
+                    ],
+                    "attributes": [
+                        {
+                            "name": "medigun charge is crit boost",
+                            "class": "set_charge_type",
+                            "value": 1
+                        },
+                        {
+                            "name": "ubercharge rate bonus",
+                            "class": "mult_medigun_uberchargerate",
+                            "value": 1.25
+                        },
+                        {
+                            "name": "kill eater score type",
+                            "class": "kill_eater_score_type",
+                            "value": 2
+                        },
+                        {
+                            "name": "kill eater score type 2",
+                            "class": "kill_eater_score_type_2",
+                            "value": 1
+                        },
+                        {
+                            "name": "special taunt",
+                            "class": "special_taunt",
+                            "value": 1
+                        }
+                    ],
+                    "first_sale_date": 1285718400,
+                    "release_date": 1309463324,
+                    "appid": 440,
+                    "_keywords": [
+                        "Kritzkrieg"
+                    ]
+                }
+            }
+        },
+        "priceindex": "2-35"
+    },
+    "expected": "6523;6;uncraftable;kt-2;td-35"
+}

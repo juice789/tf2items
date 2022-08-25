@@ -29,7 +29,7 @@ const quality = ({
     texture,
     elevated
 }) => items[defindex].item_name === 'War Paint' || (Boolean(texture) || ['701', '702', '703', '704'].includes(effect))
-        ? (elevated ? 11 : 5)
+        ? (elevated ? '11' : '5')
         : quality
 
 const australium = ifElse(

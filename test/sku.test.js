@@ -135,7 +135,8 @@ describe('itemFromSku, itemNameFromSku', () => {
         const sku = '5021;6'
         expect(itemFromSku(sku)).toEqual({
             defindex: '5021',
-            quality: '6'
+            quality: '6',
+            sku
         })
         expect(itemNameFromSku(sku)).toEqual('Mann Co. Supply Crate Key')
     })
@@ -149,7 +150,8 @@ describe('itemFromSku, itemNameFromSku', () => {
             killstreakTier: '3',
             festivized: true,
             texture: '213',
-            wear: '1'
+            wear: '1',
+            sku
         })
         expect(itemNameFromSku(sku)).toEqual("Strange Unusual Isotope Festivized Professional Killstreak Miami Element Crusader's Crossbow (Factory New)")
     })
@@ -160,7 +162,8 @@ describe('itemFromSku, itemNameFromSku', () => {
             quality: '6',
             target: '451',
             output: '6522',
-            oq: '6'
+            oq: '6',
+            sku
         })
         expect(itemNameFromSku(sku)).toEqual('Bonk Boy Strangifier Chemistry Set')
     })
@@ -171,7 +174,8 @@ describe('itemFromSku, itemNameFromSku', () => {
             quality: '11',
             festivized: true,
             killstreakTier: '1',
-            australium: true
+            australium: true,
+            sku
         })
         expect(itemNameFromSku(sku)).toEqual('Strange Festivized Killstreak Australium Stickybomb Launcher')
     })
@@ -180,7 +184,8 @@ describe('itemFromSku, itemNameFromSku', () => {
         expect(itemFromSku(sku)).toEqual({
             defindex: '5045',
             quality: '6',
-            series: '21'
+            series: '21',
+            sku
         })
         expect(itemNameFromSku(sku)).toEqual('Mann Co. Supply Crate #21')
     })
@@ -189,7 +194,8 @@ describe('itemFromSku, itemNameFromSku', () => {
         expect(itemFromSku(sku)).toEqual({
             defindex: '30667',
             quality: '6',
-            craft: '42'
+            craft: '42',
+            sku
         })
         expect(itemNameFromSku(sku)).toEqual('#42 Batsaber')
     })

@@ -2,7 +2,6 @@ const {
     defaultTo,
     nth,
     compose,
-    keys,
     length,
     prop,
     map,
@@ -24,12 +23,13 @@ const {
     converge,
     concat,
     of,
-    unnest
+    unnest,
+    pick
 } = require('ramda')
 const { renameKeys } = require('ramda-adjunct')
 
 const { safeItems: items } = require('./schemaItems.js')
-const { skuFromItem } = require('./sku.js')
+const { skuFromItem, itemFromSku } = require('./sku.js')
 
 const choose = (n, xs) =>
     n < 1 || n > xs.length
@@ -49,7 +49,6 @@ const getCombos = uncurryN(3, (min, max, xs) =>
 
 const unboxSkinsRemap = when(
     allPass([
-        compose(includes(__, ['15', '5']), prop('quality')),//strange too
         complement(has)('texture'),//no texture
         compose(//is an unbox skin
             allPass([
@@ -85,7 +84,6 @@ const unboxSkinsRemap = when(
 
 const warPaintRemap = when(
     allPass([
-        propEq('quality', '15'),
         complement(has)('texture'),
         compose(
             propEq('item_name', 'War Paint'),
@@ -101,20 +99,21 @@ const remaps = compose(
     warPaintRemap
 )
 
-const toIgnore = ['killstreakTier', 'elevated', 'festivized', 'effect', 'texture', 'wear', 'craft', 'series']
+const propListDefault = ['killstreakTier', 'elevated', 'festivized', 'effect', 'texture', 'wear', 'craft', 'series']
 
-const blanketify = uncurryN(2, (skus, item) => compose(
-    map(renameKeys({ sku2: 'sku', sku: 'originalSku' })),
-    filter(compose(includes(__, skus), prop('sku2'))),
-    map(chain(assoc('sku2'), skuFromItem)),
+const blanketify = uncurryN(3, (propList, skus, sku) => compose(
+    map(pick(['sku', 'originalSku'])),
+    map(renameKeys({ _sku: 'sku', sku: 'originalSku' })),//reset the sku, save the original sku
+    filter(compose(includes(__, skus), prop('_sku'))),//find every new combination in the sku list
+    map(chain(assoc('_sku'), skuFromItem)),//save the new sku
     unnest,
-    map(remaps),
-    map(omit(__, item)),
-    chain(compose(getCombos(0), length), identity),
-    filter(compose(Boolean, prop(__, item)))
-)(toIgnore))
+    map(remaps),//decode defindices that are not possible anymore
+    map(omit(__, itemFromSku(sku))),//create items from the combinations
+    concat([[]]),//create the last combination where no prop is removed. If the skus includes the sku we can return it.
+    chain(compose(getCombos(0), length), identity),//create every possible combination
+    filter(compose(Boolean, prop(__, itemFromSku(sku))))//remove every prop from proplist that is not present in the item
+)(propList || propListDefault))
 
 module.exports = {
-    remaps,
     blanketify
 }

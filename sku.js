@@ -86,6 +86,7 @@ const itemFromSku = (sku) => {
         quality,
         ...decodeRules(more)
     }
+    item.sku = sku
     return item
 }
 

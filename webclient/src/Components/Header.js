@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { prop, equals, __, path, compose, length, keys, pickBy, startsWith, find, propOr } from 'ramda'
-import { SearchIcon, PlusIcon, TimesIcon, CogIcon, SyncAltIcon, EllipsisHIcon } from 'react-line-awesome'
+import { SearchIcon, PlusIcon, TimesIcon, CogIcon, SyncAltIcon, EllipsisHIcon, SquareFullIcon } from 'react-line-awesome'
 import { useMediaQuery } from '@react-hook/media-query'
 import { useEventListener } from './utils'
 
@@ -42,6 +42,9 @@ position:relative;
     display:flex;
     align-items:center;
     justify-content:center;
+}
+@media (min-width:850px){
+    display:${({ onlyResponsive }) => onlyResponsive ? 'none' : 'flex'}
 }
 `
 
@@ -114,7 +117,7 @@ const HeaderActual = () => {
 
     const handler = useCallback(
         (e) => {
-            if (dropdownOpen && !menuRef.current.contains(e.target)) {
+            if (dropdownOpen && !menuRef.current?.contains(e.target)) {
                 toggleDropdown(!dropdownOpen)
             }
         },
@@ -132,6 +135,7 @@ const HeaderActual = () => {
     }
     const isResponsive = useMediaQuery('(max-width: 850px)')
     const searchTerm = useSelector(path(['search', 'value']))
+    const isSelectionOpen = useSelector(prop('isSelectionOpen'))
     useEventListener('mousedown', handler)
 
     const searchChange = () => {
@@ -166,11 +170,15 @@ const HeaderActual = () => {
         }
     }
 
+    const openSelection = () => {
+        dispatch({ type: 'TOGGLE_SELECTION' })
+    }
+
     const headerContents = <>
         <Sort />
         {usePages && <Pages />}
         <Button onClick={() => toggleSearch(!searchOpen)} isOpen={searchOpen}>
-            <SearchIcon onClick={e => {searchOpen && e.stopPropagation()}}/>
+            <SearchIcon onClick={e => { searchOpen && e.stopPropagation() }} />
             {
                 searchOpen
                     ? <>
@@ -200,6 +208,15 @@ const HeaderActual = () => {
         >
             <PlusIcon />
             <Label>Add Items</Label>
+            <PlaceHolder />
+        </Button>
+        <Button
+            active={isSelectionOpen}
+            onClick={openSelection}
+            onlyResponsive={true}
+        >
+            <SquareFullIcon />
+            <Label>Select Items</Label>
             <PlaceHolder />
         </Button>
     </>

@@ -1,12 +1,4 @@
 
-test:
-blanket
-
--- on preview save and reset click, close the preview
--- add tooltip for use pages
--- sort defult label click still not working
--- multi stage select (checkbox)
-
 option 1: 
 
 call the sagas anywhere your redux-saga app + add the api context from the api.js

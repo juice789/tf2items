@@ -60,3 +60,12 @@ export function sort(state = { sortType: 'SORT_DEFAULT', sortMode: null }, actio
             return state
     }
 }
+
+export function isSelectionOpen(state = false, action) {
+    switch (action.type) {
+        case 'TOGGLE_SELECTION':
+            return !state
+        default:
+            return state
+    }
+}

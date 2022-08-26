@@ -106,7 +106,7 @@ user-select:none;
     background: ${({ danger }) => danger ? '#762114' : '#897fd0'};
 }
 `
-const PreviewActual = () => {
+const PreviewActual = ({ togglePreview }) => {
 
     const dispatch = useDispatch()
     const previewItems = useSelector(compose(values, prop('preview')), shallowEqual)
@@ -114,12 +114,18 @@ const PreviewActual = () => {
     const pages = useSelector(prop('pages'))
 
     const removeItem = (sku) => () => dispatch({ type: 'REMOVE_PREVIEW_ITEM', sku })
-    const clearItems = () => dispatch({ type: 'CLEAR_PREVIEW' })
+    const clearItems = () => {
+        dispatch({ type: 'CLEAR_PREVIEW' })
+        togglePreview(false)
+    }
 
-    const saveItems = () => dispatch({
-        type: 'SAVE_ITEMS',
-        items: indexBy(prop('sku'), previewItems)
-    })
+    const saveItems = () => {
+        dispatch({
+            type: 'SAVE_ITEMS',
+            items: indexBy(prop('sku'), previewItems)
+        })
+        togglePreview(false)
+    }
 
     const items = map(({ sku, page }) => (
         <Row key={sku}>

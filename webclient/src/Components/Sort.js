@@ -61,7 +61,6 @@ background: ${({ isActive }) => isActive ? '#6e66a6' : 'inherit'};
 }
 `
 
-
 const Label = styled.div`
 display: flex;
 height: 100%;
@@ -69,11 +68,6 @@ min-width:5rem;
 align-items: center;
 padding-left: 0.5rem;
 flex-grow: 1;
-`
-
-const Inner = styled.div`
-display:flex;
-align-items:center;
 `
 
 const OptionActual = ({ type, label, toggleDropdown, selected }) => {
@@ -111,7 +105,6 @@ const DropdownActual = ({ toggleDropdown }) => {
     </Dropdown>
 }
 
-
 const SortActual = () => {
 
     const { sortType, sortMode } = useSelector(prop('sort'))
@@ -132,6 +125,7 @@ const SortActual = () => {
 
     const dropDownClick = (e) => {
         if (ref.current === e.target || Array.from(ref.current.childNodes).includes(e.target)) {
+            console.log('clicky')
             toggleDropdown(!dropdownOpen)
         }
     }
@@ -143,7 +137,7 @@ const SortActual = () => {
 
     return (
         <Sort ref={ref} onClick={dropDownClick}>
-            <Inner>{icon}&nbsp;<span>{sorts[sortType]}</span></Inner>
+            {icon}&nbsp;{sorts[sortType]}
             <AngleDownIcon />
             {
                 dropdownOpen && <DropdownActual toggleDropdown={toggleDropdown} />

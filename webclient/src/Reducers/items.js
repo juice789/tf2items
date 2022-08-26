@@ -152,6 +152,7 @@ export function selectedItems(state = [], action) {
     switch (action.type) {
         case 'RESET_STATE':
         case 'NEW_STATE':
+        case 'TOGGLE_SELECTION':
             return []
         case 'ITEM_SELECTED':
             return has(action.sku, state) ? dissoc(action.sku, state) : assoc(action.sku, true, state)

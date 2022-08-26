@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList as List, areEqual } from 'react-window'
+import { useMediaQuery } from '@react-hook/media-query'
 
 import { prop, compose, propEq, path, gte, when, __, indexOf, map, assoc, chain, toLower, values, filter, cond, reverse, sortBy, identity, T, propOr, equals } from 'ramda'
 
@@ -69,13 +70,12 @@ display: flex;
 
 const StickyRow = memo(() => {
 
-    const isOpen = useSelector(compose(
-        equals('settings'),
-        propOr([], 'openedAside')
-    ))
-
+    const settingsOpen = useSelector(compose(equals('settings'), propOr([], 'openedAside')))
+    const selectionOpen = useSelector(prop('isSelectionOpen'))
+    const isResponsive = useMediaQuery('(max-width: 850px)')
+    const isHidden = settingsOpen === false && (isResponsive ? selectionOpen === false : true)
     return <Th>
-        {isOpen ? <Label w={2} /> : null}
+        {isHidden ? null : <Label w={2} />}
         <Label w={10} w2={8}>Links</Label>
         <Label grow={true}>Item</Label>
     </Th>

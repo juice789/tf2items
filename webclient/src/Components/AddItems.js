@@ -110,7 +110,7 @@ const AddItemsActual = () => {
                 </CategoriesOuter>
             }
             <AsideInner>
-                {previewOpen && <Preview />}
+                {previewOpen && <Preview togglePreview={togglePreview} />}
                 {category !== '' && <FormOuter isHidden={previewOpen}><Form key={category + counter} /></FormOuter>}
             </AsideInner>
         </Aside>

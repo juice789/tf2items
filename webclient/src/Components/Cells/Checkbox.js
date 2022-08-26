@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { propOr, compose, equals, has } from 'ramda'
+import { propOr, compose, equals, has, prop } from 'ramda'
 import { CheckSquareIcon, SquareIcon } from 'react-line-awesome'
 import { Cell } from './styles'
+import { useMediaQuery } from '@react-hook/media-query'
 
 const CustomCell = styled(Cell)`
 width: 2rem;
@@ -30,8 +31,9 @@ export const Checkbox = React.memo(({ sku }) => {
 
     const dispatch = useDispatch()
 
-    const isOpen = useSelector(compose(equals('settings'), propOr([], 'openedAside')))
-
+    const settingsOpen = useSelector(compose(equals('settings'), propOr([], 'openedAside')))
+    const selectionOpen = useSelector(prop('isSelectionOpen'))
+    const isResponsive = useMediaQuery('(max-width: 850px)')
     const checked = useSelector(compose(
         has(sku),
         propOr({}, 'selectedItems')
@@ -40,7 +42,7 @@ export const Checkbox = React.memo(({ sku }) => {
     const selectThis = () => dispatch({ type: 'ITEM_SELECTED', sku })
 
     return (
-        <CustomCell isHidden={!isOpen} onClick={selectThis}>
+        <CustomCell isHidden={settingsOpen === false && (isResponsive ? selectionOpen === false : true)} onClick={selectThis}>
             <Control checked={checked}>
                 {checked ? <CheckSquareIcon /> : <SquareIcon />}
             </Control>

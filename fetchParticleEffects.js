@@ -11,10 +11,10 @@ const transformEffects = compose(
     path(['result', 'attribute_controlled_attached_particles'])
 )
 
-function* fetchParticleEffects() {
+function* fetchParticleEffectsSaga() {
     const { getSchemaOverview } = yield getContext('api')
     const schema = yield call(getSchemaOverview)
     return transformEffects(schema)
 }
 
-module.exports = { fetchParticleEffects }
+module.exports = { fetchParticleEffectsSaga }

@@ -29,7 +29,7 @@ const toBpQuality = (sku) => {
 const toBpName = (sku) => {
 
     const item = omit(
-        ['quality', 'elevated', 'uncraftable', 'craft', 'target', 'output', 'oq'],
+        ['quality', 'elevated', 'uncraftable', 'craft', 'target', 'output', 'oq', 'effect'],
         itemFromSku(sku)
     )
 

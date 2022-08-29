@@ -12,4 +12,5 @@ const safeItems = new Proxy(schema.items, {
 module.exports = {
     ...schema,
     safeItems,
+    items: schema.items
 }

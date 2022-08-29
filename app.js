@@ -14,6 +14,12 @@ const createApi = require('./api.js')
 const sagas = require('./sagas.js')
 const { saveSchemaSaga } = require('./saveSchema.js')
 
+const { fromEconItem } = require('./fromEconItem.js')
+const { fromListingV1 } = require('./fromListingV1.js')
+const { fromListingV2 } = require('./fromListingV2.js')
+const { blanketify } = require('./blanket.js')
+const { toSearchParams } = require('./toSearchParams.js')
+
 const getInstance = (options) => {
     const api = createApi(options)
     return compose(
@@ -38,5 +44,11 @@ module.exports = {
     ...sagas,
     ...sagaHelpers,
     saveSchemaSaga,
-    getInstance
+    getInstance,
+    createApi,
+    fromEconItem,
+    fromListingV1,
+    fromListingV2,
+    blanketify,
+    toSearchParams
 }

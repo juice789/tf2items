@@ -159,4 +159,10 @@ describe('blanketify', () => {
         ]))
     })
 
+    it('not in sku list at all', () => {
+        const skus = ['5021;6']
+        const sku = '6527;6;uncraftable;kt-1;td-35'
+        expect(sortBySku(blanketify(['target'], skus, sku))).toEqual(sortBySku([]))
+    })
+
 })

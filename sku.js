@@ -113,7 +113,7 @@ const getName = ({
     craft && '#' + craft,
     uncraftable && 'Non-Craftable',
     elevated && 'Strange',
-    quality && !['6', '15'].includes(quality.toString()) && (qualityBpStyle ? effect : true) && qualityNames[quality],
+    quality && !['6', '15'].includes(quality.toString()) && (qualityBpStyle ? !effect : true) && qualityNames[quality],
     oq && oq.toString() !== '6' && qualityNames[oq],
     target && killstreakTier && killstreakTiers[killstreakTier],
     target && safeItems[target].item_name,
@@ -129,9 +129,9 @@ const getName = ({
     series && '#' + series
 ].filter(Boolean).join(' ')
 
-const itemNameFromSku = (sku) => {
+const itemNameFromSku = (sku, ...params) => {
     const item = itemFromSku(sku)
-    return getName(item)
+    return getName(item, ...params)
 }
 
 module.exports = {

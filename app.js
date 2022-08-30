@@ -8,8 +8,9 @@ const sagaHelpers = require('./sagaHelpers')
 const items = require('./schemaItems.js')
 const sku = require('./sku.js')
 const skuBp = require('./skuBp.js')
+const skuLinks = require('./skuLinks.js')
 
-const createApi = require('./api.js')
+const { createApi, api } = require('./api.js')
 
 const sagas = require('./sagas.js')
 const { saveSchemaSaga } = require('./saveSchema.js')
@@ -43,9 +44,11 @@ module.exports = {
     ...skuBp,
     ...sagas,
     ...sagaHelpers,
+    ...skuLinks,
     saveSchemaSaga,
     getInstance,
     createApi,
+    api,
     fromEconItem,
     fromListingV1,
     fromListingV2,

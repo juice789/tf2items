@@ -56,4 +56,7 @@ api.getAssetClassInfo = ({ steamApiKey }) => (ids, appId = 440) => myAxios({
 
 const createApi = compose(map(__, api), applyTo)
 
-module.exports = createApi
+module.exports = {
+    createApi,
+    api
+}

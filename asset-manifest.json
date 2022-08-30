@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/tf2items/static/js/main.d04ba600.js",
+    "main.js": "/tf2items/static/js/main.c784c78f.js",
     "static/media/marketplace.png": "/tf2items/static/media/marketplace.e101149dd640ea94c705.png",
     "static/media/steam.svg": "/tf2items/static/media/steam.25e6a85f4870e0149610ac8fcdb034c9.svg",
     "static/media/backpack.svg": "/tf2items/static/media/backpack.b639db97fd426698d18185f958ba7778.svg",
     "index.html": "/tf2items/index.html",
-    "main.d04ba600.js.map": "/tf2items/static/js/main.d04ba600.js.map"
+    "main.c784c78f.js.map": "/tf2items/static/js/main.c784c78f.js.map"
   },
   "entrypoints": [
-    "static/js/main.d04ba600.js"
+    "static/js/main.c784c78f.js"
   ]
 }

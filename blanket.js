@@ -24,7 +24,8 @@ const {
     concat,
     of,
     unnest,
-    pick
+    pick,
+    mergeRight
 } = require('ramda')
 const { renameKeys } = require('ramda-adjunct')
 
@@ -101,17 +102,20 @@ const remaps = compose(
 
 const propListDefault = ['killstreakTier', 'elevated', 'festivized', 'effect', 'texture', 'wear', 'craft', 'series']
 
-const blanketify = uncurryN(3, (propList, skus, sku) => compose(
-    map(pick(['sku', 'originalSku'])),
-    map(renameKeys({ _sku: 'sku', sku: 'originalSku' })),//reset the sku, save the original sku
+const blanketify = uncurryN(3, (propList, skus, item) => compose(
+    map(compose(
+        mergeRight(item),//merge the props with the item, keeping the assetid for use later
+        pick(['sku', 'originalSku']),
+        renameKeys({ _sku: 'sku', sku: 'originalSku' })//reset the sku, save the original sku
+    )),
     filter(compose(includes(__, skus), prop('_sku'))),//find every new combination in the sku list
     map(chain(assoc('_sku'), skuFromItem)),//save the new sku
     unnest,
     map(remaps),//decode defindices that are not possible anymore
-    map(omit(__, itemFromSku(sku))),//create items from the combinations
+    map(omit(__, itemFromSku(item.sku))),//create items from the combinations
     concat([[]]),//create the last combination where no prop is removed. If the skus includes the sku we can return it.
     chain(compose(getCombos(0), length), identity),//create every possible combination
-    filter(compose(Boolean, prop(__, itemFromSku(sku))))//remove every prop from proplist that is not present in the item
+    filter(compose(Boolean, prop(__, itemFromSku(item.sku))))//remove every prop from proplist that is not present in the item
 )(propList || propListDefault))
 
 module.exports = {

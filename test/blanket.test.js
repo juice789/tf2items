@@ -56,7 +56,7 @@ describe('blanketify', () => {
             }
         ]))
     })
-
+    /*
     it('blanket unusual, + exact effect too', () => {
         const skus = ['177;5', '177;5;u-79']
         const sku = '177;5;u-79'
@@ -70,7 +70,7 @@ describe('blanketify', () => {
                 originalSku: '177;5;u-79'
             }
         ]))
-    })
+    })*/
 
     it('blanket war paints', () => {
         const skus = ['9536;15', '17235;15;pk-235', '9536;15;w-1']

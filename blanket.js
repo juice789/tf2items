@@ -113,7 +113,7 @@ const blanketify = uncurryN(3, (propList, skus, item) => compose(
     unnest,
     map(remaps),//decode defindices that are not possible anymore
     map(omit(__, itemFromSku(item.sku))),//create items from the combinations
-    concat([[]]),//create the last combination where no prop is removed. If the skus includes the sku we can return it.
+    //concat([[]]),//create the last combination where no prop is removed. If the skus includes the sku we can return it.
     chain(compose(getCombos(0), length), identity),//create every possible combination
     filter(compose(Boolean, prop(__, itemFromSku(item.sku))))//remove every prop from proplist that is not present in the item
 )(propList || propListDefault))

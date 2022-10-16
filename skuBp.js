@@ -57,12 +57,23 @@ const toBpPriceIndex = (sku) => {
     ].filter(Boolean).join('/')
 }
 
-const listingFromSku = (sku) => {
+const listingV1FromSku = (sku) => {
     const { uncraftable } = itemFromSku(sku)
     return {
         quality: toBpQuality(sku),
         craftable: uncraftable ? '0' : '1',
         item_name: toBpName(sku),
+        priceindex: toBpPriceIndex(sku)
+    }
+}
+
+const listingV2ResolvableFromSku = (sku) => {
+    const { uncraftable } = itemFromSku(sku)
+    return {
+        quality: toBpQuality(sku),
+        craftable: uncraftable ? '0' : '1',
+        item: toBpName(sku),
+        tradable: '1',
         priceindex: toBpPriceIndex(sku)
     }
 }
@@ -82,6 +93,7 @@ module.exports = {
     toBpName,
     toBpId,
     toBpPriceIndex,
-    listingFromSku,
+    listingV1FromSku,
+    listingV2ResolvableFromSku,
     toBpSku
 }

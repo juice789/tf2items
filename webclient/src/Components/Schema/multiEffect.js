@@ -31,17 +31,22 @@ const multiEffectList = {
     s2021: filterEffects(range(177, 189)),
     h2021: filterEffects(range(189, 205)),
     w2021: filterEffects(range(205, 224)),
+    s2022: filterEffects(range(224, 257)),
+    h2022: filterEffects(range(257, 270)),
+    w2022: filterEffects(range(270, 279)),
     wep: filterEffects(range(701, 705)),
     wep2: filterEffects(range(701, 704)),
-    taunt1: filterEffects(range(3001, 3011)),
-    taunt2: filterEffects(range(3011, 3017)),
-    taunt3: filterEffects(range(3017, 3023)),
-    taunt4: filterEffects(range(3023, 3031)),
-    taunt5: filterEffects(range(3031, 3037)),
-    taunt6: filterEffects(range(3037, 3049)),
-    taunt7: filterEffects(range(3049, 3057)),
-    taunt8: filterEffects(range(3059, 3073)),
-    taunt9: filterEffects(range(3073, 3088))
+    taunt01: filterEffects(range(3001, 3011)),
+    taunt02: filterEffects(range(3011, 3017)),
+    taunt03: filterEffects(range(3017, 3023)),
+    taunt04: filterEffects(range(3023, 3031)),
+    taunt05: filterEffects(range(3031, 3037)),
+    taunt06: filterEffects(range(3037, 3049)),
+    taunt07: filterEffects(range(3049, 3057)),
+    taunt08: filterEffects(range(3059, 3073)),
+    taunt09: filterEffects(range(3073, 3088)),
+    taunt10: filterEffects(range(3088, 3105)),
+    taunt11: filterEffects(range(3105, 3114))
 }
 
 export default multiEffectList

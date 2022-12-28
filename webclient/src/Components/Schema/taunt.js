@@ -35,15 +35,17 @@ const taunt = {
         label: 'Multi effects',
         isClearable: true,
         options: [
-            ['taunt1', 'OG effects'],
-            ['taunt2', 'Halloween 1'],
-            ['taunt3', 'Halloween 2'],
-            ['taunt4', 'Halloween 3'],
-            ['taunt5', 'Halloween 4'],
-            ['taunt6', 'Halloween 5'],
-            ['taunt7', 'Winter 2020'],
-            ['taunt8', 'Halloween 2021'],
-            ['taunt9', 'Winter 2021']
+            ['taunt01', 'OG effects'],
+            ['taunt02', 'Halloween 1'],
+            ['taunt03', 'Halloween 2'],
+            ['taunt04', 'Halloween 3'],
+            ['taunt05', 'Halloween 4'],
+            ['taunt06', 'Halloween 5'],
+            ['taunt07', 'Winter 2020'],
+            ['taunt08', 'Halloween 2021'],
+            ['taunt09', 'Winter 2021'],
+            ['taunt10', 'Halloween 2022'],
+            ['taunt11', 'Winter 2022'],
         ]
     },
     validation: {

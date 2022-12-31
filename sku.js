@@ -108,7 +108,8 @@ const getName = ({
     craft
 },
     bpTexture = false,
-    qualityBpStyle = false
+    qualityBpStyle = false,
+    useProperName = false
 ) => [
     craft && '#' + craft,
     uncraftable && 'Non-Craftable',
@@ -124,6 +125,7 @@ const getName = ({
     texture && textures[texture],
     bpTexture && '|',
     australium && 'Australium',
+    useProperName && safeItems[defindex].propername === '1' && quality.toString() === '6' && 'The',
     safeItems[defindex].item_name,
     wear && '(' + wears[wear] + ')',
     series && '#' + series

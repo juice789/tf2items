@@ -83,7 +83,7 @@ const toBpSku = (sku) => {
         ['craft'],
         itemFromSku(sku)
     )
-    return getName(item, null, Boolean(item.effect))
+    return getName(item, null, Boolean(item.effect), true)
 }
 
 const toBpId = (sku) => crypto.createHash('md5').update(toBpSku(sku)).digest('hex')

@@ -84,7 +84,8 @@ const scmUrl = (sku) => {
         texture,
         wear,
         australium,
-        series
+        series,
+        uncraftable
     } = itemFromSku(sku)
 
     const chemSeries = {

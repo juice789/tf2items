@@ -125,7 +125,7 @@ const getName = ({
     texture && textures[texture],
     bpTexture && '|',
     australium && 'Australium',
-    useProperName && safeItems[defindex].propername === '1' && quality.toString() === '6' && 'The',
+    useProperName && safeItems[defindex].propername === '1' && quality.toString() === '6' && !uncraftable && !elevated && !festivized && !killstreakTier && 'The',
     safeItems[defindex].item_name,
     wear && '(' + wears[wear] + ')',
     series && '#' + series

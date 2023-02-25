@@ -134,6 +134,7 @@ const ItemListActual = memo(() => {
         map(prop('sku')),
         cond([
             [() => sortType === 'SORT_NAME', sortBy(prop('name'))],
+            [() => sortType === 'SORT_SKU', sortBy(prop('sku'))],
             [T, identity]
         ]),
         when(

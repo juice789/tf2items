@@ -52,6 +52,7 @@ export function sort(state = { sortType: 'SORT_DEFAULT', sortMode: null }, actio
                 sortMode: null
             }
         case 'SORT_NAME':
+        case 'SORT_SKU':
             return {
                 sortType: action.type,
                 sortMode: (action.type !== state.sortType || !state.sortMode) ? 'ASC' : state.sortMode === 'ASC' ? 'DESC' : 'ASC'

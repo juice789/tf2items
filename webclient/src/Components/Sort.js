@@ -88,7 +88,8 @@ const OptionActual = ({ type, label, toggleDropdown, selected }) => {
 
 const sorts = {
     SORT_DEFAULT: 'Default',
-    SORT_NAME: 'Name'
+    SORT_NAME: 'Name',
+    SORT_SKU: 'SKU'
 }
 
 const DropdownActual = ({ toggleDropdown }) => {

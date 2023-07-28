@@ -12,10 +12,10 @@ const transformTextures = compose(
     path(['lang', 'Tokens'])
 )
 
-function* fetchTexturesSaga() {
+function* fetchTextures() {
     const { fetchProtoObjDefs } = yield getContext('api')
     const protoObjDefs = yield call(fetchProtoObjDefs)
     return transformTextures(vdf.parse(protoObjDefs))
 }
 
-module.exports = { fetchTexturesSaga }
+module.exports = { fetchTextures }

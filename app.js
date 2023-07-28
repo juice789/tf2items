@@ -1,6 +1,5 @@
 const { runSaga } = require('redux-saga')
-const { map, compose, replace } = require('ramda')
-const { renameKeysWith } = require('ramda-adjunct')
+const { map } = require('ramda')
 
 const helperObjects = require('./schemaHelper.json')
 const sagaHelpers = require('./sagaHelpers')
@@ -13,7 +12,7 @@ const skuLinks = require('./skuLinks.js')
 const { createApi, api } = require('./api.js')
 
 const sagas = require('./sagas.js')
-const { saveSchemaSaga } = require('./saveSchema.js')
+const { saveSchema } = require('./saveSchema.js')
 
 const { fromEconItem } = require('./fromEconItem.js')
 const { fromListingV1 } = require('./fromListingV1.js')
@@ -23,18 +22,18 @@ const { toSearchParams } = require('./toSearchParams.js')
 
 const getInstance = (options) => {
     const api = createApi(options)
-    return compose(
-        renameKeysWith(replace('Saga', '')),
-        map(
+    const fns = { ...sagas, saveSchema }
+    return options.saga
+        ? fns
+        : map(
             (saga) => (...args) => new Promise((resolve, reject) => {
                 runSaga({
                     context: { api }
                 }, saga, ...args)
                     .toPromise()
                     .then(resolve, reject)
-            })
-        ),
-    )({ ...sagas, saveSchemaSaga })
+            }), fns
+        )
 }
 
 module.exports = {
@@ -45,7 +44,7 @@ module.exports = {
     ...sagas,
     ...sagaHelpers,
     ...skuLinks,
-    saveSchemaSaga,
+    saveSchema,
     getInstance,
     createApi,
     api,

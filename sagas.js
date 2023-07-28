@@ -1,15 +1,15 @@
-const { fetchItemsApiSaga } = require('./fetchItemsApi.js')
-const { fetchItemsGameSaga } = require('./fetchItemsGame.js')
-const { fetchParticleEffectsSaga } = require('./fetchParticleEffects.js')
-const { fetchTexturesSaga } = require('./fetchTextures.js')
-const { fetchTfEnglishSaga } = require('./fetchTfEnglish.js')
-const { fetchAppDataInventorySaga } = require('./fetchAppDataInventory.js')
+const { fetchItemsApi } = require('./fetchItemsApi.js')
+const { fetchItemsGame } = require('./fetchItemsGame.js')
+const { fetchParticleEffects } = require('./fetchParticleEffects.js')
+const { fetchTextures } = require('./fetchTextures.js')
+const { fetchTfEnglish } = require('./fetchTfEnglish.js')
+const { fetchAppDataInventory } = require('./fetchAppDataInventory.js')
 
 module.exports = {
-    fetchItemsApiSaga,
-    fetchItemsGameSaga,
-    fetchParticleEffectsSaga,
-    fetchTexturesSaga,
-    fetchTfEnglishSaga,
-    fetchAppDataInventorySaga
+    fetchItemsApi,
+    fetchItemsGame,
+    fetchParticleEffects,
+    fetchTextures,
+    fetchTfEnglish,
+    fetchAppDataInventory
 }

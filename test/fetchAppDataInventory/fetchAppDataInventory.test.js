@@ -6,13 +6,13 @@ const inventory = require('./inventory.json')
 const expected = require('./expected.json')
 const queryString = require('./queryString.json')
 
-describe('fetchAppDataInventorySaga', () => {
+describe('fetchAppDataInventory', () => {
 
     const api = {
         getAssetClassInfo: jest.fn().mockReturnValue(assetClasses)
     }
 
-    const { fetchAppDataInventorySaga } = require('../../fetchAppDataInventory.js')
+    const { fetchAppDataInventory } = require('../../fetchAppDataInventory.js')
 
     beforeEach(() => {
         jest.useFakeTimers()
@@ -24,7 +24,7 @@ describe('fetchAppDataInventorySaga', () => {
 
     it('add the app_data to inventory', (done) => {
 
-        expectSaga(fetchAppDataInventorySaga, inventory)
+        expectSaga(fetchAppDataInventory, inventory)
             .provide([
                 [matchers.getContext('api'), api]
             ])

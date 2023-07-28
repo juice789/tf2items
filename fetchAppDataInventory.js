@@ -32,7 +32,7 @@ const mergeAssetClasses = uncurryN(2, (assetClasses) => compose(
     groupBy(props(['classid', 'instanceid']))
 ))
 
-function* fetchAppDataInventorySaga(inventory, d = 1000) {
+function* fetchAppDataInventory(inventory, d = 1000) {
 
     let p = 0, assetClasses = {}
     const { getAssetClassInfo } = yield getContext('api')
@@ -50,5 +50,5 @@ function* fetchAppDataInventorySaga(inventory, d = 1000) {
 }
 
 module.exports = {
-    fetchAppDataInventorySaga
+    fetchAppDataInventory
 }

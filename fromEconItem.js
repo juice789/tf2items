@@ -36,7 +36,8 @@ const {
     of,
     path,
     equals,
-    pick
+    pick,
+    assocPath
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
@@ -187,8 +188,15 @@ const uncraftable = compose(
 
 const market_hash_name = prop('market_hash_name')
 
-const quality = pathOr('-1', ['app_data', 'quality'])
+const setQuality = when(
+    compose(complement(Boolean), path(['app_data', 'quality'])),
+    chain(
+        assocPath(['app_data', 'quality']),
+        compose(prop(__, invertObj(qualityNames)), findTag('Quality'))
+    )
+)
 
+const quality = pathOr('-1', ['app_data', 'quality'])
 const defindex = pathOr('-1', ['app_data', 'def_index'])
 
 const propsTf2_1 = {
@@ -339,7 +347,8 @@ const fromEconItem440 = compose(
     remaps,
     chain(mergeRight, compose(map(__, propsTf2_2), applyTo)),
     map(__, propsTf2_1),
-    unary(applyTo)
+    unary(applyTo),
+    setQuality
 )
 
 const fromEconItemOther = compose(

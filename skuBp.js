@@ -29,11 +29,11 @@ const toBpQuality = (sku) => {
 const toBpName = (sku) => {
 
     const item = omit(
-        ['quality', 'elevated', 'uncraftable', 'craft', 'target', 'output', 'oq', 'effect'],
+        ['quality', 'elevated', 'uncraftable', 'craft', 'target', 'output', 'oq', 'effect', 'series'],
         itemFromSku(sku)
     )
 
-    return getName(item, Boolean(item.texture)).replace('\\n', '%0A')
+    return getName(item, Boolean(item.texture))
 }
 
 const toBpPriceIndex = (sku) => {

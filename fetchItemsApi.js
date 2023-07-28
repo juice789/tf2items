@@ -17,7 +17,7 @@ const transformItemsApi = compose(
     indexBy(prop('defindex'))
 )
 
-function* fetchItemsApiSaga() {
+function* fetchItemsApi() {
     const { getSchemaItems } = yield getContext('api')
     let start = 0, items = []
     do {
@@ -30,4 +30,4 @@ function* fetchItemsApiSaga() {
 }
 
 
-module.exports = { fetchItemsApiSaga }
+module.exports = { fetchItemsApi }

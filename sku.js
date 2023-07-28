@@ -129,7 +129,8 @@ const getName = ({
     safeItems[defindex].item_name,
     wear && '(' + wears[wear] + ')',
     series && '#' + series
-].filter(Boolean).join(' ')
+].filter(Boolean).join(' ').replace('\\n', `
+`)
 
 const itemNameFromSku = (sku, ...params) => {
     const item = itemFromSku(sku)

@@ -23,6 +23,49 @@ const {
     textures
 } = require('./schema.json')
 
+const marketHashNameFromSku = (sku) => {
+
+    const {
+        defindex,
+        quality,
+        killstreakTier,
+        target,
+        output,
+        oq,
+        elevated,
+        festivized,
+        texture,
+        wear,
+        australium,
+        series,
+        uncraftable
+    } = itemFromSku(sku)
+
+    const chemSeries = {
+        20000: 1,
+        20005: 2
+    }
+
+    const marketHashName = [
+        oq && oq !== '6' && qualityNames[oq],
+        elevated && 'Strange',
+        !['6', '15'].includes(quality) && qualityNames[quality],
+        festivized && 'Festivized',
+        killstreakTier && killstreakTiers[killstreakTier],
+        australium && 'Australium',
+        texture && textures[texture],
+        target && items[target].item_name,
+        output && items[output].item_name,
+        items[defindex].propername === '1' && quality.toString() === '6' && !uncraftable && !elevated && !festivized && !killstreakTier && 'The',
+        items[defindex].item_name,
+        wear && '(' + wears[wear] + ')',
+        chemSeries[defindex] && 'Series #' + chemSeries[defindex],
+        series && !items[defindex].seriesHidden && 'Series #' + series
+    ].filter(Boolean).join(' ')
+
+    return marketHashName
+}
+
 const manncoUrl = (sku) => {
     const {
         defindex,
@@ -71,47 +114,8 @@ const manncoUrl = (sku) => {
 }
 
 const scmUrl = (sku) => {
-
-    const {
-        defindex,
-        quality,
-        killstreakTier,
-        target,
-        output,
-        oq,
-        elevated,
-        festivized,
-        texture,
-        wear,
-        australium,
-        series,
-        uncraftable
-    } = itemFromSku(sku)
-
-    const chemSeries = {
-        20000: 1,
-        20005: 2
-    }
-
-    const scmUrl = [
-        oq && oq !== '6' && qualityNames[oq],
-        elevated && 'Strange',
-        !['6', '15'].includes(quality) && qualityNames[quality],
-        festivized && 'Festivized',
-        killstreakTier && killstreakTiers[killstreakTier],
-        australium && 'Australium',
-        texture && textures[texture],
-        target && items[target].item_name,
-        output && items[output].item_name,
-        items[defindex].propername === '1' && quality.toString() === '6' && !uncraftable && !elevated && !festivized && !killstreakTier && 'The',
-        items[defindex].item_name,
-        wear && '(' + wears[wear] + ')',
-        chemSeries[defindex] && 'Series%20%23' + chemSeries[defindex],
-        series && !items[defindex].seriesHidden && 'Series%20%23' + series
-    ].filter(Boolean).join(' ')
-
-
-    return 'https://steamcommunity.com/market/listings/440/' + scmUrl
+    const marketHashName = marketHashNameFromSku(sku)
+    return 'https://steamcommunity.com/market/listings/440/' + encodeURIComponent(marketHashName)
 }
 
 const bpUrl = (sku) => {
@@ -122,11 +126,11 @@ const bpUrl = (sku) => {
 
     const bpUrl = [
         toBpQuality(sku),
-        toBpName(sku),
+        encodeURIComponent(toBpName(sku)),
         'Tradable',
         uncraftable === true ? 'Non-Craftable' : 'Craftable',
         toBpPriceIndex(sku)
-    ].filter(Boolean).join('/').replace('%', '%25').replace('%250A', '%0A')
+    ].filter(Boolean).join('/')
 
     return 'https://backpack.tf/stats/' + bpUrl
 }
@@ -176,5 +180,6 @@ module.exports = {
     manncoUrl,
     marketplaceUrl,
     bpUrl,
-    scmUrl
+    scmUrl,
+    marketHashNameFromSku
 }

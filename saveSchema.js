@@ -1,11 +1,11 @@
 const { call } = require('redux-saga/effects')
 
 const {
-    fetchItemsApiSaga,
-    fetchItemsGameSaga,
-    fetchParticleEffectsSaga,
-    fetchTexturesSaga,
-    fetchTfEnglishSaga
+    fetchItemsApi,
+    fetchItemsGame,
+    fetchParticleEffects,
+    fetchTextures,
+    fetchTfEnglish
 } = require('./sagas.js')
 
 const {
@@ -14,14 +14,14 @@ const {
     transformItems
 } = require('./sagaHelpers')
 
-function* saveSchemaSaga() {
+function* saveSchema() {
     try {
 
-        const itemsApi = yield call(fetchItemsApiSaga)
-        const itemsGame = yield call(fetchItemsGameSaga)
-        const particleEffects = yield call(fetchParticleEffectsSaga)
-        const textures = yield call(fetchTexturesSaga)
-        const english = yield call(fetchTfEnglishSaga)
+        const itemsApi = yield call(fetchItemsApi)
+        const itemsGame = yield call(fetchItemsGame)
+        const particleEffects = yield call(fetchParticleEffects)
+        const textures = yield call(fetchTextures)
+        const english = yield call(fetchTfEnglish)
 
         const collections = getCollections(english, itemsGame)
         const items = getItems(english, itemsGame)
@@ -39,4 +39,4 @@ function* saveSchemaSaga() {
     }
 }
 
-module.exports = { saveSchemaSaga }
+module.exports = { saveSchema }

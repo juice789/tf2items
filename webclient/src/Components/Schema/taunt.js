@@ -46,7 +46,8 @@ const taunt = {
             ['taunt09', 'Winter 2021'],
             ['taunt10', 'Halloween 2022'],
             ['taunt11', 'Winter 2022'],
-            ['taunt12', 'Summer 2023']
+            ['taunt12', 'Summer 2023'],
+            ['taunt13', 'Halloween 2023']
         ]
     },
     validation: {

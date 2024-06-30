@@ -1,4 +1,4 @@
-const { prop, pick, map, compose, complement, includes, equals, length, allPass, mapObjIndexed, when, has, __, chain, assoc, pathEq, omit, split, keys, propEq, propOr, nth, of, range, path, uncurryN, mergeDeepRight, reduce, concat } = require('ramda')
+const { prop, pick, map, compose, complement, includes, equals, length, allPass, mapObjIndexed, when, has, __, chain, assoc, pathEq, omit, split, keys, propEq, propOr, nth, range, path, uncurryN, mergeDeepRight, reduce, concat } = require('ramda')
 const { qualityIds, strangifierTargets, crateSeries, chemsetDefindex } = require('./schemaHelper.json')
 
 const propsToKeep = [
@@ -23,7 +23,7 @@ const transformItems = uncurryN(3, (collections, itemsApi) => compose(
     map((item) => mergeDeepRight(collections[item.name], item)),
     reduce(mergeDeepRight, {}),
     concat([itemsApi, crateSeries, strangifierTargets, chemsetDefindex]),
-    of,
+    Array.of,
     map(
         compose(
             pick(propsToKeep),
@@ -56,7 +56,7 @@ const transformItems = uncurryN(3, (collections, itemsApi) => compose(
             ),
             when(
                 path(['static_attrs', 'tool target item']),
-                chain(assoc('target'), compose(of, path(['static_attrs', 'tool target item'])))
+                chain(assoc('target'), compose(Array.of, path(['static_attrs', 'tool target item'])))
             ),
             when(
                 path(['static_attrs', 'hide crate series number']),
@@ -64,26 +64,26 @@ const transformItems = uncurryN(3, (collections, itemsApi) => compose(
             ),
             when(
                 path(['static_attrs', 'set supply crate series']),
-                chain(assoc('series'), compose(of, path(['static_attrs', 'set supply crate series'])))
+                chain(assoc('series'), compose(Array.of, path(['static_attrs', 'set supply crate series'])))
             ),
             when(
                 path(['attributes', 'tool target item', 'value']),
-                chain(assoc('target'), compose(of, path(['attributes', 'tool target item', 'value'])))
+                chain(assoc('target'), compose(Array.of, path(['attributes', 'tool target item', 'value'])))
             ),
             when(
-                pathEq(['tags', 'can_be_festivized'], '1'),
+                pathEq('1', ['tags', 'can_be_festivized']),
                 assoc('festivized', '1')
             ),
             when(
-                pathEq(['attributes', 'cannot trade', 'value'], '1'),
+                pathEq('1', ['attributes', 'cannot trade', 'value']),
                 assoc('untradable', '1')
             ),
             when(
-                pathEq(['tool', 'type'], 'paint_can'),
+                pathEq('paint_can', ['tool', 'type']),
                 assoc('type2', 'paint')
             ),
             when(
-                pathEq(['tool', 'type'], 'decoder_ring'),
+                pathEq('decoder_ring', ['tool', 'type']),
                 assoc('type2', 'key')
             ),
             when(
@@ -93,7 +93,7 @@ const transformItems = uncurryN(3, (collections, itemsApi) => compose(
             when(
                 allPass([
                     compose(includes('paintkitweapon'), propOr('', 'item_quality')),
-                    complement(propEq)('defindex', '9536')
+                    complement(propEq)('9536', 'defindex')
                 ]),
                 chain(assoc('texture'), path(['static_attrs', 'paintkit_proto_def_index']))
             )

@@ -22,7 +22,6 @@ const {
     allPass,
     converge,
     concat,
-    of,
     unnest,
     pick,
     mergeRight
@@ -54,7 +53,7 @@ const unboxSkinsRemap = when(
         compose(//is an unbox skin
             allPass([
                 has('texture'),
-                complement(propEq)('item_name', 'War Paint')
+                complement(propEq)('War Paint', 'item_name')
             ]),
             prop(__, items),
             prop('defindex')
@@ -63,17 +62,17 @@ const unboxSkinsRemap = when(
     converge(
         concat,
         [
-            of,
+            Array.of,
             compose(
-                of,
+                Array.of,
                 chain(assoc('defindex'), compose(
                     prop('defindex'),//change defindex from unbox skin defindex to weapon defindex
                     defaultTo({}),
                     nth(0),
                     values,
                     ({ item_name }) => pickBy(allPass([
-                        propEq('item_quality', 6),
-                        propEq('item_name', item_name)
+                        propEq(6, 'item_quality'),
+                        propEq(item_name, 'item_name')
                     ]), items),
                     prop(__, items),
                     prop('defindex')
@@ -87,7 +86,7 @@ const warPaintRemap = when(
     allPass([
         complement(has)('texture'),
         compose(
-            propEq('item_name', 'War Paint'),
+            propEq('War Paint', 'item_name'),
             prop(__, items),
             prop('defindex')
         ),

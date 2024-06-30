@@ -64,8 +64,8 @@ const effect = findValue(effectOptions)
 
 const elevated = cond(
     [
-        [complement(propEq)('quality', 11), hasPath(['attributes', '214'])],
-        [propEq('quality', 11), compose(isWeaponEffect, effect)],
+        [complement(propEq)(11, 'quality'), hasPath(['attributes', '214'])],
+        [propEq(11, 'quality'), compose(isWeaponEffect, effect)],
         [T, F]
     ]
 )
@@ -172,7 +172,7 @@ const remap = (fn1, fn2) => when(
 
 const remapStrangifier = remap(
     compose(
-        propEq('item_name', 'Strangifier'),
+        propEq('Strangifier', 'item_name'),
         prop(__, items),
         prop('defindex')
     ),
@@ -193,12 +193,12 @@ const remapStrangifier = remap(
 
 const strangifierSets = pickBy(allPass([
     has('td'),
-    propEq('item_name', 'Chemistry Set')
+    propEq('Chemistry Set', 'item_name')
 ]), items)
 
 const remapStrangifierSet = remap(
     allPass([
-        propEq('defindex', 20001),
+        propEq(20001, 'defindex'),
         prop('output'),
         prop('target')
     ]),
@@ -220,12 +220,12 @@ const remapStrangifierSet = remap(
 const collectorSets = pickBy(allPass([
     complement(prop)('td'),
     prop('od'),
-    propEq('item_name', 'Chemistry Set'),
+    propEq('Chemistry Set', 'item_name'),
 ]), items)
 
 const remapCollectorSet = remap(
     allPass([
-        propEq('defindex', 20001),
+        propEq(20001, 'defindex'),
         complement(prop)('target')
     ]),
     compose(
@@ -282,15 +282,15 @@ const remapWeapon = when(
 )
 
 const decodeSkinQuality = cond([
-    [allPass([propEq('quality', 15), compose(isWeaponEffect, prop('effect'))]), assoc('quality', 5)], //decorated + effect = unusual
-    [allPass([propEq('quality', 11), compose(isWeaponEffect, prop('effect'))]), assoc('quality', 5)], //strange + effect = unusual
-    [allPass([propEq('quality', 15), complement(prop)('effect'), prop('elevated')]), assoc('quality', 11)], //decorated + elevated = strange
+    [allPass([propEq(15, 'quality'), compose(isWeaponEffect, prop('effect'))]), assoc('quality', 5)], //decorated + effect = unusual
+    [allPass([propEq(11, 'quality'), compose(isWeaponEffect, prop('effect'))]), assoc('quality', 5)], //strange + effect = unusual
+    [allPass([propEq(15, 'quality'), complement(prop)('effect'), prop('elevated')]), assoc('quality', 11)], //decorated + elevated = strange
     [T, identity]
 ])
 
 const unboxedSkins = map(
     (item) => assoc('item_name', textures[item.texture] + ' ' + item.item_name, item),
-    pickBy(propEq('item_quality', 15), items)
+    pickBy(propEq(15, 'item_quality'), items)
 )
 
 const unboxSkinsRemap = remap(
@@ -300,7 +300,7 @@ const unboxSkinsRemap = remap(
         flatten,
         toPairs,
         ({ defindex, texture }) => pickBy(
-            propEq('item_name', textures[texture] + ' ' + items[defindex].item_name),
+            propEq(textures[texture] + ' ' + items[defindex].item_name, 'item_name'),
             unboxedSkins
         )
     )
@@ -340,7 +340,7 @@ const promoIndex = {
 const promoRemap = when(
     allPass([
         compose(has(__, promoIndex), prop('defindex')),
-        propEq('quality', 1)
+        propEq(1, 'quality')
     ]),
     chain(assoc('defindex'), compose(prop(__, promoIndex), prop('defindex')))
 )

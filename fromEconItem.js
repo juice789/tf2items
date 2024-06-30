@@ -33,7 +33,6 @@ const {
     complement,
     either,
     concat,
-    of,
     path,
     equals,
     pick,
@@ -56,7 +55,7 @@ const removeStrings = curry((string, strings) => compose(
 
 const findTag = uncurryN(2, (tagName) => compose(
     prop('name'),
-    find(propEq('category_name', tagName)),
+    find(propEq(tagName, 'category_name')),
     map(renameKeys({
         localized_category_name: 'category_name',
         localized_tag_name: 'name'
@@ -114,7 +113,7 @@ const craft = ifElse(
 )
 
 const australium = allPass([
-    pathEq(['app_data', 'quality'], '11'),
+    pathEq('11', ['app_data', 'quality']),
     marketHashIncludes('Australium')
 ])
 
@@ -156,9 +155,9 @@ const killstreakTier = compose(
 
 const effect = ifElse(
     allPass([
-        pathEq(['app_data', 'quality'], '5'),
+        pathEq('5', ['app_data', 'quality']),
         compose(
-            find(propEq('color', 'ffd700')),
+            find(propEq('ffd700', 'color')),
             propOr([], 'descriptions')
         )
     ]),
@@ -166,14 +165,14 @@ const effect = ifElse(
         propOr('-1', __, invertObj(particleEffects)),
         replace('★ Unusual Effect: ', ''),
         prop('value'),
-        find(propEq('color', 'ffd700')),
+        find(propEq('ffd700', 'color')),
         propOr([], 'descriptions')
     ),
     always(null)
 )
 
 const elevated = allPass([
-    complement(pathEq)(['app_data', 'quality'], '11'),
+    complement(pathEq)('11', ['app_data', 'quality']),
     compose(
         includes('Strange'),
         ({ app_data, market_hash_name }) => replace(items[app_data.def_index].item_name, '', market_hash_name)
@@ -182,7 +181,7 @@ const elevated = allPass([
 
 const uncraftable = compose(
     Boolean,
-    find(propEq('value', '( Not Usable in Crafting )')),
+    find(propEq('( Not Usable in Crafting )', 'value')),
     propOr([], 'descriptions')
 )
 
@@ -236,8 +235,8 @@ const target = ifElse(
         find(__, values(items)),
         allPass,
         concat([propSatisfies(complement(includes)(__, [0, 15]), 'item_quality')]),
-        of,
-        propEq('item_name'),
+        Array.of,
+        propEq(__, 'item_name'),
         ({ market_hash_name, defindex }) => removeStrings(market_hash_name, [
             'Strangifier',
             'Unusual',
@@ -275,8 +274,8 @@ const output = ({ recipe, market_hash_name, killstreakTier }) => {
                 find(__, values(items)),
                 allPass,
                 concat([propSatisfies(complement(includes)(__, [0, 15]), 'item_quality')]),
-                of,
-                propEq('item_name'),
+                Array.of,
+                propEq(__, 'item_name'),
                 removeStrings(__, ['Chemistry Set', "Collector's"])
             )(market_hash_name)
         default:
@@ -357,7 +356,7 @@ const fromEconItemOther = compose(
 )
 
 const fromEconItem = ifElse(
-    propEq('appid', 440),
+    propEq(440, 'appid'),
     fromEconItem440,
     fromEconItemOther
 )

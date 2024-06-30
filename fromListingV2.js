@@ -42,19 +42,19 @@ const elevated = cond(
 
 const killstreakTier = propOr(null, 'killstreakTier')
 
-const festivized = propEq('festivized', true)
+const festivized = propEq(true, 'festivized')
 
 const texture = pathOr(null, ['texture', 'id'])
 
 const wear = pathOr(null, ['wearTier', 'id'])
 
-const australium = propEq('australium', true)
+const australium = propEq(true, 'australium')
 
 const series = propOr(null, 'crateSeries')
 
 const target = ifElse(
     allPass([
-        pathEq(['recipe', 'targetItem'], null),
+        pathEq(null, ['recipe', 'targetItem']),
         compose(equals(3), length, split('-'), prop('priceindex'))
     ]),
     compose(nth(2), split('-'), prop('priceindex')),

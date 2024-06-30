@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import {
-    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, of, toPairs, concat
+    prop, map, values, keys, compose, evolve, assoc, omit, objOf, mergeRight, any, hasPath, props, pick, path, has, apply, pickBy, complement, includes, propEq, allPass, when, toPairs, concat
 } from 'ramda'
 import { CheckIcon, TimesIcon, ChevronCircleDownIcon } from 'react-line-awesome'
 import Select, { createFilter } from 'react-select'
@@ -98,7 +98,7 @@ height: 35px;
 border-radius: 0.2rem;
 padding-left: 0.6rem;
 font-weight:300 !important;
-:hover{
+&:hover{
     border-color: #6e66a6;
 }
 `
@@ -110,7 +110,7 @@ const getItems = compose(
 
 const makeFilters = (filterName, filterValue) => compose(
     includes(filterValue),
-    when(complement(Array.isArray), of),
+    when(complement(Array.isArray), Array.of),
     prop(filterName)
 )
 
@@ -130,7 +130,7 @@ const FormActual = () => {
 
     const hiddenControlNames = useSelector(compose(
         keys,
-        pickBy(propEq('hidden', true)),
+        pickBy(propEq(true, 'hidden')),
         path(['addItems', 'rules'])
     ))
 

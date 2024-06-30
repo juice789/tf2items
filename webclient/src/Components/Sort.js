@@ -18,7 +18,7 @@ border: 1px solid #2d2b37;
 user-select:none;
 color: #8a879a;
 position:relative;
-:hover {
+&:hover {
     border-color: #6e66a6;
     color: #e1e0e5;
 }
@@ -56,7 +56,7 @@ align-items:center;
 justify-content:space-between;
 color: #e1e0e5;
 background: ${({ isActive }) => isActive ? '#6e66a6' : 'inherit'};
-:hover {
+&:hover {
     background: #6e66a6;
 }
 `

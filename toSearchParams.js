@@ -33,7 +33,7 @@ const quality = ({
         : quality
 
 const australium = ifElse(
-    propEq('australium', true),
+    propEq(true, 'australium'),
     always(1),
     always(-1)
 )
@@ -44,7 +44,7 @@ const killstreak_tier = compose(
 )
 
 const craftable = ifElse(
-    propEq('uncraftable', true),
+    propEq(true, 'uncraftable'),
     always(-1),
     always(1)
 )
@@ -64,7 +64,7 @@ const texture_name = compose(prop(__, textures), prop('texture'))
 
 const elevated = ifElse(
     allPass([
-        propEq('elevated', true),
+        propEq(true, 'elevated'),
         compose(
             complement(includes)(__, ['701', '702', '703', '704']),
             prop('effect')

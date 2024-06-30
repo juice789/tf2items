@@ -5,7 +5,7 @@ import { Aside, Header, HeaderButton, SaveButton } from './Blocks'
 import { useDispatch, useSelector } from 'react-redux'
 import { TimesIcon, ThumbsUpIcon, WindowCloseIcon } from 'react-line-awesome'
 import {
-    or, converge, equals, compose, chain, concat, map, replace, filter, startsWith, pickBy, prop, head, of, pick, find, mapObjIndexed, values, keys, includes, when, always
+    or, converge, equals, compose, chain, concat, map, replace, filter, startsWith, pickBy, prop, head, pick, find, mapObjIndexed, values, keys, includes, when, always
 } from 'ramda'
 import { itemNameFromSku } from '@juice789/tf2items'
 
@@ -48,7 +48,7 @@ cursor: pointer;
 color: #6e66a6;
 transition: color 0.2s ease;
 font-size:1rem;
-:hover {
+&:hover {
     color: #897fd0;
 }
 `
@@ -59,7 +59,7 @@ color: #b3b2be;
 transition: color 0.2s ease;
 justify-content:space-between;
 flex-grow:1;
-:hover {
+&:hover {
     color:#f9f9fa;
 }
 `
@@ -138,7 +138,7 @@ const getChanges = compose(
         chain(
             pick,
             compose(
-                chain(concat, compose(map(replace('__', '')), head, of)),
+                chain(concat, compose(map(replace('__', '')), head, Array.of)),
                 filter(startsWith('__')),
                 keys
             )

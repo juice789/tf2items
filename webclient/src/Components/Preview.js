@@ -82,7 +82,7 @@ cursor:pointer;
     color:#6e66a6;
     transition: color 0.2s ease;
 }
-:hover{
+&:hover{
     > * {
         color:#897fd0;
     }    
@@ -102,7 +102,7 @@ border-radius: 0.3rem;
 transition: background 0.2s ease;
 line-height:1rem;
 user-select:none;
-:hover{
+&:hover{
     background: ${({ danger }) => danger ? '#762114' : '#897fd0'};
 }
 `

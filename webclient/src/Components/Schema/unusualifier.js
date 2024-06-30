@@ -14,7 +14,7 @@ const unusualifier = {
         target: target(),
     },
     itemFn: pick([9258]),
-    targetFn: pickBy(propEq('item_slot', 'taunt')),
+    targetFn: pickBy(propEq('taunt', 'item_slot')),
     filters: {
         used_by_classes: getClasses(undefined, ['multi'])
     },

@@ -32,7 +32,7 @@ margin-left: 0.5rem;
 background: ${({ active }) => active ? '#3a3747' : '#2d2b37'};
 color: ${({ active, isOpen }) => isOpen ? '#e1e0e5' : active ? '#e1e0e5' : '#8a879a'};
 position:relative;
-:hover{
+&:hover{
     color: #e1e0e5;
 }
 > i {

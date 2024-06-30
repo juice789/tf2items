@@ -19,7 +19,7 @@ user-select:none;
 color: #8a879a;
 position:relative;
 margin-left:0.5rem;
-:hover {
+&:hover {
     border-color: #6e66a6;
     color: #e1e0e5;
 }
@@ -70,7 +70,7 @@ border-radius:0.25rem;
 color: #8a879a;
 cursor:pointer;
 margin-left:0.25rem;
-:hover {
+&:hover {
     color: #e1e0e5;
 }
 `
@@ -96,7 +96,7 @@ align-items:center;
 justify-content:space-between;
 color: #e1e0e5;
 background: ${({ isActive }) => isActive ? '#6e66a6' : 'inherit'};
-:hover {
+&:hover {
     background: #6e66a6;
 }
 `
@@ -112,7 +112,7 @@ padding-left: 0.6rem;
 margin-left:0.5rem;
 font-weight:100;
 flex-grow:1;
-:hover{
+&:hover{
     border-color: #6e66a6;
 }
 `

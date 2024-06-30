@@ -27,14 +27,14 @@ max-width: 10rem;
 > a {
     color:#8a879a;
     text-decoration: none;
-    :hover{
+    &:hover{
         color: #6e66a6;
     }
     > img {
         width: auto;
         height:1.5rem;
         opacity: 0.8;
-        :hover{
+        &:hover{
             opacity:1;
         }
     }

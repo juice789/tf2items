@@ -16,8 +16,8 @@ const key = {
         map(
             when(
                 allPass([
-                    propEq('item_name', 'Mann Co. Supply Crate Key'),
-                    complement(propEq)('name', 'Decoder Ring')
+                    propEq('Mann Co. Supply Crate Key', 'item_name'),
+                    complement(propEq)('Decoder Ring', 'name')
                 ]),
                 chain(
                     assoc('item_name'),
@@ -28,7 +28,7 @@ const key = {
         pickBy(
             allPass([
                 compose(complement(test)(/ New$/), prop('name')), //don't include if it ends with " New"
-                propEq('type2', 'key'),
+                propEq('key', 'type2'),
                 complement(has)('untradable')
             ])
         )

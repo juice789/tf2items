@@ -53,13 +53,13 @@ const defaultCategory = {
             )
         ),
         when(//Strangifier
-            propEq('item_name', 'Strangifier'),
+            propEq('Strangifier', 'item_name'),
             chain(assoc('item_name'), compose(join(' '), props(['item_name', 'defindex'])))
         ),
         when(//unboxed skins + war paints
             allPass([
                 has('texture'),
-                propEq('item_quality', 15)
+                propEq(15, 'item_quality')
             ]),
             chain(
                 assoc('item_name'),
@@ -72,8 +72,8 @@ const defaultCategory = {
         ),
         when(//unboxed kits
             allPass([
-                propEq('item_class', 'tool'),
-                propEq('item_name', 'Kit'),
+                propEq('tool', 'item_class'),
+                propEq('Kit', 'item_name'),
                 compose(equals(1), length, propOr([], 'target'))
             ]),
             chain(assoc('item_name'), compose(join(' '), props(['item_name', 'defindex'])))
@@ -84,15 +84,15 @@ const defaultCategory = {
         ),
         when(//new key variants
             allPass([
-                propEq('type2', 'key'),
+                propEq('key', 'type2'),
                 compose(test(/ New$/), prop('name')),
             ]),
             chain(assoc('item_name'), compose(join(' '), props(['item_name', 'defindex'])))
         ),
         when(//old key names
             allPass([
-                propEq('item_name', 'Mann Co. Supply Crate Key'),
-                complement(propEq)('name', 'Decoder Ring')
+                propEq('Mann Co. Supply Crate Key', 'item_name'),
+                complement(propEq)('Decoder Ring', 'name')
             ]),
             chain(assoc('item_name'), compose(concat(__, ' (Mann Co. Supply Crate Key)'), prop('name')))
         ),
@@ -101,7 +101,7 @@ const defaultCategory = {
             chain(assoc('item_name'), compose(join(' '), props(['item_name', 'defindex'])))
         ),
         when(//fix double stockpile crates
-            propEq('item_name', 'Mann Co. Stockpile Crate'),
+            propEq('Mann Co. Stockpile Crate', 'item_name'),
             chain(assoc('item_name'), compose(join(' '), props(['item_name', 'defindex'])))
         ),
         when(//display the crate series if only 1 series exists per crate
@@ -117,7 +117,7 @@ const defaultCategory = {
             chain(assoc('item_name'), compose(join(' '), props(['item_name', 'defindex'])))
         ),
         when(//show normal quality in item name
-            propEq('item_quality', 0),
+            propEq(0, 'item_quality'),
             chain(assoc('item_name'), compose(concat(__, ' (normal)'), prop('item_name')))
         ),
         when(//make tradable filter

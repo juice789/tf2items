@@ -196,10 +196,10 @@ export const selectStyleAlt = {
 export const toggleStyle = {
   trackContent: (defaults) => ({
     ...defaults,
-    ':nth-child(2)': {
+    '&:nth-child(2)': {
       color: "#1b9e2c"
     },
-    ':nth-child(3)': {
+    '&:nth-child(3)': {
       color: "#c77265"
     },
     '>i': {
@@ -210,7 +210,7 @@ export const toggleStyle = {
     ...defaults,
     border: '0px',
     boxShadow: "0 0 0 1px #3a3747",
-    ':hover': {
+    '&:hover': {
       boxShadow: "0 0 0 1px #3a3747, 0 0 0 2px #6e66a6"
     }
   }),

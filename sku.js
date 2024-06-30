@@ -1,5 +1,5 @@
 const {
-    compose, split, map, reduce, pickBy, mergeRight, converge, concat, of, join, head, tail, filter
+    compose, split, map, reduce, pickBy, mergeRight, converge, concat, join, head, tail, filter
 } = require('ramda')
 
 const {
@@ -73,7 +73,7 @@ const decodeRules = compose(
     map(
         compose(
             ([k, value = true]) => ({ [rules[k]]: value }),
-            converge(concat, [compose(of, head), compose(filter(Boolean), of, join('-'), tail)]),
+            converge(concat, [compose(Array.of, head), compose(filter(Boolean), Array.of, join('-'), tail)]),
             split('-')
         )
     )

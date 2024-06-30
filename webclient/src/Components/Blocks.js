@@ -50,7 +50,7 @@ color: #8a879a;
 transition: color 0.2s ease;
 cursor: pointer;
 position: relative;
-:hover {
+&:hover {
     color: #e1e0e5;
 }
 `
@@ -71,15 +71,15 @@ border: 0;
 font-weight:300;
 user-select:none;
 width: ${({ full }) => full ? '100%' : 'auto'};
-:enabled: hover{
+&:enabled:hover{
     background: ${({ danger }) => danger ? '#762114' : '#897fd0'};
 }
-:disabled{
+&:disabled{
     cursor: not-allowed;
     background: rgba(138, 135, 154, 0.2);
     color:rgba(138, 135, 154, 0.5);
 }
-:active, :focus{
+&:active, &:focus{
     outline:0;
     border: 0;
 }

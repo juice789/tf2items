@@ -60,7 +60,7 @@ const Row = styled.div`
 display: flex;
 flex-direction: column;
 min-width: 20rem;
-:hover {
+&:hover {
     background: #403d4f;
 }
 `
@@ -145,7 +145,7 @@ const ItemListActual = memo(() => {
             assoc('name'),
             compose(toLower, itemNameFromSku, prop('sku'))
         )),
-        filter(propEq('page', selectedPage)),
+        filter(propEq(selectedPage, 'page')),
         values,
         prop('items')
     ), shallowEqual)

@@ -1,5 +1,5 @@
 import {
-    has, dissoc, assoc, indexBy, prop, map, omit, chain, pick, compose, filter, complement, startsWith, keys, replace, assocPath, mergeDeepRight, dissocPath, converge, evolve, ifElse, fromPairs, concat, __, of, when, mergeRight, includes, pickBy
+    has, dissoc, assoc, indexBy, prop, map, omit, chain, pick, compose, filter, complement, startsWith, keys, replace, assocPath, mergeDeepRight, dissocPath, converge, evolve, ifElse, fromPairs, concat, __, when, mergeRight, includes, pickBy
 } from 'ramda'
 
 import { renameKeysWith } from 'ramda-adjunct'
@@ -24,8 +24,8 @@ export function addItems(state = defaultState, action) {
             return {
                 ...state,
                 category: action.category,
-                controls: fromPairs(map(compose(concat(__, [null]), of), action.controls)),
-                filters: fromPairs(map(compose(concat(__, [null]), of), action.filters)),
+                controls: fromPairs(map(compose(concat(__, [null]), Array.of), action.controls)),
+                filters: fromPairs(map(compose(concat(__, [null]), Array.of), action.filters)),
                 rules: action.rules,
                 props: {},
                 defaults: action.defaults,

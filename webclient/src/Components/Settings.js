@@ -101,7 +101,7 @@ const SettingsActual = () => {
                 assoc('name'),
                 compose(toLower, itemNameFromSku, prop('sku'))
             )),
-            pickBy(propEq('page', selectedPage)),
+            pickBy(propEq(selectedPage, 'page')),
             prop('items')
         )
     )
@@ -197,7 +197,7 @@ const SettingsActual = () => {
                             isSearchable={false}
                             styles={selectStyle()}
                             options={usePagesOptions}
-                            value={usePagesOptions.find(propEq('value', usePages))}
+                            value={usePagesOptions.find(propEq(usePages, 'value'))}
                             onChange={setUsePages}
                         />
                     </ControlOuter>
@@ -223,7 +223,7 @@ const SettingsActual = () => {
                                                 isClearable={true}
                                                 styles={selectStyle()}
                                                 options={pageOptions}
-                                                value={pageOptions.find(propEq('value', newPage))}
+                                                value={pageOptions.find(propEq(newPage, 'value'))}
                                                 onChange={(props) => setNewPage(props?.value)}
                                             />
                                         </ControlOuter>

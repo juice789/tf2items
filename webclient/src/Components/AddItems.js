@@ -103,7 +103,7 @@ const AddItemsActual = () => {
                             onChange={onChange}
                             styles={selectStyle()}
                             options={categoryOptions}
-                            value={categoryOptions.find(propEq('value', category))}
+                            value={categoryOptions.find(propEq(category, 'value'))}
                             isSearchable={false}
                         />
                     </SelectOuter>

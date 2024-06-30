@@ -45,7 +45,7 @@ const skinUnboxed = {
                     complement(includes)('War Paint'),
                     prop('item_name')
                 ),
-                propEq('item_quality', 15)
+                propEq(15, 'item_quality')
             ])
         )
     ),

@@ -12,7 +12,7 @@ min-width: 2rem;
 max-width: 2rem;
 cursor: pointer;
 user-select: none;
-:hover > * {
+&:hover > * {
     color: #6e66a6;
 }
 `

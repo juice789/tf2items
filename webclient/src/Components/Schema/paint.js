@@ -15,7 +15,7 @@ const paint = {
     itemFn: pickBy(
         allPass([
             compose(complement(includes)(__, ['5023']), prop('defindex')),
-            propEq('type2', 'paint')
+            propEq('paint', 'type2')
         ])
     ),
     defaults: {

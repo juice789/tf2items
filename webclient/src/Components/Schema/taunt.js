@@ -22,7 +22,7 @@ const taunt = {
     },
     itemFn: pickBy(
         allPass([
-            propEq('item_slot', 'taunt'),
+            propEq('taunt', 'item_slot'),
             complement(has)('untradable')
         ])
     ),

@@ -1,7 +1,13 @@
 import { safeItems as items } from '@juice789/tf2items'
 
 import {
-    compose, values, map, prop, pick, when, chain, has, indexBy
+    compose,
+    prop,
+    pick,
+    when,
+    chain,
+    has,
+    indexBy
 } from 'ramda'
 
 import {
@@ -17,22 +23,26 @@ const chemistrySet = {
         indexBy(prop('defindex')),
         chain(
             when(has('td'),
-                (item) => map(td => ({
-                    ...items[td],
-                    ...item,
-                    defindex: item.defindex + '<' + td,
-                    td,
-                    item_name: `${items[td].item_name} ${item.item_name}`
-                }), item.td))
+                (item) => item.td.map(
+                    td => ({
+                        ...items[td],
+                        ...item,
+                        defindex: item.defindex + '<' + td,
+                        td,
+                        item_name: `${items[td].item_name} ${item.item_name}`
+                    })
+                ))
         ),
-        chain((item) => map(od => ({
-            ...items[od],
-            ...item,
-            defindex: item.defindex + '<' + od,
-            od,
-            item_name: `${item.oq === '14' ? "Collector's " : ''}${items[od].item_name} ${item.item_name}`
-        }), item.od)),
-        values,
+        chain((item) => item.od.map(
+            (od) => ({
+                ...items[od],
+                ...item,
+                defindex: item.defindex + '<' + od,
+                od,
+                item_name: `${item.oq === '14' ? "Collector's " : ''}${items[od].item_name} ${item.item_name}`
+            })
+        )),
+        Object.values,
         pick([20000, 20001, 20005, 20006, 20007])
     ),
     filters: {

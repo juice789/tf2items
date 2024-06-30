@@ -12,22 +12,16 @@ import {
 } from '@juice789/tf2items'
 
 import {
-    compose,
-    toPairs,
-    omit,
-    pickBy,
-    when,
     pick,
-    complement,
-    isEmpty,
     __
 } from 'ramda'
 
-const pickOmitOptions = (whitelist = [], blacklist = [], list) => compose(
-    toPairs,
-    omit(blacklist),
-    when(() => complement(isEmpty)(whitelist), pick(whitelist)),
-)(list)
+const pickOmitOptions = (whiteList = [], blackList = [], list) => Object.entries(list).reduce((newList, [k, v]) =>
+    (whiteList.length === 0 || whiteList.includes(k)) && blackList.includes(k) === false
+        ? newList.concat([[k, v]])
+        : newList,
+    []
+)
 
 export const getQuality = (whiteList, blacklist) => ({
     name: "quality",
@@ -54,7 +48,7 @@ export const killstreakTier = {
     label: "Killstreak Tier",
     isClearable: true,
     isSearchable: false,
-    options: toPairs(killstreakTiers)
+    options: Object.entries(killstreakTiers)
 }
 
 export const festivized = {
@@ -68,7 +62,7 @@ export const wear = {
     label: "Wear",
     isClearable: true,
     isSearchable: false,
-    options: toPairs(wears)
+    options: Object.entries(wears)
 }
 
 export const getEffect = (whitelist, blacklist = impossibleEffects) => ({
@@ -82,7 +76,7 @@ export const texture = {
     name: "texture",
     label: "Texture",
     isClearable: true,
-    options: toPairs(pickBy((v, k) => k >= 102, textures))
+    options: Object.entries(textures).filter(([k, v]) => k >= 102)
 }
 
 export const defindex = (settings = {}) => ({
@@ -139,7 +133,7 @@ export const item_class = {
     name: 'item_class',
     label: 'Type',
     isClearable: true,
-    options: toPairs(itemClasses)
+    options: Object.entries(itemClasses)
 }
 
 export const untradable = {

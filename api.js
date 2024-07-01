@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios').default
 const { compose, __, map, applyTo, prop } = require('ramda')
 
 const myAxios = axios.create()

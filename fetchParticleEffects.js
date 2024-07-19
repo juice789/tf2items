@@ -5,6 +5,7 @@ const transformEffects = compose(
     invertObj,
     map(nth(0)),
     invert,
+    pickBy(Boolean),
     pickBy(complement(includes)('Attrib_Particle')),
     map(prop('name')),
     indexBy(prop('id')),

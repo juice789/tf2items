@@ -1,0 +1,91 @@
+{
+    "econItem": {
+        "appid": 753,
+        "contextid": "6",
+        "assetid": "30735105542",
+        "classid": "149751754",
+        "instanceid": "246376127",
+        "amount": 1,
+        "missing": false,
+        "est_usd": "2",
+        "icon_url": "IzMF03bk9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdA3g5gMEPvUZZEfSMJ6dESN8p_2SVTY7V2N0LxGVIwXpaL3_L7U0rbOhtP86bxFH6p-HbRS3xOjOWLHHaTlpsRLZePW3YqGej5e3HFjrISL14FgsMerxErDNfb5bLa0d_u95WqmK9yhQqSk54KsMSc1ninCxDZOl3kHFCcpIGy3KiIJDdh15nO09sW-rhAOrcL9_yhmkpX2k1sY_m",
+        "icon_url_large": "IzMF03bk9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdA3g5gMEPvUZZEfSMJ6dESN8p_2SVTY7V2N0LxGVIwXpaL3_L7U0rbOhtP86bxFH6p-HbRS3xOjOWLHHaTlpsRLZePW3YqGej5e3HFjrISL14FgsMerxErDNfb5bLa0d_u95WqmK9yhQqSk54KsMSc1ninCxDZOl3kHFCcpIGy3KiIJDdh15nO09sW-rhAOrcL9_yhmkpX2k1sY_m",
+        "icon_drag_url": "",
+        "name": "SPY (Trading Card)",
+        "market_hash_name": "440-SPY (Trading Card)",
+        "market_name": "SPY (Trading Card)",
+        "name_color": "",
+        "background_color": "",
+        "type": "Team Fortress 2 Trading Card",
+        "tradable": true,
+        "marketable": true,
+        "commodity": true,
+        "market_fee_app": "440",
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 7,
+        "descriptions": [
+            {
+                "type": "text",
+                "value": ""
+            }
+        ],
+        "owner_actions": [
+            {
+                "name": "#Profile_ViewBadgeProgress",
+                "link": "https://steamcommunity.com/my/gamecards/440/"
+            },
+            {
+                "name": "#TradingCards_GrindIntoGoo",
+                "link": "javascript:GetGooValue( '%contextid%', '%assetid%', 440, 9, 0 )"
+            }
+        ],
+        "tags": [
+            {
+                "internal_name": "droprate_0",
+                "name": "Common",
+                "category": "droprate",
+                "category_name": "Rarity",
+                "localized_tag_name": "Common",
+                "color": "",
+                "localized_category_name": "Rarity"
+            },
+            {
+                "internal_name": "app_440",
+                "name": "Team Fortress 2",
+                "category": "Game",
+                "category_name": "Game",
+                "localized_tag_name": "Team Fortress 2",
+                "color": "",
+                "localized_category_name": "Game"
+            },
+            {
+                "internal_name": "cardborder_0",
+                "name": "Normal",
+                "category": "cardborder",
+                "category_name": "Card Border",
+                "localized_tag_name": "Normal",
+                "color": "",
+                "localized_category_name": "Card Border"
+            },
+            {
+                "internal_name": "item_class_2",
+                "name": "Trading Card",
+                "category": "item_class",
+                "category_name": "Item Type",
+                "localized_tag_name": "Trading Card",
+                "color": "",
+                "localized_category_name": "Item Type"
+            }
+        ],
+        "id": "30735105542",
+        "fraudwarnings": [],
+        "owner_descriptions": [],
+        "actions": [],
+        "market_actions": []
+    },
+    "expected": {
+        "sku": "other;753;440-SPY (Trading Card)",
+        "id": "30735105542",
+        "old_id": null
+    }
+}

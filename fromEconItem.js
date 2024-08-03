@@ -294,7 +294,7 @@ const propsTf2_2 = {
 }
 
 const propsOtherGame = {
-    sku: market_hash_name,
+    sku: ({ appid, market_hash_name }) => `other;${appid};${market_hash_name}`,
     id,
     old_id
 }

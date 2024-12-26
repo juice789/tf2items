@@ -90,6 +90,7 @@ const cosmetic = {
             ['w2023', 'Winter 2023'],
             ['s2024', 'Summer 2024'],
             ['h2024', 'Halloween 2024'],
+            ['w2024', 'Winter 2024'],
         ]
     },
     validation: {

@@ -1,3 +1,6 @@
+
+const removeAccents = require('remove-accents');
+
 const {
     itemFromSku
 } = require('./sku.js')
@@ -90,7 +93,7 @@ const manncoUrl = (sku) => {
         20005: 2
     }
 
-    const manncoUrl = [
+    const manncoName = [
         440,
         uncraftable && 'uncraftable',
         oq && oq !== '6' && qualityNames[oq],
@@ -108,9 +111,9 @@ const manncoUrl = (sku) => {
         wear && wears[wear],
         chemSeries[defindex] && 'series-' + chemSeries[defindex],
         series && (!items[defindex].seriesHidden || ['111', '112', '113', '114', '115', '116'].includes(series)) && 'series-' + series
-    ].filter(Boolean).join('-').replaceAll(/[^0-9a-zA-Z -]/g, '').replaceAll(' ', '-').toLowerCase()
-
-    return 'https://mannco.store/item/' + manncoUrl
+    ].filter(Boolean).join('-')
+    const url = removeAccents(manncoName).replaceAll(/[^0-9a-zA-Z -]/g, '').replaceAll(' ', '-').toLowerCase()
+    return 'https://mannco.store/item/' + url
 }
 
 const scmUrl = (sku) => {

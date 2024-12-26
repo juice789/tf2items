@@ -311,6 +311,16 @@ const keyRemap = when(
     )
 )
 
+//725 tour of duty ticket
+const uncraftRemap = when(
+    compose(
+        includes(__, ['725']),
+        String,
+        prop('defindex')
+    ),
+    assoc('uncraftable', false)
+)
+
 const kitRemap = when(
     compose(
         includes('Killstreakifier Basic'),
@@ -337,6 +347,7 @@ const otherRemap = when(
 const remaps = compose(
     kitRemap,
     keyRemap,
+    uncraftRemap,
     otherRemap
 )
 

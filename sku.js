@@ -109,10 +109,11 @@ const getName = ({
 },
     bpTexture = false,
     qualityBpStyle = false,
-    useProperName = false
+    useProperName = false,
+    showUncraft = true
 ) => [
     craft && '#' + craft,
-    uncraftable && 'Non-Craftable',
+    uncraftable && showUncraft && 'Non-Craftable',
     elevated && 'Strange',
     quality && !['6', '15'].includes(quality.toString()) && (qualityBpStyle ? !effect : true) && qualityNames[quality],
     oq && oq.toString() !== '6' && qualityNames[oq],

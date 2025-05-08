@@ -91,6 +91,151 @@
         "supply_crate": "supply_crate",
         "tool": "tool"
     },
+    "paintHex": {
+        "5027": [
+            "729E42"
+        ],
+        "5028": [
+            "424F3B"
+        ],
+        "5029": [
+            "51384A"
+        ],
+        "5030": [
+            "D8BED8"
+        ],
+        "5031": [
+            "7D4071"
+        ],
+        "5032": [
+            "CF7336"
+        ],
+        "5033": [
+            "A57545"
+        ],
+        "5034": [
+            "C5AF91"
+        ],
+        "5035": [
+            "694D3A"
+        ],
+        "5036": [
+            "7C6C57"
+        ],
+        "5037": [
+            "E7B53B"
+        ],
+        "5038": [
+            "7E7E7E"
+        ],
+        "5039": [
+            "E6E6E6"
+        ],
+        "5040": [
+            "141414"
+        ],
+        "5046": [
+            "B8383B",
+            "5885A2"
+        ],
+        "5051": [
+            "FF69B4"
+        ],
+        "5052": [
+            "2F4F4F"
+        ],
+        "5053": [
+            "808000"
+        ],
+        "5054": [
+            "32CD32"
+        ],
+        "5055": [
+            "F0E68C"
+        ],
+        "5056": [
+            "E9967A"
+        ],
+        "5060": [
+            "483838",
+            "384248"
+        ],
+        "5061": [
+            "A89A8C",
+            "839FA3"
+        ],
+        "5062": [
+            "3B1F23",
+            "18233D"
+        ],
+        "5063": [
+            "654740",
+            "28394D"
+        ],
+        "5064": [
+            "803020",
+            "256D8D"
+        ],
+        "5065": [
+            "C36C2D",
+            "B88035"
+        ],
+        "5076": [
+            "BCDDB3"
+        ],
+        "5077": [
+            "2D2D24"
+        ]
+    },
+    "paintDefindex": {
+        "Indubitably Green": "5027",
+        "Zepheniah's Greed": "5028",
+        "Noble Hatter's Violet": "5029",
+        "Color No. 216-190-216": "5030",
+        "A Deep Commitment to Purple": "5031",
+        "Mann Co. Orange": "5032",
+        "Muskelmannbraun": "5033",
+        "Peculiarly Drab Tincture": "5034",
+        "Radigan Conagher Brown": "5035",
+        "Ye Olde Rustic Colour": "5036",
+        "Australium Gold": "5037",
+        "Aged Moustache Grey": "5038",
+        "An Extraordinary Abundance of Tinge": "5039",
+        "A Distinctive Lack of Hue": "5040",
+        "Team Spirit": "5046",
+        "Pink as Hell": "5051",
+        "A Color Similar to Slate": "5052",
+        "Drably Olive": "5053",
+        "The Bitter Taste of Defeat and Lime": "5054",
+        "The Color of a Gentlemann's Business Pants": "5055",
+        "Dark Salmon Injustice": "5056",
+        "Operator's Overalls": "5060",
+        "Waterlogged Lab Coat": "5061",
+        "Balaclavas Are Forever": "5062",
+        "An Air of Debonair": "5063",
+        "The Value of Teamwork": "5064",
+        "Cream Spirit": "5065",
+        "A Mann's Mint": "5076",
+        "After Eight": "5077"
+    },
+    "spellDefindex": {
+        "Halloween Fire": "8925",
+        "Pumpkin Bombs": "8922",
+        "Exorcism": "8921",
+        "Headless Horseshoes": "8920",
+        "Bruised Purple Footprints": "8919",
+        "Rotten Orange Footprints": "8918",
+        "Violent Violet Footprints": "8917",
+        "Corpse Gray Footprints": "8916",
+        "Gangreen Footprints": "8915",
+        "Team Spirit Footprints": "8914",
+        "Voices from Below": "8906",
+        "Sinister Staining": "8904",
+        "Spectral Spectrum": "8903",
+        "Chromatic Corruption": "8902",
+        "Die Job": "8901",
+        "Putrescent Pigmentation": "8900"
+    },
     "cosmeticCollections": [
         "Gun Mettle Cosmetics Collection",
         "Quarantined Collection Case",

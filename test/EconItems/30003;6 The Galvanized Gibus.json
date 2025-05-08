@@ -1,62 +1,76 @@
 {
     "econItem": {
         "appid": 440,
-        "assetid": "11113554855",
-        "classid": "4691717617",
-        "instanceid": "4907108907",
+        "classid": "150320638",
+        "instanceid": "6770817171",
+        "assetid": "12345",
         "currency": 0,
         "background_color": "3C352E",
-        "icon_url": "IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdEH9myp0erksICfSMfqIdEs5nqWSMU5OD2IwIlnYPyihXOjLx2Sk5MbUqMcbBnQz4ruyeU2T0bwjMLjXmGVBvFO0LYCq2omLnsriKSzDPQ-1-SgoBf6RXp2cca5yMbkNu0NEJ_2O9xkYtTRN9I5wRJw7rzDoDP7oZYyO4jQ",
-        "icon_url_large": "IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdEH9myp0erksICfSMfqIdEs5nqWSMU5OD2IwIlnYPyihXOjLx2Sk5MbUqMcbBnQz4ruyeU2T0bwjMLjXmGVBvFO0LYCq2omLnsriKSzDPQ-1-SgoBf6RXp2cca5yMbkNu0NEJ_2O9xkYtTRN9I5wRJw7rzDoDP7oZYyO4jQ",
+        "icon_url": "IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdEH9myp0erksICfTeLfQYFp1nqWSMU5OD2N5bwHMLmShXOjLx2Sk5MbUqMcbBnQz4ruyeU2b4ajj7Li3VI1lhH_YdWjSIvGTw--WQED3KEu4rRwkMf6EH8jUYOs6IOUds0YADqmPpwh0tTEIqJZZCJF712noU8nPGzZY",
+        "icon_url_large": "IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdEH9myp0erksICfTeLfQYFp1nqWSMU5OD2N5bwHMLmShXOjLx2Sk5MbUqMcbBnQz4ruyeU2b4ajj7Li3VI1lhH_YdWjSIvGTw--WQED3KEu4rRwkMf6EH8jUYOs6IOUds0YADqmPpwh0tTEIqJZZCJF712noU8nPGzZY",
         "descriptions": [
             {
-                "value": "Paint Color: Australium Gold",
-                "color": "756b5e"
+                "value": "Paint Color: A Deep Commitment to Purple",
+                "color": "756b5e",
+                "name": "attribute"
             },
             {
-                "value": "★ Unusual Effect: Dead Presidents",
-                "color": "ffd700"
+                "value": "Halloween: Chromatic Corruption (spell only active during event)",
+                "color": "7ea9d1",
+                "name": "attribute"
             },
             {
-                "value": "Break news, spirits and heads."
+                "value": "Halloween: Violent Violet Footprints (spell only active during event)",
+                "color": "7ea9d1",
+                "name": "attribute"
+            },
+            {
+                "value": "Elegant simplicity and old-world charm combine with the intoxicating aromas of methyl alcohol and gasoline. Do not wear in unventilated areas.",
+                "name": "attribute"
+            },
+            {
+                "value": "\nGift from: \\tony#6/2",
+                "color": "7ea9d1",
+                "name": "attribute"
+            },
+            {
+                "value": "Date Received: Saturday, February 22, 2025 (13:12:30) GMT",
+                "name": "attribute"
             }
         ],
         "tradable": 1,
         "actions": [
             {
-                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=538&lang=en_US",
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=30003&lang=en_US",
                 "name": "Item Wiki Page..."
             },
             {
-                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D16468046034921968830",
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D2861311262799637119",
                 "name": "Inspect in Game..."
             }
         ],
-        "fraudwarnings": [
-            "This item has been renamed.\nOriginal name: \"Killer Exclusive\""
-        ],
-        "name": "''Yellow and Pure''",
-        "name_color": "8650AC",
-        "type": "Strange Hat - Points Scored: 5871",
-        "market_name": "Strange Unusual Killer Exclusive",
-        "market_hash_name": "Strange Unusual Killer Exclusive",
+        "name": "The Galvanized Gibus",
+        "name_color": "7D6D00",
+        "type": "Level 73 Hat",
+        "market_name": "The Galvanized Gibus",
+        "market_hash_name": "The Galvanized Gibus",
         "market_actions": [
             {
-                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D16468046034921968830",
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D2861311262799637119",
                 "name": "Inspect in Game..."
             }
         ],
         "commodity": 0,
         "market_tradable_restriction": 7,
         "market_marketable_restriction": 0,
-        "marketable": 1,
+        "marketable": 0,
         "tags": [
             {
                 "category": "Quality",
-                "internal_name": "rarity4",
+                "internal_name": "Unique",
                 "localized_category_name": "Quality",
-                "localized_tag_name": "Unusual",
-                "color": "8650AC"
+                "localized_tag_name": "Unique",
+                "color": "7D6D00"
             },
             {
                 "category": "Type",
@@ -120,16 +134,10 @@
             }
         ],
         "app_data": {
-            "def_index": "538",
-            "quality": "5",
+            "def_index": "30003",
+            "quality": "6",
             "slot": "Cosmetic",
             "filter_data": {
-                "931505789": {
-                    "element_ids": {
-                        "0": "991457757",
-                        "1": "8"
-                    }
-                },
                 "1662615936": {
                     "element_ids": {
                         "0": "991457757",
@@ -142,6 +150,12 @@
                         "7": "7",
                         "8": "8",
                         "9": "9"
+                    }
+                },
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "8"
                     }
                 }
             },
@@ -160,13 +174,13 @@
         }
     },
     "expected": {
-        "sku": "538;5;strange;u-60",
-        "id": "11113554855",
+        "sku": "30003;6",
+        "id": "12345",
         "old_id": null
     },
     "expectedWithOptions": {
-        "sku": "538;5;strange;u-60;pc-5037",
-        "id": "11113554855",
+        "sku": "30003;6;pc-5031;hs-8902_8917",
+        "id": "12345",
         "old_id": null
     }
 }

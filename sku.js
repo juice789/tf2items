@@ -32,7 +32,9 @@ const skuFromItem = ({
     wear,
     australium,
     series,
-    craft
+    craft,
+    paintColor,
+    halloweenSpell
 }) => [
     defindex,
     quality,
@@ -49,6 +51,8 @@ const skuFromItem = ({
     ['1', true].includes(australium) && 'australium',
     series && isNaN(series) === false && 'c-' + parseInt(series),
     craft && isNaN(craft) === false && 'no-' + parseInt(craft),
+    paintColor && 'pc-' + paintColor,
+    halloweenSpell && 'hs-' + halloweenSpell
 ].filter(Boolean).join(';')
 
 const rules = {
@@ -64,7 +68,9 @@ const rules = {
     w: "wear",
     australium: 'australium',
     c: "series",
-    no: "craft"
+    no: "craft",
+    pc: "paintColor",
+    hs: "halloweenSpell"
 }
 
 const decodeRules = compose(

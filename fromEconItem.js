@@ -36,12 +36,16 @@ const {
     path,
     equals,
     pick,
-    assocPath
+    assocPath,
+    isEmpty,
+    join,
+    filter,
+    omit
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
 const { particleEffects, textures } = require('./schema.json')
-const { qualityNames, wears } = require('./schemaHelper.json')
+const { qualityNames, wears, paintDefindex, spellDefindex } = require('./schemaHelper.json')
 const { skuFromItem } = require('./sku.js')
 const { renameKeys } = require('ramda-adjunct')
 
@@ -78,7 +82,6 @@ const recipe = compose(
     find(__, ['Fabricator', 'Strangifier Chemistry Set', 'Chemistry Set']),
     flip(marketHashIncludes),
 )
-
 
 const series = ifElse(
     compose(equals('Crate'), findTag('Type')),
@@ -185,6 +188,24 @@ const uncraftable = compose(
     propOr([], 'descriptions')
 )
 
+const paintOptions = Object.keys(paintDefindex).map(paintName => `Paint Color: ${paintName}`)
+
+const paintColor = compose(
+    when(Boolean, ({ value }) => paintDefindex[value.split('Paint Color: ')[1]]),
+    find(compose(includes(__, paintOptions), prop('value'))),
+    propOr([], 'descriptions')
+)
+
+const spellOptions = Object.keys(spellDefindex).map(spellName => `Halloween: ${spellName} (spell only active during event)`)
+
+const halloweenSpell = compose(
+    when(isEmpty, always(null)),
+    join('_'),
+    map(({ value }) => spellDefindex[value.split('Halloween: ')[1].replace(' (spell only active during event)', '')]),
+    filter(compose(includes(__, spellOptions), prop('value'))),
+    propOr([], 'descriptions')
+)
+
 const market_hash_name = prop('market_hash_name')
 
 const setQuality = when(
@@ -213,6 +234,8 @@ const propsTf2_1 = {
     series,
     craft,
     recipe,
+    halloweenSpell,
+    paintColor,
     id,
     old_id
 }
@@ -305,16 +328,12 @@ const keyRemap = when(
         String,
         prop('defindex')
     ),
-    compose(
-        assoc('defindex', '5021'),
-        assoc('uncraftable', false)
-    )
+    assoc('defindex', '5021')
 )
 
-//725 tour of duty ticket
-const uncraftRemap = when(
+const uncraftRemap = (uncraftRemapDefindex) => when(
     compose(
-        includes(__, ['725']),
+        includes(__, uncraftRemapDefindex),
         String,
         prop('defindex')
     ),
@@ -344,35 +363,43 @@ const otherRemap = when(
     chain(assoc('defindex'), compose(prop(__, otherIndex), prop('defindex')))
 )
 
-const remaps = compose(
-    kitRemap,
-    keyRemap,
-    uncraftRemap,
-    otherRemap
-)
+const defaultOptions440 = {
+    omitProps: ['paintColor', 'halloweenSpell'],
+    uncraftRemapDefindex: ['5021']
+}
 
-const fromEconItem440 = compose(
+const fromEconItem440 = ({ omitProps = [], uncraftRemapDefindex = [] } = defaultOptions440) => compose(
     pick(['sku', 'id', 'old_id']),
     chain(assoc('sku'), skuFromItem),
-    remaps,
+    uncraftRemap(uncraftRemapDefindex),
+    kitRemap,
+    keyRemap,
+    otherRemap,
     chain(mergeRight, compose(map(__, propsTf2_2), applyTo)),
-    map(__, propsTf2_1),
+    map(__, omit(omitProps, propsTf2_1)),
     unary(applyTo),
     setQuality
 )
 
-const fromEconItemOther = compose(
+const fromEconItemOther = (options = {}) => compose(
     map(__, propsOtherGame),
     unary(applyTo)
 )
 
 const fromEconItem = ifElse(
     propEq(440, 'appid'),
-    fromEconItem440,
-    fromEconItemOther
+    fromEconItem440(),
+    fromEconItemOther()
 )
+
+const fromEconItemOptions = curry((options, econItem) => ifElse(
+    propEq(440, 'appid'),
+    fromEconItem440(options),
+    fromEconItemOther(options)
+)(econItem))
 
 module.exports = {
     fromEconItem,
+    fromEconItemOptions,
     kitRemap
 }

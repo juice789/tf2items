@@ -1,0 +1,125 @@
+{
+    "econItem": {
+        "appid": 440,
+        "classid": "4006794159",
+        "instanceid": "7034694081",
+        "assetid": "9252885411",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgENYwUuWCTxrDFAg9HkAv-ON-cPl94K6ZFH3jMlyVEvMubjNDU2cwabBPANCKJopV29CiNqsZdgVoPm8-1VLA25tIaXNa5sbo9B6Rq9DQ",
+        "icon_url_large": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgENYwUuWCTxrDFAg9HkAv-ON-cPl94K6ZFH3jMlyVEvMubjNDU2cwabBPANCKJopV29CiNqsZdgVoPm8-1VLA25tIaXNa5sbo9B6Rq9DQ",
+        "descriptions": [
+            {
+                "value": "Halloween: Pumpkin Bombs (spell only active during event)",
+                "color": "7ea9d1",
+                "name": "attribute"
+            },
+            {
+                "value": "Halloween: Exorcism (spell only active during event)",
+                "color": "7ea9d1",
+                "name": "attribute"
+            },
+            {
+                "value": "Sheen: Deadly Daffodil",
+                "color": "7ea9d1",
+                "name": "attribute"
+            },
+            {
+                "value": "Killstreaks Active",
+                "color": "7ea9d1",
+                "name": "attribute"
+            },
+            {
+                "value": "Alt-Fire: Detonate all stickybombs",
+                "name": "attribute"
+            },
+            {
+                "value": "\nGift from: \\pozi",
+                "color": "7ea9d1",
+                "name": "attribute"
+            },
+            {
+                "value": "Date Received: Monday, September 21, 2020 (17:37:05) GMT",
+                "name": "attribute"
+            },
+            {
+                "value": " ",
+                "name": "attribute"
+            },
+            {
+                "value": "( Not Tradable or Marketable )",
+                "name": "attribute"
+            }
+        ],
+        "tradable": 0,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=971&lang=en_US",
+                "name": "Item Wiki Page..."
+            }
+        ],
+        "name": "Strange Specialized Killstreak Gold Botkiller Stickybomb Launcher Mk.II",
+        "name_color": "CF6A32",
+        "type": "Strange Stickybomb Launcher - Kills: 2063",
+        "market_name": "Strange Specialized Killstreak Gold Botkiller Stickybomb Launcher Mk.II",
+        "market_hash_name": "Strange Specialized Killstreak Gold Botkiller Stickybomb Launcher Mk.II",
+        "commodity": 0,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 0,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "strange",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Strange",
+                "color": "CF6A32"
+            },
+            {
+                "category": "Type",
+                "internal_name": "secondary",
+                "localized_category_name": "Type",
+                "localized_tag_name": "Secondary weapon"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Demoman",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Demoman"
+            }
+        ],
+        "app_data": {
+            "def_index": "971",
+            "quality": "11",
+            "slot": "Secondary weapon",
+            "filter_data": {
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "4"
+                    }
+                },
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "1"
+                    }
+                }
+            },
+            "player_class_ids": {
+                "0": "4"
+            },
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "971;11;kt-2",
+        "id": "9252885411",
+        "old_id": null
+    },
+    "expectedWithOptions": {
+        "sku": "971;11;kt-2;hs-8922_8921",
+        "id": "9252885411",
+        "old_id": null
+    }
+}

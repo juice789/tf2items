@@ -67,16 +67,9 @@ const findTag = uncurryN(2, (tagName) => compose(
     propOr([], 'tags')
 ))
 
-const old_id = ifElse(
-    has('new_assetid'),
-    prop('assetid'),
-    always(null)
-)
+const old_id = ({ new_assetid, rollback_new_assetid, assetid }) => (new_assetid || rollback_new_assetid) ? assetid : null
 
-const id = chain(
-    propOr(__, 'new_assetid'),
-    prop('assetid')
-)
+const id = ({ new_assetid, rollback_new_assetid, assetid }) => new_assetid || rollback_new_assetid || assetid
 
 const recipe = compose(
     find(__, ['Fabricator', 'Strangifier Chemistry Set', 'Chemistry Set']),

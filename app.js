@@ -14,7 +14,7 @@ const { createApi, api } = require('./api.js')
 const sagas = require('./sagas.js')
 const { saveSchema } = require('./saveSchema.js')
 
-const { fromEconItem } = require('./fromEconItem.js')
+const { fromEconItem, fromEconItemOptions } = require('./fromEconItem.js')
 const { fromListingV1 } = require('./fromListingV1.js')
 const { fromListingV2 } = require('./fromListingV2.js')
 const { blanketify } = require('./blanket.js')
@@ -49,6 +49,7 @@ module.exports = {
     createApi,
     api,
     fromEconItem,
+    fromEconItemOptions,
     fromListingV1,
     fromListingV2,
     blanketify,

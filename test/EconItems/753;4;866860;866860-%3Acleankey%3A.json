@@ -1,0 +1,68 @@
+{
+    "econItem": {
+        "appid": 753,
+        "contextid": "6",
+        "assetid": "11511617825",
+        "classid": "2838587435",
+        "instanceid": "0",
+        "amount": 1,
+        "pos": 70,
+        "id": "11511617825",
+        "currency": 0,
+        "background_color": "",
+        "icon_url": "i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSIYhY_9XEDYOMNRBsMoGuuOgceXob50kaxV_PHjMO1MHaEqg4jot-iuhbjERylx8LmqCFa6qT5avU8cvHLDz_Hkr1057Y-TCq2zR8mtzjRy96rbzvJOSK9U5v3",
+        "icon_url_large": "i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSIYhY_9XEDYOMNRBsMoGuuOgceXob50kaxV_PHjMO1MHaEqg4jot-iuhbjERylx8LmqCFa6qT5avU8cvHLDz_Hkr1057Y-TCq2zR8mtzjRy96rbzvJOSK9U5v3",
+        "descriptions": [
+            {
+                "value": "Earned for participating in the Spring Cleaning Event in 2018."
+            },
+            {
+                "value": "\n"
+            },
+            {
+                "type": "html",
+                "value": "Preview: <img class=\"emoticon\" src=\"https://steamcommunity-a.akamaihd.net/economy/emoticon/:cleankey:\">"
+            }
+        ],
+        "tradable": true,
+        "name": ":cleankey:",
+        "type": "Spring Cleaning Event Emoticon",
+        "market_name": ":cleankey:",
+        "market_hash_name": "866860-:cleankey:",
+        "market_fee_app": 866860,
+        "commodity": true,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 7,
+        "marketable": true,
+        "tags": [
+            {
+                "internal_name": "droprate_0",
+                "name": "Common",
+                "category": "droprate",
+                "color": "",
+                "category_name": "Rarity"
+            },
+            {
+                "internal_name": "app_866860",
+                "name": "Spring Cleaning Event",
+                "category": "Game",
+                "color": "",
+                "category_name": "Game"
+            },
+            {
+                "internal_name": "item_class_4",
+                "name": "Emoticon",
+                "category": "item_class",
+                "color": "",
+                "category_name": "Item Type"
+            }
+        ],
+        "is_currency": false,
+        "fraudwarnings": []
+    },
+    "expected": {
+        "sku": "753;4;866860;866860-%3Acleankey%3A",
+        "id": "11511617825",
+        "old_id": null
+    }
+}

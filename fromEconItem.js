@@ -40,13 +40,16 @@ const {
     isEmpty,
     join,
     filter,
-    omit
+    omit,
+    last,
+    defaultTo
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
 const { particleEffects, textures } = require('./schema.json')
 const { qualityNames, wears, paintDefindex, spellDefindex } = require('./schemaHelper.json')
 const { skuFromItem } = require('./sku.js')
+const { skuFromItem753 } = require('./sku753.js')
 const { renameKeys } = require('ramda-adjunct')
 
 const marketHashIncludes = curry((string, { market_hash_name }) => market_hash_name.indexOf(string) !== -1)
@@ -57,8 +60,8 @@ const removeStrings = curry((string, strings) => compose(
     reduce((all, curr) => replace(curr, '', all), string || '')
 )(strings))
 
-const findTag = uncurryN(2, (tagName) => compose(
-    prop('name'),
+const findTag = uncurryN(3, (tagName, displayProp) => compose(
+    prop(displayProp),
     find(propEq(tagName, 'category_name')),
     map(renameKeys({
         localized_category_name: 'category_name',
@@ -77,7 +80,7 @@ const recipe = compose(
 )
 
 const series = ifElse(
-    compose(equals('Crate'), findTag('Type')),
+    compose(equals('Crate'), findTag('Type', 'name')),
     ifElse(
         marketHashIncludes('#'),
         compose(
@@ -116,11 +119,11 @@ const australium = allPass([
 const wear = compose(
     prop(__, invertObj(wears)),
     removeStrings(__, ['(', ')']),
-    findTag('Exterior')
+    findTag('Exterior', 'name')
 )
 
 const texture = ifElse(
-    findTag('Exterior'),
+    findTag('Exterior', 'name'),
     compose(
         propOr('-1', __, invertObj(textures)),
         ({ app_data, market_hash_name }) => removeStrings(market_hash_name, [
@@ -205,7 +208,7 @@ const setQuality = when(
     compose(complement(Boolean), path(['app_data', 'quality'])),
     chain(
         assocPath(['app_data', 'quality']),
-        compose(prop(__, invertObj(qualityNames)), findTag('Quality'))
+        compose(prop(__, invertObj(qualityNames)), findTag('Quality', 'name'))
     )
 )
 
@@ -315,6 +318,15 @@ const propsOtherGame = {
     old_id
 }
 
+const props753 = {
+    market_hash_name: prop('market_hash_name'),
+    border: compose(last, defaultTo(''), findTag('Card Border', 'internal_name')),
+    game: compose(nth(1), split('_'), findTag('Game', 'internal_name')),
+    type: compose(last, findTag('Item Type', 'internal_name')),
+    id,
+    old_id
+}
+
 const keyRemap = when(
     compose(
         includes(__, ['5021', '5049', '5067', '5072', '5073', '5079', '5081', '5628', '5631', '5632', '5713', '5716', '5717', '5762', '5791', '5792']), //old keys that turned into regular keys
@@ -374,22 +386,26 @@ const fromEconItem440 = ({ omitProps = [], uncraftRemapDefindex = [] } = default
     setQuality
 )
 
+const fromEconItem753 = () => compose(
+    pick(['sku', 'id', 'old_id']),
+    chain(assoc('sku'), skuFromItem753),
+    map(__, props753),
+    unary(applyTo)
+)
+
 const fromEconItemOther = (options = {}) => compose(
     map(__, propsOtherGame),
     unary(applyTo)
 )
 
-const fromEconItem = ifElse(
-    propEq(440, 'appid'),
-    fromEconItem440(),
-    fromEconItemOther()
-)
+const mainFns = {
+    440: fromEconItem440,
+    753: fromEconItem753
+}
 
-const fromEconItemOptions = curry((options, econItem) => ifElse(
-    propEq(440, 'appid'),
-    fromEconItem440(options),
-    fromEconItemOther(options)
-)(econItem))
+const fromEconItem = (econItem) => (mainFns[econItem.appid] || fromEconItemOther)()(econItem)
+
+const fromEconItemOptions = curry((options, econItem) => (mainFns[econItem.appid] || fromEconItemOther)(options)(econItem))
 
 module.exports = {
     fromEconItem,

@@ -74,6 +74,10 @@ const old_id = ({ new_assetid, rollback_new_assetid, assetid }) => (new_assetid 
 
 const id = ({ new_assetid, rollback_new_assetid, assetid }) => new_assetid || rollback_new_assetid || assetid
 
+const old_contextid = ({ new_contextid, rollback_new_contextid, contextid }) => (new_contextid || rollback_new_contextid) ? contextid : null
+
+const contextid = ({ new_contextid, rollback_new_contextid, contextid }) => new_contextid || rollback_new_contextid || contextid
+
 const recipe = compose(
     find(__, ['Fabricator', 'Strangifier Chemistry Set', 'Chemistry Set']),
     flip(marketHashIncludes),
@@ -233,7 +237,9 @@ const propsTf2_1 = {
     halloweenSpell,
     paintColor,
     id,
-    old_id
+    old_id,
+    contextid,
+    old_contextid
 }
 
 const isTarget = either(
@@ -324,7 +330,9 @@ const props753 = {
     game: compose(nth(1), split('_'), findTag('Game', 'internal_name')),
     type: compose(last, findTag('Item Type', 'internal_name')),
     id,
-    old_id
+    old_id,
+    contextid,
+    old_contextid
 }
 
 const keyRemap = when(
@@ -374,7 +382,7 @@ const defaultOptions440 = {
 }
 
 const fromEconItem440 = ({ omitProps = [], uncraftRemapDefindex = [] } = defaultOptions440) => compose(
-    pick(['sku', 'id', 'old_id']),
+    pick(['sku', 'id', 'old_id', 'contextid', 'old_contextid']),
     chain(assoc('sku'), skuFromItem),
     uncraftRemap(uncraftRemapDefindex),
     kitRemap,
@@ -387,7 +395,7 @@ const fromEconItem440 = ({ omitProps = [], uncraftRemapDefindex = [] } = default
 )
 
 const fromEconItem753 = () => compose(
-    pick(['sku', 'id', 'old_id']),
+    pick(['sku', 'id', 'old_id', 'contextid', 'old_contextid']),
     chain(assoc('sku'), skuFromItem753),
     map(__, props753),
     unary(applyTo)

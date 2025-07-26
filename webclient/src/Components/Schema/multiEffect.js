@@ -40,6 +40,7 @@ const multiEffectList = {
     s2024: filterEffects(range(327, 350)),
     h2024: filterEffects(range(350, 363)),
     w2024: filterEffects(range(364, 373)),
+    s2025: filterEffects(range(373, 382)),
     wep: filterEffects(range(701, 705)),
     wep2: filterEffects(range(701, 704)),
     taunt01: filterEffects(range(3001, 3011)),
@@ -59,6 +60,7 @@ const multiEffectList = {
     taunt15: filterEffects(range(3145, 3174)),
     taunt16: filterEffects(range(3174, 3185)),
     taunt17: filterEffects(range(3185, 3194)),
+    taunt18: filterEffects(range(3194, 3203)),
 }
 
 export default multiEffectList

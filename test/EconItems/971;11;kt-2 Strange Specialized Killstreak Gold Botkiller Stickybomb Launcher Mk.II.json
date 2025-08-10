@@ -115,11 +115,11 @@
     "expected": {
         "sku": "971;11;kt-2",
         "id": "9252885411",
-        "old_id": null
+        "old_id": null, "contextid": null, "old_contextid": null
     },
     "expectedWithOptions": {
         "sku": "971;11;kt-2;hs-8922_8921",
         "id": "9252885411",
-        "old_id": null
+        "old_id": null, "contextid": null, "old_contextid": null
     }
 }

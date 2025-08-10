@@ -72,11 +72,11 @@ const findTag = uncurryN(3, (tagName, displayProp) => compose(
 
 const old_id = ({ new_assetid, rollback_new_assetid, assetid }) => (new_assetid || rollback_new_assetid) ? assetid : null
 
-const id = ({ new_assetid, rollback_new_assetid, assetid }) => new_assetid || rollback_new_assetid || assetid
+const id = ({ new_assetid, rollback_new_assetid, assetid }) => new_assetid || rollback_new_assetid || assetid || null
 
 const old_contextid = ({ new_contextid, rollback_new_contextid, contextid }) => (new_contextid || rollback_new_contextid) ? contextid : null
 
-const contextid = ({ new_contextid, rollback_new_contextid, contextid }) => new_contextid || rollback_new_contextid || contextid
+const contextid = ({ new_contextid, rollback_new_contextid, contextid }) => new_contextid || rollback_new_contextid || contextid || null
 
 const recipe = compose(
     find(__, ['Fabricator', 'Strangifier Chemistry Set', 'Chemistry Set']),

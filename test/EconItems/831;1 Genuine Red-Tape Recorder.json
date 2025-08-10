@@ -83,6 +83,8 @@
     "expected": {
         "sku": "831;1",
         "id": "10530370903",
-        "old_id": "10530370902"
+        "old_id": "10530370902",
+        "contextid": null,
+        "old_contextid": null
     }
 }

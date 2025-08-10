@@ -78,11 +78,15 @@
     "expected": {
         "sku": "725;6;uncraftable",
         "id": "15254895323",
-        "old_id": null
+        "old_id": null,
+        "contextid": "2",
+        "old_contextid": null
     },
     "expectedWithOptions": {
         "sku": "725;6",
         "id": "15254895323",
-        "old_id": null
+        "old_id": null,
+        "contextid": "2",
+        "old_contextid": null
     }
 }

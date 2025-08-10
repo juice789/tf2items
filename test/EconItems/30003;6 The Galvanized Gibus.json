@@ -176,11 +176,11 @@
     "expected": {
         "sku": "30003;6",
         "id": "12345",
-        "old_id": null
+        "old_id": null, "contextid": null, "old_contextid": null
     },
     "expectedWithOptions": {
         "sku": "30003;6;pc-5031;hs-8902_8917",
         "id": "12345",
-        "old_id": null
+        "old_id": null, "contextid": null, "old_contextid": null
     }
 }

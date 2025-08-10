@@ -26,7 +26,7 @@ it('fromEconItem', () => {
     "expected": {
         "sku":null,
         "id":null,
-        "old_id":null
+        "old_id": null, "contextid": null, "old_contextid": null
     }
 }
 */

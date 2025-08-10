@@ -178,11 +178,11 @@
     "expected": {
         "sku": "30362;5;strange;u-60;kt-3",
         "id": "11888431459",
-        "old_id": null
+        "old_id": null, "contextid": null, "old_contextid": null
     },
     "expectedWithOptions": {
         "sku": "30362;5;strange;u-60;kt-3;pc-5046",
         "id": "11888431459",
-        "old_id": null
+        "old_id": null, "contextid": null, "old_contextid": null
     }
 }

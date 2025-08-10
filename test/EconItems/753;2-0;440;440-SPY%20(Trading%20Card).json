@@ -84,8 +84,10 @@
         "market_actions": []
     },
     "expected": {
-        "sku": "other;753;440-SPY (Trading Card)",
+        "sku": "753;2-0;440;440-SPY%20(Trading%20Card)",
         "id": "30735105542",
-        "old_id": null
+        "old_id": null,
+        "contextid": "6",
+        "old_contextid": null
     }
 }

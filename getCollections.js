@@ -1,5 +1,4 @@
-const { prop, map, compose, toLower, mapObjIndexed, toPairs, when, has, __, chain, assoc, reduce, mergeRight, values, path, uncurryN, replace } = require('ramda')
-const { renameKeysWith } = require('ramda-adjunct')
+const { prop, map, compose, toLower, mapObjIndexed, toPairs, when, has, __, chain, assoc, reduce, mergeRight, values, path, uncurryN, replace, mapKeys } = require('ramda')
 
 const simplifyCollections = compose(
     reduce((curr, obj) => mergeRight(curr, obj), {}),
@@ -15,7 +14,7 @@ const simplifyCollections = compose(
             prop('items')
         )
     ),
-    (collections) => renameKeysWith((key) => replace('#', '', path([key, 'name'], collections)), collections),
+    (collections) => mapKeys((key) => replace('#', '', path([key, 'name'], collections)), collections),
     prop('item_collections')
 )
 

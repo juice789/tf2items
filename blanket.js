@@ -24,9 +24,9 @@ const {
     concat,
     unnest,
     pick,
-    mergeRight
+    mergeRight,
+    renameKeys
 } = require('ramda')
-const { renameKeys } = require('ramda-adjunct')
 
 const { safeItems: items } = require('./schemaItems.js')
 const { skuFromItem, itemFromSku } = require('./sku.js')

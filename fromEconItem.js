@@ -42,7 +42,8 @@ const {
     filter,
     omit,
     last,
-    defaultTo
+    defaultTo,
+    renameKeys
 } = require('ramda')
 
 const { safeItems: items } = require('./schemaItems.js')
@@ -50,7 +51,6 @@ const { particleEffects, textures } = require('./schema.json')
 const { qualityNames, wears, paintDefindex, spellDefindex } = require('./schemaHelper.json')
 const { skuFromItem } = require('./sku.js')
 const { skuFromItem753 } = require('./sku753.js')
-const { renameKeys } = require('ramda-adjunct')
 
 const marketHashIncludes = curry((string, { market_hash_name }) => market_hash_name.indexOf(string) !== -1)
 

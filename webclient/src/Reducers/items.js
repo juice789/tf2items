@@ -1,8 +1,34 @@
 import {
-    has, dissoc, assoc, indexBy, prop, map, omit, chain, pick, compose, filter, complement, startsWith, keys, replace, assocPath, mergeDeepRight, dissocPath, converge, evolve, ifElse, fromPairs, concat, __, when, mergeRight, includes, pickBy
+    has,
+    dissoc,
+    assoc,
+    indexBy,
+    prop,
+    map,
+    omit,
+    chain,
+    pick,
+    compose,
+    filter,
+    complement,
+    startsWith,
+    keys,
+    replace,
+    assocPath,
+    mergeDeepRight,
+    dissocPath,
+    converge,
+    evolve,
+    ifElse,
+    fromPairs,
+    concat,
+    __,
+    when,
+    mergeRight,
+    includes,
+    pickBy,
+    mapKeys
 } from 'ramda'
-
-import { renameKeysWith } from 'ramda-adjunct'
 
 const defaultState = {
     category: '',
@@ -117,7 +143,7 @@ const resetChanges = map(chain(
 ))
 
 const applyChanges = compose(
-    map(renameKeysWith(replace('__', ''))),
+    map(mapKeys(replace('__', ''))),
     map(chain(pick, compose(filter(startsWith('__')), keys))),
     map(omit(['__toRemove']))
 )

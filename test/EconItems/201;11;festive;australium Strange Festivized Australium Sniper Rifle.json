@@ -88,6 +88,9 @@
     "expected": {
         "sku": "201;11;festive;australium",
         "id": "11928423675",
-        "old_id": null, "contextid": null, "old_contextid": null
+        "old_id": null,
+        "contextid": null,
+        "old_contextid": null,
+        "appid": 440
     }
 }

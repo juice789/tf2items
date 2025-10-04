@@ -1,1 +1,165 @@
-{"econItem":{"appid":440,"assetid":"10376470203","classid":"4493844830","instanceid":"37876811","currency":0,"background_color":"3C352E","icon_url":"fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEZawsWWiTyqjdPicbiCOCzB-4FpN40_K9WzCZUwz53NfGyNXlmdlXEVaJfDvRo9lvvDH5l7JYxAIXkputTLV3stNbEYeUpZY5LHsOERLbYMWbJm4K2","icon_url_large":"fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEZawsWWiTyqjdPicbiCOCzB-4FpN40_K9WzCZUwz53NfGyNXlmdlXEVaJfDvRo9lvvDH5l7JYxAIXkputTLV3stNbEYeUpZY5LHsOERLbYMWbJm4K2","descriptions":[{"value":"Winter 2021"},{"value":" "},{"value":"( Not Tradable or Marketable )"}],"tradable":0,"actions":[{"link":"http://wiki.teamfortress.com/scripts/itemredirect.php?id=12398&lang=en_US","name":"Item Wiki Page..."},{"link":"steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D7526014458531731354","name":"Inspect in Game..."}],"name":"Genuine RGL.gg One Day Prolander Cup - NA #1","name_color":"4D7455","type":"Level 1 Tournament Medal","market_name":"Genuine RGL.gg One Day Prolander Cup - NA #1","market_hash_name":"Genuine RGL.gg One Day Prolander Cup - NA #1","market_actions":[{"link":"steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D7526014458531731354","name":"Inspect in Game..."}],"commodity":0,"market_tradable_restriction":7,"market_marketable_restriction":0,"marketable":0,"tags":[{"category":"Quality","internal_name":"rarity1","localized_category_name":"Quality","localized_tag_name":"Genuine","color":"4D7455"},{"category":"Type","internal_name":"misc","localized_category_name":"Type","localized_tag_name":"Cosmetic"},{"category":"Class","internal_name":"Scout","localized_category_name":"Class","localized_tag_name":"Scout"},{"category":"Class","internal_name":"Sniper","localized_category_name":"Class","localized_tag_name":"Sniper"},{"category":"Class","internal_name":"Soldier","localized_category_name":"Class","localized_tag_name":"Soldier"},{"category":"Class","internal_name":"Demoman","localized_category_name":"Class","localized_tag_name":"Demoman"},{"category":"Class","internal_name":"Medic","localized_category_name":"Class","localized_tag_name":"Medic"},{"category":"Class","internal_name":"Heavy","localized_category_name":"Class","localized_tag_name":"Heavy"},{"category":"Class","internal_name":"Pyro","localized_category_name":"Class","localized_tag_name":"Pyro"},{"category":"Class","internal_name":"Spy","localized_category_name":"Class","localized_tag_name":"Spy"},{"category":"Class","internal_name":"Engineer","localized_category_name":"Class","localized_tag_name":"Engineer"}],"app_data":{"def_index":"12398","quality":"1","slot":"Cosmetic","filter_data":{"931505789":{"element_ids":{"0":"991457757","1":"8"}},"1662615936":{"element_ids":{"0":"991457757","1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9"}}},"player_class_ids":{"0":"1","1":"2","2":"3","3":"4","4":"5","5":"6","6":"7","7":"8","8":"9"},"highlight_color":"7a6e65"}},"expected":{"sku":"12398;1","id":"10376470203","old_id": null, "contextid": null, "old_contextid": null}}
+{
+    "econItem": {
+        "appid": 440,
+        "assetid": "10376470203",
+        "classid": "4493844830",
+        "instanceid": "37876811",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEZawsWWiTyqjdPicbiCOCzB-4FpN40_K9WzCZUwz53NfGyNXlmdlXEVaJfDvRo9lvvDH5l7JYxAIXkputTLV3stNbEYeUpZY5LHsOERLbYMWbJm4K2",
+        "icon_url_large": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEZawsWWiTyqjdPicbiCOCzB-4FpN40_K9WzCZUwz53NfGyNXlmdlXEVaJfDvRo9lvvDH5l7JYxAIXkputTLV3stNbEYeUpZY5LHsOERLbYMWbJm4K2",
+        "descriptions": [
+            {
+                "value": "Winter 2021"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "( Not Tradable or Marketable )"
+            }
+        ],
+        "tradable": 0,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=12398&lang=en_US",
+                "name": "Item Wiki Page..."
+            },
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D7526014458531731354",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "name": "Genuine RGL.gg One Day Prolander Cup - NA #1",
+        "name_color": "4D7455",
+        "type": "Level 1 Tournament Medal",
+        "market_name": "Genuine RGL.gg One Day Prolander Cup - NA #1",
+        "market_hash_name": "Genuine RGL.gg One Day Prolander Cup - NA #1",
+        "market_actions": [
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D7526014458531731354",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "commodity": 0,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 0,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "rarity1",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Genuine",
+                "color": "4D7455"
+            },
+            {
+                "category": "Type",
+                "internal_name": "misc",
+                "localized_category_name": "Type",
+                "localized_tag_name": "Cosmetic"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Scout",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Scout"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Sniper",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Sniper"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Soldier",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Soldier"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Demoman",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Demoman"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Medic",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Medic"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Heavy",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Heavy"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Pyro",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Pyro"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Spy",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Spy"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Engineer",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Engineer"
+            }
+        ],
+        "app_data": {
+            "def_index": "12398",
+            "quality": "1",
+            "slot": "Cosmetic",
+            "filter_data": {
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "8"
+                    }
+                },
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "1",
+                        "2": "2",
+                        "3": "3",
+                        "4": "4",
+                        "5": "5",
+                        "6": "6",
+                        "7": "7",
+                        "8": "8",
+                        "9": "9"
+                    }
+                }
+            },
+            "player_class_ids": {
+                "0": "1",
+                "1": "2",
+                "2": "3",
+                "3": "4",
+                "4": "5",
+                "5": "6",
+                "6": "7",
+                "7": "8",
+                "8": "9"
+            },
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "12398;1",
+        "id": "10376470203",
+        "old_id": null,
+        "contextid": null,
+        "old_contextid": null,
+        "appid": 440
+    }
+}

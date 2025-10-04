@@ -1,1 +1,224 @@
-{"econItem":{"appid":440,"assetid":"11947661440","classid":"4776439738","instanceid":"2843004570","currency":0,"background_color":"3C352E","icon_url":"fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEMaQkUTxr2vTx8mMnvA-aHAfQ_ktk664MayTdinxVwPffmYG5YexDHDPIPCcot8Qn-Wmlq7ZI6UYThpL5QKlq8vdbHM7R6ONBFHsWGDPWAYQj97x9q1qFZKMbdvmqxisdXGrH7","icon_url_large":"fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEMaQkUTxr2vTx8mMnvA-aHAfQ_ktk664MayTdinxVwPffmYG5YexDHDPIPCcot8Qn-Wmlq7ZI6UYThpL5QKlq8vdbHM7R6ONBFHsWGDPWAYQj97x9q1qFZKMbdvmqxisdXGrH7","descriptions":[{"value":"Commando Grade Flame Thrower (Field-Tested)","color":"8847ff"},{"value":"★ Unusual Effect: Hot","color":"ffd700"},{"value":"This weapon holsters 30% faster","color":"7ea9d1"},{"value":"This weapon deploys 60% faster","color":"7ea9d1"},{"value":"Extinguishing teammates restores 20 health","color":"7ea9d1"},{"value":"Sheen: Manndarin","color":"7ea9d1"},{"value":"Killstreaks Active","color":"7ea9d1"},{"value":"-66% afterburn damage penalty","color":"d83636"},{"value":"+25% airblast cost","color":"d83636"},{"value":" "},{"value":"The Gas Jockey's Gear","color":"e1e10f"},{"value":" "},{"value":"The Degreaser","color":"8b8989"},{"value":"The Powerjack","color":"8b8989"},{"value":"The Attendant","color":"8b8989"},{"value":" "},{"value":"Item Set Bonus:","color":"e1e10f"},{"value":"Leave a Calling Card on your victims","color":"8b8989"},{"value":" "},{"value":" "},{"value":"Jungle Jackpot Collection"},{"value":"    Park Pigmented War Paint","color":"eb4b4b"},{"value":"    Sax Waxed War Paint","color":"d32ce6"},{"value":"    Yeti Coated War Paint","color":"d32ce6"},{"value":"    Macaw Masked War Paint","color":"8847ff"},{"value":"    Croc Dusted War Paint","color":"8847ff"},{"value":"★ Piña Polished War Paint","color":"8847ff"},{"value":"    Anodized Aloha War Paint","color":"4b69ff"},{"value":"    Bamboo Brushed War Paint","color":"4b69ff"},{"value":"    Tiger Buffed War Paint","color":"4b69ff"},{"value":"    Leopard Printed War Paint","color":"4b69ff"},{"value":"    Mannana Peeled War Paint","color":"4b69ff"}],"tradable":1,"actions":[{"link":"http://wiki.teamfortress.com/scripts/itemredirect.php?id=215&lang=en_US","name":"Item Wiki Page..."},{"link":"steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D11964597908554607387","name":"Inspect in Game..."}],"name":"Piña Polished Degreaser","name_color":"8650AC","type":"","market_name":"Unusual Specialized Killstreak Piña Polished Degreaser (Field-Tested)","market_hash_name":"Unusual Specialized Killstreak Piña Polished Degreaser (Field-Tested)","market_actions":[{"link":"steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D11964597908554607387","name":"Inspect in Game..."}],"commodity":0,"market_tradable_restriction":7,"market_marketable_restriction":0,"marketable":1,"tags":[{"category":"Quality","internal_name":"rarity4","localized_category_name":"Quality","localized_tag_name":"Unusual","color":"8650AC"},{"category":"Type","internal_name":"primary","localized_category_name":"Type","localized_tag_name":"Primary weapon"},{"category":"Class","internal_name":"Pyro","localized_category_name":"Class","localized_tag_name":"Pyro"},{"category":"Exterior","internal_name":"TFUI_InvTooltip_FieldTested","localized_category_name":"Exterior","localized_tag_name":"Field-Tested"}],"app_data":{"def_index":"215","quality":"5","slot":"Primary weapon","set_bundle_def_index":"2000","containing_bundles":{"0":"2148"},"filter_data":{"931505789":{"element_ids":{"0":"991457757","1":"0"}},"1662615936":{"element_ids":{"0":"991457757","1":"7"}}},"player_class_ids":{"0":"7"},"highlight_color":"7a6e65"}},"expected":{"sku":"215;5;u-701;kt-2;pk-309;w-3","id":"11947661440","old_id": null, "contextid": null, "old_contextid": null}}
+{
+    "econItem": {
+        "appid": 440,
+        "assetid": "11947661440",
+        "classid": "4776439738",
+        "instanceid": "2843004570",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEMaQkUTxr2vTx8mMnvA-aHAfQ_ktk664MayTdinxVwPffmYG5YexDHDPIPCcot8Qn-Wmlq7ZI6UYThpL5QKlq8vdbHM7R6ONBFHsWGDPWAYQj97x9q1qFZKMbdvmqxisdXGrH7",
+        "icon_url_large": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEMaQkUTxr2vTx8mMnvA-aHAfQ_ktk664MayTdinxVwPffmYG5YexDHDPIPCcot8Qn-Wmlq7ZI6UYThpL5QKlq8vdbHM7R6ONBFHsWGDPWAYQj97x9q1qFZKMbdvmqxisdXGrH7",
+        "descriptions": [
+            {
+                "value": "Commando Grade Flame Thrower (Field-Tested)",
+                "color": "8847ff"
+            },
+            {
+                "value": "★ Unusual Effect: Hot",
+                "color": "ffd700"
+            },
+            {
+                "value": "This weapon holsters 30% faster",
+                "color": "7ea9d1"
+            },
+            {
+                "value": "This weapon deploys 60% faster",
+                "color": "7ea9d1"
+            },
+            {
+                "value": "Extinguishing teammates restores 20 health",
+                "color": "7ea9d1"
+            },
+            {
+                "value": "Sheen: Manndarin",
+                "color": "7ea9d1"
+            },
+            {
+                "value": "Killstreaks Active",
+                "color": "7ea9d1"
+            },
+            {
+                "value": "-66% afterburn damage penalty",
+                "color": "d83636"
+            },
+            {
+                "value": "+25% airblast cost",
+                "color": "d83636"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "The Gas Jockey's Gear",
+                "color": "e1e10f"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "The Degreaser",
+                "color": "8b8989"
+            },
+            {
+                "value": "The Powerjack",
+                "color": "8b8989"
+            },
+            {
+                "value": "The Attendant",
+                "color": "8b8989"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "Item Set Bonus:",
+                "color": "e1e10f"
+            },
+            {
+                "value": "Leave a Calling Card on your victims",
+                "color": "8b8989"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "Jungle Jackpot Collection"
+            },
+            {
+                "value": "    Park Pigmented War Paint",
+                "color": "eb4b4b"
+            },
+            {
+                "value": "    Sax Waxed War Paint",
+                "color": "d32ce6"
+            },
+            {
+                "value": "    Yeti Coated War Paint",
+                "color": "d32ce6"
+            },
+            {
+                "value": "    Macaw Masked War Paint",
+                "color": "8847ff"
+            },
+            {
+                "value": "    Croc Dusted War Paint",
+                "color": "8847ff"
+            },
+            {
+                "value": "★ Piña Polished War Paint",
+                "color": "8847ff"
+            },
+            {
+                "value": "    Anodized Aloha War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Bamboo Brushed War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Tiger Buffed War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Leopard Printed War Paint",
+                "color": "4b69ff"
+            },
+            {
+                "value": "    Mannana Peeled War Paint",
+                "color": "4b69ff"
+            }
+        ],
+        "tradable": 1,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=215&lang=en_US",
+                "name": "Item Wiki Page..."
+            },
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20S%owner_steamid%A%assetid%D11964597908554607387",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "name": "Piña Polished Degreaser",
+        "name_color": "8650AC",
+        "type": "",
+        "market_name": "Unusual Specialized Killstreak Piña Polished Degreaser (Field-Tested)",
+        "market_hash_name": "Unusual Specialized Killstreak Piña Polished Degreaser (Field-Tested)",
+        "market_actions": [
+            {
+                "link": "steam://rungame/440/76561202255233023/+tf_econ_item_preview%20M%listingid%A%assetid%D11964597908554607387",
+                "name": "Inspect in Game..."
+            }
+        ],
+        "commodity": 0,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 1,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "rarity4",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Unusual",
+                "color": "8650AC"
+            },
+            {
+                "category": "Type",
+                "internal_name": "primary",
+                "localized_category_name": "Type",
+                "localized_tag_name": "Primary weapon"
+            },
+            {
+                "category": "Class",
+                "internal_name": "Pyro",
+                "localized_category_name": "Class",
+                "localized_tag_name": "Pyro"
+            },
+            {
+                "category": "Exterior",
+                "internal_name": "TFUI_InvTooltip_FieldTested",
+                "localized_category_name": "Exterior",
+                "localized_tag_name": "Field-Tested"
+            }
+        ],
+        "app_data": {
+            "def_index": "215",
+            "quality": "5",
+            "slot": "Primary weapon",
+            "set_bundle_def_index": "2000",
+            "containing_bundles": {
+                "0": "2148"
+            },
+            "filter_data": {
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "0"
+                    }
+                },
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "7"
+                    }
+                }
+            },
+            "player_class_ids": {
+                "0": "7"
+            },
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "215;5;u-701;kt-2;pk-309;w-3",
+        "id": "11947661440",
+        "old_id": null,
+        "contextid": null,
+        "old_contextid": null,
+        "appid": 440
+    }
+}

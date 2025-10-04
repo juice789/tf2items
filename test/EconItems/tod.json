@@ -80,13 +80,15 @@
         "id": "15254895323",
         "old_id": null,
         "contextid": "2",
-        "old_contextid": null
+        "old_contextid": null,
+        "appid": 440
     },
     "expectedWithOptions": {
         "sku": "725;6",
         "id": "15254895323",
         "old_id": null,
         "contextid": "2",
-        "old_contextid": null
+        "old_contextid": null,
+        "appid": 440
     }
 }

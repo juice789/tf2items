@@ -1,1 +1,91 @@
-{"econItem":{"appid":440,"assetid":"12001305013","classid":"1848854659","instanceid":"11040578","currency":0,"background_color":"3C352E","icon_url":"fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEAaR4dWAjxhztMm8XjGfuPN-MSms4w2pFZ1TVnkBJoC--0IjBiPF2QVflYCfZv8F7qXiVj68QxUoXlpu8Degm8tIaVO7Z5ZN9FScHXCPeYJleqOEO3leU","icon_url_large":"fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEAaR4dWAjxhztMm8XjGfuPN-MSms4w2pFZ1TVnkBJoC--0IjBiPF2QVflYCfZv8F7qXiVj68QxUoXlpu8Degm8tIaVO7Z5ZN9FScHXCPeYJleqOEO3leU","descriptions":[{"value":"Contains a random Multi-Class Cosmetic\n\nContents may be Strange\nor Unusual (hats only)"},{"value":" "},{"value":"This is a limited use item. Uses: 1","color":"00a000"},{"value":" "},{"value":"( Not Usable in Crafting )"}],"tradable":1,"actions":[{"link":"http://wiki.teamfortress.com/scripts/itemredirect.php?id=5860&lang=en_US","name":"Item Wiki Page..."}],"name":"Unlocked Cosmetic Crate Multi-Class","name_color":"7D6D00","type":"","market_name":"Unlocked Cosmetic Crate Multi-Class","market_hash_name":"Unlocked Cosmetic Crate Multi-Class","commodity":0,"market_tradable_restriction":7,"market_marketable_restriction":0,"marketable":1,"tags":[{"category":"Quality","internal_name":"Unique","localized_category_name":"Quality","localized_tag_name":"Unique","color":"7D6D00"},{"category":"Type","internal_name":"","localized_category_name":"Type","localized_tag_name":""}],"app_data":{"limited":"1","quantity":"1","def_index":"5860","quality":"6","slot":"Action","filter_data":{"931505789":{"element_ids":{"0":"991457757","1":"9"}},"1662615936":{"element_ids":{"0":"991457757"}}},"player_class_ids":"","highlight_color":"7a6e65"}},"expected":{"sku":"5860;6;uncraftable","id":"12001305013","old_id": null, "contextid": null, "old_contextid": null}}
+{
+    "econItem": {
+        "appid": 440,
+        "assetid": "12001305013",
+        "classid": "1848854659",
+        "instanceid": "11040578",
+        "currency": 0,
+        "background_color": "3C352E",
+        "icon_url": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEAaR4dWAjxhztMm8XjGfuPN-MSms4w2pFZ1TVnkBJoC--0IjBiPF2QVflYCfZv8F7qXiVj68QxUoXlpu8Degm8tIaVO7Z5ZN9FScHXCPeYJleqOEO3leU",
+        "icon_url_large": "fWFc82js0fmoRAP-qOIPu5THSWqfSmTELLqcUywGkijVjZULUrsm1j-9xgEAaR4dWAjxhztMm8XjGfuPN-MSms4w2pFZ1TVnkBJoC--0IjBiPF2QVflYCfZv8F7qXiVj68QxUoXlpu8Degm8tIaVO7Z5ZN9FScHXCPeYJleqOEO3leU",
+        "descriptions": [
+            {
+                "value": "Contains a random Multi-Class Cosmetic\n\nContents may be Strange\nor Unusual (hats only)"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "This is a limited use item. Uses: 1",
+                "color": "00a000"
+            },
+            {
+                "value": " "
+            },
+            {
+                "value": "( Not Usable in Crafting )"
+            }
+        ],
+        "tradable": 1,
+        "actions": [
+            {
+                "link": "http://wiki.teamfortress.com/scripts/itemredirect.php?id=5860&lang=en_US",
+                "name": "Item Wiki Page..."
+            }
+        ],
+        "name": "Unlocked Cosmetic Crate Multi-Class",
+        "name_color": "7D6D00",
+        "type": "",
+        "market_name": "Unlocked Cosmetic Crate Multi-Class",
+        "market_hash_name": "Unlocked Cosmetic Crate Multi-Class",
+        "commodity": 0,
+        "market_tradable_restriction": 7,
+        "market_marketable_restriction": 0,
+        "marketable": 1,
+        "tags": [
+            {
+                "category": "Quality",
+                "internal_name": "Unique",
+                "localized_category_name": "Quality",
+                "localized_tag_name": "Unique",
+                "color": "7D6D00"
+            },
+            {
+                "category": "Type",
+                "internal_name": "",
+                "localized_category_name": "Type",
+                "localized_tag_name": ""
+            }
+        ],
+        "app_data": {
+            "limited": "1",
+            "quantity": "1",
+            "def_index": "5860",
+            "quality": "6",
+            "slot": "Action",
+            "filter_data": {
+                "931505789": {
+                    "element_ids": {
+                        "0": "991457757",
+                        "1": "9"
+                    }
+                },
+                "1662615936": {
+                    "element_ids": {
+                        "0": "991457757"
+                    }
+                }
+            },
+            "player_class_ids": "",
+            "highlight_color": "7a6e65"
+        }
+    },
+    "expected": {
+        "sku": "5860;6;uncraftable",
+        "id": "12001305013",
+        "old_id": null,
+        "contextid": null,
+        "old_contextid": null,
+        "appid": 440
+    }
+}

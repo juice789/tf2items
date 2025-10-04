@@ -155,11 +155,17 @@
     "expected": {
         "sku": "538;6;no-5",
         "id": "11864664570",
-        "old_id": null, "contextid": null, "old_contextid": null
+        "old_id": null,
+        "contextid": null,
+        "old_contextid": null,
+        "appid": 440
     },
     "expectedWithOptions": {
         "sku": "538;6;no-5;pc-5039",
         "id": "11864664570",
-        "old_id": null, "contextid": null, "old_contextid": null
+        "old_id": null,
+        "contextid": null,
+        "old_contextid": null,
+        "appid": 440
     }
 }

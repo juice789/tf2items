@@ -332,7 +332,7 @@ const props753 = {
     market_hash_name: prop('market_hash_name'),
     border: compose(last, defaultTo(''), findTag('Card Border', 'internal_name')),
     game: compose(nth(1), split('_'), findTag('Game', 'internal_name')),
-    type: compose(last, findTag('Item Type', 'internal_name')),
+    type: ({ tags = [] }) => last(tags.find(tag => tag.category === 'item_class')?.internal_name || 'x'),
     id,
     old_id,
     contextid,

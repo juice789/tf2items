@@ -1,17 +1,14 @@
 const { call, getContext, delay } = require('redux-saga/effects')
 
 const {
-    groupBy, map, compose, toPairs, uniq, pick, values, mergeRight, indexBy, props, mapObjIndexed, when, complement, has, assoc, unnest, uncurryN
+    groupBy, map, compose, uniq, values, mergeRight, indexBy, props, mapObjIndexed, when, complement, has, assoc, unnest, uncurryN, without
 } = require('ramda')
 
-const getAssetClassQuery = compose(
-    map(([key, { classid, instanceid }]) => `&classid${key}=${classid}&instanceid${key}=${instanceid}`),
-    toPairs
-)
+const getAssetClassQuery = assetClassIds => assetClassIds.map(([classid, instanceid], index) => `&classid${index}=${classid}&instanceid${index}=${instanceid}`)
 
 const getAssetClassIds = compose(
     uniq,
-    map(pick(['classid', 'instanceid']))
+    map(props(['classid', 'instanceid']))
 )
 
 const transformAssetClasses = compose(
@@ -32,20 +29,17 @@ const mergeAssetClasses = uncurryN(2, (assetClasses) => compose(
     groupBy(props(['classid', 'instanceid']))
 ))
 
-function* fetchAppDataInventory(inventory, d = 1000) {
-
-    let p = 0, assetClasses = {}
+function* fetchAppDataInventory(inventory, d = 1000, cache = []) {
+    let p = 0, assetClasses = transformAssetClasses(cache)
     const { getAssetClassInfo } = yield getContext('api')
-    const ids = getAssetClassIds(inventory)
-
+    const ids = without(cache.map(props(['classid', 'instanceid'])), getAssetClassIds(inventory))
     while (ids.length > 0 && p < ids.length) {
         yield delay(d)
-        const query = getAssetClassQuery(ids.slice(p, p + 100))
+        const query = getAssetClassQuery(ids.slice(p, p + 150))
         const { result } = yield call(getAssetClassInfo, query)
         assetClasses = mergeRight(assetClasses, transformAssetClasses(result))
-        p += 100
+        p += 150
     }
-
     return mergeAssetClasses(assetClasses, inventory)
 }
 

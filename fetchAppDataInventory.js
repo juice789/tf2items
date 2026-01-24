@@ -35,10 +35,10 @@ function* fetchAppDataInventory(inventory, d = 1000, cache = []) {
     const ids = without(cache.map(props(['classid', 'instanceid'])), getAssetClassIds(inventory))
     while (ids.length > 0 && p < ids.length) {
         yield delay(d)
-        const query = getAssetClassQuery(ids.slice(p, p + 150))
+        const query = getAssetClassQuery(ids.slice(p, p + 125))
         const { result } = yield call(getAssetClassInfo, query)
         assetClasses = mergeRight(assetClasses, transformAssetClasses(result))
-        p += 150
+        p += 125
     }
     return mergeAssetClasses(assetClasses, inventory)
 }

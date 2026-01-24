@@ -5,7 +5,7 @@ const skuFromItem753 = ({
     type,
 }) => [
     753,
-    type === '2' ? `${type}-${border}` : type,
+    (type === '2' && border) ? `${type}-${border}` : type,
     game,
     encodeURIComponent(market_hash_name)
 ].filter(Boolean).join(';')
@@ -13,8 +13,8 @@ const skuFromItem753 = ({
 const itemFromSku753 = (sku) => {
     const [x, type, game, market_hash_name] = sku.split(';')
     const item = {
-        type,
-        border: type[1],
+        type: type[0],
+        border: type[2],
         game,
         market_hash_name: decodeURIComponent(market_hash_name)
     }

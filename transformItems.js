@@ -1,5 +1,6 @@
-const { prop, pick, map, compose, complement, includes, equals, length, allPass, mapObjIndexed, when, has, __, chain, assoc, pathEq, omit, split, keys, propEq, propOr, nth, range, path, uncurryN, mergeDeepRight, reduce, concat } = require('ramda')
-const { qualityIds, strangifierTargets, crateSeries, chemsetDefindex } = require('./schemaHelper.json')
+import { mergeDeepRight } from './utils.js'
+import schemaHelper from './schemaHelper.json' with { type: 'json' }
+const { qualityIds, strangifierTargets, crateSeries, chemsetDefindex } = schemaHelper
 
 const propsToKeep = [
     'name',
@@ -19,88 +20,59 @@ const propsToKeep = [
     'item_quality'
 ]
 
-const transformItems = uncurryN(3, (collections, itemsApi) => compose(
-    map((item) => mergeDeepRight(collections[item.name], item)),
-    reduce(mergeDeepRight, {}),
-    concat([itemsApi, crateSeries, strangifierTargets, chemsetDefindex]),
-    Array.of,
-    map(
-        compose(
-            pick(propsToKeep),
-            when(
-                allPass([
-                    compose(Boolean, prop('item_slot')),
-                    compose(includes(__, ['primary', 'melee', 'secondary', 'pda', 'pda2', 'building']), prop('item_slot')),
-                    compose(
-                        includes(__, range(2, 9)),
-                        length,
-                        prop('used_by_classes')
-                    )
-                ]),
-                assoc('used_by_classes', ['multi'])
-            ),
-            when(
-                allPass([
-                    compose(Boolean, prop('item_slot')),
-                    compose(equals(9), length, prop('used_by_classes'))
-                ]),
-                assoc('used_by_classes', ['all'])
-            ),
-            when(
-                has('used_by_classes'),
-                chain(assoc('used_by_classes'), compose(keys, prop('used_by_classes')))
-            ),
-            when(
-                compose(complement(Boolean), prop('item_name')),
-                chain(assoc('item_name'), prop('name'))
-            ),
-            when(
-                path(['static_attrs', 'tool target item']),
-                chain(assoc('target'), compose(Array.of, path(['static_attrs', 'tool target item'])))
-            ),
-            when(
-                path(['static_attrs', 'hide crate series number']),
-                assoc('seriesHidden', true)
-            ),
-            when(
-                path(['static_attrs', 'set supply crate series']),
-                chain(assoc('series'), compose(Array.of, path(['static_attrs', 'set supply crate series'])))
-            ),
-            when(
-                path(['attributes', 'tool target item', 'value']),
-                chain(assoc('target'), compose(Array.of, path(['attributes', 'tool target item', 'value'])))
-            ),
-            when(
-                pathEq('1', ['tags', 'can_be_festivized']),
-                assoc('festivized', '1')
-            ),
-            when(
-                pathEq('1', ['attributes', 'cannot trade', 'value']),
-                assoc('untradable', '1')
-            ),
-            when(
-                pathEq('paint_can', ['tool', 'type']),
-                assoc('type2', 'paint')
-            ),
-            when(
-                pathEq('decoder_ring', ['tool', 'type']),
-                assoc('type2', 'key')
-            ),
-            when(
-                has('item_quality'),
-                chain(assoc('item_quality'), compose(prop(__, qualityIds), nth(0), split(' '), prop('item_quality')))
-            ),
-            when(
-                allPass([
-                    compose(includes('paintkitweapon'), propOr('', 'item_quality')),
-                    complement(propEq)('9536', 'defindex')
-                ]),
-                chain(assoc('texture'), path(['static_attrs', 'paintkit_proto_def_index']))
-            )
-        )
-    ),
-    omit(['default']),
-    mapObjIndexed((v, k) => assoc('defindex', k, v))
-))
+const WEAPON_SLOTS = new Set(['primary', 'melee', 'secondary', 'pda', 'pda2', 'building'])
 
-module.exports = { transformItems }
+function transformItem(item) {
+    if (item.item_quality?.includes('paintkitweapon') && item.defindex !== '9536') {
+        item.texture = item.static_attrs?.['paintkit_proto_def_index']
+    }
+    if ('item_quality' in item) {
+        item.item_quality = qualityIds[item.item_quality.split(' ')[0]]
+    }
+    if (item.tool?.type === 'decoder_ring') item.type2 = 'key'
+    if (item.tool?.type === 'paint_can') item.type2 = 'paint'
+    if (item.attributes?.['cannot trade']?.value === '1') item.untradable = '1'
+    if (item.tags?.can_be_festivized === '1') item.festivized = '1'
+    if (item.attributes?.['tool target item']?.value) {
+        item.target = [item.attributes['tool target item'].value]
+    }
+    if (item.static_attrs?.['set supply crate series']) {
+        item.series = [item.static_attrs['set supply crate series']]
+    }
+    if (item.static_attrs?.['hide crate series number']) item.seriesHidden = true
+    if (item.static_attrs?.['tool target item']) {
+        item.target = [item.static_attrs['tool target item']]
+    }
+    if (!item.item_name) item.item_name = item.name
+    if ('used_by_classes' in item && !Array.isArray(item.used_by_classes)) {
+        item.used_by_classes = Object.keys(item.used_by_classes)
+    }
+    if (item.item_slot && item.used_by_classes?.length === 9) {
+        item.used_by_classes = ['all']
+    } else if (WEAPON_SLOTS.has(item.item_slot) && item.used_by_classes?.length >= 2 && item.used_by_classes?.length <= 8) {
+        item.used_by_classes = ['multi']
+    }
+
+    const picked = {}
+    for (const key of propsToKeep) {
+        if (key in item) picked[key] = item[key]
+    }
+    return picked
+}
+
+export function transformItems(collections, itemsApi, items) {
+    const transformedItems = {}
+    for (const [defindex, item] of Object.entries(items)) {
+        if (defindex === 'default') continue
+        transformedItems[defindex] = transformItem({ ...item, defindex })
+    }
+
+    const merged = [itemsApi, crateSeries, strangifierTargets, chemsetDefindex, transformedItems]
+        .reduce((acc, obj) => mergeDeepRight(acc, obj), {})
+
+    const result = {}
+    for (const [defindex, item] of Object.entries(merged)) {
+        result[defindex] = mergeDeepRight(collections[item.name] ?? {}, item)
+    }
+    return result
+}

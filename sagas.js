@@ -1,15 +1,6 @@
-const { fetchItemsApi } = require('./fetchItemsApi.js')
-const { fetchItemsGame } = require('./fetchItemsGame.js')
-const { fetchParticleEffects } = require('./fetchParticleEffects.js')
-const { fetchTextures } = require('./fetchTextures.js')
-const { fetchTfEnglish } = require('./fetchTfEnglish.js')
-const { fetchAppDataInventory } = require('./fetchAppDataInventory.js')
-
-module.exports = {
-    fetchItemsApi,
-    fetchItemsGame,
-    fetchParticleEffects,
-    fetchTextures,
-    fetchTfEnglish,
-    fetchAppDataInventory
-}
+export { fetchItemsApi } from './fetchItemsApi.js'
+export { fetchItemsGame } from './fetchItemsGame.js'
+export { fetchParticleEffects } from './fetchParticleEffects.js'
+export { fetchTextures } from './fetchTextures.js'
+export { fetchTfEnglish } from './fetchTfEnglish.js'
+export { fetchAppDataInventory } from './fetchAppDataInventory.js'

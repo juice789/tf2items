@@ -1,57 +1,43 @@
-const { runSaga } = require('redux-saga')
-const { map } = require('ramda')
+import { runSaga } from 'redux-saga'
+import helperObjects from './schemaHelper.json' with { type: 'json' }
+import { createApi } from './api.js'
+import * as sagas from './sagas.js'
+import { saveSchema } from './saveSchema.js'
 
-const helperObjects = require('./schemaHelper.json')
-const sagaHelpers = require('./sagaHelpers')
+export * from './schemaItems.js'
+export * from './sku.js'
+export * from './skuBp.js'
+export * from './sagas.js'
+export * from './sagaHelpers.js'
+export * from './skuLinks.js'
+export { saveSchema } from './saveSchema.js'
+export { fromEconItem, fromEconItemOptions } from './fromEconItem.js'
+export { fromListingV1 } from './fromListingV1.js'
+export { fromListingV2 } from './fromListingV2.js'
+export { blanketify } from './blanket.js'
+export { createApi, api } from './api.js'
 
-const items = require('./schemaItems.js')
-const sku = require('./sku.js')
-const skuBp = require('./skuBp.js')
-const skuLinks = require('./skuLinks.js')
+export const {
+    qualityNames, qualityIds, rarities, killstreakTiers, wears, classes, itemSlots, itemClasses,
+    paintHex, paintDefindex, spellDefindex, cosmeticCollections, weaponCollections, warPaintCollections,
+    fabricatorDefindex, strangifierTargets, australiumDefindex, crateSeries, paintableDefindex,
+    chemsetDefindex, serieslessDefindex, impossibleEffects
+} = helperObjects
 
-const { createApi, api } = require('./api.js')
-
-const sagas = require('./sagas.js')
-const { saveSchema } = require('./saveSchema.js')
-
-const { fromEconItem, fromEconItemOptions } = require('./fromEconItem.js')
-const { fromListingV1 } = require('./fromListingV1.js')
-const { fromListingV2 } = require('./fromListingV2.js')
-const { blanketify } = require('./blanket.js')
-const { toSearchParams } = require('./toSearchParams.js')
-
-const getInstance = (options) => {
+export const getInstance = (options) => {
     const api = createApi(options)
     const fns = { ...sagas, saveSchema }
     return options.saga
         ? fns
-        : map(
-            (saga) => (...args) => new Promise((resolve, reject) => {
-                runSaga({
-                    context: { api }
-                }, saga, ...args)
-                    .toPromise()
-                    .then(resolve, reject)
-            }), fns
+        : Object.fromEntries(
+            Object
+                .entries(fns)
+                .map(([k, saga]) => [k, (...args) => new Promise((resolve, reject) => {
+                    runSaga({
+                        context: { api }
+                    }, saga, ...args)
+                        .toPromise()
+                        .then(resolve, reject)
+                })])
         )
-}
-
-module.exports = {
-    ...helperObjects,
-    ...items,
-    ...sku,
-    ...skuBp,
-    ...sagas,
-    ...sagaHelpers,
-    ...skuLinks,
-    saveSchema,
-    getInstance,
-    createApi,
-    api,
-    fromEconItem,
-    fromEconItemOptions,
-    fromListingV1,
-    fromListingV2,
-    blanketify,
-    toSearchParams
 }

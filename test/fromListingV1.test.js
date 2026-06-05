@@ -1,20 +1,16 @@
-const path = require('path')
-const fs = require('fs')
-const ListingsPath = path.join(__dirname, "listingsV1")
+import { readFileSync, readdirSync } from 'fs'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { fromListingV1 } from '../fromListingV1.js'
 
-const tests = []
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const ListingsPath = join(__dirname, "listingsV1")
 
 const override = null
 
-const fileNames = override || fs.readdirSync(ListingsPath)
+const fileNames = override || readdirSync(ListingsPath)
 
-fileNames.forEach(function (file) {
-    const filePath = path.join(ListingsPath, file)
-    const test = require(filePath)
-    tests.push(test)
-})
-
-const { fromListingV1 } = require('../fromListingV1.js')
+const tests = fileNames.map(file => JSON.parse(readFileSync(join(ListingsPath, file), 'utf-8')))
 
 it('fromListingV1', () => {
     tests.forEach(({ listing, expected }) => expect(fromListingV1(listing)).toEqual(expected))

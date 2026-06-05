@@ -1,22 +1,19 @@
-const path = require('path')
-const fs = require('fs')
-const EconItemPath = path.join(__dirname, "EconItems")
+import { readFileSync, readdirSync } from 'fs'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { fromEconItemOptions } from '../fromEconItem.js'
 
-const tests = []
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const EconItemPath = join(__dirname, "EconItems")
 
 const override = null
 
-const fileNames = override || fs.readdirSync(EconItemPath)
+const fileNames = override || readdirSync(EconItemPath)
 
-fileNames.forEach(function (file) {
-    const filePath = path.join(EconItemPath, file)
-    const test = require(filePath)
-    tests.push(test)
-})
-
-const { fromEconItemOptions } = require('../fromEconItem.js')
+const tests = fileNames.map(file => JSON.parse(readFileSync(join(EconItemPath, file), 'utf-8')))
 
 const options = {
+    omitProps: ['rch'],
     uncraftRemapDefindex: ['5021', '725']
 }
 

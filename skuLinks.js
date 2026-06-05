@@ -1,32 +1,13 @@
+import removeAccents from 'remove-accents'
+import { itemFromSku } from './sku.js'
+import { toBpQuality, toBpName, toBpPriceIndex } from './skuBp.js'
+import schemaHelper from './schemaHelper.json' with { type: 'json' }
+import schema from './schema.json' with { type: 'json' }
+import { safeItems as items } from './schemaItems.js'
+const { qualityNames, killstreakTiers, wears } = schemaHelper
+const { particleEffects, textures } = schema
 
-const removeAccents = require('remove-accents');
-
-const {
-    itemFromSku
-} = require('./sku.js')
-
-const {
-    toBpQuality,
-    toBpName,
-    toBpPriceIndex
-} = require('./skuBp.js')
-
-const {
-    qualityNames,
-    killstreakTiers,
-    wears
-} = require('./schemaHelper.json')
-
-const {
-    safeItems: items
-} = require('./schemaItems.js')
-
-const {
-    particleEffects,
-    textures
-} = require('./schema.json')
-
-const marketHashNameFromSku = (sku) => {
+export const marketHashNameFromSku = (sku) => {
 
     const {
         defindex,
@@ -69,7 +50,7 @@ const marketHashNameFromSku = (sku) => {
     return marketHashName
 }
 
-const manncoUrl = (sku) => {
+export const manncoUrl = (sku) => {
     const {
         defindex,
         quality,
@@ -84,7 +65,8 @@ const manncoUrl = (sku) => {
         wear,
         australium,
         series,
-        effect
+        effect,
+        rch
     } = itemFromSku(sku)
 
 
@@ -107,7 +89,7 @@ const manncoUrl = (sku) => {
         target && items[target].item_name,
         output && items[output].item_name,
         items[defindex].propername === '1' && quality.toString() === '6' && !elevated && !festivized && !killstreakTier && 'The',
-        items[defindex].item_name.replace('\\n', ' '),
+        defindex === '0000' ? (rch ? items[rch].item_name.replace('\\n', ' ') : 'random craft hat') : items[defindex].item_name.replace('\\n', ' '),
         wear && wears[wear],
         chemSeries[defindex] && 'series-' + chemSeries[defindex],
         series && (!items[defindex].seriesHidden || ['111', '112', '113', '114', '115', '116'].includes(series)) && 'series-' + series
@@ -116,12 +98,14 @@ const manncoUrl = (sku) => {
     return 'https://mannco.store/item/' + url
 }
 
-const scmUrl = (sku) => {
+export const scmUrl = (sku) => {
     const marketHashName = marketHashNameFromSku(sku)
-    return 'https://steamcommunity.com/market/listings/440/' + encodeURIComponent(marketHashName)
+    return marketHashName.includes('Undefined item')
+        ? '#' + encodeURIComponent(marketHashName)
+        : 'https://steamcommunity.com/market/listings/440/' + encodeURIComponent(marketHashName)
 }
 
-const bpUrl = (sku) => {
+export const bpUrl = (sku) => {
 
     const {
         uncraftable
@@ -138,7 +122,7 @@ const bpUrl = (sku) => {
     return 'https://backpack.tf/stats/' + bpUrl
 }
 
-const marketplaceUrl = (sku) => {
+export const marketplaceUrl = (sku) => {
     const {
         defindex,
         quality,
@@ -154,12 +138,13 @@ const marketplaceUrl = (sku) => {
         australium,
         series,
         craft,
-        effect
+        effect,
+        rch
     } = itemFromSku(sku)
 
 
     const marketplaceSku = [
-        defindex,
+        defindex === '0000' ? (rch || '-100') : defindex,
         quality,
         effect && 'u' + effect,
         wear && 'w' + wear,
@@ -177,12 +162,4 @@ const marketplaceUrl = (sku) => {
     ].filter(Boolean).join(';')
 
     return 'https://marketplace.tf/items/tf2/' + marketplaceSku
-}
-
-module.exports = {
-    manncoUrl,
-    marketplaceUrl,
-    bpUrl,
-    scmUrl,
-    marketHashNameFromSku
 }

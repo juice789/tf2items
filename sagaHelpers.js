@@ -1,9 +1,3 @@
-const { getCollections } = require('./getCollections.js')
-const { getItems } = require('./getItems.js')
-const { transformItems } = require('./transformItems.js')
-
-module.exports = {
-    getCollections,
-    getItems,
-    transformItems
-}
+export { getCollections } from './getCollections.js'
+export { getItems } from './getItems.js'
+export { transformItems } from './transformItems.js'

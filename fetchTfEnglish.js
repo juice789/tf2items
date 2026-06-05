@@ -1,12 +1,13 @@
-const { call, getContext } = require('redux-saga/effects')
+import { call, getContext } from 'redux-saga/effects'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
 const vdf = require('vdf')
-const { toLower, mapKeys } = require('ramda')
 
-function* fetchTfEnglish() {
-    const { fetchTfEnglish } = yield getContext('api')
-    const english = yield call(fetchTfEnglish)
+export function* fetchTfEnglish() {
+    const { fetchTfEnglish: fetchTfEnglishApi } = yield getContext('api')
+    const english = yield call(fetchTfEnglishApi)
     const englishVdf = vdf.parse(english)
-    return mapKeys(toLower, englishVdf.lang.Tokens)
+    const tokens = englishVdf.lang.Tokens
+    return Object.fromEntries(Object.entries(tokens).map(([k, v]) => [k.toLowerCase(), v]))
 }
-
-module.exports = { fetchTfEnglish }

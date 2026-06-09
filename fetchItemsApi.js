@@ -1,23 +1,18 @@
-const { call, delay, getContext } = require('redux-saga/effects')
-const { prop, indexBy, pick, map, compose, evolve, replace, when } = require('ramda')
+import { call, delay, getContext } from 'redux-saga/effects'
 
-const propsToKeep = [
-    'image_url'
-]
+const IMAGE_PREFIX = 'http://media.steampowered.com/apps/440/icons/'
 
-const transformItemsApi = compose(
-    map(
-        compose(
-            pick(propsToKeep),
-            when(
-                prop('image_url'),
-                evolve({ image_url: replace('http://media.steampowered.com/apps/440/icons/', '') })
-            )
-        )),
-    indexBy(prop('defindex'))
-)
+function transformItemsApi(items) {
+    const result = {}
+    for (const item of items) {
+        result[item.defindex] = item.image_url
+            ? { image_url: item.image_url.replace(IMAGE_PREFIX, '') }
+            : {}
+    }
+    return result
+}
 
-function* fetchItemsApi() {
+export function* fetchItemsApi() {
     const { getSchemaItems } = yield getContext('api')
     let start = 0, items = []
     do {
@@ -28,6 +23,3 @@ function* fetchItemsApi() {
     } while (start >= 0)
     return transformItemsApi(items)
 }
-
-
-module.exports = { fetchItemsApi }

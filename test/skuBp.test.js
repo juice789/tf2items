@@ -1,4 +1,4 @@
-const { toBpQuality, toBpName, toBpPriceIndex, toBpSku } = require('../skuBp.js')
+import { toBpQuality, toBpName, toBpPriceIndex, toBpSku } from '../skuBp.js'
 
 describe('toBpQuality', () => {
     const tests = {

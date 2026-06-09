@@ -1,23 +1,10 @@
-const {
-    compose, split, map, reduce, pickBy, mergeRight, converge, concat, join, head, tail, filter
-} = require('ramda')
+import { safeItems } from './schemaItems.js'
+import schemaHelper from './schemaHelper.json' with { type: 'json' }
+import schema from './schema.json' with { type: 'json' }
+const { qualityNames, killstreakTiers, wears } = schemaHelper
+const { textures, particleEffects } = schema
 
-const {
-    safeItems
-} = require('./schemaItems.js')
-
-const {
-    qualityNames,
-    killstreakTiers,
-    wears
-} = require('./schemaHelper.json')
-
-const {
-    textures,
-    particleEffects
-} = require('./schema.json')
-
-const skuFromItem = ({
+export const skuFromItem = ({
     defindex,
     quality,
     uncraftable,
@@ -34,9 +21,10 @@ const skuFromItem = ({
     series,
     craft,
     paintColor,
-    halloweenSpell
+    halloweenSpell,
+    rch
 }) => [
-    defindex,
+    (defindex === '0000' || (rch && !craft && !halloweenSpell)) ? '0000' : defindex,
     quality,
     ['1', true].includes(uncraftable) && 'uncraftable',
     ['1', true].includes(elevated) && 'strange',
@@ -52,7 +40,8 @@ const skuFromItem = ({
     series && isNaN(series) === false && 'c-' + parseInt(series),
     craft && isNaN(craft) === false && 'no-' + parseInt(craft),
     paintColor && 'pc-' + paintColor,
-    halloweenSpell && 'hs-' + halloweenSpell
+    halloweenSpell && 'hs-' + halloweenSpell,
+    (rch && !craft && !halloweenSpell) && 'rch-' + rch
 ].filter(Boolean).join(';')
 
 const rules = {
@@ -70,22 +59,23 @@ const rules = {
     c: "series",
     no: "craft",
     pc: "paintColor",
-    hs: "halloweenSpell"
+    hs: "halloweenSpell",
+    rch: "rch"
 }
 
-const decodeRules = compose(
-    pickBy((v, k) => k !== 'undefined'),
-    reduce(mergeRight, {}),
-    map(
-        compose(
-            ([k, value = true]) => ({ [rules[k]]: value }),
-            converge(concat, [compose(Array.of, head), compose(filter(Boolean), Array.of, join('-'), tail)]),
-            split('-')
-        )
-    )
-)
+function decodeRules(parts) {
+    const result = {}
+    for (const part of parts) {
+        const dash = part.indexOf('-')
+        const k = dash === -1 ? part : part.slice(0, dash)
+        const value = dash === -1 ? true : part.slice(dash + 1)
+        const prop = rules[k]
+        if (prop !== undefined) result[prop] = value
+    }
+    return result
+}
 
-const itemFromSku = (sku) => {
+export const itemFromSku = (sku) => {
     const [defindex, quality, ...more] = sku.split(';')
     const item = {
         defindex,
@@ -93,10 +83,13 @@ const itemFromSku = (sku) => {
         ...decodeRules(more)
     }
     item.sku = sku
+    if(item.defindex === '0000' && item.rch){
+        item.defindex = item.rch
+    }
     return item
 }
 
-const getName = ({
+export const getName = ({
     defindex,
     quality,
     uncraftable,
@@ -111,7 +104,8 @@ const getName = ({
     wear,
     australium,
     series,
-    craft
+    craft,
+    rch
 },
     bpTexture = false,
     qualityBpStyle = false,
@@ -133,20 +127,13 @@ const getName = ({
     bpTexture && '|',
     australium && 'Australium',
     useProperName && safeItems[defindex].propername === '1' && quality.toString() === '6' && !uncraftable && !elevated && !festivized && !killstreakTier && 'The',
-    safeItems[defindex].item_name,
+    defindex === '0000' && !rch ? 'Random Craft Hat' : safeItems[rch || defindex].item_name,
     wear && '(' + wears[wear] + ')',
     series && '#' + series
 ].filter(Boolean).join(' ').replace('\\n', `
 `)
 
-const itemNameFromSku = (sku, ...params) => {
+export const itemNameFromSku = (sku, ...params) => {
     const item = itemFromSku(sku)
     return getName(item, ...params)
-}
-
-module.exports = {
-    skuFromItem,
-    itemFromSku,
-    getName,
-    itemNameFromSku
 }

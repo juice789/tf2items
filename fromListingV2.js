@@ -1,69 +1,41 @@
-const {
-    compose,
-    propEq,
-    prop,
-    map,
-    __,
-    applyTo,
-    pathOr,
-    includes,
-    pathEq,
-    propOr,
-    ifElse,
-    equals,
-    length,
-    split,
-    allPass,
-    nth,
-    cond,
-    T,
-    F,
-    complement
-} = require('ramda')
+import { skuFromItem } from './sku.js'
+import { remaps } from './fromListingV1.js'
 
-const { skuFromItem } = require('./sku.js')
-const { remaps } = require('./fromListingV1.js')
+const defindex = item => item.defindex
 
-const defindex = prop('defindex')
+const quality = item => item?.quality?.id ?? null
 
-const quality = pathOr(null, ['quality', 'id'])
+const uncraftable = item => item.name?.includes('Non-Craftable') ?? false
 
-const uncraftable = compose(includes('Non-Craftable'), prop('name'))
+const effect = item => item?.particle?.id ?? null
 
-const effect = pathOr(null, ['particle', 'id'])
+const elevated = item => (item?.quality?.id ?? null) === 11
+    ? ['701', '702', '703', '704'].includes(String(item?.particle?.id ?? null))
+    : (item?.elevatedQuality?.id ?? null) === 11
 
-const elevated = cond(
-    [
-        [compose(complement(equals)(11), quality), compose(equals(11), pathOr(null, ['elevatedQuality', 'id']))],
-        [compose(equals(11), quality), compose(includes(__, ['701', '702', '703', '704']), String, effect)],
-        [T, F]
-    ]
-)
+const killstreakTier = item => item.killstreakTier ?? null
 
-const killstreakTier = propOr(null, 'killstreakTier')
+const festivized = item => item.festivized === true
 
-const festivized = propEq(true, 'festivized')
+const texture = item => item?.texture?.id ?? null
 
-const texture = pathOr(null, ['texture', 'id'])
+const wear = item => item?.wearTier?.id ?? null
 
-const wear = pathOr(null, ['wearTier', 'id'])
+const australium = item => item.australium === true
 
-const australium = propEq(true, 'australium')
+const series = item => item.crateSeries ?? null
 
-const series = propOr(null, 'crateSeries')
+const target = item => {
+    const parts = (item.priceindex ?? '').split('-')
+    if (item?.recipe?.targetItem === null && parts.length === 3) {
+        return parts[2]
+    }
+    return item?.recipe?.targetItem?._source?.defindex ?? null
+}
 
-const target = ifElse(
-    allPass([
-        pathEq(null, ['recipe', 'targetItem']),
-        compose(equals(3), length, split('-'), prop('priceindex'))
-    ]),
-    compose(nth(2), split('-'), prop('priceindex')),
-    pathOr(null, ['recipe', 'targetItem', '_source', 'defindex'])
-)
+const output = item => item?.recipe?.outputItem?.defindex ?? null
 
-const output = pathOr(null, ['recipe', 'outputItem', 'defindex'])
-
-const oq = pathOr(null, ['recipe', 'outputItem', 'quality', 'id'])
+const oq = item => item?.recipe?.outputItem?.quality?.id ?? null
 
 const fns = {
     defindex,
@@ -82,11 +54,7 @@ const fns = {
     oq
 }
 
-const fromListingV2 = compose(
-    skuFromItem,
-    remaps,
-    map(__, fns),
-    applyTo
-)
-
-module.exports = { fromListingV2 }
+export function fromListingV2(item) {
+    const mapped = Object.fromEntries(Object.entries(fns).map(([k, fn]) => [k, fn(item)]))
+    return skuFromItem(remaps(mapped))
+}

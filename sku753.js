@@ -1,4 +1,4 @@
-const skuFromItem753 = ({
+export const skuFromItem753 = ({
     market_hash_name,
     game,
     border,
@@ -10,7 +10,7 @@ const skuFromItem753 = ({
     encodeURIComponent(market_hash_name)
 ].filter(Boolean).join(';')
 
-const itemFromSku753 = (sku) => {
+export const itemFromSku753 = (sku) => {
     const [x, type, game, market_hash_name] = sku.split(';')
     const item = {
         type: type[0],
@@ -20,9 +20,4 @@ const itemFromSku753 = (sku) => {
     }
     item.sku = sku
     return item
-}
-
-module.exports = {
-    skuFromItem753,
-    itemFromSku753
 }

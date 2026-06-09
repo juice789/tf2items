@@ -1,18 +1,25 @@
+import { readFileSync } from 'fs'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { createRequire } from 'module'
+import { jest } from '@jest/globals'
+import { fetchAppDataInventory } from '../../fetchAppDataInventory.js'
+
+const require = createRequire(import.meta.url)
 const { expectSaga } = require('redux-saga-test-plan')
 const matchers = require('redux-saga-test-plan/matchers')
 
-const assetClasses = require('./assetClasses.json')
-const inventory = require('./inventory.json')
-const expected = require('./expected.json')
-const queryString = require('./queryString.json')
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const assetClasses = JSON.parse(readFileSync(join(__dirname, './assetClasses.json'), 'utf-8'))
+const inventory = JSON.parse(readFileSync(join(__dirname, './inventory.json'), 'utf-8'))
+const expected = JSON.parse(readFileSync(join(__dirname, './expected.json'), 'utf-8'))
+const queryString = JSON.parse(readFileSync(join(__dirname, './queryString.json'), 'utf-8'))
 
 describe('fetchAppDataInventory', () => {
 
     const api = {
         getAssetClassInfo: jest.fn().mockReturnValue(assetClasses)
     }
-
-    const { fetchAppDataInventory } = require('../../fetchAppDataInventory.js')
 
     beforeEach(() => {
         jest.useFakeTimers()

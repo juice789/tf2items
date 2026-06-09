@@ -1,6 +1,6 @@
-const schema = require('./schema.json')
+import schema from './schema.json' with { type: 'json' }
 
-const safeItems = new Proxy(schema.items, {
+export const safeItems = new Proxy(schema.items, {
     get(receiver, name) {
         return name in receiver ? receiver[name] : {
             defindex: name,
@@ -9,8 +9,4 @@ const safeItems = new Proxy(schema.items, {
     }
 })
 
-module.exports = {
-    ...schema,
-    safeItems,
-    items: schema.items
-}
+export const { particleEffects, textures, collections, items } = schema

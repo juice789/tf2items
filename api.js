@@ -1,11 +1,10 @@
-const axios = require('axios').default
-const { compose, __, map, applyTo, prop } = require('ramda')
+import axios from 'axios'
 
 const myAxios = axios.create()
 
-myAxios.interceptors.response.use(prop('data'), Promise.reject.bind(Promise))
+myAxios.interceptors.response.use(res => res.data, Promise.reject.bind(Promise))
 
-const api = {}
+export const api = {}
 
 api.getSchemaItems = ({ steamApiKey: key }) => (start) => myAxios({
     method: 'get',
@@ -54,9 +53,4 @@ api.getAssetClassInfo = ({ steamApiKey }) => (ids, appId = 440) => myAxios({
     url: `https://api.steampowered.com/ISteamEconomy/GetAssetClassInfo/v1/?key=${steamApiKey}&appid=${appId}&language=EN&class_count=${ids.length}${ids.join('')}`
 })
 
-const createApi = compose(map(__, api), applyTo)
-
-module.exports = {
-    createApi,
-    api
-}
+export const createApi = (options) => Object.fromEntries(Object.entries(api).map(([k, fn]) => [k, fn(options)]))

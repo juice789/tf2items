@@ -1,20 +1,8 @@
-const { call } = require('redux-saga/effects')
+import { call } from 'redux-saga/effects'
+import { fetchItemsApi, fetchItemsGame, fetchParticleEffects, fetchTextures, fetchTfEnglish } from './sagas.js'
+import { getCollections, getItems, transformItems } from './sagaHelpers.js'
 
-const {
-    fetchItemsApi,
-    fetchItemsGame,
-    fetchParticleEffects,
-    fetchTextures,
-    fetchTfEnglish
-} = require('./sagas.js')
-
-const {
-    getCollections,
-    getItems,
-    transformItems
-} = require('./sagaHelpers')
-
-function* saveSchema() {
+export function* saveSchema() {
     try {
 
         const itemsApi = yield call(fetchItemsApi)
@@ -38,5 +26,3 @@ function* saveSchema() {
         console.log('error saving schema', err)
     }
 }
-
-module.exports = { saveSchema }

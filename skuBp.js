@@ -1,10 +1,10 @@
-const crypto = require('crypto')
-const { safeItems: items } = require('./schemaItems.js')
-const { qualityNames } = require('./schemaHelper.json')
-const { itemFromSku, getName } = require('./sku.js')
-const { omit } = require('ramda')
+import { createHash } from 'node:crypto'
+import { safeItems as items } from './schemaItems.js'
+import schemaHelper from './schemaHelper.json' with { type: 'json' }
+const { qualityNames } = schemaHelper
+import { itemFromSku, getName } from './sku.js'
 
-const toBpQuality = (sku) => {
+export const toBpQuality = (sku) => {
 
     const {
         defindex,
@@ -26,17 +26,14 @@ const toBpQuality = (sku) => {
     ].filter(Boolean).join(' ')
 }
 
-const toBpName = (sku) => {
+export const toBpName = (sku) => {
 
-    const item = omit(
-        ['quality', 'elevated', 'uncraftable', 'craft', 'target', 'output', 'oq', 'effect', 'series'],
-        itemFromSku(sku)
-    )
+    const { quality, elevated, uncraftable, craft, target, output, oq, effect, series, ...item } = itemFromSku(sku)
 
     return getName(item, Boolean(item.texture))
 }
 
-const toBpPriceIndex = (sku) => {
+export const toBpPriceIndex = (sku) => {
 
     const {
         effect,
@@ -57,7 +54,7 @@ const toBpPriceIndex = (sku) => {
     ].filter(Boolean).join('/')
 }
 
-const listingV1FromSku = (sku) => {
+export const listingV1FromSku = (sku) => {
     const { uncraftable } = itemFromSku(sku)
     return {
         quality: toBpQuality(sku),
@@ -67,7 +64,7 @@ const listingV1FromSku = (sku) => {
     }
 }
 
-const listingV2ResolvableFromSku = (sku) => {
+export const listingV2ResolvableFromSku = (sku) => {
     const { uncraftable } = itemFromSku(sku)
     return {
         quality: toBpQuality(sku),
@@ -78,22 +75,9 @@ const listingV2ResolvableFromSku = (sku) => {
     }
 }
 
-const toBpSku = (sku) => {
-    const item = omit(
-        ['craft'],
-        itemFromSku(sku)
-    )
+export const toBpSku = (sku) => {
+    const { craft, ...item } = itemFromSku(sku)
     return getName(item, null, Boolean(item.effect), true)
 }
 
-const toBpId = (sku) => crypto.createHash('md5').update(toBpSku(sku)).digest('hex')
-
-module.exports = {
-    toBpQuality,
-    toBpName,
-    toBpId,
-    toBpPriceIndex,
-    listingV1FromSku,
-    listingV2ResolvableFromSku,
-    toBpSku
-}
+export const toBpId = (sku) => createHash('md5').update(toBpSku(sku)).digest('hex')

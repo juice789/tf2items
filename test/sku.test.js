@@ -1,4 +1,4 @@
-const { skuFromItem, itemFromSku, itemNameFromSku } = require('../sku.js')
+import { skuFromItem, itemFromSku, itemNameFromSku } from '../sku.js'
 
 describe('skuFromItem', () => {
     it('defindex', () => {
@@ -128,6 +128,14 @@ describe('skuFromItem', () => {
         }
         expect(skuFromItem(item)).toEqual('739;6;no-13')
     })
+    it('random craft hat', () => {
+        const item = {
+            defindex: '30472',
+            quality: '6',
+            rch: '30472'
+        }
+        expect(skuFromItem(item)).toEqual('0000;6;rch-30472')
+    })
 })
 
 describe('itemFromSku, itemNameFromSku', () => {
@@ -198,5 +206,24 @@ describe('itemFromSku, itemNameFromSku', () => {
             sku
         })
         expect(itemNameFromSku(sku)).toEqual('#42 Batsaber')
+    })
+    it('0000;6;rch-30561', () => {
+        const sku = '0000;6;rch-30561'
+        expect(itemFromSku(sku)).toEqual({
+            defindex: '30561',
+            quality: '6',
+            rch: '30561',
+            sku
+        })
+        expect(itemNameFromSku(sku)).toEqual('Bootenkhamuns')
+    })
+    it('0000;6', () => {
+        const sku = '0000;6'
+        expect(itemFromSku(sku)).toEqual({
+            defindex: '0000',
+            quality: '6',
+            sku
+        })
+        expect(itemNameFromSku(sku)).toEqual('Random Craft Hat')
     })
 })

@@ -1,4 +1,4 @@
-const { marketHashNameFromSku } = require('../skuLinks.js')
+import { marketHashNameFromSku } from '../skuLinks.js'
 
 const tests = {
     '491;6': 'Lucky No. 42',

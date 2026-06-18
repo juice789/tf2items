@@ -1,6 +1,6 @@
 {
   "name": "@juice789/tf2items",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "tf2 item schema thingys",
   "main": "app.js",
   "type": "module",

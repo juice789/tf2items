@@ -102,7 +102,7 @@ const killstreakTier = item => {
 
 function effect(item) {
     if (item?.app_data?.quality !== '5') return null
-    const desc = (item.descriptions ?? []).find(d => d.color === 'ffd700')
+    const desc = (item.descriptions || []).find(d => d.color === 'ffd700')
     if (!desc) return null
     return particleEffectsInv[desc.value.replace('★ Unusual Effect: ', '')] ?? '-1'
 }
@@ -114,12 +114,12 @@ const elevated = item =>
         .includes('Strange')
 
 const uncraftable = item =>
-    Boolean((item.descriptions ?? []).find(d => d.value === '( Not Usable in Crafting )'))
+    Boolean((item.descriptions || []).find(d => d.value === '( Not Usable in Crafting )'))
 
 const paintOptions = Object.keys(paintDefindex).map(name => `Paint Color: ${name}`)
 
 const paintColor = item => {
-    const desc = (item.descriptions ?? []).find(d => paintOptions.includes(d.value))
+    const desc = (item.descriptions || []).find(d => paintOptions.includes(d.value))
     if (!desc) return desc
     return paintDefindex[desc.value.split('Paint Color: ')[1]]
 }
@@ -127,7 +127,7 @@ const paintColor = item => {
 const spellOptions = Object.keys(spellDefindex).map(name => `Halloween: ${name} (spell only active during event)`)
 
 const halloweenSpell = item => {
-    const spells = (item.descriptions ?? [])
+    const spells = (item.descriptions || [])
         .filter(d => spellOptions.includes(d.value))
         .map(d => spellDefindex[d.value.split('Halloween: ')[1].replace(' (spell only active during event)', '')])
     return spells.length === 0 ? null : spells.join('_')

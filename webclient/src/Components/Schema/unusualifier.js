@@ -1,8 +1,4 @@
 import {
-    propEq, pickBy, pick,
-} from 'ramda'
-
-import {
     defindex,
     getClasses,
     target
@@ -13,8 +9,12 @@ const unusualifier = {
         defindex: defindex({ isSearchable: false }),
         target: target(),
     },
-    itemFn: pick([9258]),
-    targetFn: pickBy(propEq('taunt', 'item_slot')),
+    itemFn: items => Object.fromEntries(
+        [9258].filter(key => key in items).map(key => [key, items[key]])
+    ),
+    targetFn: items => Object.fromEntries(
+        Object.entries(items).filter(([, item]) => item.item_slot === 'taunt')
+    ),
     filters: {
         used_by_classes: getClasses(undefined, ['multi'])
     },

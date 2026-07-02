@@ -1,12 +1,10 @@
 import { takeEvery, put, select } from 'redux-saga/effects'
 
-import { map, prop, reduce, max, keys, without } from 'ramda'
-
 function* addPage({ label }) {
-    const pages = yield select(prop('pages'))
+    const pages = yield select(state => state.pages)
     yield put({
         type: 'PAGE_ADDED',
-        value: (reduce(max, 0, map(parseInt, keys(pages))) + 1).toString(),
+        value: (Math.max(...Object.keys(pages).map(page => parseInt(page))) + 1).toString(),
         label
     })
 }
@@ -20,10 +18,8 @@ function* editPage({ value, label }) {
 }
 
 function* deletePage({ value }) {
-
-    const pages = yield select(prop('pages'))
-    const fallback = without([value], keys(pages))[0]
-
+    const pages = yield select(state => state.pages)
+    const fallback = Object.keys(pages).filter(page => page !== value)[0]
     return yield put({
         type: 'PAGE_DELETED',
         value,

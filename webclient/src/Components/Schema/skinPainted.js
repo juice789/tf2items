@@ -1,10 +1,6 @@
 import { paintableDefindex } from '@juice789/tf2items'
 
 import {
-    range, pick
-} from 'ramda'
-
-import {
     getQuality,
     elevated,
     killstreakTier,
@@ -18,6 +14,8 @@ import {
     getRules,
 } from './controls'
 
+import { range } from './helpers'
+
 const skinPainted = {
     controls: {
         quality: getQuality([11, 5, 15]),
@@ -29,7 +27,9 @@ const skinPainted = {
         effect: getEffect(range(701, 705)),
         defindex: defindex()
     },
-    itemFn: pick(paintableDefindex),
+    itemFn: items => Object.fromEntries(
+        paintableDefindex.filter(key => key in items).map(key => [key, items[key]])
+    ),
     filters: {
         used_by_classes: getClasses(undefined, ['all']),
         item_slot: getSlot()

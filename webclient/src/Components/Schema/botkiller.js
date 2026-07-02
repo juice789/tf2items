@@ -1,8 +1,4 @@
 import {
-    compose, prop, pickBy, includes, __, allPass
-} from 'ramda'
-
-import {
     killstreakTier,
     defindex,
     getClasses
@@ -13,11 +9,8 @@ const botkiller = {
         killstreakTier,
         defindex: defindex()
     },
-    itemFn: pickBy(
-        allPass([
-            compose(includes('Botkiller'), prop('item_name')),
-            compose(includes(__, ['primary', 'melee', 'secondary', 'pda', 'pda2', 'building']), prop('item_slot'))
-        ])
+    itemFn: items => Object.fromEntries(
+        Object.entries(items).filter(([, item]) => item.item_name.includes('Botkiller'))
     ),
     filters: {
         used_by_classes: getClasses(undefined, ['multi', 'all'])

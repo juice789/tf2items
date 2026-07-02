@@ -1,10 +1,6 @@
 import { textures, weaponCollections } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, propEq, pickBy, includes, allPass, assoc, complement, range, props, evolve, join, chain, __, identity
-} from 'ramda'
-
-import {
     getQuality,
     elevated,
     killstreakTier,
@@ -18,6 +14,10 @@ import {
     getRules
 } from './controls'
 
+import { range } from './helpers'
+
+const withTextureName = item => ({ ...item, item_name: `${textures[item.texture]} ${item.item_name}` })
+
 const skinUnboxed = {
     controls: {
         quality: getQuality([11, 5, 15]),
@@ -28,27 +28,16 @@ const skinUnboxed = {
         effect: getEffect(range(701, 705)),
         defindex: defindex()
     },
-    itemFn: compose(
-        map(
-            chain(
-                assoc('item_name'),
-                compose(
-                    join(' '),
-                    evolve([prop(__, textures), identity]),
-                    props(['texture', 'item_name'])
-                )
-            )
-        ),
-        pickBy(
-            allPass([
-                compose(
-                    complement(includes)('War Paint'),
-                    prop('item_name')
-                ),
-                propEq(15, 'item_quality')
-            ])
+    itemFn: items => {
+        const filtered = Object.fromEntries(
+            Object
+                .entries(items)
+                .filter(([, item]) => !item.item_name.includes('War Paint') && item.item_quality === 15)
         )
-    ),
+        return Object.fromEntries(
+            Object.entries(filtered).map(([key, item]) => [key, withTextureName(item)])
+        )
+    },
     filters: {
         used_by_classes: getClasses(undefined, ['all']),
         collection: getCollections(weaponCollections),

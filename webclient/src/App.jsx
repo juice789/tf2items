@@ -1,12 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { prop } from 'ramda'
-import { useMediaQuery } from '@react-hook/media-query'
 
 import Header from './Components/Header'
 
-import Notifications from '@juice789/redux-saga-notifications'
+import Notifications from '@juice789/redux-saga-notifications/themed'
 
 import AddItems from './Components/AddItems'
 import ItemList from './Components/ItemList'
@@ -27,6 +25,14 @@ flex: 1 1 auto;
 overflow-y:auto;
 position:relative;
 overflow-x:hidden;
+@media (max-width: ${({ theme }) => theme.mobileBreakPoint}) {
+    > *:first-child { 
+        display: ${({ $hasAside }) => $hasAside ? 'flex' : 'none'}; 
+    }
+    > *:last-child {
+        display: ${({ $hasAside }) => $hasAside ? 'none' : 'flex'}; 
+    }
+}
 `
 
 const asides = {
@@ -36,35 +42,20 @@ const asides = {
 }
 
 const ItemsActual = () => {
-
-  const openedAside = useSelector(prop('openedAside'))
-
-  const isResponsive = useMediaQuery('(max-width: 850px)')
-
+  const openedAside = useSelector(state => state.openedAside)
   const aside = openedAside
     ? React.createElement(asides[openedAside], { key: openedAside })
     : null
-
-  const itemList = <ItemList />
-  return (
-    <>
-      <App>
-        <Header />
-        <Inner>
-          {isResponsive
-            ? openedAside
-              ? aside
-              : itemList
-            : <>
-              {aside}
-              {itemList}
-            </>
-          }
-        </Inner>
-      </App>
-      <Notifications />
-    </>
-  )
+  return <>
+    <App>
+      <Header />
+      <Inner $hasAside={!!openedAside}>
+        {aside}
+        <ItemList />
+      </Inner>
+    </App>
+    <Notifications />
+  </>
 }
 
 export default ItemsActual

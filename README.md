@@ -34,12 +34,13 @@ Everything documented below is available from both entry points **except** `save
 ## Table of contents
 
 1. [SKUs](#skus)
-2. [Converting Steam items / listings into SKUs](#converting-steam-items--listings-into-skus)
-3. [Link builders (`skuLinks.js`)](#link-builders-skulinksjs)
-4. [Steam Community items (trading cards, backgrounds, emotes, etc...)](#steam-community-items-trading-cards-backgrounds-emotes-etc)
-5. [The schema](#the-schema)
-6. [Building the schema yourself (`saveSchema`)](#building-the-schema-yourself-saveschema)
-7. [Reference data exports](#reference-data-exports)
+2. [Converting Steam EconItems into SKUs](#converting-steam-econitems-into-skus)
+3. [Converting backpack.tf listings into SKUs](#converting-backpacktf-listings-into-skus)
+4. [Link builders (`skuLinks.js`)](#link-builders-skulinksjs)
+5. [Steam Community items (trading cards, backgrounds, emotes, etc...)](#steam-community-items-trading-cards-backgrounds-emotes-etc)
+6. [The schema](#the-schema)
+7. [Building the schema yourself (`saveSchema`)](#building-the-schema-yourself-saveschema)
+8. [Reference data exports](#reference-data-exports)
 
 ---
 
@@ -177,13 +178,13 @@ Build the `{ quality, craftable, item_name/item, priceindex, ... }` shape backpa
 
 ---
 
-## Converting Steam items / listings into SKUs
+## Converting Steam EconItems into SKUs
 
-These take real payloads from Steam/backpack.tf and turn them into a SKU. All **Node only**.
+These take real EconItem payloads from Steam and turn them into a SKU. All **Node only**.
 
 ### `fromEconItem(econItem) -> { sku, id, old_id, contextid, old_contextid, appid }`
 
-`econItem` is an [`EconItem`](https://github.com/DoctorMcKay/node-steam-tradeoffer-manager/wiki/EconItem) as produced by [`node-steam-tradeoffer-manager`](https://github.com/DoctorMcKay/node-steam-tradeoffer-manager) (`appid 440` for TF2 or `753` for Steam Community items like trading cards). `fromEconItem` converts it into a sku plus its asset identity. Dispatches internally based on `econItem.appid`:
+`econItem` is an [`EconItem`](https://github.com/DoctorMcKay/node-steam-tradeoffer-manager/wiki/EconItem) as produced by [`node-steam-tradeoffer-manager`](https://github.com/DoctorMcKay/node-steam-tradeoffer-manager). `fromEconItem` mainly supports **Team Fortress 2** (`appid 440`) or **Steam Community** (`appid 753`) items — trading cards, backgrounds, emotes, etc. It converts the econ item into a sku plus its asset identity. Dispatches internally based on `econItem.appid`:
 
 - `440` → full TF2 item parsing (reads tags/descriptions/market_hash_name **and `app_data`** to recover quality, killstreak tier, paint, spells, etc., then builds the sku via `skuFromItem`).
 - `753` → trading cards / community items, sku built via `skuFromItem753` (see [below](#steam-community-items-trading-cards-backgrounds-emotes-etc)).
@@ -286,6 +287,12 @@ fromEconItemOptions({ omitProps: [] })(econItem).sku   // '0000;6;rch-30425'
 ```
 
 One more wrinkle: `skuFromItem` only collapses to the `0000;rch-` form when the item *isn't also* carrying a `craft` number or a `halloweenSpell` — when one of those is present, the specific hat is considered significant enough that the sku keeps the real defindex and drops `rch-` entirely, even if you did request the `rch` prop.
+
+---
+
+## Converting backpack.tf listings into SKUs
+
+These take real listing payloads from backpack.tf and turn them into a SKU. All **Node only**.
 
 ### `fromListingV1(listing) -> sku` / `fromListingV2(listing) -> sku`
 
@@ -413,15 +420,14 @@ Some of these extra props correspond directly to the SKU parts of the same name 
 import { getInstance } from '@juice789/tf2items'
 
 const { saveSchema } = getInstance({
-  steamApiKey: 'YOUR_STEAM_API_KEY',
-  saga: false   // false (default, recommended): functions return Promises. true: get raw generator functions back instead, for advanced use with your own redux-saga setup.
+  steamApiKey: 'YOUR_STEAM_API_KEY'
 })
 
 const schema = await saveSchema()
 // schema === { particleEffects, textures, collections, items }  (same shape as schema.json)
 ```
 
-`options.steamApiKey` is required for anything that calls the Steam Web API (schema items, schema overview, items_game URL, asset class info). With `options.saga: false` (the default, shown above) every function returns a `Promise` you can just `await`; with `options.saga: true` you instead get back the raw generator functions, for advanced use with your own redux-saga setup.
+`options.steamApiKey` is required for anything that calls the Steam Web API (schema items, schema overview, items_game URL, asset class info).
 
 `saveSchema` fetches the Steam `GetSchemaItems` API, the `items_game.txt` (prefab-expanded weapon/item definitions), particle effects, paintkit textures, and `tf_english.txt` (localization), then merges everything into the `items` shape described above.
 

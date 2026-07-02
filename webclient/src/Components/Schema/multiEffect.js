@@ -1,22 +1,24 @@
 import { particleEffects, impossibleEffects } from '@juice789/tf2items'
+import { range } from './helpers'
 
-import {
-    omit, pickBy, includes, map, without, range, concat, toString
-} from 'ramda'
-
-const filterEffects = (whitelist) => pickBy(
-    (v, k) => includes(k, map(toString, whitelist)),
-    omit(impossibleEffects, particleEffects)
-)
+const filterEffects = (whitelist) => {
+    const allowed = whitelist.map(String)
+    return Object.fromEntries(
+        Object
+            .entries(particleEffects)
+            .filter(([key]) => !impossibleEffects.includes(key))
+            .filter(([key]) => allowed.includes(key))
+    )
+}
 
 const multiEffectList = {
-    all: filterEffects(without([4], range(1, 700))),
-    gen1: filterEffects(without([4], range(1, 20))),
+    all: filterEffects(range(1, 700).filter(n => n !== 4)),
+    gen1: filterEffects(range(1, 20).filter(n => n !== 4)),
     gen1low: filterEffects([6, 7, 11, 12, 15, 16, 18, 19]),
     gen1high: filterEffects([8, 9, 10, 13, 14, 17]),
     gen2: filterEffects(range(29, 37)),
     gen3: filterEffects(range(56, 63)),
-    halloween: filterEffects(concat(range(37, 48), range(73, 87))),
+    halloween: filterEffects([...range(37, 48), ...range(73, 87)]),
     robo: filterEffects(range(63, 73)),
     eotl: filterEffects(range(87, 91)),
     invasion: filterEffects(range(91, 100)),
@@ -41,6 +43,8 @@ const multiEffectList = {
     h2024: filterEffects(range(350, 363)),
     w2024: filterEffects(range(364, 373)),
     s2025: filterEffects(range(373, 382)),
+    h2025: filterEffects(range(382, 393)),
+    w2025: filterEffects(range(393, 406)),
     wep: filterEffects(range(701, 705)),
     wep2: filterEffects(range(701, 704)),
     taunt01: filterEffects(range(3001, 3011)),
@@ -61,6 +65,8 @@ const multiEffectList = {
     taunt16: filterEffects(range(3174, 3185)),
     taunt17: filterEffects(range(3185, 3194)),
     taunt18: filterEffects(range(3194, 3203)),
+    taunt19: filterEffects(range(3203, 3213)),
+    taunt20: filterEffects(range(3213, 3224)),
 }
 
 export default multiEffectList

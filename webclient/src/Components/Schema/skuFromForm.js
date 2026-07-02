@@ -1,11 +1,7 @@
-const {
-    curry, includes, when, compose, __, prop, chain, assoc, has, nth, split, mergeRight
-} = require('ramda')
-
-const {
+import {
     safeItems,
     skuFromItem
-} = require('@juice789/tf2items')
+} from '@juice789/tf2items'
 
 const ktRemap = {
     '6527': '1',
@@ -20,47 +16,50 @@ const odRemap = {
     '20003': '6526'
 }
 
-const skuFromForm = curry((obj, overrides) => compose(
-    skuFromItem,
-    when(
-        compose(includes('>'), prop('defindex')),//strangifier
-        compose(
-            chain(assoc('defindex'), compose(nth(0), split('>'), prop('defindex'))),
-            chain(assoc('target'), compose(nth(1), split('>'), prop('defindex')))
-        )
-    ),
-    when(
-        compose(includes('<'), prop('defindex')),//chemistry set
-        compose(
-            chain(assoc('oq'), compose(prop('oq'), prop(__, safeItems), prop('defindex'))),
-            chain(assoc('defindex'), compose(nth(0), split('<'), prop('defindex'))),
-            chain(assoc('target'), compose(nth(2), split('<'), prop('defindex'))),
-            chain(assoc('output'), compose(nth(1), split('<'), prop('defindex')))
-        )
-    ),
-    when(
-        compose(includes('/'), prop('defindex')),//crates
-        compose(
-            chain(assoc('defindex'), compose(nth(0), split('/'), prop('defindex'))),
-            chain(assoc('series'), compose(nth(1), split('/'), prop('defindex')))
-        )
-    ),
-    when(
-        compose(has('target'), prop(__, safeItems), prop('defindex')),
-        chain(assoc('target'), compose(prop('target'), prop(__, safeItems), prop('defindex')))
-    ),
-    when(
-        compose(has('texture'), prop(__, safeItems), prop('defindex')),
-        chain(assoc('texture'), compose(prop('texture'), prop(__, safeItems), prop('defindex')))
-    ),
-    when(
-        compose(prop(__, odRemap), prop('defindex')),
-        chain(assoc('output'), compose(prop(__, odRemap), prop('defindex'))),
-    ),
-    when(
-        compose(prop(__, ktRemap), prop('defindex')),
-        chain(assoc('killstreakTier'), compose(prop(__, ktRemap), prop('defindex'))),
-    )
-)(mergeRight(obj, overrides)))
+const applyKtRemap = item =>
+    ktRemap[item.defindex] ? { ...item, killstreakTier: ktRemap[item.defindex] } : item
+
+const applyOdRemap = item =>
+    odRemap[item.defindex] ? { ...item, output: odRemap[item.defindex] } : item
+
+const applyTexture = item => {
+    const data = safeItems[item.defindex]
+    return data && 'texture' in data ? { ...item, texture: data.texture } : item
+}
+
+const applyTarget = item => {
+    const data = safeItems[item.defindex]
+    return data && 'target' in data ? { ...item, target: data.target } : item
+}
+
+const applyCrateSeries = item => {
+    if (!item.defindex.includes('/')) return item
+    const [defindex, series] = item.defindex.split('/')
+    return { ...item, defindex, series }
+}
+
+const applyChemistrySet = item => {
+    if (!item.defindex.includes('<')) return item
+    const [defindex, output, target] = item.defindex.split('<')
+    return { ...item, output, target, defindex, oq: safeItems[defindex]?.oq }
+}
+
+const applyStrangifier = item => {
+    if (!item.defindex.includes('>')) return item
+    const [defindex, target] = item.defindex.split('>')
+    return { ...item, defindex, target }
+}
+
+const skuFromForm = (obj) => (overrides) => {
+    let item = { ...obj, ...overrides }
+    item = applyKtRemap(item)
+    item = applyOdRemap(item)
+    item = applyTexture(item)
+    item = applyTarget(item)
+    item = applyCrateSeries(item)
+    item = applyChemistrySet(item)
+    item = applyStrangifier(item)
+    return skuFromItem(item)
+}
 
 export default skuFromForm

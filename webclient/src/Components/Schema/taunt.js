@@ -1,8 +1,4 @@
 import {
-    propEq, pickBy, allPass, complement, has, range
-} from 'ramda'
-
-import {
     getQuality,
     elevated,
     uncraftable,
@@ -11,6 +7,7 @@ import {
     getClasses,
     getRules
 } from './controls'
+import { range } from './helpers'
 
 const taunt = {
     controls: {
@@ -20,11 +17,10 @@ const taunt = {
         effect: getEffect(range(3000, 4000)),
         defindex: defindex()
     },
-    itemFn: pickBy(
-        allPass([
-            propEq('taunt', 'item_slot'),
-            complement(has)('untradable')
-        ])
+    itemFn: items => Object.fromEntries(
+        Object
+            .entries(items)
+            .filter(([, item]) => item.item_slot === 'taunt' && !('untradable' in item))
     ),
     filters: {
         used_by_classes: getClasses(undefined, ['multi'])
@@ -53,6 +49,8 @@ const taunt = {
             ['taunt16', 'Halloween 2024'],
             ['taunt17', 'Winter 2024'],
             ['taunt18', 'Summer 2025'],
+            ['taunt19', 'Halloween 2025'],
+            ['taunt20', 'Winter 2025'],
         ]
     },
     validation: {

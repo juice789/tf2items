@@ -1,8 +1,4 @@
 import {
-    compose, prop, pickBy, includes, __, allPass,
-} from 'ramda'
-
-import {
     getQuality,
     killstreakTier,
     defindex,
@@ -16,11 +12,13 @@ const festive = {
         killstreakTier,
         defindex: defindex()
     },
-    itemFn: pickBy(
-        allPass([
-            compose(includes('Festive'), prop('item_name')),
-            compose(includes(__, ['primary', 'melee', 'secondary', 'pda', 'pda2', 'building']), prop('item_slot')),
-        ])
+    itemFn: items => Object.fromEntries(
+        Object
+            .entries(items)
+            .filter(([, item]) =>
+                item.item_name.includes('Festive')
+                && ['primary', 'melee', 'secondary', 'pda', 'pda2', 'building'].includes(item.item_slot)
+            )
     ),
     filters: {
         used_by_classes: getClasses(undefined, ['all']),

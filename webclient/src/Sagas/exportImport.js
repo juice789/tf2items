@@ -1,18 +1,18 @@
 import { takeEvery, select, put } from 'redux-saga/effects'
-import { prop, groupBy, map, compose, values, evolve, indexBy, unnest, mapObjIndexed, assoc, objOf, pick } from 'ramda'
 
 function* exportState() {
-
-    const state = yield select(compose(
-        evolve({
-            items: compose(
-                map(map(prop('sku'))),
-                groupBy(prop('page')),
-                values,
-            )
-        }),
-        pick(['items', 'pages', 'usePages'])
-    ))
+    const state = yield select((state) => ({
+        items: Object.fromEntries(
+            Object
+                .entries(Object.groupBy(Object.values(state.items), item => item.page))
+                .map(([page, pageItems]) => [
+                    page,
+                    pageItems.map(item => item.sku)
+                ])
+        ),
+        pages: state.pages,
+        usePages: state.usePages
+    }))
 
     var dataStr = "data:text/jsoncharset=utf-8," + encodeURIComponent(JSON.stringify(state))
     var downloadAnchorNode = document.createElement('a')
@@ -24,16 +24,15 @@ function* exportState() {
 }
 
 function* importState({ importedState }) {
-
-    const newState = evolve({
-        items: compose(
-            indexBy(prop('sku')),
-            unnest,
-            values,
-            mapObjIndexed((v, k, o) => map(compose(assoc('page', k), objOf('sku')), v))
-        )
-    }, importedState)
-
+    const newState = {
+        ...importedState,
+        items: Object
+            .entries(importedState.items)
+            .reduce((acc, [page, skus]) => ({
+                ...acc,
+                ...skus.reduce((acc, sku) => (acc[sku] = { page, sku }, acc), {})
+            }), {})
+    }
     yield put({
         type: 'NEW_STATE',
         ...newState

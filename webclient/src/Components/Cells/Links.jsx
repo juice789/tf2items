@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 import backpackLogo from './Images/backpack.svg'
@@ -25,10 +24,10 @@ width: 10rem;
 min-width: 10rem;
 max-width: 10rem;
 > a {
-    color:#8a879a;
+    color:${({ theme }) => theme.fontColorDim};
     text-decoration: none;
     &:hover{
-        color: #6e66a6;
+        color: ${({ theme }) => theme.mainColor};
     }
     > img {
         width: auto;
@@ -49,22 +48,17 @@ max-width: 8rem;
 }
 `
 
-export const Links = ({ sku }) => {
-
-    return (
-        <CustomCell>
-            <a target={'_blank'} rel="noopener noreferrer" href={manncoUrl(sku)}>
-                <img src={manncoLogo} />
-            </a>
-            <a target={'_blank'} rel="noopener noreferrer" href={marketplaceUrl(sku)}>
-                <img src={marketplaceLogo} />
-            </a>
-            <a target={'_blank'} rel="noopener noreferrer" href={scmUrl(sku)}>
-                <img src={steamLogo} />
-            </a>
-            <a target={'_blank'} rel="noopener noreferrer" href={bpUrl(sku)}>
-                <img src={backpackLogo} />
-            </a>
-        </CustomCell>
-    )
-}
+export const Links = ({ sku }) => <CustomCell>
+    <a target={'_blank'} rel="noopener noreferrer" href={manncoUrl(sku)}>
+        <img src={manncoLogo} />
+    </a>
+    <a target={'_blank'} rel="noopener noreferrer" href={marketplaceUrl(sku)}>
+        <img src={marketplaceLogo} />
+    </a>
+    <a target={'_blank'} rel="noopener noreferrer" href={scmUrl(sku)}>
+        <img src={steamLogo} />
+    </a>
+    <a target={'_blank'} rel="noopener noreferrer" href={bpUrl(sku)}>
+        <img src={backpackLogo} />
+    </a>
+</CustomCell>

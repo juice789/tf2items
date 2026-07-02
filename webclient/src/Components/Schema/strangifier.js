@@ -1,8 +1,4 @@
 import {
-    compose, values, map, prop, pickBy, includes, allPass, chain, indexBy, has
-} from 'ramda'
-
-import {
     safeItems as items
 } from '@juice789/tf2items'
 
@@ -11,27 +7,26 @@ import {
     getClasses
 } from './controls'
 
+// one strangifier -> one item per compatible target weapon, composite defindex "base>target"
+const expandTargets = item => item.target.map(target => ({
+    ...items[target],
+    ...item,
+    defindex: item.defindex + '>' + target,
+    target,
+    item_name: items[target].item_name + " Strangifier"
+}))
+
 const strangifier = {
     controls: {
         defindex: defindex(),
     },
-    itemFn: compose(
-        indexBy(prop('defindex')),
-        chain((item) => map(target => ({
-            ...items[target],
-            ...item,
-            defindex: item.defindex + '>' + target,
-            target,
-            item_name: items[target].item_name + " Strangifier"
-        }), item.target)),
-        values,
-        pickBy(
-            allPass([
-                compose(includes('Strangifier'), prop('item_name')),
-                has('target')
-            ])
-        )
-    ),
+    itemFn: input => {
+        const filtered = Object
+            .values(input)
+            .filter(item => item.item_name.includes('Strangifier') && 'target' in item)
+        const expanded = filtered.flatMap(expandTargets)
+        return Object.fromEntries(expanded.map(item => [item.defindex, item]))
+    },
     filters: {
         used_by_classes: getClasses()
     },

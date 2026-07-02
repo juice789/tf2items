@@ -1,10 +1,9 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
-import AutoSizer from 'react-virtualized-auto-sizer'
+import { AutoSizer } from 'react-virtualized-auto-sizer'
 import { FixedSizeList as List, areEqual } from 'react-window'
 import { useMediaQuery } from '@react-hook/media-query'
 
-import { prop, compose, propEq, path, gte, when, __, indexOf, map, assoc, chain, toLower, values, filter, cond, reverse, sortBy, identity, T, propOr, equals } from 'ramda'
 
 import { shallowEqual, useSelector } from 'react-redux'
 import { itemNameFromSku } from '@juice789/tf2items'
@@ -17,7 +16,7 @@ flex: 1 1 auto;
 position: relative;
 flex-direction: column;
 overflow: hidden;
-border-left: 1px solid #403d4f;
+border-left: 1px solid ${({ theme }) => theme.background4};
 `
 
 const Th = styled.div`
@@ -26,29 +25,29 @@ left: 0;
 width: 100%;
 display: flex;
 height: 3rem;
-background: #33313f;
+background: ${({ theme }) => theme.background2};
 position: sticky !important;
-border-bottom: 1px solid #403d4f;
+border-bottom: 1px solid ${({ theme }) => theme.background4};
 z-index: 2;
 `
 
 const Label = styled.div`
 font-size: 0.9rem;
 height: 3rem;
-border-right: 1px solid #3a3747;
+border-right: 1px solid ${({ theme }) => theme.background3};
 display: flex;
 align-items:center;
 padding-left: 0.5rem;
 padding-right: 0.5rem;
-width: ${prop('w')}rem;
-min-width: ${prop('w')}rem;
-max-width: ${({ grow, w }) => grow ? 'unset' : w + 'rem'};
-flex-grow: ${({ grow }) => grow ? 1 : 0};
+width: ${({ $w }) => $w}rem;
+min-width: ${({ $w }) => $w}rem;
+max-width: ${({ $grow, $w }) => $grow ? 'unset' : $w + 'rem'};
+flex-grow: ${({ $grow }) => $grow ? 1 : 0};
 @media (max-width:1400px){
-    width: ${prop('w2')}rem;
-    min-width: ${prop('w2')}rem;
-    max-width: ${({ grow, w2 }) => grow ? 'unset' : w2 + 'rem'};
-    flex-grow: ${({ grow }) => grow ? 1 : 0};
+    width: ${({ $w2 }) => $w2}rem;
+    min-width: ${({ $w2 }) => $w2}rem;
+    max-width: ${({ $grow, $w2 }) => $grow ? 'unset' : $w2 + 'rem'};
+    flex-grow: ${({ $grow }) => $grow ? 1 : 0};
 }
 `
 
@@ -61,7 +60,7 @@ display: flex;
 flex-direction: column;
 min-width: 20rem;
 &:hover {
-    background: #403d4f;
+    background: ${({ theme }) => theme.background4};
 }
 `
 const RowInner = styled.div`
@@ -69,15 +68,14 @@ display: flex;
 `
 
 const StickyRow = memo(() => {
-
-    const settingsOpen = useSelector(compose(equals('settings'), propOr([], 'openedAside')))
-    const selectionOpen = useSelector(prop('isSelectionOpen'))
+    const settingsOpen = useSelector(({ openedAside }) => openedAside === 'settings')
+    const selectionOpen = useSelector(state => state.isSelectionOpen)
     const isResponsive = useMediaQuery('(max-width: 850px)')
     const isHidden = settingsOpen === false && (isResponsive ? selectionOpen === false : true)
     return <Th>
-        {isHidden ? null : <Label w={2} />}
-        <Label w={10} w2={8}>Links</Label>
-        <Label grow={true}>Item</Label>
+        {isHidden ? null : <Label $w={2} />}
+        <Label $w={10} $w2={8}>Links</Label>
+        <Label $grow={true}>Item</Label>
     </Th>
 })
 
@@ -105,9 +103,10 @@ const innerElementType = ({ children, ...rest }) => (
 )
 
 const AutoSizerActual = ({ itemCount, itemSize, items }) => (
-    <AutoSizer>
-        {({ height, width }) => (
-            <List
+    <AutoSizer renderProp={({ height, width }) => (
+        height === undefined || width === undefined
+            ? null
+            : <List
                 innerElementType={innerElementType}
                 height={height}
                 itemCount={itemCount}
@@ -117,38 +116,24 @@ const AutoSizerActual = ({ itemCount, itemSize, items }) => (
             >
                 {RowActual}
             </List>
-        )}</AutoSizer>
+    )} />
 )
 
 const ItemListActual = memo(() => {
 
-    const selectedPage = useSelector(prop('selectedPage'))
-    const searchTerm = useSelector(path(['search', 'value']))
-    const { sortType, sortMode } = useSelector(prop('sort'))
+    const items = useSelector(({ items, search, selectedPage, sort: { sortType, sortMode } }) => {
+        const pageItems = Object
+            .values(items)
+            .filter((item) => item.page === selectedPage)
+            .map((item) => ({ ...item, name: itemNameFromSku(item.sku).toLowerCase() }))
+            .filter((item) => !search.value || item.name.indexOf(search.value.toLowerCase()) >= 0)
 
-    const items = useSelector(compose(
-        when(
-            () => sortMode === 'DESC',
-            reverse
-        ),
-        map(prop('sku')),
-        cond([
-            [() => sortType === 'SORT_NAME', sortBy(prop('name'))],
-            [() => sortType === 'SORT_SKU', sortBy(prop('sku'))],
-            [T, identity]
-        ]),
-        when(
-            () => Boolean(searchTerm),
-            filter(compose(gte(__, 0), indexOf(toLower(searchTerm)), prop('name')))
-        ),
-        map(chain(
-            assoc('name'),
-            compose(toLower, itemNameFromSku, prop('sku'))
-        )),
-        filter(propEq(selectedPage, 'page')),
-        values,
-        prop('items')
-    ), shallowEqual)
+        if (sortType === 'SORT_NAME') pageItems.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
+        else if (sortType === 'SORT_SKU') pageItems.sort((a, b) => a.sku < b.sku ? -1 : a.sku > b.sku ? 1 : 0)
+
+        const skus = pageItems.map((item) => item.sku)
+        return sortMode === 'DESC' ? skus.reverse() : skus
+    }, shallowEqual)
 
     return (
         <ItemList>
@@ -156,7 +141,7 @@ const ItemListActual = memo(() => {
                 items.length > 0
                     ? <AutoSizerActual
                         itemCount={items.length}
-                        itemSize={35}
+                        itemSize={45}
                         items={items}
                     />
                     : null

@@ -1,8 +1,4 @@
 import {
-    compose, map, prop, pickBy, when, includes, __, allPass, propOr, chain, assoc, complement, has, concat, startsWith
-} from 'ramda'
-
-import {
     getQuality,
     elevated,
     uncraftable,
@@ -13,6 +9,8 @@ import {
     getRules
 } from './controls'
 
+import { markGenuine } from './helpers'
+
 const weapon = {
     controls: {
         quality: getQuality([0, 1, 11, 13, 14, 3, 6]),
@@ -21,30 +19,24 @@ const weapon = {
         killstreakTier,
         defindex: defindex(),
     },
-    itemFn: compose(
-        map(
-            when(
-                compose(
-                    startsWith('Promo '),
-                    propOr('', 'name')
-                ),
-                chain(
-                    assoc('item_name'),
-                    compose(concat(__, ' (Genuine)'), prop('item_name'))
+    itemFn: items => {
+        const filtered = Object.fromEntries(
+            Object
+                .entries(items)
+                .filter(([, item]) =>
+                    !([850].includes(item.defindex)) //deflector
+                    && !('untradable' in item)
+                    && !([0, 15].includes(item.item_quality)) //no normal or decorated items
+                    && ['primary', 'melee', 'secondary', 'pda', 'pda2', 'building'].includes(item.item_slot)
+                    && !item.item_name.includes('Festive')
+                    && !item.item_name.includes('Botkiller')
+                    && !item.item_class.includes('_token')
                 )
-            )
-        ),
-        pickBy(
-            allPass([
-                compose(complement(includes)(__, [850]), prop('defindex')),//deflector
-                complement(has)('untradable'),
-                compose(complement(includes)(__, [0, 15]), prop('item_quality')),//no normal or decorated items
-                compose(includes(__, ['primary', 'melee', 'secondary', 'pda', 'pda2', 'building']), prop('item_slot')),
-                compose(complement(includes)('Festive'), prop('item_name')),
-                compose(complement(includes)('Botkiller'), prop('item_name')),
-                compose(complement(includes)('_token'), prop('item_class'))
-            ])
-        )),
+        )
+        return Object.fromEntries(
+            Object.entries(filtered).map(([key, item]) => [key, markGenuine(item)])
+        )
+    },
     filters: {
         used_by_classes: getClasses(),
         item_slot: getSlot(['melee', 'primary', 'secondary', 'pda', 'pda2', 'building'])

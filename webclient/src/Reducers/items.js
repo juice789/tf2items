@@ -1,34 +1,4 @@
-import {
-    has,
-    dissoc,
-    assoc,
-    indexBy,
-    prop,
-    map,
-    omit,
-    chain,
-    pick,
-    compose,
-    filter,
-    complement,
-    startsWith,
-    keys,
-    replace,
-    assocPath,
-    mergeDeepRight,
-    dissocPath,
-    converge,
-    evolve,
-    ifElse,
-    fromPairs,
-    concat,
-    __,
-    when,
-    mergeRight,
-    includes,
-    pickBy,
-    mapKeys
-} from 'ramda'
+import { mergeDeep } from '../utils'
 
 const defaultState = {
     category: '',
@@ -50,33 +20,40 @@ export function addItems(state = defaultState, action) {
             return {
                 ...state,
                 category: action.category,
-                controls: fromPairs(map(compose(concat(__, [null]), Array.of), action.controls)),
-                filters: fromPairs(map(compose(concat(__, [null]), Array.of), action.filters)),
+                controls: Object.fromEntries(action.controls.map((c) => [c, null])),
+                filters: Object.fromEntries(action.filters.map((f) => [f, null])),
                 rules: action.rules,
                 props: {},
                 defaults: action.defaults,
                 validation: action.validation
             }
-        case 'NEWITEM_FILTER_CHANGE':
-            return assocPath(
-                [has(action.key, state.filters) ? 'filters' : 'props', action.key],
-                action.val,
-                state
-            )
-        case 'NEWITEM_PROP_CHANGE':
-            return evolve({
-                controls: assoc(action.key, action.val),
-                rules: map(
-                    when(
-                        has(action.key),
-                        ifElse(
-                            compose(includes(action.val), prop(action.key)),
-                            (rule) => assoc('hidden', rule.reverse ? true : false, rule),
-                            (rule) => assoc('hidden', rule.reverse ? false : true, rule)
-                        )
-                    )
+        case 'NEWITEM_FILTER_CHANGE': {
+            const section = action.key in state.filters ? 'filters' : 'props'
+            return {
+                ...state,
+                [section]: {
+                    ...state[section],
+                    [action.key]: action.val
+                }
+            }
+        }
+        case 'NEWITEM_PROP_CHANGE': {
+            const { multiEffect: _multiEffect, ...restProps } = state.props
+            return {
+                ...state,
+                controls: { ...state.controls, [action.key]: action.val },
+                props: action.key === 'quality' ? restProps : state.props,
+                rules: Object.fromEntries(
+                    Object
+                        .entries(state.rules)
+                        .map(([ruleKey, rule]) => {
+                            if (!(action.key in rule)) return [ruleKey, rule]
+                            const matches = rule[action.key].includes(action.val)
+                            return [ruleKey, { ...rule, hidden: rule.reverse ? matches : !matches }]
+                        })
                 )
-            }, state)
+            }
+        }
         default:
             return state
     }
@@ -87,14 +64,17 @@ export const preview = (state = {}, action) => {
         case 'RESET_STATE':
         case 'NEW_STATE':
             return {}
-        case 'PREVIEW_ITEMS':
-            return mergeRight(
-                indexBy(
-                    prop('sku'),
-                    map((sku) => ({ sku, page: action.page }), action.items)
-                ), state)
-        case 'REMOVE_PREVIEW_ITEM':
-            return omit([action.sku], state)
+        case 'PREVIEW_ITEMS': {
+            const items = action.items.reduce((acc, sku) => (acc[sku] = ({ sku, page: action.page }), acc), {})
+            return {
+                ...items,
+                ...state
+            }
+        }
+        case 'REMOVE_PREVIEW_ITEM': {
+            const { [action.sku]: _oldItem, ...rest } = state
+            return rest
+        }
         case 'CLEAR_PREVIEW':
         case 'SAVE_ITEMS':
             return {}
@@ -134,18 +114,31 @@ const defaultItems = {
     }
 }
 
-const resetChanges = map(chain(
-    pick,
-    compose(
-        filter(complement(startsWith('__'))),
-        keys
-    )
-))
+const discardChanges = (data) => Object.fromEntries(
+    Object
+        .entries(data)
+        .map(([sku, item]) => [
+            sku,
+            Object.fromEntries(
+                Object
+                    .entries(item)
+                    .filter(([k]) => !k.startsWith('__'))
+            )
+        ])
+)
 
-const applyChanges = compose(
-    map(mapKeys(replace('__', ''))),
-    map(chain(pick, compose(filter(startsWith('__')), keys))),
-    map(omit(['__toRemove']))
+const applyChanges = (data) => Object.fromEntries(
+    Object
+        .entries(data)
+        .map(([sku, item]) => [
+            sku,
+            Object.fromEntries(
+                Object
+                    .entries(item)
+                    .filter(([k]) => k.startsWith('__') && k !== '__toRemove')
+                    .map(([k, v]) => [k.replace('__', ''), v])
+            )
+        ])
 )
 
 export const items = (state = defaultItems, action) => {
@@ -156,32 +149,51 @@ export const items = (state = defaultItems, action) => {
             return action.items
         case 'SAVE_ITEMS':
         case 'MASS_PROP_CHANGE':
-            return mergeDeepRight(state, action.items)
-        case 'RESET_CHANGE':
-            return dissocPath([action.sku, '__' + action.p], state)
+            return mergeDeep(state, action.items)
+        case 'RESET_CHANGE': {
+            const { ['__' + action.p]: _oldProp, ...updatedItem } = state[action.sku]
+            return {
+                ...state,
+                [action.sku]: updatedItem
+            }
+        }
         case 'RESET_CHANGES':
-            return resetChanges(state)
+            return discardChanges(state)
         case 'USE_PAGES':
-            return action.value === false ? map(assoc('page', '0'), state) : state
-        case 'SAVE_CHANGES':
-            const removeList = keys(pickBy(has('__toRemove'), state))
-            return compose(
-                converge(mergeDeepRight, [resetChanges, applyChanges]),
-                omit(removeList)
-            )(state)
+            return action.value === false
+                ? Object.fromEntries(
+                    Object.entries(state).map(([sku, item]) => [sku, { ...item, page: '0' }])
+                )
+                : state
+        case 'SAVE_CHANGES': {
+            const removeList = Object
+                .keys(state)
+                .filter(key => '__toRemove' in state[key])
+            const remaining = Object.fromEntries(
+                Object.entries(state).filter(([sku]) => !removeList.includes(sku))
+            )
+            return mergeDeep(discardChanges(remaining), applyChanges(remaining))
+        }
         default:
             return state
     }
 }
 
-export function selectedItems(state = [], action) {
+export function selectedItems(state = {}, action) {
     switch (action.type) {
         case 'RESET_STATE':
         case 'NEW_STATE':
         case 'TOGGLE_SELECTION':
-            return []
+            return {}
         case 'ITEM_SELECTED':
-            return has(action.sku, state) ? dissoc(action.sku, state) : assoc(action.sku, true, state)
+            if (action.sku in state) {
+                const { [action.sku]: _oldItem, ...rest } = state
+                return rest
+            }
+            return {
+                ...state,
+                [action.sku]: true
+            }
         case 'DESELECT_ALL':
         case 'RESET_CHANGES':
         case 'SAVE_CHANGES':

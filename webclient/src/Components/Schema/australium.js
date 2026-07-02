@@ -1,5 +1,4 @@
 import { australiumDefindex } from '@juice789/tf2items'
-import { pick } from 'ramda'
 
 import {
     killstreakTier,
@@ -14,7 +13,9 @@ const australium = {
         festivized,
         defindex: defindex()
     },
-    itemFn: pick(australiumDefindex),
+    itemFn: items => Object.fromEntries(
+        australiumDefindex.filter(key => key in items).map(key => [key, items[key]])
+    ),
     filters: {
         used_by_classes: getClasses(undefined, ['multi', 'all'])
     },

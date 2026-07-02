@@ -1,10 +1,6 @@
 import { textures, warPaintCollections } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, pickBy, has, range, allPass, assoc, equals
-} from 'ramda'
-
-import {
     getQuality,
     elevated,
     wear,
@@ -15,6 +11,8 @@ import {
     getRules
 } from './controls'
 
+import { range } from './helpers'
+
 const warpaint = {
     controls: {
         quality: getQuality([11, 5, 15]),
@@ -23,14 +21,19 @@ const warpaint = {
         effect: getEffect(range(701, 704)),
         defindex: defindex()
     },
-    itemFn: compose(
-        map((item) => assoc('item_name', textures[item.texture] + ' ' + item.item_name, item)),
-        pickBy(
-            allPass([
-                compose(equals('War Paint'), prop('item_name')),
-                has('texture')
+    itemFn: items => {
+        const filtered = Object.fromEntries(
+            Object
+                .entries(items)
+                .filter(([, item]) => item.item_name === 'War Paint' && 'texture' in item)
+        )
+        return Object.fromEntries(
+            Object.entries(filtered).map(([key, item]) => [
+                key,
+                { ...item, item_name: textures[item.texture] + ' ' + item.item_name }
             ])
-        )),
+        )
+    },
     filters: {
         collection: getCollections(warPaintCollections),
         rarity: getRarities()

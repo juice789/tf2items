@@ -1,15 +1,17 @@
 import { fabricatorDefindex } from '@juice789/tf2items'
 
 import {
-    compose, map, prop, __, chain, assoc, pick
-} from 'ramda'
-
-import {
     defindex,
     getClasses,
     getSlot,
     target
 } from './controls'
+
+const kitNames = {
+    '6523': 'Specialized Killstreak Kit',
+    '6527': 'Killstreak Kit',
+    '6526': 'Professional Killstreak Kit'
+}
 
 const kit = {
     controls: {
@@ -20,23 +22,14 @@ const kit = {
         quality: '6',
         uncraftable: '1'
     },
-    itemFn: compose(
-        map(
-            chain(
-                assoc('item_name'),
-                compose(
-                    prop(__, {
-                        '6523': 'Specialized Killstreak Kit',
-                        '6527': 'Killstreak Kit',
-                        '6526': 'Professional Killstreak Kit'
-                    }),
-                    prop('defindex')
-                )
-            )
-        ),
-        pick([6527, 6523, 6526])
+    itemFn: items => Object.fromEntries(
+        [6527, 6523, 6526]
+            .filter(key => key in items)
+            .map(key => [key, { ...items[key], item_name: kitNames[items[key].defindex] }])
     ),
-    targetFn: pick(fabricatorDefindex),
+    targetFn: items => Object.fromEntries(
+        fabricatorDefindex.filter(key => key in items).map(key => [key, items[key]])
+    ),
     filters: {
         used_by_classes: getClasses(undefined, ['all']),
         item_slot: getSlot(['melee', 'primary', 'secondary'])

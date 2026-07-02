@@ -1,15 +1,21 @@
 import React from 'react'
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
+
+import {
+  legacy_createStore as createStore,
+  applyMiddleware,
+  compose
+} from 'redux'
+
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import storage from './localStorageAdapter'
 import createSagaMiddleware from 'redux-saga'
-import { defaultRebootTheme } from 'styled-reboot'
-import { ThemeProvider } from 'styled-components'
 
 import GlobalStyle from './globalStyle'
+import { ThemeProvider } from './Components/Context'
+import { theme } from './theme'
 
 import rootReducer from './Reducers'
 import rootSaga from './Sagas'
@@ -38,12 +44,13 @@ persistStore(store, null, () => { })
 
 sagaMiddleware.run(rootSaga)
 
-const container = document.getElementById('root')
-const root = createRoot(container)
-
-root.render(<ThemeProvider theme={defaultRebootTheme}>
-  <Provider store={store}>
-    <GlobalStyle />
-    <App />
-  </Provider>
-</ThemeProvider>)
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
+    </Provider>
+  </React.StrictMode>
+)

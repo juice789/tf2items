@@ -1,10 +1,6 @@
 import { cosmeticCollections } from '@juice789/tf2items'
 
 import {
-    compose, prop, pickBy, includes, range, __, allPass, propOr, complement, has, startsWith, map, when, chain, assoc, concat
-} from 'ramda'
-
-import {
     getQuality,
     elevated,
     uncraftable,
@@ -15,6 +11,7 @@ import {
     getRarities,
     getRules
 } from './controls'
+import { range, markGenuine } from './helpers'
 
 const cosmeticRarities = [
     "rare",
@@ -32,25 +29,16 @@ const cosmetic = {
         defindex: defindex({ type: 'virtual' })
     },
     rules: getRules(['effect', 'elevated']),
-    itemFn: compose(
-        map(
-            when(
-                compose(
-                    startsWith('Promo '),
-                    propOr('', 'name')
-                ),
-                chain(
-                    assoc('item_name'),
-                    compose(concat(__, ' (Genuine)'), prop('item_name'))
-                )
-            )
-        ),
-        pickBy(
-            allPass([
-                compose(includes(__, ['misc', 'head']), prop('item_slot')),
-                complement(has)('untradable')
-            ])
-        )),
+    itemFn: items => {
+        const filtered = Object.fromEntries(
+            Object
+                .entries(items)
+                .filter(([, item]) => ['misc', 'head'].includes(item.item_slot) && !('untradable' in item))
+        )
+        return Object.fromEntries(
+            Object.entries(filtered).map(([key, item]) => [key, markGenuine(item)])
+        )
+    },
     filters: {
         used_by_classes: getClasses(undefined, ['multi']),
         collection: getCollections(cosmeticCollections),
@@ -92,6 +80,8 @@ const cosmetic = {
             ['h2024', 'Halloween 2024'],
             ['w2024', 'Winter 2024'],
             ['s2025', 'Summer 2025'],
+            ['h2025', 'Halloween 2025'],
+            ['w2025', 'Winter 2025'],
         ]
     },
     validation: {

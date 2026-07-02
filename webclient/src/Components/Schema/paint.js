@@ -1,8 +1,4 @@
 import {
-    compose, prop, propEq, pickBy, includes, __, allPass, complement,
-} from 'ramda'
-
-import {
     uncraftable,
     defindex
 } from './controls'
@@ -12,11 +8,10 @@ const paint = {
         uncraftable,
         defindex: defindex(),
     },
-    itemFn: pickBy(
-        allPass([
-            compose(complement(includes)(__, ['5023']), prop('defindex')),
-            propEq('paint', 'type2')
-        ])
+    itemFn: items => Object.fromEntries(
+        Object
+            .entries(items)
+            .filter(([, item]) => !['5023'].includes(item.defindex) && item.type2 === 'paint')
     ),
     defaults: {
         quality: '6'

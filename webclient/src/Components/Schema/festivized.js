@@ -1,8 +1,4 @@
 import {
-    compose, prop, pickBy, includes, __, allPass, complement, has
-} from 'ramda'
-
-import {
     getQuality,
     elevated,
     uncraftable,
@@ -24,14 +20,10 @@ const festivized = {
     defaults: {
         festivized: '1'
     },
-    itemFn: pickBy(
-        allPass([
-            has('festivized'),
-            compose(
-                complement(includes)(__, [0, 15]),
-                prop('item_quality')
-            ),
-        ])
+    itemFn: items => Object.fromEntries(
+        Object
+            .entries(items)
+            .filter(([, item]) => 'festivized' in item && ![0, 15].includes(item.item_quality))
     ),
     filters: {
         used_by_classes: getClasses(undefined, ['all']),

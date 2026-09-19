@@ -437,7 +437,7 @@ const schema = await saveSchema()
 
 A set of lookup tables (sourced from `schemaHelper.json`) are exported directly, useful for building UIs or validating input:
 
-`qualityNames`, `qualityIds`, `rarities`, `killstreakTiers`, `wears`, `classes`, `itemSlots`, `itemClasses`, `paintHex`, `paintDefindex`, `spellDefindex`, `cosmeticCollections`, `weaponCollections`, `warPaintCollections`, `fabricatorDefindex`, `strangifierTargets`, `australiumDefindex`, `crateSeries`, `paintableDefindex`, `chemsetDefindex`, `serieslessDefindex`, `impossibleEffects`
+`qualityNames`, `qualityIds`, `rarities`, `killstreakTiers`, `wears`, `classes`, `itemSlots`, `itemClasses`, `paintHex`, `paintDefindex`, `spellDefindex`, `cosmeticCollections`, `weaponCollections`, `warPaintCollections`, `fabricatorDefindex`, `strangifierTargets`, `australiumDefindex`, `crateSeries`, `paintableDefindex`, `chemsetDefindex`, `serieslessDefindex`, `impossibleEffects`, `rchDefindex`
 
 For example:
 

@@ -9,5 +9,5 @@ export const {
     qualityNames, qualityIds, rarities, killstreakTiers, wears, classes, itemSlots, itemClasses,
     paintHex, paintDefindex, spellDefindex, cosmeticCollections, weaponCollections, warPaintCollections,
     fabricatorDefindex, strangifierTargets, australiumDefindex, crateSeries, paintableDefindex,
-    chemsetDefindex, serieslessDefindex, impossibleEffects
+    chemsetDefindex, serieslessDefindex, impossibleEffects, rchDefindex
 } = helperObjects

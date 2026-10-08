@@ -1,0 +1,77 @@
+{
+  "name": "@juice789/tf2items-selector",
+  "version": "1.0.0",
+  "description": "TF2 item selector React hook",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./themed": "./dist/themed.js",
+    "./internal": "./dist/internal.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\" && vite build --mode default && vite build --mode themed && vite build --mode internal",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "tf2",
+    "sku",
+    "react"
+  ],
+  "author": "juice789",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juice789/tf2items",
+    "directory": "selector"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@juice789/react-toggle": "^5.0.0",
+    "@juice789/tf2items": "^2.0.3",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "react-icons": "^5.0.0",
+    "react-select": "^5.0.0",
+    "react-window": "^1.8.0",
+    "styled-components": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@juice789/react-toggle": {
+      "optional": true
+    },
+    "@juice789/tf2items": {
+      "optional": true
+    },
+    "react-icons": {
+      "optional": true
+    },
+    "react-select": {
+      "optional": true
+    },
+    "react-window": {
+      "optional": true
+    },
+    "styled-components": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@juice789/react-toggle": "^5.0.0",
+    "@juice789/tf2items": "file:..",
+    "@vitejs/plugin-react": "^6.0.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-icons": "^5.7.0",
+    "react-select": "^5.10.2",
+    "react-window": "^1.8.11",
+    "styled-components": "^6.1.11",
+    "vite": "^8.1.1"
+  }
+}

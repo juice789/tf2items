@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { FaTimesCircle } from 'react-icons/fa'
 import { itemNameFromSku } from '@juice789/tf2items'
 
@@ -104,26 +103,11 @@ user-select: none;
     background: ${({ theme }) => theme.mainColorFade};
 }
 `
-const PreviewActual = ({ togglePreview }) => {
+const PreviewActual = ({ previewItems, pages, dispatch, onSave, onClear }) => {
 
-    const dispatch = useDispatch()
-    const previewItems = useSelector(({ preview }) => Object.values(preview), shallowEqual)
-    const usePages = useSelector(state => state.usePages)
-    const pages = useSelector(state => state.pages)
+    const usePages = !!pages
 
     const removeItem = (sku) => () => dispatch({ type: 'REMOVE_PREVIEW_ITEM', sku })
-    const clearItems = () => {
-        dispatch({ type: 'CLEAR_PREVIEW' })
-        togglePreview(false)
-    }
-
-    const saveItems = () => {
-        dispatch({
-            type: 'SAVE_ITEMS',
-            items: previewItems.reduce((acc, curr) => (acc[curr.sku] = curr, acc), {})
-        })
-        togglePreview(false)
-    }
 
     const items = previewItems.map(({ sku, page }) => (
         <Row key={sku}>
@@ -144,8 +128,8 @@ const PreviewActual = ({ togglePreview }) => {
                 {items}
             </List>
             <Controls $isVisible={previewItems.length > 0}>
-                <Button onClick={saveItems}>Save</Button>
-                <Button onClick={clearItems}>Reset</Button>
+                <Button onClick={onSave}>Save</Button>
+                <Button onClick={onClear}>Reset</Button>
             </Controls>
         </Preview>
     )

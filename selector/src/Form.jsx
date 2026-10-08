@@ -1,13 +1,11 @@
 import { useState, useMemo, memo } from 'react'
 import styled, { useTheme } from 'styled-components'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { FaCheck, FaTimes, FaChevronCircleDown } from 'react-icons/fa'
 import Select, { createFilter, components as SelectComponents } from 'react-select'
 import { areEqual, FixedSizeList as List } from 'react-window'
 import Toggle from '@juice789/react-toggle/themed'
 import { safeItems as items } from '@juice789/tf2items'
 
-import { selectStyle, toggleStyle } from '../globalStyle'
 import categories, { skuFromForm } from './Schema'
 import multiEffectList from './Schema/multiEffect'
 import { SaveButton } from './styles'
@@ -139,19 +137,15 @@ const MenuList = ({ children }) => (
     </List>
 )
 
-const FormActual = () => {
+const FormActual = ({ formState, dispatch, pages, selectStyle, toggleStyle }) => {
     const theme = useTheme()
-    const dispatch = useDispatch()
     const [isFilterOpen, toggleFilter] = useState(false)
-    const formState = useSelector(state => state.addItems, shallowEqual)
-    const usePages = useSelector(state => state.usePages)
-    const pages = useSelector(state => state.pages)
+    const usePages = !!pages
 
-    const hiddenControlNames = useSelector(({ addItems }) => Object
-        .entries(addItems.rules)
+    const hiddenControlNames = Object
+        .entries(formState.rules)
         .filter(([, rule]) => rule.hidden)
         .map(([name]) => name)
-    )
 
     const category = categories[formState.category]
 

@@ -14,7 +14,7 @@ export function getItems(english, items_game) {
     }
 
     function mergePrefabs(item) {
-        if (!('prefab' in item)) return item
+        if (typeof item !== 'object' || !('prefab' in item)) return item
         return mergePrefabs(mergePrefab(item))
     }
 

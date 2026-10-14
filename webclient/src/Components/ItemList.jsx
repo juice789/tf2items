@@ -1,9 +1,7 @@
 import { memo } from 'react'
 import styled from 'styled-components'
-import { AutoSizer } from 'react-virtualized-auto-sizer'
-import { FixedSizeList as List, areEqual } from 'react-window'
+import { List } from 'react-window'
 import { useMediaQuery } from '@react-hook/media-query'
-
 
 import { shallowEqual, useSelector } from 'react-redux'
 import { itemNameFromSku } from '@juice789/tf2items'
@@ -51,10 +49,6 @@ flex-grow: ${({ $grow }) => $grow ? 1 : 0};
 }
 `
 
-const Rows = styled.div`
-position: relative;
-`
-
 const Row = styled.div`
 display: flex;
 flex-direction: column;
@@ -79,10 +73,10 @@ const StickyRow = memo(() => {
     </Th>
 })
 
-const RowActual = memo(({ data: items, index, style }) => {
+const RowActual = ({ items, index, style }) => {
     const sku = items[index]
     return (
-        <Row key={sku} style={style}>
+        <Row style={{ ...style, top: '3rem' }}>
             <RowInner>
                 <Checkbox sku={sku} />
                 <Links sku={sku} />
@@ -90,34 +84,7 @@ const RowActual = memo(({ data: items, index, style }) => {
             </RowInner>
         </Row>
     )
-}, areEqual)
-
-
-const innerElementType = ({ children, ...rest }) => (
-    <div {...rest}>
-        <StickyRow />
-        <Rows>
-            {children}
-        </Rows>
-    </div>
-)
-
-const AutoSizerActual = ({ itemCount, itemSize, items }) => (
-    <AutoSizer renderProp={({ height, width }) => (
-        height === undefined || width === undefined
-            ? null
-            : <List
-                innerElementType={innerElementType}
-                height={height}
-                itemCount={itemCount}
-                itemSize={itemSize}
-                width={width}
-                itemData={items}
-            >
-                {RowActual}
-            </List>
-    )} />
-)
+}
 
 const ItemListActual = memo(() => {
 
@@ -139,11 +106,14 @@ const ItemListActual = memo(() => {
         <ItemList>
             {
                 items.length > 0
-                    ? <AutoSizerActual
-                        itemCount={items.length}
-                        itemSize={45}
-                        items={items}
-                    />
+                    ? <List
+                        rowComponent={RowActual}
+                        rowCount={items.length}
+                        rowHeight={45}
+                        rowProps={{ items }}
+                    >
+                        <StickyRow />
+                    </List>
                     : null
             }
         </ItemList>

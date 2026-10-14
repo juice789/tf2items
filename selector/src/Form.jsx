@@ -1,8 +1,8 @@
-import { useState, useMemo, memo } from 'react'
+import { useState, useMemo } from 'react'
 import styled, { useTheme } from 'styled-components'
 import { FaCheck, FaTimes, FaChevronCircleDown } from 'react-icons/fa'
 import Select, { createFilter, components as SelectComponents } from 'react-select'
-import { areEqual, FixedSizeList as List } from 'react-window'
+import { List } from 'react-window'
 import Toggle from '@juice789/react-toggle/themed'
 import { safeItems as items } from '@juice789/tf2items'
 
@@ -116,7 +116,7 @@ const getFilters = filters => Object
     .filter(([, value]) => !!value)
     .map(([filterName, filterValue]) => makeFilters(filterName, filterValue))
 
-const MenuListOption = memo(({ index, style, data }) => <div style={style}>{data[index]}</div>, areEqual)
+const MenuListOption = ({ index, style, options }) => <div style={style}>{options[index]}</div>
 
 const VirtualOption = ({ innerProps, label, ...props }) => (
     <SelectComponents.Option
@@ -128,13 +128,12 @@ const VirtualOption = ({ innerProps, label, ...props }) => (
 
 const MenuList = ({ children }) => (
     <List
-        itemCount={children.length}
-        itemSize={40}
-        height={200}
-        itemData={children}
-    >
-        {MenuListOption}
-    </List>
+        rowComponent={MenuListOption}
+        rowCount={children.length}
+        rowHeight={40}
+        rowProps={{ options: children }}
+        style={{ height: 200 }}
+    />
 )
 
 const FormActual = ({ formState, dispatch, pages, selectStyle, toggleStyle }) => {

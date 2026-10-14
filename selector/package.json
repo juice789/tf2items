@@ -1,6 +1,6 @@
 {
   "name": "@juice789/tf2items-selector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TF2 item selector React hook",
   "type": "module",
   "exports": {
